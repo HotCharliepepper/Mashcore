@@ -16,422 +16,107 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0C0C0C;
-      --surface: #141414;
-      --surface-2: #1A1A1A;
-      --text: #E8E4DF;
-      --text-muted: #7A756F;
-      --accent: #C8553D;
-      --accent-soft: rgba(200,85,61,0.12);
-      --warm: #D4A574;
-      --border: rgba(255,255,255,0.06);
-      --border-hover: rgba(255,255,255,0.12);
-      --max: 720px;
+      --bg: #080808;
+      --surface: #0F0F0F;
+      --surface-2: #161616;
+      --text: #EDE9E3;
+      --text-muted: #706B65;
+      --text-dim: #4A4640;
+      --accent: #B8472E;
+      --accent-glow: rgba(184,71,46,0.15);
+      --warm: #C9A07A;
+      --border: rgba(255,255,255,0.05);
+      --border-hover: rgba(255,255,255,0.1);
+      --glow-warm: rgba(184,71,46,0.04);
+      --glow-gold: rgba(201,160,122,0.03);
+      --max: 700px;
       --font-kr: "Pretendard Variable", -apple-system, sans-serif;
       --font-en: "Instrument Serif", Georgia, serif;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-kr);
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      letter-spacing: -0.3px;
-      word-break: keep-all;
-      overflow-x: hidden;
-    }
+    body { font-family: var(--font-kr); background: var(--bg); color: var(--text); line-height: 1.6; letter-spacing: -0.3px; word-break: keep-all; overflow-x: hidden; }
     a { color: inherit; text-decoration: none; }
-
-    /* ── GRAIN OVERLAY ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
+    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.018; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 120px 0 80px;
-      position: relative;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(200,85,61,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-label {
-      font-family: var(--font-en);
-      font-size: 14px;
-      font-style: italic;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      letter-spacing: 0.5px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.3s forwards;
-    }
-    .hero h1 {
-      font-size: clamp(28px, 6vw, 44px);
-      font-weight: 900;
-      line-height: 1.35;
-      letter-spacing: -1.5px;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.6s forwards;
-    }
-    .hero h1 .em {
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.85;
-      margin-bottom: 48px;
-      max-width: 480px;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.9s forwards;
-    }
-    .hero-cta-area {
-      opacity: 0;
-      animation: fadeUp 0.8s 1.1s forwards;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .hero-bg img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
-      opacity: 0.18;
-      filter: grayscale(0.3);
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, var(--bg) 0%, transparent 20%, transparent 60%, var(--bg) 85%);
-    }
-    .hero .wrap {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ── AXIS LINE ── */
-    .axis-line {
-      font-family: var(--font-en);
-      font-style: italic;
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: 0.8px;
-      padding: 48px 0;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* ── SECTIONS ── */
-    section {
-      padding: 100px 0;
-    }
-    .section-label {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-style: italic;
-      color: var(--text-muted);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: block;
-    }
-    .section-title {
-      font-size: clamp(22px, 4.5vw, 32px);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.4;
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      margin-bottom: 48px;
-    }
-
-    /* ── PILLARS ── */
-    .pillars {
-      display: grid;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .pillar {
-      background: var(--surface);
-      padding: 36px 32px;
-      transition: background 0.3s;
-    }
-    .pillar:hover {
-      background: var(--surface-2);
-    }
-    .pillar-num {
-      font-family: var(--font-en);
-      font-size: 12px;
-      color: var(--accent);
-      font-style: italic;
-      margin-bottom: 14px;
-      display: block;
-    }
-    .pillar h3 {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
-    }
-    .pillar p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.75;
-    }
-
-    /* ── DIAGNOSTIC ── */
-    .diag-list {
-      display: grid;
-      gap: 8px;
-    }
-    .diag-item {
-      padding: 20px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      line-height: 1.5;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: border-color 0.3s;
-      cursor: default;
-    }
-    .diag-item:hover {
-      border-color: var(--border-hover);
-    }
-    .diag-icon {
-      flex-shrink: 0;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-top: 9px;
-    }
-
-    /* ── PROCESS ── */
-    .process-steps {
-      display: grid;
-      gap: 0;
-      position: relative;
-    }
-    .process-step {
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .process-step:last-child {
-      border-bottom: none;
-    }
-    .step-num {
-      font-family: var(--font-en);
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--warm);
-      line-height: 1;
-      padding-top: 2px;
-    }
-    .step-content h4 {
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      letter-spacing: -0.3px;
-    }
-    .step-content p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    /* ── QUOTE STRIP ── */
-    .quote-strip {
-      padding: 72px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      text-align: center;
-    }
-    .quote-strip blockquote {
-      font-size: clamp(18px, 4vw, 26px);
-      font-weight: 800;
-      letter-spacing: -0.8px;
-      line-height: 1.5;
-      max-width: 520px;
-      margin: 0 auto 16px;
-    }
-    .quote-strip cite {
-      font-family: var(--font-en);
-      font-style: italic;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* ── FINAL CTA ── */
-    .final-cta {
-      padding: 100px 0 120px;
-      text-align: center;
-    }
-    .final-cta .section-title {
-      margin-bottom: 12px;
-    }
-    .final-cta .section-desc {
-      max-width: 400px;
-      margin: 0 auto 40px;
-    }
-    .cta-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-    }
-
-    /* ── BUTTONS ── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 36px;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: var(--font-kr);
-      letter-spacing: -0.3px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      border: none;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--text);
-      color: var(--bg);
-    }
-    .btn-primary:hover {
-      background: #fff;
-      transform: translateY(-1px);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover {
-      border-color: var(--border-hover);
-      color: var(--text);
-    }
-    .btn-threads {
-      background: var(--text);
-      color: var(--bg);
-    }
-    .btn-threads:hover {
-      background: #fff;
-      transform: translateY(-1px);
-    }
-    .btn-threads svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 48px 0;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .footer-brand {
-      font-family: var(--font-en);
-      font-size: 14px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 8px;
-    }
-    .footer-sub {
-      font-size: 12px;
-      color: var(--text-muted);
-      opacity: 0.5;
-    }
-    .footer-links {
-      margin-top: 16px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    .footer-links a {
-      font-size: 12px;
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--text); }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 0.7s cubic-bezier(.16,1,.3,1);
-    }
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal.d1 { transition-delay: 0.08s; }
-    .reveal.d2 { transition-delay: 0.16s; }
-    .reveal.d3 { transition-delay: 0.24s; }
-
-    /* ── MOBILE ── */
+    .hero { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 80px; position: relative; }
+    .hero::before { content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(ellipse, var(--glow-warm) 0%, transparent 60%); pointer-events: none; }
+    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-hover), transparent); }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: contain; object-position: center center; opacity: 0.12; filter: grayscale(0.4) contrast(1.1); }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--bg) 0%, transparent 25%, transparent 55%, var(--bg) 85%); }
+    .hero .wrap { position: relative; z-index: 1; }
+    .hero-label { font-family: var(--font-en); font-size: 13px; font-style: italic; color: var(--text-dim); margin-bottom: 36px; letter-spacing: 1px; opacity: 0; animation: fadeUp 1s 0.3s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero h1 { font-size: clamp(28px, 6vw, 44px); font-weight: 900; line-height: 1.38; letter-spacing: -1.8px; margin-bottom: 32px; opacity: 0; animation: fadeUp 1s 0.6s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero h1 .em { color: var(--accent); }
+    .hero-sub { font-size: 15px; color: var(--text-muted); line-height: 1.9; margin-bottom: 52px; max-width: 460px; opacity: 0; animation: fadeUp 1s 0.9s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-cta-area { opacity: 0; animation: fadeUp 1s 1.15s cubic-bezier(.16,1,.3,1) forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .axis-line { font-family: var(--font-en); font-style: italic; font-size: 12px; color: var(--text-dim); letter-spacing: 1.5px; padding: 44px 0; text-align: center; background: linear-gradient(180deg, var(--bg), var(--surface), var(--bg)); }
+    section { padding: 100px 0; position: relative; }
+    .section-label { font-family: var(--font-en); font-size: 10px; font-style: italic; color: var(--warm); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; display: block; opacity: 0.7; }
+    .section-title { font-size: clamp(22px, 4.5vw, 32px); font-weight: 800; letter-spacing: -1.2px; line-height: 1.42; margin-bottom: 16px; }
+    .section-desc { font-size: 14px; color: var(--text-muted); line-height: 1.85; margin-bottom: 48px; }
+    .pillars { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .pillar { background: var(--surface); padding: 36px 32px; transition: background 0.5s ease; position: relative; }
+    .pillar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-glow), transparent); opacity: 0; transition: opacity 0.5s; }
+    .pillar:hover { background: var(--surface-2); }
+    .pillar:hover::before { opacity: 1; }
+    .pillar-num { font-family: var(--font-en); font-size: 12px; color: var(--accent); font-style: italic; margin-bottom: 16px; display: block; opacity: 0.8; }
+    .pillar h3 { font-size: 17px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 10px; }
+    .pillar p { font-size: 13.5px; color: var(--text-muted); line-height: 1.8; }
+    .diag-list { display: grid; gap: 6px; }
+    .diag-item { padding: 20px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 14.5px; font-weight: 600; line-height: 1.55; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.4s, background 0.4s, transform 0.3s; cursor: default; }
+    .diag-item:hover { border-color: var(--accent-glow); background: var(--surface-2); transform: translateX(4px); }
+    .diag-icon { flex-shrink: 0; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 10px; box-shadow: 0 0 8px var(--accent-glow); }
+    .process-steps { display: grid; gap: 0; }
+    .process-step { display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); transition: transform 0.3s; }
+    .process-step:hover { transform: translateX(4px); }
+    .process-step:last-child { border-bottom: none; }
+    .step-num { font-family: var(--font-en); font-size: 26px; font-weight: 400; color: var(--warm); line-height: 1; padding-top: 2px; opacity: 0.6; }
+    .step-content h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .step-content p { font-size: 13.5px; color: var(--text-muted); line-height: 1.75; }
+    .quote-strip { padding: 80px 0; text-align: center; position: relative; background: var(--surface); }
+    .quote-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,71,46,0.2), transparent); }
+    .quote-strip::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,160,122,0.1), transparent); }
+    .quote-strip blockquote { font-size: clamp(17px, 3.8vw, 24px); font-weight: 800; letter-spacing: -0.8px; line-height: 1.55; max-width: 520px; margin: 0 auto 16px; }
+    .quote-strip cite { font-family: var(--font-en); font-style: italic; font-size: 13px; color: var(--text-muted); }
+    .final-cta { padding: 100px 0 120px; text-align: center; position: relative; }
+    .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 500px; background: radial-gradient(circle, var(--glow-warm) 0%, transparent 70%); pointer-events: none; }
+    .final-cta .section-title { margin-bottom: 12px; }
+    .final-cta .section-desc { max-width: 380px; margin: 0 auto 44px; }
+    .cta-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 36px; border-radius: 999px; font-size: 14.5px; font-weight: 700; font-family: var(--font-kr); letter-spacing: -0.3px; cursor: pointer; transition: all 0.35s cubic-bezier(.16,1,.3,1); border: none; white-space: nowrap; }
+    .btn-primary { background: var(--text); color: var(--bg); box-shadow: 0 2px 20px rgba(237,233,227,0.06); }
+    .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 4px 30px rgba(237,233,227,0.1); }
+    .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-muted); }
+    .btn-threads { background: var(--text); color: var(--bg); box-shadow: 0 2px 20px rgba(237,233,227,0.06); }
+    .btn-threads:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 4px 30px rgba(237,233,227,0.1); }
+    .btn-threads svg { width: 15px; height: 15px; }
+    footer { padding: 56px 0; text-align: center; position: relative; }
+    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-hover), transparent); }
+    .footer-brand { font-family: var(--font-en); font-size: 13px; color: var(--text-dim); font-style: italic; margin-bottom: 6px; letter-spacing: 1px; }
+    .footer-sub { font-size: 11px; color: var(--text-dim); opacity: 0.5; }
+    .footer-links { margin-top: 18px; display: flex; justify-content: center; gap: 24px; }
+    .footer-links a { font-size: 11px; color: var(--text-dim); transition: color 0.3s; letter-spacing: 0.3px; }
+    .footer-links a:hover { color: var(--text-muted); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
     @media (max-width: 600px) {
       .hero { min-height: 85vh; min-height: 85svh; padding: 100px 0 60px; }
       section { padding: 72px 0; }
-      .pillar { padding: 28px 24px; }
+      .pillar { padding: 26px 22px; }
+      .pillar p, .step-content p { font-size: 13px; }
       .process-step { grid-template-columns: 36px 1fr; gap: 14px; }
-      .step-num { font-size: 22px; }
+      .step-num { font-size: 20px; }
       .quote-strip { padding: 56px 0; }
       .final-cta { padding: 72px 0 100px; }
+      .diag-item:hover, .process-step:hover { transform: none; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       .hero h1, .hero-label, .hero-sub, .hero-cta-area { animation: none; opacity: 1; transform: none; }
       .reveal { opacity: 1 !important; transform: none !important; }
@@ -447,7 +132,7 @@
     <span class="hero-label">Mashcore Lab</span>
     <h1>감각은 있는데<br>매출이 안 나온다면,<br><span class="em">구조</span>가 없는 겁니다.</h1>
     <p class="hero-sub">
-      대표의 말습관, 브랜드의 첫인상, 매장의 공기.<br>
+      간판의 첫인상, 매장의 흐름, 대표의 말습관, 고객의 반응.<br>
       눈에 안 보이는 것들이 매출을 만듭니다.<br>
       그걸 <strong style="color:var(--text);">구조로 바꾸는 일</strong>을 합니다.
     </p>
@@ -460,35 +145,89 @@
 <!-- ═══ AXIS ═══ -->
 <div class="axis-line">Sensation into Structure. Structure into Results.</div>
 
+<!-- ═══ ABOUT ═══ -->
+<section style="background: var(--surface);">
+  <div class="wrap">
+    <span class="section-label reveal">About</span>
+    <h2 class="section-title reveal">2020년부터<br>자영업 현장을 걸어왔습니다.</h2>
+    <p class="section-desc reveal" style="max-width:540px;">
+      하루 평균 30~50명의 대표님들을 만나며<br>
+      간판의 첫인상, 매장의 흐름, 접객의 결, 대표님의 말습관,<br>
+      그리고 실제 매출까지 함께 봐왔습니다.
+    </p>
+    <p class="section-desc reveal" style="max-width:540px; margin-bottom:0;">
+      덕분에 알게 됐습니다.<br>
+      잘 되는 매장은 광고보다 먼저,<br>
+      <strong style="color:var(--text);">사람과 공간과 태도가 하나의 흐름으로 연결</strong>되어 있었습니다.
+    </p>
+  </div>
+</section>
+
 <!-- ═══ PILLARS ═══ -->
 <section>
   <div class="wrap">
     <span class="section-label reveal">What I Design</span>
-    <h2 class="section-title reveal">세 가지를 설계합니다.</h2>
-    <p class="section-desc reveal">보이지 않는 것들이 매출을 결정합니다.<br>저는 그 보이지 않는 것들에 구조를 만듭니다.</p>
+    <h2 class="section-title reveal">보이지 않는 것들이<br>매출을 결정합니다.</h2>
+    <p class="section-desc reveal">상권의 공기, 공간의 인상, 대표의 태도, 고객의 움직임.<br>저는 그 보이지 않는 것들에 구조를 만듭니다.</p>
 
     <div class="pillars reveal">
       <div class="pillar">
         <span class="pillar-num">01</span>
         <h3>감각 설계</h3>
-        <p>간판 앞 3초, 입구의 공기, 메뉴판의 첫 줄.<br>고객이 무의식으로 느끼는 것들을 의도적으로 설계합니다.</p>
+        <p>간판 앞 3초의 시선, 입구에서 느껴지는 공기, 매장 안의 음악 속도.<br>고객이 무의식으로 느끼는 것들이 체류 시간과 객단가를 바꿉니다.</p>
       </div>
       <div class="pillar">
         <span class="pillar-num">02</span>
         <h3>대표의 언어</h3>
-        <p>말습관이 팀을 만들고, 팀이 매장을 만듭니다.<br>대표가 쓰는 단어 하나가 매출의 방향을 바꿉니다.</p>
+        <p>말습관이 팀을 만들고, 팀이 매장을 만듭니다.<br>"안 되는 이유"를 말하는 대표와 "되게 하는 구조"를 말하는 대표, 매출이 다릅니다.</p>
       </div>
       <div class="pillar">
         <span class="pillar-num">03</span>
         <h3>브랜드 구조</h3>
-        <p>로고나 디자인이 아닙니다.<br>고객이 이 브랜드를 기억하고, 소개하고, 다시 오는 흐름을 만듭니다.</p>
+        <p>로고나 디자인이 아닙니다.<br>고객이 이 매장을 기억하고, 소개하고, 다시 오게 만드는 전체 흐름을 설계합니다.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ═══ SENSORY EVIDENCE ═══ -->
+<section style="background: var(--surface-2);">
+  <div class="wrap">
+    <span class="section-label reveal">Sensory × Sales</span>
+    <h2 class="section-title reveal">감각이 매출이 되는<br>다섯 가지 순간.</h2>
+    <p class="section-desc reveal">사람은 먼저 보고, 리듬을 느끼고, 향을 상상하고,<br>질감을 신뢰한 뒤, 마지막에 맛으로 확신합니다.</p>
+
+    <div class="pillars reveal">
+      <div class="pillar">
+        <span class="pillar-num">👁</span>
+        <h3>시각 — 간판 앞 3초</h3>
+        <p>고객은 간판을 3초 봅니다. 그 3초 안에 "들어갈 곳"과 "지나칠 곳"이 갈립니다.<br>색감, 글씨 크기, 여백 — 보이는 것이 첫 매출입니다.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">👂</span>
+        <h3>청각 — 음악의 속도</h3>
+        <p>매장 음악의 BPM을 바꿨을 뿐인데 체류 시간이 달라졌습니다.<br>빠른 음악은 회전율, 느린 음악은 객단가. 소리도 설계할 수 있습니다.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">👃</span>
+        <h3>후각 — 문 앞의 냄새</h3>
+        <p>커피 향이 밖으로 새어나오는 카페와 아닌 카페, 진입률이 다릅니다.<br>향은 기억을 만들고, 기억은 재방문을 만듭니다.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">✋</span>
+        <h3>촉각 — 머무는 이유</h3>
+        <p>의자에 오래 앉아도 되는 감각, 컵의 두께감, 테이블 간격이 주는 안정감.<br>촉각은 직접 말하지 않아도, 고객의 체류 시간과 만족도를 결정합니다.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">👅</span>
+        <h3>미각 — 마지막 확신</h3>
+        <p>맛은 핵심이지만, 사람을 움직이는 첫 감각은 맛 그 자체가 아닙니다.<br>먼저 보이는 장면, 떠오르는 향, 예상되는 질감 위에서 맛이 기억을 완성합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- ═══ DIAGNOSTIC ═══ -->
-<section style="background: var(--surface);">
+<section>
   <div class="wrap">
     <span class="section-label reveal">Self Diagnosis</span>
     <h2 class="section-title reveal">이런 생각을 해본 적 있다면,<br>구조의 문제입니다.</h2>
@@ -508,10 +247,38 @@
 <!-- ═══ QUOTE ═══ -->
 <div class="quote-strip">
   <div class="wrap reveal">
-    <blockquote>대부분은 감각이 없어서가 아니라,<br>감각을 구조로 바꾸는 법을<br>모르기 때문입니다.</blockquote>
-    <cite>— Mashcore</cite>
+    <blockquote>친구한테 "내 매장 어때?" 물어본 적 있으시죠.<br>"분위기 좋다", "음식 맛있다"<br>그 말, 진심이었을까요.</blockquote>
+    <cite style="display:block; margin-top:24px; font-size:14px; line-height:1.85; max-width:480px; margin-left:auto; margin-right:auto; text-align:center; font-style:normal; color:var(--text-muted);">
+      당신도 친구 매장에 가서<br>
+      싫은 소리를 제대로 해본 적이 있나요.<br><br>
+      가까운 사람일수록 좋은 말만 합니다.<br>
+      그건 배려이지, 진단이 아닙니다.<br><br>
+      <span style="color:var(--text-dim); font-size:13px;">
+      수천 개의 매장을 걸어본 사람의 눈과<br>
+      가까운 사람이 건네는 인상은<br>
+      근본적으로 다를 수밖에 없습니다.</span>
+    </cite>
   </div>
 </div>
+
+<!-- ═══ BRIDGE ═══ -->
+<section style="padding: 80px 0;">
+  <div class="wrap" style="text-align:center;">
+    <span class="section-label reveal" style="margin-bottom:28px;">Do Not Run</span>
+    <p class="reveal" style="font-size: 15px; color: var(--text-muted); line-height: 1.95; max-width:480px; margin: 0 auto;">
+      그래서 저는 도망치지 않고 말합니다.<br><br>
+      <strong style="color:var(--text);">고객의 시선이 어디에서 머무는지.</strong><br>
+      <strong style="color:var(--text);">매장의 흐름이 어디에서 끊기는지.</strong><br>
+      <strong style="color:var(--text);">대표님의 어떤 습관이 팀의 리듬을 바꾸는지.</strong><br><br>
+      <span style="color:var(--text-dim); font-size:14px;">
+      듣기 편한 이야기만 들으면<br>
+      매장은 편안하게 그 자리에 머무릅니다.<br><br></span>
+      <span style="color:var(--text);">
+      구조가 보이면, 바꿀 수 있습니다.<br>
+      바꾸면, 매출이 움직입니다.</span>
+    </p>
+  </div>
+</section>
 
 <!-- ═══ PROCESS ═══ -->
 <section>
@@ -550,9 +317,10 @@
 <section style="background: var(--surface); padding: 64px 0;">
   <div class="wrap" style="text-align: center;">
     <span class="section-label reveal">Content</span>
-    <p class="reveal" style="font-size: 15px; color: var(--text-muted); line-height: 1.8; max-width: 400px; margin: 12px auto 28px;">
-      감각 설계, 대표의 언어, 브랜드 구조에 대한<br>
-      생각을 매주 Threads에 씁니다.
+    <p class="reveal" style="font-size: 15px; color: var(--text-muted); line-height: 1.8; max-width: 440px; margin: 12px auto 28px;">
+      상권, 공간, 접객, 말습관, 그리고 매출로 이어지는 감각.<br>
+      자영업 현장을 오래 보며 알게 된 것들을<br>
+      매주 Threads에 씁니다.
     </p>
     <a class="btn btn-ghost reveal" href="https://www.threads.net/@mashcore_lab" target="_blank" rel="noopener">
       @mashcore_lab →

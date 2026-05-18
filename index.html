@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Mashcore Lab — 사람의 자리를 보는 해석실</title>
-  <meta name="description" content="AI가 다 한다는데, 사장님 매장은 왜 그대로일까. 사람이 멈추는 자리, 안심하는 자리, 선택하는 자리를 봅니다." />
-  <meta property="og:title" content="Mashcore Lab — 사람의 자리를 보는 해석실" />
-  <meta property="og:description" content="AI가 다 한다는데, 사장님 매장은 왜 그대로일까. 사람이 멈추는 자리, 안심하는 자리, 선택하는 자리를 봅니다." />
+  <title>Mashcore Lab — 멈추는 자리를 읽는 해석실</title>
+  <meta name="description" content="사람, 브랜드, 공간, 검색 흐름 속에서 고객이 멈추는 자리를 읽고 구조로 바꿉니다. 자리·결·안심·신호 네 개의 신호로 사업의 결을 정돈합니다." />
+  <meta property="og:title" content="Mashcore Lab — 멈추는 자리를 읽는 해석실" />
+  <meta property="og:description" content="AI가 다 한다더라구요. 근데 그 자리의 망설임은 아직 사람이 만듭니다." />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
     :root {
       --bg: #0A0A0A;
       --surface: #141414;
-      --surface-2: #1C1C1C;
+      --surface-2: #1A1A1A;
       --surface-3: #222222;
       --text: #EDEDED;
       --text-muted: #9A9A9A;
@@ -25,107 +25,308 @@
       --accent-soft: rgba(201,167,122,0.18);
       --accent-glow: rgba(201,167,122,0.10);
       --warm: #C9A77A;
-      --border: rgba(255,255,255,0.05);
-      --border-hover: rgba(255,255,255,0.12);
-      --border-strong: rgba(255,255,255,0.18);
-      --glow-warm: rgba(201,167,122,0.05);
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.13);
+      --border-strong: rgba(255,255,255,0.20);
+      --glow-warm: rgba(201,167,122,0.06);
       --max: 720px;
-      --max-wide: 880px;
+      --max-wide: 900px;
       --font-kr: "Noto Serif KR", "Sandoll Myungjo", serif;
       --font-en: "Instrument Serif", Georgia, serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--font-kr); background: var(--bg); color: var(--text); line-height: 1.7; letter-spacing: -0.1px; word-break: keep-all; overflow-x: hidden; font-weight: 400; }
+    body {
+      font-family: var(--font-kr);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.78;
+      letter-spacing: -0.1px;
+      word-break: keep-all;
+      overflow-x: hidden;
+      font-weight: 400;
+    }
     a { color: inherit; text-decoration: none; }
-    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.018; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* 미세 노이즈 — 화면 전체에 결을 입힘 */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.020;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
     .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
     .wrap-wide { max-width: var(--max-wide); margin: 0 auto; padding: 0 24px; }
 
-    /* === HERO === */
-    .hero { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 120px 0 90px; position: relative; }
-    .hero::before { content: ''; position: absolute; top: -10%; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(ellipse, var(--glow-warm) 0%, transparent 60%); pointer-events: none; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-hover), transparent); }
-    .hero .wrap { position: relative; z-index: 1; }
-    .hero-label-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 44px; opacity: 0; animation: fadeUp 1s 0.3s cubic-bezier(.16,1,.3,1) forwards; flex-wrap: wrap; }
-    .hero-brand { font-family: var(--font-en); font-size: 14px; font-style: italic; color: var(--text); letter-spacing: 1px; }
-    .hero-divider { width: 24px; height: 1px; background: var(--border-strong); }
-    .hero-tagline { font-family: var(--font-en); font-size: 12px; font-style: italic; color: var(--text-dim); letter-spacing: 1.5px; }
-    .hero h1 { font-size: clamp(32px, 6.6vw, 52px); font-weight: 700; line-height: 1.32; letter-spacing: -1.3px; margin-bottom: 40px; opacity: 0; animation: fadeUp 1s 0.6s cubic-bezier(.16,1,.3,1) forwards; }
-    .hero h1 .em { color: var(--accent); font-style: italic; font-family: var(--font-en); font-weight: 400; }
-    .hero-sub { font-size: 16px; color: var(--text-muted); line-height: 1.95; margin-bottom: 56px; max-width: 520px; opacity: 0; animation: fadeUp 1s 0.9s cubic-bezier(.16,1,.3,1) forwards; }
-    .hero-sub strong { color: var(--text); font-weight: 500; }
-    .hero-cta-area { opacity: 0; animation: fadeUp 1s 1.15s cubic-bezier(.16,1,.3,1) forwards; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* === AXIS === */
-    .axis-line { font-family: var(--font-en); font-style: italic; font-size: 12px; color: var(--text-dim); letter-spacing: 1.5px; padding: 44px 0; text-align: center; background: linear-gradient(180deg, var(--bg), var(--surface), var(--bg)); }
-
-    /* === SECTION BASE === */
-    section { padding: 110px 0; position: relative; }
-    .section-label { font-family: var(--font-en); font-size: 10.5px; font-style: italic; color: var(--warm); letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 22px; display: block; opacity: 0.78; }
-    .section-title { font-size: clamp(24px, 4.6vw, 34px); font-weight: 700; letter-spacing: -0.7px; line-height: 1.42; margin-bottom: 18px; }
-    .section-desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.9; margin-bottom: 52px; }
+    /* === 공통 라벨/타이포 === */
+    .section-label {
+      font-family: var(--font-en);
+      font-size: 10.5px;
+      font-style: italic;
+      color: var(--warm);
+      letter-spacing: 2.6px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      display: block;
+      opacity: 0.82;
+    }
+    .section-title {
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.7px;
+      line-height: 1.4;
+      margin-bottom: 22px;
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.95;
+      margin-bottom: 52px;
+      max-width: 560px;
+    }
     .section-desc strong { color: var(--text); font-weight: 500; }
 
-    /* === FIVE DISCIPLINES (활동축) === */
-    .disciplines { 
-      border: 1px solid var(--border); 
-      border-radius: 16px; 
-      overflow: hidden; 
+    section { padding: 110px 0; position: relative; }
+
+    /* === HERO === */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 0 90px;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(ellipse, var(--glow-warm) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
+    }
+    .hero .wrap { position: relative; z-index: 1; }
+
+    .hero-label-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s cubic-bezier(.16,1,.3,1) forwards;
+      flex-wrap: wrap;
+    }
+    .hero-brand {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+    .hero-divider { width: 24px; height: 1px; background: var(--border-strong); }
+    .hero-tagline {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-dim);
+      letter-spacing: 1.5px;
+    }
+
+    /* 짧은 도발 라벨 — Hero 위 시간차 */
+    .hero-pretitle {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--text-dim);
+      letter-spacing: 1.2px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 1s 0.45s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero-pretitle .dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      vertical-align: middle;
+      margin-right: 10px;
+      transform: translateY(-1px);
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6.4vw, 50px);
+      font-weight: 700;
+      line-height: 1.36;
+      letter-spacing: -1.3px;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp 1s 0.7s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero h1 .em {
+      color: var(--accent);
+      font-style: italic;
+      font-family: var(--font-en);
+      font-weight: 400;
+    }
+    .hero h1 .gap {
+      display: block;
+      height: 0.4em;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.95;
+      margin-bottom: 60px;
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 1s 0.95s cubic-bezier(.16,1,.3,1) forwards;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta-area {
+      opacity: 0;
+      animation: fadeUp 1s 1.2s cubic-bezier(.16,1,.3,1) forwards;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .hero-cta {
+      font-family: var(--font-kr);
+      font-size: 15px;
+      color: var(--text);
+      padding: 16px 28px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(.16,1,.3,1);
+      letter-spacing: -0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-cta:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .hero-cta .arrow {
+      font-family: var(--font-en);
+      font-style: italic;
+      opacity: 0.7;
+      transition: transform 0.4s;
+    }
+    .hero-cta:hover .arrow { transform: translateX(4px); opacity: 1; }
+    .hero-cta-sub {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 12.5px;
+      color: var(--text-dim);
+      letter-spacing: 0.8px;
+      margin-left: 4px;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === AXIS — 섹션 사이 호흡 === */
+    .axis-line {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 1.8px;
+      padding: 44px 0;
+      text-align: center;
+      background: linear-gradient(180deg, var(--bg), var(--surface), var(--bg));
+    }
+
+    /* === 02. WHAT WE READ — 4 시그니처 === */
+    .signals {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
       background: var(--surface);
       position: relative;
     }
-    .disciplines::before {
+    .signals::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent-soft) 50%, transparent);
     }
-    .discipline {
+    .signal {
       display: grid;
-      grid-template-columns: 44px 110px 1fr;
-      gap: 22px;
-      padding: 30px 34px;
+      grid-template-columns: 48px 1fr;
+      gap: 26px;
+      padding: 34px 36px;
       border-bottom: 1px solid var(--border);
       transition: background 0.4s;
       align-items: baseline;
-      position: relative;
     }
-    .discipline:last-child { border-bottom: none; }
-    .discipline:hover { background: var(--surface-2); }
-    .discipline-num {
+    .signal:last-child { border-bottom: none; }
+    .signal:hover { background: var(--surface-2); }
+    .signal-num {
       font-family: var(--font-en);
       font-style: italic;
-      font-size: 13.5px;
+      font-size: 13px;
       color: var(--accent);
       letter-spacing: 1.5px;
       opacity: 0.85;
     }
-    .discipline-en {
-      font-family: var(--font-en);
-      font-style: italic;
-      font-size: 17px;
-      color: var(--text-muted);
-      letter-spacing: 0.4px;
-      line-height: 1.4;
-    }
-    .discipline-body { line-height: 1.7; }
-    .discipline-ko {
-      font-size: 17.5px;
+    .signal-body { line-height: 1.7; }
+    .signal-name {
+      font-size: 22px;
       font-weight: 600;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
       margin-bottom: 6px;
       color: var(--text);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
     }
-    .discipline-def {
-      font-size: 13.5px;
+    .signal-en {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--text-dim);
+      letter-spacing: 0.4px;
+      font-weight: 400;
+    }
+    .signal-def {
+      font-size: 14.5px;
       color: var(--text-muted);
-      line-height: 1.75;
+      line-height: 1.85;
     }
-    .disciplines-footer {
-      padding: 24px 34px;
+    .signal-def strong { color: var(--text); font-weight: 500; }
+    .signals-footer {
+      padding: 24px 36px;
       background: var(--surface-2);
       border-top: 1px solid var(--border);
       font-size: 13px;
@@ -136,68 +337,204 @@
       text-align: right;
     }
 
-    /* === SHIFT === */
-    .shift-block { padding: 8px 0; max-width: 560px; }
-    .shift-block p { font-size: 16px; line-height: 2.05; color: var(--text-muted); margin-bottom: 32px; }
-    .shift-block p:last-child { margin-bottom: 0; }
-    .shift-block strong { color: var(--text); font-weight: 500; }
+    /* === 03. WHY IT MATTERS === */
+    .why-block {
+      max-width: 580px;
+    }
+    .why-headline {
+      font-size: clamp(22px, 3.6vw, 28px);
+      font-weight: 600;
+      line-height: 1.55;
+      letter-spacing: -0.5px;
+      margin-bottom: 48px;
+      color: var(--text);
+    }
+    .why-headline .em { color: var(--accent); font-style: italic; font-family: var(--font-en); font-weight: 400; }
+    .why-list {
+      border-left: 1px solid var(--border);
+      padding-left: 28px;
+    }
+    .why-item {
+      padding: 18px 0;
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      position: relative;
+    }
+    .why-item:not(:last-child) { border-bottom: 1px dashed var(--border); }
+    .why-item strong { color: var(--text); font-weight: 500; }
+    .why-item::before {
+      content: '';
+      position: absolute;
+      left: -29px; top: 28px;
+      width: 14px; height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .why-footer {
+      margin-top: 44px;
+      font-size: 14.5px;
+      color: var(--text);
+      line-height: 1.85;
+      font-style: italic;
+      font-family: var(--font-en);
+      letter-spacing: 0.2px;
+      max-width: 460px;
+    }
 
-    /* === RESEARCH FIELDS MAP === */
-    .fields-map {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+    /* === 04. FIELD LAB — Lab ↔ Weplace === */
+    .field-lab { background: var(--surface); }
+    .field-lab::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
     }
-    .field-item {
-      padding: 36px 4px;
-      border-bottom: 1px solid var(--border);
-      transition: padding-left 0.4s, background 0.4s;
-      cursor: default;
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 64px 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin-top: 12px;
     }
-    .field-item:last-child { border-bottom: none; }
-    .field-item:hover { padding-left: 16px; }
-    .field-header {
+    .field-node {
+      padding: 36px 32px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg);
+      position: relative;
+      min-height: 280px;
       display: flex;
-      align-items: baseline;
-      gap: 22px;
-      margin-bottom: 8px;
+      flex-direction: column;
     }
-    .field-num {
+    .field-node.lab { border-color: var(--accent-soft); }
+    .field-node-label {
       font-family: var(--font-en);
       font-style: italic;
-      font-size: 13.5px;
+      font-size: 11.5px;
       color: var(--accent);
-      letter-spacing: 1.5px;
-      min-width: 36px;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
       opacity: 0.85;
     }
-    .field-en {
+    .field-node-name {
       font-family: var(--font-en);
       font-style: italic;
-      font-size: clamp(22px, 4.2vw, 30px);
+      font-size: 26px;
       color: var(--text);
-      font-weight: 400;
       letter-spacing: -0.3px;
-      flex: 1;
+      margin-bottom: 14px;
       line-height: 1.2;
     }
-    .field-question {
+    .field-node-role {
       font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 22px;
+      font-weight: 500;
+    }
+    .field-node-keys {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px dashed var(--border);
+      letter-spacing: 0.3px;
+    }
+    .field-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 24px;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+    .field-footer {
+      margin-top: 44px;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      max-width: 640px;
+    }
+    .field-footer strong { color: var(--text); font-weight: 500; }
+    .field-footer a {
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-glow);
+      padding-bottom: 1px;
+      font-family: var(--font-en);
+      font-style: italic;
+      transition: border-color 0.3s;
+    }
+    .field-footer a:hover { border-bottom-color: var(--accent); }
+
+    /* === 05. MEMORY STRUCTURE === */
+    .memory-intro {
+      max-width: 580px;
+      margin-bottom: 56px;
+    }
+    .memory-intro p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 2.0;
+      margin-bottom: 22px;
+    }
+    .memory-intro p:last-child { margin-bottom: 0; }
+    .memory-intro strong { color: var(--text); font-weight: 500; }
+    .memory-intro .accent { color: var(--accent); font-style: italic; font-family: var(--font-en); }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .memory-card {
+      padding: 28px 26px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      transition: border-color 0.4s, transform 0.4s cubic-bezier(.16,1,.3,1);
+    }
+    .memory-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .memory-card-num {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      opacity: 0.8;
+    }
+    .memory-card-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .memory-card-desc {
+      font-size: 13.5px;
       color: var(--text-muted);
       line-height: 1.8;
-      padding-left: 58px;
     }
-    .field-question strong { color: var(--text); font-weight: 500; }
 
-    /* === CORE THESIS === */
-    .thesis-block {
+    /* === 06. SCENES TO STRUCTURE === */
+    .scenes-block {
       background: var(--surface);
       border-left: 2px solid var(--accent);
-      padding: 44px 36px;
+      padding: 48px 38px;
       border-radius: 4px;
       position: relative;
       overflow: hidden;
     }
-    .thesis-block::before {
+    .scenes-block::before {
       content: '';
       position: absolute;
       top: 0; right: 0; bottom: 0;
@@ -206,777 +543,576 @@
       pointer-events: none;
       opacity: 0.5;
     }
-    .thesis-block p {
+    .scenes-block p {
       font-size: 16px;
       line-height: 2.0;
       color: var(--text);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       position: relative;
     }
-    .thesis-block p:last-child { margin-bottom: 0; }
-    .thesis-block .dim { color: var(--text-muted); }
-    .thesis-flow {
-      font-family: var(--font-en);
-      font-style: italic;
-      font-size: 17px;
-      color: var(--accent);
-      letter-spacing: 0.5px;
-      padding: 18px 0 6px;
-      line-height: 1.8;
-    }
-    .thesis-flow .arrow { opacity: 0.6; padding: 0 4px; }
+    .scenes-block p:last-child { margin-bottom: 0; }
+    .scenes-block .dim { color: var(--text-muted); }
+    .scenes-block strong { color: var(--text); font-weight: 500; }
 
-    /* === FIELD ORIGIN === */
-    .field-origin {
-      background: var(--surface);
-      position: relative;
-    }
-    .field-origin::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-hover), transparent);
-    }
-    .origin-prose {
-      max-width: 560px;
-      font-size: 15.5px;
-      line-height: 1.95;
-      color: var(--text-muted);
-    }
-    .origin-prose p { margin-bottom: 28px; }
-    .origin-prose p:last-child { margin-bottom: 0; }
-    .origin-prose strong { color: var(--text); font-weight: 500; }
-    .origin-stat-row {
-      display: flex;
-      gap: 56px;
-      margin: 48px 0;
-      padding: 28px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-    .origin-stat { display: flex; flex-direction: column; gap: 6px; }
-    .origin-stat-num {
-      font-family: var(--font-en);
-      font-size: 28px;
-      font-style: italic;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .origin-stat-label { font-size: 12.5px; color: var(--text-dim); letter-spacing: 0.3px; }
-
-    /* === WEPLACE BRIDGE === */
-    .bridge-wrap { padding: 8px 0; }
-    .bridge-headline {
-      font-size: clamp(18px, 3.5vw, 22px);
-      font-weight: 600;
-      line-height: 1.6;
-      letter-spacing: -0.3px;
-      color: var(--text);
-      margin-bottom: 48px;
-      max-width: 540px;
-    }
-    .bridge-diagram {
+    /* === 07. HOW WE WORK === */
+    .flow-row {
       display: grid;
-      grid-template-columns: 1fr 56px 1fr;
-      gap: 0;
-      align-items: stretch;
-      margin-bottom: 36px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 24px;
     }
-    .bridge-node {
-      padding: 32px 28px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      transition: border-color 0.4s, background 0.4s;
-    }
-    .bridge-node:hover { border-color: var(--border-hover); background: var(--surface-2); }
-    .bridge-node-label {
-      font-family: var(--font-en);
-      font-style: italic;
-      font-size: 11px;
-      color: var(--warm);
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      opacity: 0.8;
-    }
-    .bridge-node-name {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-    .bridge-node-role { font-size: 13.5px; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
-    .bridge-node-keys {
-      font-size: 12.5px;
-      color: var(--text-dim);
-      line-height: 1.75;
-      padding-top: 14px;
-      border-top: 1px dashed var(--border);
-      letter-spacing: 0.1px;
-    }
-    .bridge-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-en);
-      font-style: italic;
-      color: var(--accent);
-      font-size: 22px;
-      opacity: 0.7;
-    }
-    .bridge-footnote {
-      max-width: 560px;
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.85;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-    .bridge-footnote strong { color: var(--text); font-weight: 500; }
-
-    /* === APPLIED LAB === */
-    .remains-list { display: grid; gap: 12px; }
-    .remains-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 26px 28px; transition: border-color 0.4s, background 0.4s; }
-    .remains-card:hover { border-color: var(--accent-glow); background: var(--surface-2); }
-    .remains-row { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: baseline; padding: 6px 0; }
-    .remains-row + .remains-row { border-top: 1px dashed var(--border); margin-top: 4px; padding-top: 14px; }
-    .remains-label { font-family: var(--font-en); font-style: italic; font-size: 11px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; line-height: 1.5; }
-    .remains-text { font-size: 14px; line-height: 1.75; color: var(--text-muted); }
-    .remains-text.before { color: var(--text-muted); }
-    .remains-text.work { color: var(--text); font-weight: 500; }
-    .remains-text.asset { color: var(--warm); font-size: 13.5px; letter-spacing: -0.1px; }
-
-    /* === OBSERVATIONS === */
-    .notes-list { display: grid; gap: 14px; }
-    .note-card {
-      padding: 32px 30px;
-      background: var(--surface);
+    .flow-step {
+      padding: 26px 22px;
       border: 1px solid var(--border);
       border-radius: 12px;
-      transition: border-color 0.4s, background 0.4s;
+      background: var(--surface);
       position: relative;
+      transition: border-color 0.4s;
     }
-    .note-card:hover { border-color: var(--border-hover); background: var(--surface-2); }
-    .note-meta-row {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-    .note-num {
+    .flow-step:hover { border-color: var(--accent-soft); }
+    .flow-step-num {
       font-family: var(--font-en);
       font-style: italic;
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--accent);
-      letter-spacing: 1.5px;
+      letter-spacing: 1.8px;
+      margin-bottom: 12px;
       opacity: 0.85;
     }
-    .note-divider { flex: 1; height: 1px; background: var(--border); }
-    .note-tag {
+    .flow-step-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+    .flow-step-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .flow-footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: var(--text-dim);
+      font-style: italic;
+      font-family: var(--font-en);
+      letter-spacing: 0.3px;
+      text-align: center;
+    }
+
+    /* === 08. CTA === */
+    .cta {
+      padding: 140px 0 120px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-soft) 50%, transparent);
+    }
+    .cta-pretitle {
       font-family: var(--font-en);
       font-style: italic;
-      font-size: 11px;
+      font-size: 13px;
       color: var(--text-dim);
       letter-spacing: 1.5px;
-      text-transform: uppercase;
+      margin-bottom: 22px;
     }
-    .note-text {
-      font-size: 16.5px;
-      font-weight: 500;
-      letter-spacing: -0.3px;
-      line-height: 1.55;
+    .cta h2 {
+      font-size: clamp(28px, 5.4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.4;
+      margin-bottom: 24px;
+      max-width: 620px;
+    }
+    .cta h2 .em {
+      color: var(--accent);
+      font-style: italic;
+      font-family: var(--font-en);
+      font-weight: 400;
+    }
+    .cta-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.95;
+      margin-bottom: 48px;
+      max-width: 480px;
+    }
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .cta-btn {
+      font-family: var(--font-kr);
+      font-size: 15.5px;
+      padding: 18px 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: transparent;
       color: var(--text);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(.16,1,.3,1);
+      letter-spacing: -0.2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
     }
+    .cta-btn.primary {
+      background: var(--accent);
+      color: #1A1408;
+      border-color: var(--accent);
+      font-weight: 500;
+    }
+    .cta-btn.primary:hover {
+      background: #D4B484;
+      transform: translateY(-1px);
+    }
+    .cta-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .cta-btn.primary:hover { color: #1A1408; }
+    .cta-btn .arrow {
+      font-family: var(--font-en);
+      font-style: italic;
+      opacity: 0.7;
+      transition: transform 0.4s;
+    }
+    .cta-btn:hover .arrow { transform: translateX(4px); opacity: 1; }
+    .cta-btn.primary .arrow { opacity: 0.85; }
 
-    /* === FINAL CTA === */
-    .industry-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 500px; margin: 32px auto 28px; }
-    .chip { background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); padding: 9px 16px; border-radius: 999px; font-size: 12.5px; font-weight: 500; letter-spacing: -0.1px; transition: all 0.3s; cursor: default; }
-    .chip:hover { border-color: var(--accent-glow); color: var(--text); background: var(--surface-2); }
-    .cta-note { font-family: var(--font-en); font-style: italic; font-size: 13px; color: var(--text-dim); letter-spacing: 0.5px; margin-top: 22px; opacity: 0.85; }
-    .final-cta { padding: 110px 0 130px; text-align: center; position: relative; }
-    .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 560px; height: 560px; background: radial-gradient(circle, var(--glow-warm) 0%, transparent 70%); pointer-events: none; }
-    .final-cta .section-title { margin-bottom: 12px; }
-    .final-cta .section-desc { max-width: 460px; margin: 0 auto 36px; }
-    .cta-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }
-
-    /* === BUTTONS === */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 36px; border-radius: 999px; font-size: 14.5px; font-weight: 500; font-family: var(--font-kr); letter-spacing: -0.1px; cursor: pointer; transition: all 0.35s cubic-bezier(.16,1,.3,1); border: none; white-space: nowrap; background: transparent; }
-    .btn-primary { color: var(--text); box-shadow: inset 0 0 0 1px var(--text-muted); }
-    .btn-primary:hover { color: #fff; box-shadow: inset 0 0 0 2px var(--text); transform: translateY(-1px); }
-    .btn-ghost { color: var(--text-dim); box-shadow: inset 0 0 0 1px var(--border); }
-    .btn-ghost:hover { color: var(--text-muted); box-shadow: inset 0 0 0 1px var(--border-hover); }
-    .btn-threads { color: var(--text); box-shadow: inset 0 0 0 1px var(--text-muted); }
-    .btn-threads:hover { color: #fff; box-shadow: inset 0 0 0 2px var(--text); transform: translateY(-1px); }
-    .btn-threads svg { width: 15px; height: 15px; }
-    .btn-sm { padding: 13px 26px; font-size: 13.5px; }
+    .cta-footnote {
+      margin-top: 40px;
+      font-size: 13px;
+      color: var(--text-dim);
+      font-style: italic;
+      font-family: var(--font-en);
+      letter-spacing: 0.4px;
+      max-width: 440px;
+      line-height: 1.8;
+    }
 
     /* === FOOTER === */
-    footer { padding: 60px 0 48px; text-align: center; position: relative; }
-    footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border-hover), transparent); }
-    .footer-brand { font-family: var(--font-en); font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 6px; letter-spacing: 1px; }
-    .footer-sub { font-size: 11.5px; color: var(--text-dim); opacity: 0.6; letter-spacing: 0.3px; }
-    .footer-links { margin-top: 22px; display: flex; justify-content: center; gap: 24px; }
-    .footer-links a { font-size: 11.5px; color: var(--text-dim); transition: color 0.3s; letter-spacing: 0.3px; }
-    .footer-links a:hover { color: var(--text-muted); }
+    footer {
+      padding: 60px 0 80px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text);
+      letter-spacing: 0.5px;
+    }
+    .footer-meta {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      font-family: var(--font-en);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    .footer-tagline {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.85;
+      max-width: 560px;
+    }
 
-    /* === REVEAL === */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
-    .reveal.active { opacity: 1; transform: translateY(0); }
-    .reveal.d1 { transition-delay: 0.1s; }
-    .reveal.d2 { transition-delay: 0.2s; }
-    .reveal.d3 { transition-delay: 0.3s; }
+    /* === REVEAL ANIMATIONS === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.15s; }
+    .reveal.d2 { transition-delay: 0.3s; }
+    .reveal.d3 { transition-delay: 0.45s; }
 
     /* === MOBILE === */
     @media (max-width: 720px) {
-      .hero { min-height: 88vh; min-height: 88svh; padding: 100px 0 70px; }
-      section { padding: 76px 0; }
-      .discipline { grid-template-columns: 36px 1fr; gap: 14px; padding: 24px 22px; }
-      .discipline-en { display: none; }
-      .discipline-ko { font-size: 16.5px; }
-      .disciplines-footer { padding: 20px 22px; font-size: 12px; text-align: center; }
-      .field-item { padding: 28px 4px; }
-      .field-en { font-size: 22px; }
-      .field-question { padding-left: 0; padding-top: 4px; font-size: 14px; }
-      .field-header { gap: 14px; margin-bottom: 12px; }
-      .field-num { min-width: 28px; }
-      .field-item:hover { padding-left: 4px; }
-      .thesis-block { padding: 32px 26px; }
-      .bridge-diagram { grid-template-columns: 1fr; gap: 0; }
-      .bridge-arrow { padding: 14px 0; font-size: 18px; }
-      .bridge-node { padding: 26px 24px; }
-      .note-card { padding: 26px 24px; }
-      .note-text { font-size: 15.5px; }
-      .origin-stat-row { gap: 32px; }
-      .final-cta { padding: 76px 0 100px; }
-      .remains-row { grid-template-columns: 56px 1fr; gap: 14px; }
-      .remains-card { padding: 22px 22px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero h1, .hero-label-row, .hero-sub, .hero-cta-area { animation: none; opacity: 1; transform: none; }
-      .reveal { opacity: 1 !important; transform: none !important; }
+      section { padding: 90px 0; }
+      .hero { padding: 100px 0 70px; }
+      .hero h1 { letter-spacing: -0.8px; }
+
+      .signal {
+        grid-template-columns: 36px 1fr;
+        gap: 18px;
+        padding: 28px 24px;
+      }
+      .signal-name { font-size: 19px; gap: 10px; }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .field-arrow {
+        transform: rotate(90deg);
+        padding: 4px 0;
+      }
+      .field-node { min-height: auto; padding: 28px 24px; }
+
+      .memory-grid { grid-template-columns: 1fr; }
+
+      .flow-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .flow-step { padding: 22px 18px; }
+
+      .scenes-block { padding: 36px 26px; }
+
+      .cta { padding: 110px 0 100px; }
+      .cta-buttons { width: 100%; }
+      .cta-btn { width: 100%; justify-content: space-between; }
+
+      .footer-row { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
 <body>
 
 <!-- ═══ 01. HERO ═══ -->
-<section class="hero">
+<header class="hero">
   <div class="wrap">
     <div class="hero-label-row">
       <span class="hero-brand">Mashcore Lab</span>
       <span class="hero-divider"></span>
-      <span class="hero-tagline">2020 —</span>
+      <span class="hero-tagline">a place that reads the pause</span>
     </div>
-    <h1>AI가 다 한다더라구요.<br><br><span class="em">근데 사장님 매장은</span><br><span class="em">그대로입니다.</span></h1>
+
+    <div class="hero-pretitle">
+      <span class="dot"></span>요즘 가장 자주 듣는 말 —
+    </div>
+
+    <h1>
+      <span class="em">"AI가 다 한다더라구요."</span>
+      <span class="gap"></span>
+      근데 그 자리의 망설임은<br>
+      아직 사람이 만듭니다.
+    </h1>
+
     <p class="hero-sub">
-      2020년부터 매장 한 곳에서 시작했습니다.<br>
-      하루 10명 이상의 사장님을 만나며<br>
-      첫인상, 동선, 말습관, 그리고 매출까지<br>
-      <strong>같이 봐왔습니다</strong>.<br><br>
-      잘 되는 매장에는 공통점이 있습니다.<br>
-      사장님이 자기 매장의<br>
-      <strong>비어 있는 자리</strong>를 압니다.<br><br>
-      거기부터 같이 봅니다.
+      Mashcore Lab은 사람, 브랜드, 공간, 검색 흐름 속에서<br>
+      <strong>고객이 멈추는 자리</strong>를 읽고 구조로 바꿉니다.<br><br>
+      매장에서 시작해, 사람·브랜드·관계까지.<br>
+      같은 결로 읽고, 같은 결로 정돈합니다.
     </p>
+
     <div class="hero-cta-area">
-      <a class="btn btn-primary" href="#contact">흐려진 자리, 한 줄</a>
-      <a class="btn btn-ghost btn-sm" href="https://www.threads.net/@mashcore_lab" target="_blank" rel="noopener">Threads에서 결 보기 →</a>
+      <a href="#signals" class="hero-cta">
+        네 개의 신호부터 보기 <span class="arrow">→</span>
+      </a>
+      <span class="hero-cta-sub">자리 · 결 · 안심 · 신호</span>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ═══ AXIS ═══ -->
-<div class="axis-line">From Sense to Trust. From Trust to Choice.</div>
+<div class="axis-line">— a lab for the pause between intent and action —</div>
 
-<!-- ═══ 02. FIVE DISCIPLINES (활동축) ═══ -->
-<section style="background: var(--surface);">
+<!-- ═══ 02. WHAT WE READ — 4 시그니처 ═══ -->
+<section id="signals">
   <div class="wrap">
-    <span class="section-label reveal">How We Work</span>
-    <h2 class="section-title reveal">다섯 결을,<br>하나의 시야로 잡습니다.</h2>
-    <p class="section-desc reveal" style="max-width:540px;">
-      해석은 생각에서 멈추지 않습니다.<br>
-      다섯 결을 <strong>한 자리</strong>에서<br>
-      차례로 봅니다.
-    </p>
-
-    <div class="disciplines reveal">
-      <div class="discipline">
-        <span class="discipline-num">I.</span>
-        <span class="discipline-en">Strategy</span>
-        <div class="discipline-body">
-          <div class="discipline-ko">순서</div>
-          <div class="discipline-def">어디부터 봐야 할지, 그 자리부터 잡습니다.</div>
-        </div>
-      </div>
-
-      <div class="discipline">
-        <span class="discipline-num">II.</span>
-        <span class="discipline-en">Structure</span>
-        <div class="discipline-body">
-          <div class="discipline-ko">설계</div>
-          <div class="discipline-def">사장님과 손님이 같은 길에서 만나게 합니다.</div>
-        </div>
-      </div>
-
-      <div class="discipline">
-        <span class="discipline-num">III.</span>
-        <span class="discipline-en">Design</span>
-        <div class="discipline-body">
-          <div class="discipline-ko">첫인상</div>
-          <div class="discipline-def">보이는 결이 가장 빠른 안심의 신호입니다.</div>
-        </div>
-      </div>
-
-      <div class="discipline">
-        <span class="discipline-num">IV.</span>
-        <span class="discipline-en">Language</span>
-        <div class="discipline-body">
-          <div class="discipline-ko">말</div>
-          <div class="discipline-def">말이 정돈되면 사람이 다시 또렷해집니다.</div>
-        </div>
-      </div>
-
-      <div class="discipline">
-        <span class="discipline-num">V.</span>
-        <span class="discipline-en">Psychology</span>
-        <div class="discipline-body">
-          <div class="discipline-ko">결</div>
-          <div class="discipline-def">사람이 멈추는 자리와 움직이는 자리를 구분합니다.</div>
-        </div>
-      </div>
-      <div class="disciplines-footer">
-        다섯 결, 하나의 시야.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 03. SHIFT ═══ -->
-<section>
-  <div class="wrap">
-    <span class="section-label reveal">Shift</span>
-    <h2 class="section-title reveal">툴은 많아졌고,<br>신뢰는 더 드물어졌습니다.</h2>
-
-    <div class="shift-block">
-      <p class="reveal d1">
-        <strong>툴은 늘어나는데,<br>
-        브랜드는 더 비슷해지고 있습니다.</strong>
-      </p>
-      <p class="reveal d1">
-        초안은 자동으로 나옵니다.<br>
-        하지만 대표의 말투,<br>
-        고객의 불안,<br>
-        공간의 첫 장면,<br>
-        관계의 온도는<br>
-        <strong>자동으로 정리되지 않습니다.</strong>
-      </p>
-      <p class="reveal d2" style="font-family: var(--font-en); font-style: italic; font-size: 17px; color: var(--accent); opacity: 0.85; letter-spacing: 0.3px; padding-top: 8px;">
-        여기서부터, Mashcore.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 04. DIAGNOSIS ═══ -->
-<section style="background: var(--surface);">
-  <div class="wrap">
-    <span class="section-label reveal">Diagnosis</span>
-    <h2 class="section-title reveal">무엇이 흐려졌는지,<br>어디부터 봐야 하는지.</h2>
+    <span class="section-label reveal">What We Read</span>
+    <h2 class="section-title reveal">우리는 네 개의 신호를 봅니다.</h2>
     <p class="section-desc reveal">
-      같은 결이 다섯 자리에서 같이 무너지고,<br>
-      같은 결로 같이 정돈됩니다.
+      어떤 사업이든, 결국 사람이 한 번 멈추는 자리에서<br>
+      다음 결정이 만들어집니다. <strong>그 자리를 네 개의 신호로 읽습니다.</strong>
     </p>
 
-    <div class="fields-map reveal">
-      <div class="field-item">
-        <div class="field-header">
-          <span class="field-num">01</span>
-          <span class="field-en">손님</span>
+    <div class="signals reveal d1">
+      <div class="signal">
+        <span class="signal-num">01</span>
+        <div class="signal-body">
+          <div class="signal-name">자리 <span class="signal-en">— the position</span></div>
+          <p class="signal-def">고객이 <strong>처음 멈추는 위치.</strong> 매장의 입구일 수도, 검색의 첫 화면일 수도, 통화의 첫 마디일 수도 있습니다.</p>
         </div>
-        <p class="field-question">왜 망설이는가. <strong>안심할 이유가 없으면, "비싸서"는 핑계가 됩니다.</strong></p>
       </div>
 
-      <div class="field-item">
-        <div class="field-header">
-          <span class="field-num">02</span>
-          <span class="field-en">첫인상</span>
+      <div class="signal">
+        <span class="signal-num">02</span>
+        <div class="signal-body">
+          <div class="signal-name">결 <span class="signal-en">— the grain</span></div>
+          <p class="signal-def">브랜드가 풍기는 <strong>태도와 방향.</strong> 로고가 아니라 말투, 응대, 사진 한 장에 묻어나는 결입니다.</p>
         </div>
-        <p class="field-question">어떻게 기억되는가. <strong>로고가 아닙니다. 결로 기억됩니다.</strong></p>
       </div>
 
-      <div class="field-item">
-        <div class="field-header">
-          <span class="field-num">03</span>
-          <span class="field-en">자리</span>
+      <div class="signal">
+        <span class="signal-num">03</span>
+        <div class="signal-body">
+          <div class="signal-name">안심 <span class="signal-en">— the ease</span></div>
+          <p class="signal-def">결정 직전 <strong>불안이 줄어드는 구조.</strong> "여기는 괜찮겠다"는 감각이 만들어지는 자리입니다.</p>
         </div>
-        <p class="field-question">왜 머무는가. <strong>인테리어가 아닙니다. 머무를 이유가 있는가.</strong></p>
       </div>
 
-      <div class="field-item">
-        <div class="field-header">
-          <span class="field-num">04</span>
-          <span class="field-en">말</span>
+      <div class="signal">
+        <span class="signal-num">04</span>
+        <div class="signal-body">
+          <div class="signal-name">신호 <span class="signal-en">— the trace</span></div>
+          <p class="signal-def">리뷰, 사진, 문장, 응대에 <strong>남는 흔적.</strong> 고객은 결정하기 전, 이 흔적들을 읽고 갑니다.</p>
         </div>
-        <p class="field-question">왜 닿는가. <strong>사장님 말투가 매장의 첫 신호입니다.</strong></p>
       </div>
 
-      <div class="field-item">
-        <div class="field-header">
-          <span class="field-num">05</span>
-          <span class="field-en">판</span>
+      <div class="signals-footer">four signals, one grain.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03. WHY IT MATTERS ═══ -->
+<section>
+  <div class="wrap">
+    <span class="section-label reveal">Why It Matters</span>
+    <h2 class="section-title reveal">문제는 실력이 아니라,<br>읽히는 방식일 때가 많습니다.</h2>
+
+    <div class="why-block">
+      <p class="why-headline reveal d1">
+        더 큰 목소리가 필요한 게 아닙니다.<br>
+        <span class="em">고객이 이미 보고 있는 신호</span>를<br>
+        다시 정리하는 일이 먼저입니다.
+      </p>
+
+      <div class="why-list reveal d2">
+        <div class="why-item">
+          <strong>좋은 매장인데</strong>, 고객이 망설입니다.
         </div>
-        <p class="field-question">왜 사람 손이 더 귀해지는가. <strong>도구가 늘어날수록, 사람 손은 더 비싸집니다.</strong></p>
+        <div class="why-item">
+          <strong>좋은 기술인데</strong>, 시장이 이해하지 못합니다.
+        </div>
+        <div class="why-item">
+          <strong>좋은 브랜드인데</strong>, 첫 화면에서 거리감이 생깁니다.
+        </div>
+      </div>
+
+      <p class="why-footer reveal d3">
+        같은 말이 왜 어떤 자리에선 신뢰되고,<br>
+        어떤 자리에선 튕겨 나가는가.<br>
+        우리는 그 자리를 봅니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04. FIELD LAB — Lab ↔ Weplace ═══ -->
+<section class="field-lab">
+  <div class="wrap-wide">
+    <span class="section-label reveal">Field Lab</span>
+    <h2 class="section-title reveal">Lab은 판을 읽고,<br>Weplace는 손이 닿는 자리에서 실행합니다.</h2>
+    <p class="section-desc reveal">
+      해석실에서 읽은 결은 <strong>현장의 검색, 홈페이지, 리뷰, 콘텐츠, 세일즈 흐름</strong>으로 옮겨집니다.<br>
+      두 부문이 한 사이클로 돕니다.
+    </p>
+
+    <div class="field-grid reveal d1">
+      <div class="field-node lab">
+        <div class="field-node-label">Lab</div>
+        <div class="field-node-name">Mashcore Lab</div>
+        <div class="field-node-role">판을 읽고, 결을 정돈하고,<br>자리를 봅니다.</div>
+        <div class="field-node-keys">자리 · 결 · 안심 · 신호<br>해석 · 정돈 · 첫인상</div>
+      </div>
+
+      <div class="field-arrow">→</div>
+
+      <div class="field-node">
+        <div class="field-node-label">Field</div>
+        <div class="field-node-name">We, place.</div>
+        <div class="field-node-role">현장의 손이 닿는 자리를<br>움직입니다.</div>
+        <div class="field-node-keys">검색 · 플레이스 · 홈페이지<br>리뷰 · 콘텐츠 · 세일즈 흐름</div>
       </div>
     </div>
 
-    <p class="reveal d2" style="margin-top:44px;max-width:480px;font-size:15px;color:var(--text-dim);line-height:1.85;font-style:italic;">
-      정답은 우리도 모릅니다.<br>
-      다만 자리는 봅니다.
+    <p class="field-footer reveal d2">
+      자영업 매장은 <strong>검증된 1차 케이스이자 진입 게이트</strong>입니다.<br>
+      매장에서 작동하는 결이 사람·브랜드·관계 위에서도 같은 문법으로 작동합니다.<br>
+      그 손이 닿는 자리가 <a href="https://weplace.netlify.app" target="_blank" rel="noopener">We, place. →</a>
     </p>
   </div>
 </section>
 
-<!-- ═══ 05. CORE THESIS ═══ -->
+<!-- ═══ 05. MEMORY STRUCTURE ═══ -->
 <section>
   <div class="wrap">
-    <span class="section-label reveal">Core Thesis</span>
-    <h2 class="section-title reveal">선택은 여전히<br>사람의 감각에서 나옵니다.</h2>
+    <span class="section-label reveal">Memory Structure</span>
+    <h2 class="section-title reveal">사업에는 기억 구조가 필요합니다.</h2>
 
-    <div class="thesis-block reveal">
+    <div class="memory-intro reveal d1">
       <p>
-        <span class="dim">정보는 빠르게 쏟아집니다.<br>
-        그런데도</span>
-        <strong>선택은 여전히 사람의 감각에서 나옵니다.</strong>
+        처음 통화에서 대표님이 무엇을 걱정했는지,<br>
+        어떤 제안에서 멈췄는지,<br>
+        다음 연락에서는 어떤 말로 다시 만나야 하는지.
+      </p>
+      <p>
+        이 흐름을 기억하지 못하면,<br>
+        <strong>두 번째 연락은 다시 첫 번째 연락이 됩니다.</strong>
+      </p>
+      <p>
+        Lab은 이 기억을 <span class="accent">결로 정리합니다.</span><br>
+        도구가 아니라, 다시 만날 때 쓸 언어로.
+      </p>
+    </div>
+
+    <div class="memory-grid reveal d2">
+      <div class="memory-card">
+        <div class="memory-card-num">01</div>
+        <div class="memory-card-name">기억 구조</div>
+        <div class="memory-card-desc">대표님이 어디서 멈췄고, 어떤 말에 반응했는지. 다음 만남을 위한 결을 남깁니다.</div>
+      </div>
+      <div class="memory-card">
+        <div class="memory-card-num">02</div>
+        <div class="memory-card-name">반응할 장면</div>
+        <div class="memory-card-desc">매장과 콘텐츠 안에서 고객이 한 번 더 멈출 자리. 이미 있는 장면에서 골라냅니다.</div>
+      </div>
+      <div class="memory-card">
+        <div class="memory-card-num">03</div>
+        <div class="memory-card-name">고객이 멈춘 말</div>
+        <div class="memory-card-desc">통화·상담·리뷰에 한 번 더 등장하는 단어. 그 단어가 다음 카피의 자리가 됩니다.</div>
+      </div>
+      <div class="memory-card">
+        <div class="memory-card-num">04</div>
+        <div class="memory-card-name">다시 만나는 언어</div>
+        <div class="memory-card-desc">두 번째 연락에서 첫 번째 결을 이어가는 한 줄. 사업의 기억이 매출로 이어지는 자리입니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06. SCENES TO STRUCTURE ═══ -->
+<section>
+  <div class="wrap">
+    <span class="section-label reveal">Scenes to Structure</span>
+    <h2 class="section-title reveal">좋은 업장일수록<br>장면은 이미 있습니다.</h2>
+
+    <div class="scenes-block reveal d1">
+      <p>
+        <span class="dim">문제는 찍을 게 없는 것이 아닙니다.</span><br>
+        <strong>어디를 잘라 고객에게 보여줄지 모르는 것</strong>입니다.
       </p>
       <p class="dim">
-        사람은 먼저 봅니다.<br>
-        분위기를 읽습니다.<br>
-        거리감을 느낍니다.<br>
-        안심할 이유를 찾습니다.<br>
-        그리고 나서 선택합니다.
+        매장에는 매일 장면이 쌓입니다.<br>
+        손님 등 뒤로 흐르는 시간, 말하지 않아도 전해지는 응대,<br>
+        리뷰 안에 한 번 더 등장하는 단어.
       </p>
       <p>
-        이 과정을 하나의 흐름으로 봅니다.
+        Lab은 이미 있는 장면에서 <strong>고객이 멈출 자리</strong>를 골라냅니다.<br>
+        그 자리는 곧 홈페이지, 콘텐츠, 검색, 세일즈, 후속관리의 언어가 됩니다.
       </p>
-      <div class="thesis-flow">
-        감각<span class="arrow">→</span>신뢰<span class="arrow">→</span>선택<span class="arrow">→</span>성과
-      </div>
-      <p style="font-size:14px;color:var(--text-dim);font-style:italic;padding-top:18px;line-height:1.8;border-top:1px dashed var(--border);margin-top:8px;">
-        공식은 아닙니다.<br>
-        사람이 멈추는 자리가 비슷할 뿐입니다.
+      <p style="font-size:14px;color:var(--text-dim);font-style:italic;padding-top:18px;line-height:1.8;border-top:1px dashed var(--border);margin-top:8px;font-family:var(--font-en);">
+        scenes are already there. we just choose where to cut.
       </p>
     </div>
   </div>
 </section>
 
-<!-- ═══ 06. ABOUT ═══ -->
-<section class="field-origin">
-  <div class="wrap">
-    <span class="section-label reveal">About</span>
-    <h2 class="section-title reveal">책상에서 시작한 게<br>아닙니다.<br>매장에서 시작했습니다.</h2>
-
-    <div class="origin-prose">
-      <p class="reveal d1">
-        2020년부터 매장 한 곳에서 출발했습니다.<br>
-        하루 10명 이상의 사장님을 만나며<br>
-        간판의 첫인상, 동선, 말습관, 그리고 매출까지<br>
-        같이 봐왔습니다.
-      </p>
-      <p class="reveal d1">
-        그 자리에서 알게 됐습니다.<br>
-        잘 되는 매장에는 광고보다 먼저,<br>
-        <strong>사람과 자리와 결</strong>이<br>
-        하나의 흐름으로 연결되어 있었습니다.
-      </p>
-
-      <div class="origin-stat-row reveal d2">
-        <div class="origin-stat">
-          <span class="origin-stat-num">2020</span>
-          <span class="origin-stat-label">첫 매장</span>
-        </div>
-        <div class="origin-stat">
-          <span class="origin-stat-num">10+</span>
-          <span class="origin-stat-label">하루 사장님 미팅</span>
-        </div>
-        <div class="origin-stat">
-          <span class="origin-stat-num">6년</span>
-          <span class="origin-stat-label">같은 자리만 봤습니다</span>
-        </div>
-      </div>
-
-      <p class="reveal d2">
-        같은 흐름이<br>
-        1인 사업자에게도, 작은 브랜드에도, 팀을 막 꾸린 사장님에게도<br>
-        <strong>같은 결로 작동</strong>한다는 것도 그 자리에서 배웠습니다.<br><br>
-        이론은 나중에 따라왔습니다.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 07. WEPLACE BRIDGE ═══ -->
+<!-- ═══ 07. HOW WE WORK ═══ -->
 <section style="background: var(--surface);">
   <div class="wrap-wide">
-    <span class="section-label reveal">Bridge</span>
-    <h2 class="section-title reveal">Mashcore는 판을 읽고,<br>Weplace는 현장을 움직입니다.</h2>
+    <span class="section-label reveal">How We Work</span>
+    <h2 class="section-title reveal">장면에서 시작해,<br>구조로 끝납니다.</h2>
+    <p class="section-desc reveal">
+      해석이 생각에서 멈추지 않게,<br>
+      <strong>네 단계의 결</strong>로 옮겨갑니다.
+    </p>
 
-    <div class="bridge-wrap">
-      <p class="bridge-headline reveal">
-        해석실에서 읽은 결은<br>
-        실행 부문에서 현장의 손으로 옮겨갑니다.
-      </p>
-
-      <div class="bridge-diagram reveal d1">
-        <div class="bridge-node">
-          <div class="bridge-node-label">Lab</div>
-          <div class="bridge-node-name">Mashcore Lab</div>
-          <div class="bridge-node-role">판을 읽고, 결을 정돈하고, 자리를 봅니다.</div>
-          <div class="bridge-node-keys">순서 · 설계 · 첫인상 · 말 · 결</div>
-        </div>
-        <div class="bridge-arrow">→</div>
-        <div class="bridge-node">
-          <div class="bridge-node-label">Field</div>
-          <div class="bridge-node-name">We, place.</div>
-          <div class="bridge-node-role">매장의 손이 닿는 자리를 움직입니다.</div>
-          <div class="bridge-node-keys">플레이스 · 프로필 · 홈페이지 · 리뷰 · 콘텐츠</div>
-        </div>
+    <div class="flow-row reveal d1">
+      <div class="flow-step">
+        <div class="flow-step-num">01 · Scene</div>
+        <div class="flow-step-name">장면</div>
+        <div class="flow-step-desc">매장, 통화, 리뷰, 홈페이지에 이미 쌓여 있는 실제 장면을 봅니다.</div>
       </div>
-
-      <p class="bridge-footnote reveal d2">
-        해석은 생각에서 멈추지 않습니다.<br>
-        손으로 와야, 결이 매출이 됩니다.<br>
-        <strong>그 손이 닿는 자리가 We, place.입니다.</strong> <a href="https://weplace.netlify.app" target="_blank" rel="noopener" style="color: var(--accent); border-bottom: 1px solid var(--accent-glow); padding-bottom: 1px; font-family: var(--font-en); font-style: italic;">We, place. →</a>
-      </p>
+      <div class="flow-step">
+        <div class="flow-step-num">02 · Signal</div>
+        <div class="flow-step-name">신호</div>
+        <div class="flow-step-desc">그 장면 안에 남은 흔적을 골라냅니다. 반복된 말, 멈춘 자리, 사진 한 장.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">03 · Pause</div>
+        <div class="flow-step-name">망설임</div>
+        <div class="flow-step-desc">고객이 결정 직전 멈추는 자리를 짚습니다. 안심이 부족한 지점입니다.</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">04 · Structure</div>
+        <div class="flow-step-name">구조</div>
+        <div class="flow-step-desc">그 자리를 다음 만남에서 쓸 언어와 구조로 정돈해 돌려드립니다.</div>
+      </div>
     </div>
+
+    <p class="flow-footer reveal d2">scene → signal → pause → structure</p>
   </div>
 </section>
 
-<!-- ═══ 08. APPLIED LAB ═══ -->
-<section>
+<!-- ═══ 08. CTA ═══ -->
+<section class="cta">
   <div class="wrap">
-    <span class="section-label reveal">After Diagnosis</span>
-    <h2 class="section-title reveal">진단 후,<br>무엇이 남는가.</h2>
-    <p class="section-desc reveal">
-      리포트 한 장 드리고 끝내지 않습니다.<br>
-      사장님 손에 <strong>계속 쓰는 자산</strong>이 남습니다.
+    <div class="cta-pretitle reveal">— before scrolling away —</div>
+    <h2 class="reveal d1">
+      한 번쯤,<br>
+      <span class="em">우리 사업의 신호</span>를<br>
+      외부의 결로 다시 읽어볼 자리.
+    </h2>
+    <p class="cta-desc reveal d2">
+      자리·결·안심·신호 네 가지로<br>
+      사업의 첫 화면을 점검합니다.<br>
+      뜨끔한 자리부터 보셔도 됩니다.
     </p>
 
-    <div class="remains-list">
-      <div class="remains-card reveal d1">
-        <div class="remains-row">
-          <span class="remains-label">Before</span>
-          <span class="remains-text before">사장님 설명이 길고 흐림</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Work</span>
-          <span class="remains-text work">사장님 언어 정리</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Asset</span>
-          <span class="remains-text asset">세일즈 문장 / 소개 문구 / 상담 기준</span>
-        </div>
-      </div>
-
-      <div class="remains-card reveal d1">
-        <div class="remains-row">
-          <span class="remains-label">Before</span>
-          <span class="remains-text before">브랜드는 예쁜데, 안 팔림</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Work</span>
-          <span class="remains-text work">브랜드 첫인상 정리</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Asset</span>
-          <span class="remains-text asset">홈페이지 카피 / 프로필 문구 / Threads 축</span>
-        </div>
-      </div>
-
-      <div class="remains-card reveal d2">
-        <div class="remains-row">
-          <span class="remains-label">Before</span>
-          <span class="remains-text before">공간의 장점이 전달 안 됨</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Work</span>
-          <span class="remains-text work">공간 감각 정리</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Asset</span>
-          <span class="remains-text asset">사진 방향 / 동선 / 체류 설계</span>
-        </div>
-      </div>
-
-      <div class="remains-card reveal d2">
-        <div class="remains-row">
-          <span class="remains-label">Before</span>
-          <span class="remains-text before">툴은 많은데, 결이 흩어짐</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Work</span>
-          <span class="remains-text work">툴 활용 구조 정리</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Asset</span>
-          <span class="remains-text asset">프롬프트 / 문서 구조 / 콘텐츠 시스템</span>
-        </div>
-      </div>
-
-      <div class="remains-card reveal d3">
-        <div class="remains-row">
-          <span class="remains-label">Before</span>
-          <span class="remains-text before">팀이 같은 말을 못 함</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Work</span>
-          <span class="remains-text work">관계와 응대 구조 정리</span>
-        </div>
-        <div class="remains-row">
-          <span class="remains-label">Asset</span>
-          <span class="remains-text asset">응대 스크립트 / 내부 매뉴얼 / 실행 체크리스트</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 09. OBSERVATIONS ═══ -->
-<section style="background: var(--surface);">
-  <div class="wrap">
-    <span class="section-label reveal">Observations</span>
-    <h2 class="section-title reveal">Mashcore Notes.</h2>
-    <p class="section-desc reveal">
-      현장에서 길어낸 짧은 관찰들.<br>
-      대답이 아니라 질문에 가까운 문장들입니다.
-    </p>
-
-    <div class="notes-list">
-      <div class="note-card reveal d1">
-        <div class="note-meta-row">
-          <span class="note-num">Note 001</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Brand</span>
-        </div>
-        <p class="note-text">툴은 늘어나는데, 왜 브랜드는 더 비슷해지는가.</p>
-      </div>
-
-      <div class="note-card reveal d1">
-        <div class="note-meta-row">
-          <span class="note-num">Note 002</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Human</span>
-        </div>
-        <p class="note-text">고객은 정보를 보고 결정하지 않는다. 안심할 이유를 찾는다.</p>
-      </div>
-
-      <div class="note-card reveal d2">
-        <div class="note-meta-row">
-          <span class="note-num">Note 003</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Language</span>
-        </div>
-        <p class="note-text">대표의 말투는, 브랜드의 가장 빠른 첫인상이다.</p>
-      </div>
-
-      <div class="note-card reveal d2">
-        <div class="note-meta-row">
-          <span class="note-num">Note 004</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Space</span>
-        </div>
-        <p class="note-text">좋은 공간은 인테리어가 아니라, 체류의 이유를 만든다.</p>
-      </div>
-
-      <div class="note-card reveal d3">
-        <div class="note-meta-row">
-          <span class="note-num">Note 005</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Market</span>
-        </div>
-        <p class="note-text">자동화가 늘어날수록, 인간 편집자의 역할은 더 비싸진다.</p>
-      </div>
-
-      <div class="note-card reveal d3">
-        <div class="note-meta-row">
-          <span class="note-num">Note 006</span>
-          <span class="note-divider"></span>
-          <span class="note-tag">Field</span>
-        </div>
-        <p class="note-text">잘 되는 매장에는 공통점이 있다. 사장님이 자기 매장의 비어 있는 자리를 안다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 10. CONTACT ═══ -->
-<section class="final-cta" id="contact">
-  <div class="wrap">
-    <span class="section-label reveal">Contact</span>
-    <h2 class="section-title reveal">정리가 안 돼도 괜찮습니다.<br>그게 시작입니다.</h2>
-    <p class="section-desc reveal">
-      지금 막힌 것이<br>
-      <strong>매출인지, 첫인상인지,<br>
-      손님인지, 말인지</strong><br>
-      아직 몰라도 됩니다.<br><br>
-      한 줄만 보내주세요.<br>
-      흐려진 자리부터 같이 봅니다.
-    </p>
-
-    <div class="industry-chips reveal">
-      <span class="chip">음식점·카페</span>
-      <span class="chip">1인 사업자</span>
-      <span class="chip">브랜드 운영</span>
-      <span class="chip">피부과·웰니스</span>
-      <span class="chip">숙소·관광</span>
-      <span class="chip">작가·창작자</span>
-    </div>
-
-    <div class="cta-buttons reveal">
-      <a class="btn btn-threads" href="https://www.threads.net/@mashcore_lab" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017C1.5 8.418 2.35 5.564 3.995 3.514 5.845 1.209 8.598.028 12.179.004h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.592 12c.024 3.088.715 5.5 2.054 7.164 1.43 1.779 3.63 2.691 6.54 2.712 2.275-.018 4.418-.58 5.614-1.492.93-.709 1.58-1.762 1.58-3.12 0-1.834-.81-2.721-1.404-3.099-.467-.297-1.032-.465-1.597-.535.062.338.098.69.098 1.053 0 3.64-2.455 6.159-5.97 6.159h-.002c-1.792-.002-3.347-.59-4.502-1.7-1.162-1.117-1.81-2.69-1.81-4.503 0-3.826 2.755-6.472 6.7-6.472 1.146 0 2.18.199 3.07.59l-.218 2.1c-.71-.33-1.566-.527-2.548-.557l-.302-.002c-2.87 0-4.583 1.79-4.583 4.347 0 1.225.423 2.235 1.192 2.854.696.559 1.639.85 2.706.858 2.527-.032 3.85-1.645 3.85-4.038 0-.357-.03-.698-.087-1.02-.505-.076-1.04-.085-1.585-.028l-.215-2.082c.905-.093 1.808-.075 2.664.074 1.004.175 1.906.577 2.607 1.224 1.058.975 1.64 2.426 1.64 4.103 0 2.03-.897 3.726-2.3 4.796-1.557 1.187-3.873 1.843-6.556 1.863z"/></svg>
-        Threads로 한 줄 보내기
+    <div class="cta-buttons reveal d2">
+      <a href="https://weplace.netlify.app" target="_blank" rel="noopener" class="cta-btn primary">
+        우리 사업의 신호 점검하기 <span class="arrow">→</span>
       </a>
-      <a class="btn btn-ghost" href="https://weplace.netlify.app" target="_blank" rel="noopener">
-        Weplace 실행 부문 보기 →
+      <a href="#signals" class="cta-btn">
+        뜨끔한 자리부터 보기 <span class="arrow">↑</span>
       </a>
     </div>
 
-    <p class="cta-note reveal">
-      답장은 천천히 드립니다. 영업은 안 합니다.<br>
-      쓰다가 보내기 싫어지면, 안 보내셔도 됩니다.
+    <p class="cta-footnote reveal d3">
+      Mashcore Lab은 해석실입니다.<br>
+      실행이 닿는 자리는 We, place.에서 이어집니다.
     </p>
   </div>
 </section>
 
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="wrap">
-    <div class="footer-brand">Mashcore Lab</div>
-    <div class="footer-sub">사람의 자리를 보는 해석실 · Since 2020</div>
-    <div class="footer-links">
-      <a href="https://www.threads.net/@mashcore_lab" target="_blank" rel="noopener">Threads</a>
-      <a href="https://weplace.netlify.app" target="_blank" rel="noopener">We, place.</a>
+    <div class="footer-row">
+      <span class="footer-brand">Mashcore Lab</span>
+      <span class="footer-meta">© 2026 · a place that reads the pause</span>
     </div>
+    <p class="footer-tagline">
+      매장 안에 손님이 가장 오래 머무는 자리.<br>
+      대부분의 사장님은 그 자리가 비어 있습니다.
+    </p>
   </div>
 </footer>
 
 <script>
-if ('IntersectionObserver' in window) {
-  const obs = new IntersectionObserver((entries, o) => {
-    entries.forEach(en => {
-      if (en.isIntersecting) { en.target.classList.add('active'); o.unobserve(en.target); }
+  // 스크롤 리빌
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-}
-setTimeout(() => {
-  document.querySelectorAll('.reveal:not(.active)').forEach(el => {
-    el.style.opacity = '1'; el.style.transform = 'none';
-  });
-}, 4000);
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
+
 </body>
 </html>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research — Mashcore Lab</title>
+  <meta name="description" content="Mashcore Lab의 현재 연구와 열린 질문, 연구 변경 기록을 모아둔 연구 지도입니다.">
+  <meta name="theme-color" content="#121A14">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Gowun+Batang:wght@400;700&family=Hanken+Grotesk:wght@400;600&display=swap');
+    :root{
+      --forest-void:#121A14;--forest:#18241C;--forest-2:#1F2D24;--moss:#2A3A2E;
+      --brass:#A6885A;--brass-deep:#836A42;--brass-soft:#C9B488;--brass-line:rgba(201,180,136,.22);
+      --parchment:#EDE7DC;--parchment-soft:#F4EFE6;--parchment-mute:rgba(237,231,220,.62);--ink:#20261F;
+      --serif:'Gowun Batang','Nanum Myeongjo',serif;--garamond:'EB Garamond',serif;--sans:'Hanken Grotesk',system-ui,sans-serif;
+      --page:min(1180px,calc(100vw - 40px));--ease:cubic-bezier(.2,.7,.2,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--forest-void);color:var(--parchment);font-family:var(--serif);word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .skip{position:fixed;top:8px;left:8px;z-index:200;padding:10px 14px;background:var(--parchment);color:var(--ink);transform:translateY(-160%);transition:.2s}
+    .skip:focus{transform:none}
+    .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-2;background-image:linear-gradient(to right,transparent calc(25% - .5px),rgba(42,58,46,.52) 25%,transparent calc(25% + .5px)),linear-gradient(to right,transparent calc(50% - .5px),rgba(42,58,46,.52) 50%,transparent calc(50% + .5px)),linear-gradient(to right,transparent calc(75% - .5px),rgba(42,58,46,.52) 75%,transparent calc(75% + .5px));opacity:.42}
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;background:rgba(18,26,20,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,58,46,.78)}
+    .nav-inner{width:var(--page);margin:auto;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{font-weight:700;letter-spacing:.28em;font-size:clamp(20px,2vw,30px);white-space:nowrap}
+    .desktop-nav{display:flex;align-items:center;gap:36px;font-family:var(--sans);font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+    .desktop-nav a{color:var(--parchment-mute);padding:10px 0;border-bottom:1px solid transparent;transition:.25s}
+    .desktop-nav a:hover,.desktop-nav a:focus-visible{color:var(--parchment)}
+    .desktop-nav a[aria-current="page"]{color:var(--parchment);border-color:var(--brass)}
+    .menu-btn{display:none;border:0;background:transparent;color:var(--parchment);padding:10px;cursor:pointer}
+    .mobile-nav{display:none;position:fixed;inset:82px 0 0;z-index:90;background:var(--forest-void);padding:48px 20px;flex-direction:column;gap:24px;font-size:26px}
+    .mobile-nav[data-open="true"]{display:flex}
+    main{padding-top:82px}
+    .wrap{width:var(--page);margin:auto}
+    .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.23em;text-transform:uppercase;color:var(--brass-soft)}
+    .hero{min-height:76vh;display:grid;align-items:center;padding:120px 0 96px}
+    .hero-inner{max-width:880px;margin:auto;text-align:center}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(46px,7vw,86px);line-height:1.24;letter-spacing:-.035em;margin-bottom:34px}
+    .hero p{max-width:680px;margin:0 auto;color:var(--parchment-mute);font-size:clamp(18px,2.2vw,23px);line-height:1.95}
+    .hero-rule{width:1px;height:112px;background:var(--moss);margin:58px auto 0}
+    section{padding:140px 0;border-top:1px solid rgba(42,58,46,.58)}
+    .section-grid{display:grid;grid-template-columns:minmax(180px,3fr) minmax(0,8fr);gap:clamp(40px,7vw,110px)}
+    .section-title{font-size:clamp(28px,4vw,48px);line-height:1.45;margin-top:18px}
+    .intro-copy{font-size:clamp(19px,2vw,24px);line-height:1.95;color:var(--parchment-mute);max-width:760px}
+    .featured{padding:0;border-top:0}
+    .featured-panel{background:var(--parchment);color:var(--ink);padding:clamp(64px,9vw,132px) clamp(26px,7vw,92px);border-block:1px solid rgba(166,136,90,.36)}
+    .featured-meta{display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(32,38,31,.58);border-bottom:1px solid rgba(32,38,31,.18);padding-bottom:18px;margin-bottom:52px}
+    .featured-title{font-size:clamp(48px,7vw,82px);line-height:1.1;margin-bottom:26px}
+    .featured-kicker{font-family:var(--garamond);font-style:italic;font-size:22px;color:var(--brass-deep);margin-bottom:48px}
+    .featured-copy{font-size:clamp(18px,2vw,22px);line-height:1.95;max-width:820px;margin-bottom:48px;color:rgba(32,38,31,.82)}
+    .link-arrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:8px;color:var(--brass-deep)}
+    .link-arrow::after{content:'→';font-size:18px}
+    .method-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--moss);border:1px solid var(--moss)}
+    .method{background:var(--forest-void);padding:42px 28px;min-height:230px}
+    .method span{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:20px}
+    .method h3{font-size:25px;margin:28px 0 16px}
+    .method p{color:var(--parchment-mute);line-height:1.8;margin:0}
+    .questions{display:grid;gap:0;border-top:1px solid var(--moss)}
+    .question{display:grid;grid-template-columns:86px 1fr;gap:28px;padding:42px 0;border-bottom:1px solid var(--moss);align-items:start}
+    .question b{font-family:var(--garamond);font-style:italic;font-weight:400;color:var(--brass-soft);font-size:20px}
+    .question p{font-size:clamp(24px,3.2vw,42px);line-height:1.55;margin:0;max-width:830px}
+    .log-preview{display:grid;grid-template-columns:180px 1fr;gap:52px;padding:42px 0;border-top:1px solid var(--brass-line);border-bottom:1px solid var(--brass-line)}
+    .log-meta{font-family:var(--sans);font-size:12px;line-height:1.9;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-soft)}
+    .log-title{font-size:clamp(28px,3.5vw,44px);line-height:1.45;margin-bottom:24px}
+    .log-copy{color:var(--parchment-mute);font-size:18px;line-height:1.85;margin-bottom:28px}
+    .bridge{padding:120px 0;text-align:center}
+    .bridge h2{font-size:clamp(32px,5vw,58px);line-height:1.5;max-width:860px;margin:0 auto 32px}
+    .bridge p{color:var(--parchment-mute);font-size:18px;line-height:1.9;max-width:620px;margin:0 auto 44px}
+    .footer{border-top:1px solid var(--moss);padding:34px 0 46px;color:var(--parchment-mute);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+    .footer-inner{width:var(--page);margin:auto;display:flex;justify-content:space-between;gap:24px;align-items:center}
+    .footer-nav{display:flex;gap:28px}
+    .footer a:hover,.footer a:focus-visible{color:var(--parchment)}
+    :focus-visible{outline:2px solid var(--brass-soft);outline-offset:5px}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+    .reveal.is-visible{opacity:1;transform:none}
+    @media(max-width:840px){
+      .desktop-nav{display:none}.menu-btn{display:block}.section-grid{grid-template-columns:1fr}.method-list{grid-template-columns:1fr 1fr}.log-preview{grid-template-columns:1fr;gap:22px}.question{grid-template-columns:56px 1fr}.featured-meta{align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.grid-bg{opacity:.28}.hero{text-align:left}.hero-inner{text-align:left;margin:0}.hero p{margin:0}.hero-rule{margin-left:0}
+    }
+    @media(max-width:560px){
+      :root{--page:calc(100vw - 40px)}.nav-inner{min-height:74px}.mobile-nav{inset:74px 0 0}.brand{font-size:19px}.hero{min-height:auto;padding:110px 0 86px}section{padding:98px 0}.method-list{grid-template-columns:1fr}.method{min-height:auto}.question{grid-template-columns:1fr;gap:10px;padding:34px 0}.featured-panel{padding-block:80px}.footer-nav{flex-wrap:wrap;gap:18px 24px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 바로가기</a>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="../" aria-label="Mashcore Lab 홈">MASHCORE LAB</a>
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <a href="./" aria-current="page">Research</a>
+        <a href="./log/">Archive</a>
+        <a href="../about/">About</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기">☰</button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobile-nav" data-open="false" aria-label="모바일 메뉴">
+    <a href="../">Home</a>
+    <a href="./" aria-current="page">Research</a>
+    <a href="./log/">Archive</a>
+    <a href="../about/">About</a>
+  </nav>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-inner reveal">
+        <div class="eyebrow">[ RESEARCH INDEX ]</div>
+        <h1>답보다 먼저,<br>바뀌는 기준을 기록합니다.</h1>
+        <p>Mashcore Lab의 연구는 완성된 이론을 진열하는 일이 아닙니다. 처음의 문장이 어디서 흔들렸고, 무엇을 남기고 무엇을 다시 정의했는지 공개합니다.</p>
+        <div class="hero-rule" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap section-grid reveal">
+        <div>
+          <div class="eyebrow">01 / POSITION</div>
+          <h2 class="section-title">연구는<br>고정된 답이 아닙니다.</h2>
+        </div>
+        <div>
+          <p class="intro-copy">하나의 문장을 세우고, 실제 장면에 놓아봅니다. 설명되지 않는 사례가 나타나면 문장을 지키기보다 경계를 다시 봅니다. 이 페이지는 그 과정이 현재 어디까지 왔는지 보여주는 지도입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured" aria-labelledby="research-01-title">
+      <div class="featured-panel">
+        <div class="wrap reveal">
+          <div class="featured-meta">
+            <span>Research 01 · Active</span>
+            <span>Current level · L0–L1</span>
+          </div>
+          <div class="eyebrow" style="color:var(--brass-deep)">Current Research</div>
+          <h2 class="featured-title" id="research-01-title">Chore to Play</h2>
+          <p class="featured-kicker">From a ladder to a layered map.</p>
+          <p class="featured-copy">우리는 처음에 일을 여덟 개의 단계로 보았습니다. 그러나 들여다볼수록 Chore와 Task는 행동의 형식이었고, Job은 경제 구조였으며, Role은 관계 속 위치였습니다. 지금 이 연구는 사람이 어느 단계에 있는지를 묻기보다, 같은 일이 어떤 조건에서 소모가 되고 어떤 조건에서 힘이 되는지를 읽고 있습니다.</p>
+          <a class="link-arrow" href="./chore-to-play/">현재 연구 지도 읽기</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid" style="margin-bottom:70px">
+          <div>
+            <div class="eyebrow">02 / METHOD</div>
+            <h2 class="section-title">어떻게<br>연구하는가</h2>
+          </div>
+          <p class="intro-copy">정답을 빨리 만들기보다, 관찰과 반례가 문장을 어떻게 바꾸는지 남깁니다.</p>
+        </div>
+        <div class="method-list">
+          <article class="method"><span>01</span><h3>Observation</h3><p>사람과 현장에서 반복해서 나타나는 장면을 기록합니다.</p></article>
+          <article class="method"><span>02</span><h3>Hypothesis</h3><p>흩어진 관찰 사이에 임시 문장과 구조를 세웁니다.</p></article>
+          <article class="method"><span>03</span><h3>Counterexample</h3><p>설명되지 않는 사람과 장면을 찾아 경계를 흔듭니다.</p></article>
+          <article class="method"><span>04</span><h3>Revision</h3><p>버릴 것과 남길 것을 나누고 현재 정의를 다시 적습니다.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid" style="margin-bottom:64px">
+          <div>
+            <div class="eyebrow">03 / OPEN QUESTIONS</div>
+            <h2 class="section-title">현재 열려 있는<br>질문들</h2>
+          </div>
+          <p class="intro-copy">아직 연구 번호를 붙이지 않은 질문도 있습니다. 답이 생기기 전까지는 질문의 형태로 남겨둡니다.</p>
+        </div>
+        <div class="questions">
+          <article class="question"><b>Q.01</b><p>반복은 언제 숙련이 되고, 언제 체념이 되는가?</p></article>
+          <article class="question"><b>Q.02</b><p>권한이 없는 사람에게 결과의 책임을 물을 수 있는가?</p></article>
+          <article class="question"><b>Q.03</b><p>도구가 많은 시대에 사람의 판단은 어디서 자라는가?</p></article>
+          <article class="question"><b>Q.04</b><p>브랜드는 왜 설명을 더할수록 오히려 약해지는가?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid" style="margin-bottom:68px">
+          <div>
+            <div class="eyebrow">04 / SELECTED LOG</div>
+            <h2 class="section-title">생각이 바뀐<br>자리</h2>
+          </div>
+          <p class="intro-copy">연구 기록은 실패를 숨기는 문서가 아니라, 현재 정의가 어디서 왔는지 설명하는 근거입니다.</p>
+        </div>
+        <article class="log-preview">
+          <div class="log-meta"><time datetime="2026-06-16">2026.06.16</time><br>Revision · L1</div>
+          <div>
+            <h3 class="log-title">8단계 단일 발달축 보류</h3>
+            <p class="log-copy">여덟 단어가 같은 종류의 개념이 아니라는 점이 확인되면서, 선형 모델을 사실 모델이 아닌 서사 가설로 낮추었습니다.</p>
+            <a class="link-arrow" href="./log/">Selected Research Log 읽기</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="bridge">
+      <div class="wrap reveal">
+        <div class="eyebrow">[ QUIET BRIDGE ]</div>
+        <h2>연구는 더 많은 말을 만들기보다,<br>다음에 무엇을 더 정확히 볼지 정합니다.</h2>
+        <p>Mashcore Lab은 그 기준이 자라는 과정을 공개합니다. 현재 대표 연구부터 천천히 읽어볼 수 있습니다.</p>
+        <a class="link-arrow" href="./chore-to-play/">Chore to Play로 들어가기</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Mashcore Lab</span>
+      <nav class="footer-nav" aria-label="푸터 메뉴"><a href="../">Home</a><a href="./">Research</a><a href="./log/">Archive</a><a href="../about/">About</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    const button=document.querySelector('.menu-btn');
+    const mobile=document.getElementById('mobile-nav');
+    const closeMenu=()=>{mobile.dataset.open='false';button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','메뉴 열기');button.textContent='☰';document.body.style.overflow=''};
+    button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';if(open){closeMenu()}else{mobile.dataset.open='true';button.setAttribute('aria-expanded','true');button.setAttribute('aria-label','메뉴 닫기');button.textContent='×';document.body.style.overflow='hidden'}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+    mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+    const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target)}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

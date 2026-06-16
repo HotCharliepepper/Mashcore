@@ -201,18 +201,32 @@
             margin: 10px 0;
         }
     </style>
-</head>
+<style id="p2-connection-layer">
+/* P2 connection layer — temporary until shared CSS extraction */
+.page-bridge{border-top:1px solid rgba(201,180,136,.18);border-bottom:1px solid rgba(201,180,136,.12);background:#101b13;padding:clamp(72px,10vw,128px) 20px;position:relative;z-index:2}
+.page-bridge__inner{width:min(1040px,100%);margin:0 auto}
+.page-bridge__label{display:block;margin-bottom:18px;color:#C9B488;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-style:italic;letter-spacing:.12em;text-transform:uppercase}
+.page-bridge__title{margin:0 0 34px;color:#EDE7DC;font-family:'Gowun Batang','Nanum Myeongjo',serif;font-size:clamp(1.75rem,3.6vw,2.75rem);line-height:1.45;word-break:keep-all}
+.page-bridge__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.page-bridge__link{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:72px;padding:18px 20px;border:1px solid rgba(201,180,136,.2);color:#d8e6d9;text-decoration:none;font-family:'Gowun Batang','Nanum Myeongjo',serif;transition:border-color .25s ease,background .25s ease,color .25s ease}
+.page-bridge__link:hover,.page-bridge__link:focus-visible{border-color:#A6885A;background:#18241C;color:#EDE7DC;outline:none}
+.page-bridge__link small{display:block;margin-top:5px;color:rgba(237,231,220,.58);font-family:system-ui,sans-serif;font-size:.75rem;letter-spacing:.05em}
+.site-logo-link{color:inherit;text-decoration:none}
+[aria-current="page"]{text-decoration-color:#A6885A}
+@media(max-width:700px){.page-bridge__links{grid-template-columns:1fr}.page-bridge{padding-inline:20px}}
+@media(prefers-reduced-motion:reduce){.page-bridge__link{transition:none}}
+</style></head>
 <body class="bg-forest-void text-on-surface overflow-x-hidden selection:bg-moss-divider selection:text-parchment-body">
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-moss-divider dark:border-moss-divider">
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full">
-<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface dark:text-on-surface">
+<a class="font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface dark:text-on-surface site-logo-link" href="../../">
                 MASHCORE LAB
-            </div>
+            </a>
 <nav class="hidden md:flex space-x-8">
-<a class="text-primary dark:text-primary border-b border-brass-accent font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">Research</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">Archive</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="text-primary dark:text-primary border-b border-brass-accent font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="../">연구</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="../log/">연구 기록</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="../../about/">소개</a>
 </nav>
 </div>
 </header>
@@ -468,25 +482,25 @@
 <div class="fade-in max-w-2xl mx-auto space-y-8">
 <h3 class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest mb-8">RESEARCH PARTICIPATION</h3>
 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">내 사례 남기기</a>
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="../../about/">내 사례 남기기</a>
 <span class="hidden md:block text-moss-divider">|</span>
-<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">반례 제보하기</a>
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="../../about/">반례 제보하기</a>
 <span class="hidden md:block text-moss-divider">|</span>
-<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">연구 인터뷰 참여</a>
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="../../about/">연구 인터뷰 참여</a>
 </div>
 </div>
 </section>
 </main>
 <!-- Footer -->
-<footer class="bg-forest-void dark:bg-forest-void border-t border-moss-divider dark:border-moss-divider w-full relative z-10">
+<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">현재 지도는 변경 기록과 함께 읽을 때 더 정확해집니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="../log/"><span>이 연구의 변경 기록<small>이전 생각·바뀐 이유·현재 판단</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="../"><span>연구 전체 지도<small>다른 질문과 연구 상태</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="bg-forest-void dark:bg-forest-void border-t border-moss-divider dark:border-moss-divider w-full relative z-10">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
 <div class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container mb-4 md:mb-0">
                 © 2026 MASHCORE LAB ARCHIVE
             </div>
 <div class="flex space-x-8">
-<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Mashcore34</a>
-<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Weplace</a>
-<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Contact</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="../../about/#mashcore34">Mashcore34</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="../../about/#weplace">Weplace</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="../../about/">소개</a>
 </div>
 </div>
 </footer>

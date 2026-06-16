@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Mashcore Lab</title>
+  <meta name="description" content="Mashcore Lab이 무엇을 읽고, Mashcore34와 Weplace로 어떻게 이어지는지 소개합니다.">
+  <meta name="theme-color" content="#121A14">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Gowun+Batang:wght@400;700&family=Hanken+Grotesk:wght@400;600&display=swap');
+    :root{
+      --forest-void:#121A14;--forest:#18241C;--forest-2:#1F2D24;--moss:#2A3A2E;
+      --brass:#A6885A;--brass-deep:#836A42;--brass-soft:#C9B488;--brass-line:rgba(201,180,136,.22);
+      --parchment:#EDE7DC;--parchment-soft:#F4EFE6;--parchment-mute:rgba(237,231,220,.62);--ink:#20261F;
+      --serif:'Gowun Batang','Nanum Myeongjo',serif;--garamond:'EB Garamond',serif;--sans:'Hanken Grotesk',system-ui,sans-serif;
+      --page:min(1180px,calc(100vw - 40px));--ease:cubic-bezier(.2,.7,.2,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--forest-void);color:var(--parchment);font-family:var(--serif);word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .skip{position:fixed;top:8px;left:8px;z-index:200;padding:10px 14px;background:var(--parchment);color:var(--ink);transform:translateY(-160%);transition:.2s}
+    .skip:focus{transform:none}
+    .grid-bg{position:fixed;inset:0;pointer-events:none;z-index:-2;background-image:linear-gradient(to right,transparent calc(25% - .5px),rgba(42,58,46,.52) 25%,transparent calc(25% + .5px)),linear-gradient(to right,transparent calc(50% - .5px),rgba(42,58,46,.52) 50%,transparent calc(50% + .5px)),linear-gradient(to right,transparent calc(75% - .5px),rgba(42,58,46,.52) 75%,transparent calc(75% + .5px));opacity:.42}
+    .site-header{position:fixed;inset:0 0 auto;z-index:100;background:rgba(18,26,20,.9);backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,58,46,.78)}
+    .nav-inner{width:var(--page);margin:auto;min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{font-weight:700;letter-spacing:.28em;font-size:clamp(20px,2vw,30px);white-space:nowrap}
+    .desktop-nav{display:flex;align-items:center;gap:36px;font-family:var(--sans);font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+    .desktop-nav a{color:var(--parchment-mute);padding:10px 0;border-bottom:1px solid transparent;transition:.25s}
+    .desktop-nav a:hover,.desktop-nav a:focus-visible{color:var(--parchment)}
+    .desktop-nav a[aria-current="page"]{color:var(--parchment);border-color:var(--brass)}
+    .menu-btn{display:none;border:0;background:transparent;color:var(--parchment);padding:10px;cursor:pointer}
+    .mobile-nav{display:none;position:fixed;inset:82px 0 0;z-index:90;background:var(--forest-void);padding:48px 20px;flex-direction:column;gap:24px;font-size:26px}
+    .mobile-nav[data-open="true"]{display:flex}
+    main{padding-top:82px}
+    .wrap{width:var(--page);margin:auto}
+    .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.23em;text-transform:uppercase;color:var(--brass-soft)}
+    .hero{min-height:82vh;display:grid;align-items:center;padding:120px 0 100px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(260px,4fr);gap:clamp(56px,8vw,120px);align-items:end}
+    h1,h2,h3,p{margin-top:0}
+    h1{font-size:clamp(52px,8vw,104px);line-height:1.2;letter-spacing:-.045em;margin:20px 0 36px}
+    .hero-copy{color:var(--parchment-mute);font-size:clamp(18px,2vw,23px);line-height:1.95;max-width:700px}
+    .position-mark{border-left:1px solid var(--brass-line);padding-left:30px;padding-bottom:8px}
+    .position-mark strong{display:block;font-family:var(--garamond);font-style:italic;font-weight:400;color:var(--brass-soft);font-size:38px;margin-bottom:12px}
+    .position-mark p{color:var(--parchment-mute);line-height:1.8;margin:0}
+    section{padding:140px 0;border-top:1px solid rgba(42,58,46,.58)}
+    .section-grid{display:grid;grid-template-columns:minmax(180px,3fr) minmax(0,8fr);gap:clamp(40px,7vw,110px)}
+    .section-title{font-size:clamp(29px,4vw,50px);line-height:1.45;margin-top:18px}
+    .body-copy{font-size:clamp(18px,2vw,23px);line-height:2;color:var(--parchment-mute);max-width:800px}
+    .body-copy strong{color:var(--parchment);font-weight:400}
+    .reading-list{margin-top:76px;border-top:1px solid var(--moss)}
+    .reading-row{display:grid;grid-template-columns:88px 1fr;gap:34px;padding:34px 0;border-bottom:1px solid var(--moss);align-items:start}
+    .reading-row b{font-family:var(--garamond);font-weight:400;font-style:italic;color:var(--brass-soft);font-size:20px}
+    .reading-row p{font-size:clamp(21px,2.8vw,35px);line-height:1.55;margin:0}
+    .parchment{padding:0;border:0;background:var(--parchment);color:var(--ink)}
+    .parchment-inner{padding:clamp(90px,12vw,180px) 0;text-align:center}
+    .parchment blockquote{font-size:clamp(33px,5vw,68px);line-height:1.55;letter-spacing:-.025em;max-width:1000px;margin:0 auto 38px}
+    .parchment p{font-family:var(--garamond);font-style:italic;font-size:21px;color:rgba(32,38,31,.62);margin:0}
+    .three-rooms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--moss);border:1px solid var(--moss);margin-top:72px}
+    .room{background:var(--forest-void);padding:46px 34px;min-height:340px;display:flex;flex-direction:column}
+    .room-index{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:22px}
+    .room h3{font-size:31px;line-height:1.35;margin:28px 0 10px}
+    .room .verb{font-family:var(--sans);letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--brass-soft);margin-bottom:28px}
+    .room p{color:var(--parchment-mute);line-height:1.85;margin-bottom:34px}
+    .room .state{margin-top:auto;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(237,231,220,.38)}
+    .person-grid{display:grid;grid-template-columns:minmax(260px,4fr) minmax(0,7fr);gap:clamp(50px,8vw,120px);align-items:start}
+    .portrait-frame{aspect-ratio:4/5;border:1px solid var(--brass-line);background:linear-gradient(145deg,var(--forest-2),var(--forest-void));display:flex;align-items:flex-end;padding:28px;position:relative;overflow:hidden}
+    .portrait-frame::before{content:'';position:absolute;inset:12%;border:1px solid rgba(201,180,136,.12)}
+    .portrait-label{position:relative;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--parchment-mute)}
+    .portrait-note{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:20px;margin-top:16px;line-height:1.5}
+    .person-copy h2{font-size:clamp(36px,5vw,64px);line-height:1.35;margin:16px 0 14px}
+    .person-copy .latin{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:25px;margin-bottom:44px}
+    .person-copy p{color:var(--parchment-mute);font-size:19px;line-height:1.95;margin-bottom:28px}
+    .principles{margin-top:55px;display:grid;grid-template-columns:1fr 1fr;gap:22px 40px}
+    .principle{border-top:1px solid var(--moss);padding-top:18px}
+    .principle span{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-soft)}
+    .principle p{font-size:17px;line-height:1.8;margin:12px 0 0}
+    .bridge{padding:130px 0;text-align:center}
+    .bridge h2{font-size:clamp(34px,5vw,62px);line-height:1.5;max-width:900px;margin:18px auto 32px}
+    .bridge p{color:var(--parchment-mute);font-size:19px;line-height:1.9;max-width:650px;margin:0 auto 44px}
+    .link-arrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:8px;color:var(--brass-soft)}
+    .link-arrow::after{content:'→';font-size:18px}
+    .footer{border-top:1px solid var(--moss);padding:34px 0 46px;color:var(--parchment-mute);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+    .footer-inner{width:var(--page);margin:auto;display:flex;justify-content:space-between;gap:24px;align-items:center}
+    .footer-nav{display:flex;gap:28px}
+    .footer a:hover,.footer a:focus-visible{color:var(--parchment)}
+    :focus-visible{outline:2px solid var(--brass-soft);outline-offset:5px}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+    .reveal.is-visible{opacity:1;transform:none}
+    @media(max-width:880px){
+      .desktop-nav{display:none}.menu-btn{display:block}.hero-grid,.section-grid,.person-grid{grid-template-columns:1fr}.hero{min-height:auto}.position-mark{max-width:560px}.three-rooms{grid-template-columns:1fr}.room{min-height:auto}.portrait-frame{max-width:470px;width:100%}.footer-inner{align-items:flex-start;flex-direction:column}.grid-bg{opacity:.28}
+    }
+    @media(max-width:560px){
+      :root{--page:calc(100vw - 40px)}.nav-inner{min-height:74px}.mobile-nav{inset:74px 0 0}.brand{font-size:19px}.hero{padding:110px 0 86px}section{padding:98px 0}.reading-row{grid-template-columns:1fr;gap:9px;padding:30px 0}.principles{grid-template-columns:1fr}.parchment-inner{padding-block:100px}.footer-nav{flex-wrap:wrap;gap:18px 24px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 바로가기</a>
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="../" aria-label="Mashcore Lab 홈">MASHCORE LAB</a>
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <a href="../research/">Research</a>
+        <a href="../research/log/">Archive</a>
+        <a href="./" aria-current="page">About</a>
+      </nav>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="메뉴 열기">☰</button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobile-nav" data-open="false" aria-label="모바일 메뉴">
+    <a href="../">Home</a>
+    <a href="../research/">Research</a>
+    <a href="../research/log/">Archive</a>
+    <a href="./" aria-current="page">About</a>
+  </nav>
+
+  <main id="main">
+    <section class="hero wrap">
+      <div class="hero-grid reveal">
+        <div>
+          <div class="eyebrow">[ ABOUT MASHCORE LAB ]</div>
+          <h1>읽다.</h1>
+          <p class="hero-copy">Mashcore Lab은 사람·브랜드·공간·관계·신뢰의 결을 읽어, 사람이 자기 막힌 자리를 스스로 보게 만드는 해석실입니다.</p>
+        </div>
+        <aside class="position-mark" aria-label="Mashcore Lab의 핵심 위치">
+          <strong>Not a seller.<br>A reader.</strong>
+          <p>답을 먼저 내미는 대신, 무엇이 아직 정확히 보이지 않는지부터 짚습니다.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid">
+          <div>
+            <div class="eyebrow">01 / DEFINITION</div>
+            <h2 class="section-title">찾아오게 만드는<br>사유의 자리</h2>
+          </div>
+          <div>
+            <p class="body-copy">사람은 해결책을 사기 전에 먼저 <strong>자기 문제가 정확히 읽히는 경험</strong>을 원합니다. Mashcore Lab은 무엇을 팔 수 있는지부터 말하지 않습니다. 사람이 왜 멈추고, 브랜드가 왜 설명할수록 약해지고, 관계가 어디서 엇갈리는지를 읽어 보입니다.</p>
+            <div class="reading-list" aria-label="Mashcore Lab이 읽는 대상">
+              <div class="reading-row"><b>01</b><p>사람은 왜 움직이기 직전에 망설이는가.</p></div>
+              <div class="reading-row"><b>02</b><p>브랜드는 왜 설명을 더할수록 약해지는가.</p></div>
+              <div class="reading-row"><b>03</b><p>역할과 책임은 어디서 서로 어긋나는가.</p></div>
+              <div class="reading-row"><b>04</b><p>반복은 언제 기준이 되고, 언제 사람을 닳게 하는가.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="parchment">
+      <div class="wrap parchment-inner reveal">
+        <blockquote>Lab은 답을 팔지 않습니다.<br>읽기를 보여줍니다.</blockquote>
+        <p>Authority comes from seeing accurately.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid">
+          <div>
+            <div class="eyebrow">02 / ONE WORLD, THREE ROOMS</div>
+            <h2 class="section-title">읽고,<br>옮기고,<br>남깁니다.</h2>
+          </div>
+          <p class="body-copy">Mashcore Lab, Weplace, Mashcore34는 별개의 이름이 아니라 같은 기준이 서로 다른 자리에서 움직이는 구조입니다.</p>
+        </div>
+        <div class="three-rooms">
+          <article class="room">
+            <span class="room-index">I.</span>
+            <h3>Mashcore Lab</h3>
+            <div class="verb">읽다 · Interpret</div>
+            <p>사람과 브랜드가 어디서 멈추는지 읽고, 관찰을 개념과 질문으로 정리합니다.</p>
+            <span class="state">This site · Research & Reading</span>
+          </article>
+          <article class="room">
+            <span class="room-index">II.</span>
+            <h3>Weplace</h3>
+            <div class="verb">옮기다 · Execute</div>
+            <p>Lab에서 읽은 구조를 사진, 소개문, 홈페이지, 리뷰, FAQ와 같은 현장 표면으로 옮깁니다.</p>
+            <span class="state">External execution channel</span>
+          </article>
+          <article class="room">
+            <span class="room-index">III.</span>
+            <h3>Mashcore34</h3>
+            <div class="verb">남기다 · Author</div>
+            <p>반복 관찰과 현장 판단을 한 사람의 기준과 사회적으로 읽히는 문장으로 남깁니다.</p>
+            <span class="state">Book axis · In progress</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap person-grid reveal">
+        <div>
+          <!-- 승인된 4:5 작업 장면 사진이 준비되면 이 프레임의 내부를 picture/img로 교체합니다. -->
+          <figure class="portrait-frame" aria-label="Mashcore 작업 장면 사진 삽입 예정 프레임">
+            <figcaption class="portrait-label">Portrait / Working Scene<br>4:5 photo frame</figcaption>
+          </figure>
+          <p class="portrait-note">정면을 증명하는 사진보다, 읽고 기록하는 장면을 남깁니다.</p>
+        </div>
+        <div class="person-copy">
+          <div class="eyebrow">03 / THE READER</div>
+          <h2>최규현 · Mashcore</h2>
+          <p class="latin">Strategic editor, observer, and builder.</p>
+          <p>사람의 감각과 현장의 신호를 읽어, 흩어진 생각을 반복 가능한 기준과 구조로 번역합니다. 멋있는 문장을 만드는 것보다 그 문장이 실제 장면에서 어디까지 버티는지를 더 오래 봅니다.</p>
+          <p>Mashcore Lab에서는 질문과 개념을 다루고, Weplace에서는 그 판단을 고객이 실제로 만나는 표면으로 옮깁니다. 그 과정에서 쌓인 기준은 Mashcore34의 글과 책으로 남습니다.</p>
+          <div class="principles">
+            <div class="principle"><span>Position</span><p>정답을 내미는 사람보다, 판을 먼저 읽는 사람.</p></div>
+            <div class="principle"><span>Method</span><p>관찰하고, 구조화하고, 현장에 놓고, 다시 수정합니다.</p></div>
+            <div class="principle"><span>Standard</span><p>작은 일도 낮은 기준으로 하지 않습니다.</p></div>
+            <div class="principle"><span>Direction</span><p>감각을 구조로, 구조를 성과와 문장으로 옮깁니다.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap reveal">
+        <div class="section-grid">
+          <div>
+            <div class="eyebrow">04 / BOUNDARY</div>
+            <h2 class="section-title">Lab이 하지<br>않는 것</h2>
+          </div>
+          <div class="reading-list" style="margin-top:0">
+            <div class="reading-row"><b>01</b><p>사람을 단계와 등급으로 단정하지 않습니다.</p></div>
+            <div class="reading-row"><b>02</b><p>AI와 기술어를 정답처럼 앞세우지 않습니다.</p></div>
+            <div class="reading-row"><b>03</b><p>미완성 가설을 완성된 이론처럼 판매하지 않습니다.</p></div>
+            <div class="reading-row"><b>04</b><p>현장 실행이 필요한 자리를 철학의 말로 덮지 않습니다.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bridge">
+      <div class="wrap reveal">
+        <div class="eyebrow">[ BEGIN WITH THE RESEARCH ]</div>
+        <h2>소개보다 먼저,<br>현재 무엇을 다시 보고 있는지 읽어보십시오.</h2>
+        <p>첫 번째 공개 연구는 Chore to Play입니다. 일의 단계를 세우려던 가설이 어떻게 다중 상태의 지도로 바뀌고 있는지 기록합니다.</p>
+        <a class="link-arrow" href="../research/">Research Index로 이동</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2026 Mashcore Lab</span>
+      <nav class="footer-nav" aria-label="푸터 메뉴"><a href="../">Home</a><a href="../research/">Research</a><a href="../research/log/">Archive</a><a href="./">About</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    const button=document.querySelector('.menu-btn');
+    const mobile=document.getElementById('mobile-nav');
+    const closeMenu=()=>{mobile.dataset.open='false';button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','메뉴 열기');button.textContent='☰';document.body.style.overflow=''};
+    button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';if(open){closeMenu()}else{mobile.dataset.open='true';button.setAttribute('aria-expanded','true');button.setAttribute('aria-label','메뉴 닫기');button.textContent='×';document.body.style.overflow='hidden'}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+    mobile.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+    const io=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');io.unobserve(entry.target)}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>

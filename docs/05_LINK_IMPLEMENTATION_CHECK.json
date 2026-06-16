@@ -1,0 +1,32 @@
+[
+  {
+    "page": "index.html",
+    "anchors": 13,
+    "hash_only": 0,
+    "missing_href": 0
+  },
+  {
+    "page": "research/index.html",
+    "anchors": 18,
+    "hash_only": 0,
+    "missing_href": 0
+  },
+  {
+    "page": "research/chore-to-play/index.html",
+    "anchors": 16,
+    "hash_only": 0,
+    "missing_href": 0
+  },
+  {
+    "page": "research/log/index.html",
+    "anchors": 9,
+    "hash_only": 0,
+    "missing_href": 0
+  },
+  {
+    "page": "about/index.html",
+    "anchors": 16,
+    "hash_only": 0,
+    "missing_href": 0
+  }
+]

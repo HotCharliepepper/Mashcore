@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chore to Play — Research in Progress</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Gowun+Batang:wght@400;700&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#858178",
+                "surface-container": "#16221a",
+                "on-primary-container": "#7b847b",
+                "on-surface": "#d8e6d9",
+                "on-secondary": "#412d07",
+                "on-tertiary": "#333029",
+                "ink-dark": "#20261F",
+                "tertiary-container": "#1a1812",
+                "tertiary-fixed-dim": "#cbc6bb",
+                "forest-void": "#121A14",
+                "tertiary-fixed": "#e8e2d7",
+                "surface-container-low": "#121e16",
+                "surface-tint": "#c0c9bf",
+                "parchment-body": "#EDE7DC",
+                "inverse-surface": "#d8e6d9",
+                "forest-base": "#18241C",
+                "surface-container-lowest": "#051109",
+                "brass-deep": "#836A42",
+                "outline-variant": "#444844",
+                "primary": "#c0c9bf",
+                "on-tertiary-fixed-variant": "#49473f",
+                "on-primary-fixed-variant": "#404942",
+                "on-tertiary-fixed": "#1d1b15",
+                "on-background": "#d8e6d9",
+                "primary-container": "#121a14",
+                "outline": "#8e928c",
+                "secondary": "#e4c18f",
+                "error-container": "#93000a",
+                "surface-bright": "#303c33",
+                "inverse-primary": "#586159",
+                "error": "#ffb4ab",
+                "primary-fixed-dim": "#c0c9bf",
+                "on-primary-fixed": "#151d17",
+                "forest-elevated": "#1F2D24",
+                "inverse-on-surface": "#27332b",
+                "brass-soft": "#C9B488",
+                "secondary-container": "#5a431b",
+                "moss-divider": "#2A3A2E",
+                "primary-fixed": "#dce5db",
+                "secondary-fixed-dim": "#e4c18f",
+                "surface-container-highest": "#2b382f",
+                "on-primary": "#2a322c",
+                "surface-variant": "#2b382f",
+                "on-secondary-container": "#d1b07f",
+                "on-error": "#690005",
+                "on-error-container": "#ffdad6",
+                "surface": "#0a160e",
+                "on-secondary-fixed": "#281900",
+                "surface-dim": "#0a160e",
+                "brass-accent": "#A6885A",
+                "surface-container-high": "#212d24",
+                "background": "#0a160e",
+                "secondary-fixed": "#ffdeae",
+                "on-secondary-fixed-variant": "#5a431b",
+                "tertiary": "#cbc6bb",
+                "on-surface-variant": "#c4c8c2"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "unit": "4px",
+                "margin-desktop": "64px",
+                "margin-mobile": "20px",
+                "gutter": "24px",
+                "section-gap": "160px"
+        },
+        "fontFamily": {
+                "label-caps": [
+                        "hankenGrotesk"
+                ],
+                "label-sm": [
+                        "hankenGrotesk"
+                ],
+                "headline-lg-mobile": [
+                        "Gowun Batang"
+                ],
+                "headline-lg": [
+                        "Gowun Batang"
+                ],
+                "headline-display": [
+                        "Gowun Batang"
+                ],
+                "italic-annotation": [
+                        "ebGaramond"
+                ],
+                "body-md": [
+                        "Gowun Batang"
+                ],
+                "body-lg": [
+                        "Gowun Batang"
+                ]
+        },
+        "fontSize": {
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "13px",
+                        {
+                                "lineHeight": "1.4",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "24px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-display": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "italic-annotation": [
+                        "16px",
+                        {
+                                "lineHeight": "1.5",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.7",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.8",
+                                "fontWeight": "400"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        body { font-family: 'Gowun Batang', serif; word-break: keep-all; }
+        .hanken { font-family: 'Hanken Grotesk', sans-serif; }
+        .garamond { font-family: 'EB Garamond', serif; }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ladder-step {
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .line-connector {
+            width: 1px;
+            height: 30px;
+            background-color: var(--moss-divider);
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body class="bg-forest-void text-on-surface overflow-x-hidden selection:bg-moss-divider selection:text-parchment-body">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-moss-divider dark:border-moss-divider">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full">
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface dark:text-on-surface">
+                MASHCORE LAB
+            </div>
+<nav class="hidden md:flex space-x-8">
+<a class="text-primary dark:text-primary border-b border-brass-accent font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">Research</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">Archive</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-headline-lg text-headline-lg tracking-[0.2em] cursor-pointer transition-opacity active:opacity-70 hover:text-primary dark:hover:text-primary transition-colors duration-300" href="#">About</a>
+</nav>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden xl:flex fixed left-0 top-0 h-full w-16 hover:w-64 transition-all duration-500 z-40 bg-forest-void dark:bg-forest-void border-r border-moss-divider group flex flex-col py-margin-desktop space-y-unit overflow-hidden pt-32">
+<div class="px-4 mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+<h2 class="font-headline-lg text-headline-lg text-on-surface text-sm">Research Path</h2>
+<p class="font-label-caps text-label-caps text-brass-soft">Current Reading</p>
+</div>
+<a class="flex items-center px-4 py-3 text-brass-soft font-bold border-l-2 border-brass-soft pl-2 hover:bg-forest-elevated transition-all duration-200" href="#hypothesis">
+<span class="material-symbols-outlined shrink-0" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+<span class="ml-4 font-label-caps text-label-caps whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hypothesis</span>
+</a>
+<a class="flex items-center px-4 py-3 text-on-tertiary-container hover:text-on-surface pl-2 hover:bg-forest-elevated transition-all duration-200" href="#reorganization">
+<span class="material-symbols-outlined shrink-0">format_list_numbered</span>
+<span class="ml-4 font-label-caps text-label-caps whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Concepts</span>
+</a>
+<a class="flex items-center px-4 py-3 text-on-tertiary-container hover:text-on-surface pl-2 hover:bg-forest-elevated transition-all duration-200" href="#matrix">
+<span class="material-symbols-outlined shrink-0">analytics</span>
+<span class="ml-4 font-label-caps text-label-caps whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Models</span>
+</a>
+<a class="flex items-center px-4 py-3 text-on-tertiary-container hover:text-on-surface pl-2 hover:bg-forest-elevated transition-all duration-200" href="#status">
+<span class="material-symbols-outlined shrink-0">history_edu</span>
+<span class="ml-4 font-label-caps text-label-caps whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">Status</span>
+</a>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 xl:pl-16 w-full max-w-[1440px] mx-auto min-h-screen">
+<!-- Hero Title -->
+<section class="px-margin-mobile md:px-margin-desktop py-32 md:py-48 grid grid-cols-4 md:grid-cols-12 gap-gutter relative">
+<div class="col-span-4 md:col-span-8 md:col-start-3 text-center space-y-12 fade-in">
+<div class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest">[RESEARCH IN PROGRESS]</div>
+<h1 class="font-headline-display text-headline-display text-parchment-body">Chore to Play</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto garamond italic">
+                    Visualizing the collapse and reconstruction of a theory.
+                </p>
+<div class="w-px h-32 bg-moss-divider mx-auto mt-24"></div>
+</div>
+</section>
+<!-- 1. Original Hypothesis -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter border-t border-moss-divider relative" id="hypothesis">
+<div class="col-span-4 md:col-span-4 md:col-start-2 fade-in">
+<div class="font-label-caps text-label-caps text-brass-soft mb-4">ORIGINAL HYPOTHESIS</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-parchment-body mb-8">
+                    처음에는 계단이라고 생각했습니다.
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 leading-relaxed">
+                    We naturally assume that work evolves linearly. From the mundane to the meaningful, a step-by-step ascension towards fulfillment. The progression from chore to calling seems logical, an inevitable journey of personal and professional growth.
+                </p>
+</div>
+<div class="col-span-4 md:col-span-4 md:col-start-8 flex flex-col items-center mt-16 md:mt-0 fade-in" id="ladder-container">
+<div class="flex flex-col items-center w-full">
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-parchment-body">Calling / Play</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/80">Work / Craft</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/70">Responsibility</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/60">Role</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/50">Job</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/40">Duty</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/30">Task</div>
+<div class="line-connector"></div>
+<div class="ladder-step py-2 font-headline-lg text-headline-lg text-on-surface-variant/20">Chore</div>
+</div>
+</div>
+</section>
+<!-- 2. The Break -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter bg-surface-container-low" id="reorganization">
+<div class="col-span-4 md:col-span-8 md:col-start-3 fade-in text-center mb-16">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-parchment-body mb-6">
+                    하지만 실제 삶은 그렇게 움직이지 않았습니다.
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">
+                    The words belong to different categories. They are not steps to climb, but layers that coexist within a single individual at any given moment.
+                </p>
+</div>
+<!-- 3. Concept Layers -->
+<div class="col-span-4 md:col-span-10 md:col-start-2 relative flex flex-col items-center justify-center fade-in space-y-8 mt-16">
+<div class="w-full max-w-3xl border-l border-moss-divider pl-6 py-2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-1">행동의 형식과 단위</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Chore · Task</p>
+</div>
+<div class="w-full max-w-3xl border-l border-moss-divider pl-6 py-2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-1">의무와 결과의 관계</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Duty · Responsibility</p>
+</div>
+<div class="w-full max-w-3xl border-l border-moss-divider pl-6 py-2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-1">경제적 구조</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Job</p>
+</div>
+<div class="w-full max-w-3xl border-l border-moss-divider pl-6 py-2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-1">관계적 위치</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Role</p>
+</div>
+<div class="w-full max-w-3xl border-l border-moss-divider pl-6 py-2">
+<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-1">활동과 숙련</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Work · Craft</p>
+</div>
+<div class="w-full max-w-3xl border-l border-brass-soft pl-6 py-2">
+<span class="font-label-caps text-label-caps text-brass-soft block mb-1">의미와 경험</span>
+<p class="font-headline-lg text-headline-lg text-brass-soft font-bold">Calling · Play</p>
+</div>
+</div>
+</section>
+<!-- 4. Example -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter">
+<div class="col-span-4 md:col-span-8 md:col-start-3 fade-in text-center">
+<h3 class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest mb-8">EXAMPLE: RESTAURANT MANAGER</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+    Consider the restaurant manager. They hold a <strong>Job</strong> and inhabit a <strong>Role</strong>. They execute <strong>Chore</strong>s (sweeping) and <strong>Task</strong>s (inventory). They bear <strong>Duty</strong> (compliance) and <strong>Responsibility</strong> (staff wellbeing). They practice <strong>Craft</strong> (hospitality). All these layers exist simultaneously.
+</p>
+</div>
+</section>
+<!-- 5. Duty / Job / Role / Responsibility -->
+<section class="px-margin-mobile md:px-margin-desktop py-32 bg-parchment-body text-ink-dark">
+<div class="max-w-[1440px] mx-auto fade-in">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="border-t border-ink-dark/20 pt-4">
+<h4 class="font-headline-lg text-headline-lg text-ink-dark mb-4">Duty</h4>
+<p class="font-body-md text-body-md text-ink-dark/80">The obligations imposed by structure and necessity. What must be done.</p>
+</div>
+<div class="border-t border-ink-dark/20 pt-4">
+<h4 class="font-headline-lg text-headline-lg text-ink-dark mb-4">Job</h4>
+<p class="font-body-md text-body-md text-ink-dark/80">The economic exchange. The container of time and effort for reward.</p>
+</div>
+<div class="border-t border-ink-dark/20 pt-4">
+<h4 class="font-headline-lg text-headline-lg text-ink-dark mb-4">Role</h4>
+<p class="font-body-md text-body-md text-ink-dark/80">The relational identity within a system. How one is seen and expected to act.</p>
+</div>
+<div class="border-t border-ink-dark/20 pt-4">
+<h4 class="font-headline-lg text-headline-lg text-ink-dark mb-4">Responsibility</h4>
+<p class="font-body-md text-body-md text-ink-dark/80">The ownership of outcomes. The moral or practical burden of consequences.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. Work and Craft -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter border-b border-moss-divider">
+<div class="col-span-4 md:col-span-8 md:col-start-3 fade-in text-center space-y-12">
+<h2 class="font-headline-display text-headline-display text-parchment-body">Work &amp; Craft</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto italic garamond">
+    "반복이 항상 Craft를 만들지는 않습니다. 판단할 기회가 없으면, 반복은 숙련보다 소모를 남길 수 있습니다."
+</p>
+</div>
+</section>
+<!-- 7. Calling and Play -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter" id="matrix">
+<div class="col-span-4 md:col-span-5 md:col-start-2 fade-in">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-parchment-body mb-6">
+                    Calling &amp; Play
+                </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 italic garamond">
+                    "의미가 있다고 즐거운 것은 아닙니다. 즐겁다고 모두 소명인 것도 아닙니다."
+                </p>
+</div>
+<div class="col-span-4 md:col-span-5 md:col-start-8 relative fade-in flex items-center justify-center min-h-[400px]">
+<!-- Minimal Matrix Diagram -->
+<div class="relative w-full aspect-square max-w-md">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-brass-soft/50"></div>
+<div class="absolute top-0 left-1/2 w-[1px] h-full bg-brass-soft/50"></div>
+<div class="absolute top-4 left-1/2 -translate-x-1/2 font-label-caps text-label-caps text-on-surface-variant tracking-widest">HIGH MEANING</div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 font-label-caps text-label-caps text-on-surface-variant tracking-widest">LOW MEANING</div>
+<div class="absolute top-1/2 left-4 -translate-y-1/2 -rotate-90 font-label-caps text-label-caps text-on-surface-variant tracking-widest origin-left">HIGH ENJOYMENT</div>
+<div class="absolute top-1/2 right-4 -translate-y-1/2 rotate-90 font-label-caps text-label-caps text-on-surface-variant tracking-widest origin-right">LOW ENJOYMENT</div>
+<div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 font-italic-annotation text-italic-annotation text-parchment-body">Calling &amp; Play</div>
+<div class="absolute top-1/4 right-1/4 translate-x-1/2 -translate-y-1/2 font-italic-annotation text-italic-annotation text-parchment-body">Calling</div>
+<div class="absolute bottom-1/4 left-1/4 -translate-x-1/2 translate-y-1/2 font-italic-annotation text-italic-annotation text-on-tertiary-container">Play</div>
+<div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 font-italic-annotation text-italic-annotation text-on-tertiary-container">Neither</div>
+</div>
+</div>
+</section>
+<!-- 8. Three Models -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter bg-surface-container-low">
+<div class="col-span-4 md:col-span-10 md:col-start-2 fade-in text-center space-y-16">
+<h2 class="font-headline-lg text-headline-lg text-parchment-body">Three Models of Progression</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+<div class="border border-moss-divider p-8">
+<h4 class="font-label-caps text-label-caps text-brass-soft mb-4">LINEAR</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">The original ladder. Step-by-step evolution.</p>
+</div>
+<div class="border border-moss-divider p-8">
+<h4 class="font-label-caps text-label-caps text-brass-soft mb-4">SPIRAL</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Iterative growth through returning cycles.</p>
+</div>
+<div class="border border-moss-divider p-8">
+<h4 class="font-label-caps text-label-caps text-brass-soft mb-4">MULTI-STATE</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Simultaneous existence of multiple layers.</p>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-parchment-body italic garamond max-w-2xl mx-auto">
+    "매트릭스는 현재를 읽고, 나선은 변화를 읽으며, Chore to Play는 방향을 묻습니다."
+</p>
+</div>
+</section>
+<!-- 9 & 10. Current Status & Position -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap grid grid-cols-4 md:grid-cols-12 gap-gutter" id="status">
+<div class="col-span-4 md:col-span-10 md:col-start-2 fade-in">
+<div class="mb-16 border-b border-moss-divider pb-8">
+<span class="font-label-caps text-label-caps text-brass-soft block mb-4">CURRENT STATUS</span>
+<p class="font-headline-lg text-headline-lg text-parchment-body">Chore to Play 전체 모델은 L0–L1 사이입니다.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div>
+<h4 class="font-label-caps text-label-caps text-on-tertiary-container mb-6 border-b border-moss-divider pb-2">PRESERVED</h4>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li>반복의 성질</li>
+<li>자율성의 중요도</li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-tertiary-container mb-6 border-b border-moss-divider pb-2">REVISED</h4>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li>8단계 단일 발달축</li>
+<li>선형적 진보 모델</li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-tertiary-container mb-6 border-b border-moss-divider pb-2">DEFERRED</h4>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li>Play 최종단계 정의</li>
+<li>정확한 측정 지표</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. Open Questions -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap bg-surface-container-low">
+<div class="max-w-4xl mx-auto fade-in">
+<span class="font-label-caps text-label-caps text-brass-soft block mb-12 text-center tracking-widest">OPEN QUESTIONS</span>
+<div class="space-y-16">
+<p class="font-headline-lg text-headline-lg text-parchment-body text-center leading-relaxed">
+            무엇이 단조로운 반복을 의미 있는 숙련으로 만드는가?
+        </p>
+<p class="font-headline-lg text-headline-lg text-parchment-body text-center leading-relaxed">
+            의무와 책임의 무게 속에서 어떻게 유희의 공간을 확보하는가?
+        </p>
+<p class="font-headline-lg text-headline-lg text-parchment-body text-center leading-relaxed">
+            조직은 개인의 다층적 상태를 어떻게 인지하고 지원할 수 있는가?
+        </p>
+<p class="font-headline-lg text-headline-lg text-parchment-body text-center leading-relaxed">
+            성장의 방향은 오직 상향식이어야만 하는가?
+        </p>
+</div>
+</div>
+</section>
+<!-- 12. Research Participation -->
+<section class="px-margin-mobile md:px-margin-desktop py-32 border-t border-moss-divider text-center">
+<div class="fade-in max-w-2xl mx-auto space-y-8">
+<h3 class="font-label-caps text-label-caps text-on-tertiary-container tracking-widest mb-8">RESEARCH PARTICIPATION</h3>
+<div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">내 사례 남기기</a>
+<span class="hidden md:block text-moss-divider">|</span>
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">반례 제보하기</a>
+<span class="hidden md:block text-moss-divider">|</span>
+<a class="font-body-md text-body-md text-brass-soft hover:text-parchment-body transition-colors border-b border-brass-soft hover:border-parchment-body pb-1" href="#">연구 인터뷰 참여</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-forest-void dark:bg-forest-void border-t border-moss-divider dark:border-moss-divider w-full relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container mb-4 md:mb-0">
+                © 2026 MASHCORE LAB ARCHIVE
+            </div>
+<div class="flex space-x-8">
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Mashcore34</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Weplace</a>
+<a class="font-label-sm text-label-sm uppercase tracking-widest text-on-tertiary-container dark:text-on-tertiary-container hover:text-parchment-body dark:hover:text-parchment-body transition-colors duration-500 underline-offset-8 hover:underline" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script>
+        // Intersection Observer for fade-ins
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    </script>
+</body></html>

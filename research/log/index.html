@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chore to Play — Selected Research Log</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+        
+        .break-keep { word-break: keep-all; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "forest-void": "#121A14",
+                      "brass-soft": "#C9B488",
+                      "tertiary": "#cbc6bb",
+                      "outline": "#8e928c",
+                      "on-primary-fixed-variant": "#404942",
+                      "on-primary": "#2a322c",
+                      "moss-divider": "#2A3A2E",
+                      "on-surface": "#d8e6d9",
+                      "forest-elevated": "#1F2D24",
+                      "primary-fixed": "#dce5db",
+                      "surface-dim": "#0a160e",
+                      "on-secondary-fixed": "#281900",
+                      "surface-variant": "#2b382f",
+                      "surface-bright": "#303c33",
+                      "secondary-fixed-dim": "#e4c18f",
+                      "tertiary-fixed": "#e8e2d7",
+                      "secondary-container": "#5a431b",
+                      "on-secondary-fixed-variant": "#5a431b",
+                      "outline-variant": "#444844",
+                      "on-tertiary-container": "#858178",
+                      "inverse-primary": "#586159",
+                      "background": "#0a160e",
+                      "primary-fixed-dim": "#c0c9bf",
+                      "forest-base": "#18241C",
+                      "surface-container": "#16221a",
+                      "on-primary-container": "#7b847b",
+                      "on-background": "#d8e6d9",
+                      "surface-container-highest": "#2b382f",
+                      "primary": "#c0c9bf",
+                      "surface-container-high": "#212d24",
+                      "on-surface-variant": "#c4c8c2",
+                      "on-error": "#690005",
+                      "brass-accent": "#A6885A",
+                      "on-primary-fixed": "#151d17",
+                      "ink-dark": "#20261F",
+                      "tertiary-container": "#1a1812",
+                      "inverse-surface": "#d8e6d9",
+                      "secondary-fixed": "#ffdeae",
+                      "inverse-on-surface": "#27332b",
+                      "error-container": "#93000a",
+                      "primary-container": "#121a14",
+                      "surface-container-low": "#121e16",
+                      "on-tertiary": "#333029",
+                      "on-secondary": "#412d07",
+                      "surface": "#0a160e",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#1d1b15",
+                      "on-secondary-container": "#d1b07f",
+                      "surface-tint": "#c0c9bf",
+                      "surface-container-lowest": "#051109",
+                      "secondary": "#e4c18f",
+                      "brass-deep": "#836A42",
+                      "parchment-body": "#EDE7DC",
+                      "on-tertiary-fixed-variant": "#49473f",
+                      "tertiary-fixed-dim": "#cbc6bb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "section-gap": "160px",
+                      "unit": "4px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Gowun Batang"
+                      ],
+                      "italic-annotation": [
+                              "EB Garamond"
+                      ],
+                      "headline-lg-mobile": [
+                              "Gowun Batang"
+                      ],
+                      "headline-lg": [
+                              "Gowun Batang"
+                      ],
+                      "headline-display": [
+                              "Gowun Batang"
+                      ],
+                      "body-md": [
+                              "Gowun Batang"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.8",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "italic-annotation": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-display": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.7",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+      </script>
+<style id="p2-connection-layer">
+/* P2 connection layer — temporary until shared CSS extraction */
+.page-bridge{border-top:1px solid rgba(201,180,136,.18);border-bottom:1px solid rgba(201,180,136,.12);background:#101b13;padding:clamp(72px,10vw,128px) 20px;position:relative;z-index:2}
+.page-bridge__inner{width:min(1040px,100%);margin:0 auto}
+.page-bridge__label{display:block;margin-bottom:18px;color:#C9B488;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-style:italic;letter-spacing:.12em;text-transform:uppercase}
+.page-bridge__title{margin:0 0 34px;color:#EDE7DC;font-family:'Gowun Batang','Nanum Myeongjo',serif;font-size:clamp(1.75rem,3.6vw,2.75rem);line-height:1.45;word-break:keep-all}
+.page-bridge__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.page-bridge__link{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:72px;padding:18px 20px;border:1px solid rgba(201,180,136,.2);color:#d8e6d9;text-decoration:none;font-family:'Gowun Batang','Nanum Myeongjo',serif;transition:border-color .25s ease,background .25s ease,color .25s ease}
+.page-bridge__link:hover,.page-bridge__link:focus-visible{border-color:#A6885A;background:#18241C;color:#EDE7DC;outline:none}
+.page-bridge__link small{display:block;margin-top:5px;color:rgba(237,231,220,.58);font-family:system-ui,sans-serif;font-size:.75rem;letter-spacing:.05em}
+.site-logo-link{color:inherit;text-decoration:none}
+[aria-current="page"]{text-decoration-color:#A6885A}
+@media(max-width:700px){.page-bridge__links{grid-template-columns:1fr}.page-bridge{padding-inline:20px}}
+@media(prefers-reduced-motion:reduce){.page-bridge__link{transition:none}}
+</style></head>
+<body class="bg-forest-void text-on-surface font-body-md antialiased selection:bg-moss-divider selection:text-brass-accent">
+<!-- Top Navigation Container -->
+<nav class="fixed top-0 w-full z-50 bg-forest-void/90 dark:bg-forest-void/90 backdrop-blur-md border-b border-moss-divider/50 dark:border-moss-divider/50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4">
+<!-- Logo -->
+<a class="font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface dark:text-on-surface cursor-pointer transition-opacity active:opacity-70 site-logo-link" href="../../">
+            MASHCORE LAB
+        </a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex space-x-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-300 font-headline-lg text-[24px] tracking-[0.1em] cursor-pointer transition-opacity active:opacity-70" href="../">연구</a>
+<a aria-current="page" class="text-primary dark:text-primary border-b border-brass-accent font-headline-lg text-[24px] tracking-[0.1em] cursor-pointer transition-opacity active:opacity-70" href="./">연구 기록</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-300 font-headline-lg text-[24px] tracking-[0.1em] cursor-pointer transition-opacity active:opacity-70" href="../../about/">소개</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">menu</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-[120px] md:pl-[64px] min-h-screen relative flex flex-col items-center">
+<!-- Subtle Grid Lines Background -->
+<div class="absolute inset-0 pointer-events-none grid grid-cols-4 md:grid-cols-12 gap-gutter px-margin-mobile md:px-margin-desktop w-full max-w-7xl mx-auto h-full z-0 opacity-40">
+<div class="border-l border-moss-divider/40 h-full"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full"></div>
+<div class="border-l border-moss-divider/40 h-full hidden md:block"></div>
+<div class="border-l border-moss-divider/40 h-full border-r hidden md:block"></div>
+</div>
+<div class="relative z-10 w-full max-w-5xl px-margin-mobile md:px-margin-desktop mt-12 mb-32">
+<!-- Header Section -->
+<header class="mb-32 text-center relative max-w-3xl mx-auto">
+<div class="font-label-caps text-label-caps text-brass-soft mb-8 uppercase tracking-[0.3em]">[ ARCHIVAL LOG ]</div>
+<h1 class="font-headline-display text-headline-display text-on-surface mb-8">Chore to Play</h1>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-[28px] text-on-surface-variant italic font-italic-annotation text-italic-annotation">Selected Research Log &amp; Intellectual Evolution</h2>
+<div class="mt-12 flex justify-center space-x-6 font-label-caps text-label-caps tracking-widest text-on-tertiary-container">
+<span class="text-on-surface-variant">STATUS: ACTIVE</span>
+<span class="w-1 h-1 rounded-full bg-brass-accent/50 self-center"></span>
+<span class="text-on-surface-variant">RESEARCH LOG · v0.2</span>
+</div>
+</header>
+<!-- Archival Timeline Container -->
+<div class="relative w-full space-y-40">
+<!-- Entry 1 -->
+<article class="relative flex flex-col md:flex-row gap-8 md:gap-16 items-start pb-40">
+<!-- Metadata Margin Note -->
+<div class="md:w-48 flex-shrink-0 flex md:flex-col gap-4 md:gap-2 pt-2 items-baseline md:items-start text-on-surface-variant">
+<span class="font-label-caps text-[14px] tracking-[0.2em] text-brass-soft">2026.06.16</span>
+<span class="font-italic-annotation italic text-[18px]">Revision · L1</span>
+</div>
+<!-- Content Column -->
+<div class="flex-1 space-y-12 w-full">
+<h3 class="font-headline-display text-[36px] md:text-[42px] leading-tight text-on-surface break-keep">8단계 단일 발달축 보류</h3>
+<div class="space-y-16 mt-12">
+<!-- Previous Thought -->
+<div class="space-y-4">
+<div class="font-label-caps text-[12px] text-on-tertiary-container uppercase tracking-[0.2em] border-b-[0.5px] border-moss-divider/50 pb-2 inline-block">Previous Thought</div>
+<p class="font-body-lg text-[20px] leading-[1.8] text-on-surface-variant font-italic-annotation italic pl-4 border-l-[0.5px] border-moss-divider/50">
+                                    "일은 여덟 단계를 따라 성장한다."
+                                </p>
+</div>
+<!-- Reason & Conclusion Grid -->
+<div class="space-y-12">
+<!-- Reason for Change -->
+<div class="bg-forest-elevated/20 p-8 border-[0.5px] border-brass-accent/10 rounded-sm">
+<div class="font-label-caps text-[12px] text-brass-soft mb-6 uppercase tracking-[0.2em] flex items-center gap-3">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 0;">sync_alt</span>
+                                        Reason for Change
+                                    </div>
+<p class="font-body-md text-[18px] leading-[1.8] text-on-surface break-keep">
+                                        여덟 단어가 서로 다른 종류의 개념이었다.
+                                    </p>
+</div>
+<!-- Current Conclusion -->
+<div class="pl-8 border-l-[1px] border-brass-accent/40">
+<div class="font-label-caps text-[12px] text-primary mb-6 uppercase tracking-[0.2em] flex items-center gap-3">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Current Conclusion
+                                    </div>
+<p class="font-body-lg text-[20px] leading-[1.8] text-on-surface break-keep">
+                                        선형 모델은 사실 모델이 아니라 서사 가설로 낮춘다.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">기록에서 바뀐 정의를 다시 현재 연구 지도에 놓아봅니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="../chore-to-play/"><span>현재 연구 지도에서 다시 읽기<small>Chore to Play 상세</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="../"><span>다른 연구 질문 보기<small>Research Index</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="w-full mt-16 border-t-[0.5px] border-moss-divider/50 bg-forest-void dark:bg-forest-void flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 max-w-7xl mx-auto z-10 relative">
+<div class="font-label-caps text-[11px] uppercase tracking-[0.2em] text-on-tertiary-container dark:text-on-tertiary-container mb-4 md:mb-0">
+            © 2026 MASHCORE LAB ARCHIVE
+        </div>
+<div class="flex space-x-8 font-label-caps text-[11px] uppercase tracking-[0.2em]">
+<a class="text-on-tertiary-container dark:text-on-tertiary-container hover:text-on-surface dark:hover:text-on-surface transition-colors duration-500" href="../../about/#mashcore34">Mashcore34</a>
+<a class="text-on-tertiary-container dark:text-on-tertiary-container hover:text-on-surface dark:hover:text-on-surface transition-colors duration-500" href="../../about/#weplace">Weplace</a>
+<a class="text-on-tertiary-container dark:text-on-tertiary-container hover:text-on-surface dark:hover:text-on-surface transition-colors duration-500" href="../../about/">소개</a>
+</div>
+</footer>
+</body></html>

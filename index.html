@@ -124,7 +124,21 @@
             transform: translateY(0);
         }
     </style>
-</head>
+<style id="p2-connection-layer">
+/* P2 connection layer — temporary until shared CSS extraction */
+.page-bridge{border-top:1px solid rgba(201,180,136,.18);border-bottom:1px solid rgba(201,180,136,.12);background:#101b13;padding:clamp(72px,10vw,128px) 20px;position:relative;z-index:2}
+.page-bridge__inner{width:min(1040px,100%);margin:0 auto}
+.page-bridge__label{display:block;margin-bottom:18px;color:#C9B488;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-style:italic;letter-spacing:.12em;text-transform:uppercase}
+.page-bridge__title{margin:0 0 34px;color:#EDE7DC;font-family:'Gowun Batang','Nanum Myeongjo',serif;font-size:clamp(1.75rem,3.6vw,2.75rem);line-height:1.45;word-break:keep-all}
+.page-bridge__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.page-bridge__link{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:72px;padding:18px 20px;border:1px solid rgba(201,180,136,.2);color:#d8e6d9;text-decoration:none;font-family:'Gowun Batang','Nanum Myeongjo',serif;transition:border-color .25s ease,background .25s ease,color .25s ease}
+.page-bridge__link:hover,.page-bridge__link:focus-visible{border-color:#A6885A;background:#18241C;color:#EDE7DC;outline:none}
+.page-bridge__link small{display:block;margin-top:5px;color:rgba(237,231,220,.58);font-family:system-ui,sans-serif;font-size:.75rem;letter-spacing:.05em}
+.site-logo-link{color:inherit;text-decoration:none}
+[aria-current="page"]{text-decoration-color:#A6885A}
+@media(max-width:700px){.page-bridge__links{grid-template-columns:1fr}.page-bridge{padding-inline:20px}}
+@media(prefers-reduced-motion:reduce){.page-bridge__link{transition:none}}
+</style></head>
 <body class="relative min-h-screen selection:bg-brass-accent selection:text-forest-void overflow-x-hidden">
 <!-- Ambient Grid Background -->
 <div class="fixed inset-0 pointer-events-none z-[-1] opacity-30">
@@ -134,11 +148,11 @@
 </div>
 <!-- TopAppBar -->
 <nav class="fixed top-0 w-full z-50 bg-forest-void/90 backdrop-blur-md border-b border-moss-divider flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 transition-opacity duration-300">
-<div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface">MASHCORE LAB</div>
+<a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface site-logo-link" href="./">MASHCORE LAB</a>
 <div class="hidden md:flex space-x-12">
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-primary border-b border-brass-accent pb-2" href="#">Research</a>
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Archive</a>
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="font-headline-lg text-body-lg tracking-[0.2em] text-primary border-b border-brass-accent pb-2" href="./research/">연구</a>
+<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="./research/log/">연구 기록</a>
+<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="./about/">소개</a>
 </div>
 <!-- Mobile Menu Button -->
 <button class="md:hidden text-on-surface" id="mobile-menu-btn">
@@ -147,9 +161,9 @@
 </nav>
 <!-- Mobile Navigation Menu -->
 <div class="fixed inset-0 bg-forest-void z-40 flex flex-col pt-[100px] px-margin-mobile space-y-8 hidden opacity-0 transition-opacity duration-300" id="mobile-nav">
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-primary" href="#">Research</a>
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="#">Archive</a>
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="#">About</a>
+<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-primary" href="./research/">연구</a>
+<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="./research/log/">연구 기록</a>
+<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="./about/">소개</a>
 </div>
 <main class="pt-[140px] pb-section-gap">
 <!-- Hero Section -->
@@ -207,7 +221,7 @@
 <p class="font-headline-display text-[28px] md:text-[36px] mb-20 leading-[1.6] text-ink-dark/90">
                     우리는 처음에 일을 여덟 개의 단계로 보았습니다. 그런데 들여다볼수록, Chore와 Task는 행동의 형식이었고, Job은 경제 구조였으며, Role은 관계 속 위치였습니다. 한 줄로 세웠던 단어들이 사실은 서로 다른 층에 놓여 있었습니다. 이 연구는 사람이 더 높은 단계로 올라가는 법보다, 같은 일이 언제 감옥이 되고 언제 힘이 되는지를 읽습니다.
                 </p>
-<a class="inline-flex items-center space-x-3 font-italic-annotation text-italic-annotation text-brass-deep border-b border-brass-deep/50 pb-2 hover:border-brass-deep hover:text-on-secondary-fixed transition-all duration-500" href="#">
+<a class="inline-flex items-center space-x-3 font-italic-annotation text-italic-annotation text-brass-deep border-b border-brass-deep/50 pb-2 hover:border-brass-deep hover:text-on-secondary-fixed transition-all duration-500" href="./research/chore-to-play/">
 <span class="tracking-widest">현재 연구 지도 읽기</span>
 <span class="material-symbols-outlined text-sm font-light" data-icon="east">east</span>
 </a>
@@ -241,14 +255,14 @@
 </section>
 </main>
 <!-- Footer -->
-<footer class="w-full border-t border-moss-divider bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
+<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">현재 읽고 있는 연구의 전체 지도로 이어집니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="./research/"><span>연구 전체 지도<small>진행 중인 연구와 열린 질문</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="./about/"><span>Mashcore Lab 소개<small>읽다·옮기다·남기다의 관계</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="w-full border-t border-moss-divider bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
 <div class="font-body-md text-on-surface-variant text-sm mb-6 md:mb-0 tracking-widest uppercase">
             © 2026 MASHCORE LAB ARCHIVE
         </div>
 <div class="flex space-x-12">
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="#">Mashcore34</a>
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="#">Weplace</a>
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="#">Contact</a>
+<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/#mashcore34">Mashcore34</a>
+<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/#weplace">Weplace</a>
+<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/">소개</a>
 </div>
 </footer>
 <script>

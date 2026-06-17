@@ -1,307 +1,233 @@
 <!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mashcore Lab — 읽는 사람의 방</title>
+<meta name="description" content="툴은 많아졌고, 사람은 더 망설입니다. Mashcore Lab은 사람과 브랜드, 관계와 일이 어디서 방향을 잃는지 읽는 해석실입니다. 대표 연구 Chore to Play를 비롯해, 반복·역할·책임·숙련·의미를 읽습니다.">
+<meta name="author" content="Mashcore Lab">
+<meta name="theme-color" content="#121A14">
+<link rel="canonical" href="/index.html">
 
-<html class="dark" lang="ko"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Mashcore Lab — Research Manuscript</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Hanken+Grotesk:wght@400;600&amp;family=EB+Garamond:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-container": "#1a1812",
-                        "on-tertiary": "#333029",
-                        "primary-fixed-dim": "#c0c9bf",
-                        "surface-tint": "#c0c9bf",
-                        "secondary-fixed-dim": "#e4c18f",
-                        "secondary-fixed": "#ffdeae",
-                        "surface-container-low": "#121e16",
-                        "on-primary-fixed-variant": "#404942",
-                        "brass-accent": "#A6885A",
-                        "on-tertiary-fixed-variant": "#49473f",
-                        "on-surface-variant": "#c4c8c2",
-                        "outline": "#8e928c",
-                        "outline-variant": "#444844",
-                        "on-secondary-fixed-variant": "#5a431b",
-                        "error": "#ffb4ab",
-                        "forest-elevated": "#1F2D24",
-                        "background": "#0a160e",
-                        "tertiary-fixed": "#e8e2d7",
-                        "surface-container-lowest": "#051109",
-                        "surface-container-highest": "#2b382f",
-                        "brass-deep": "#836A42",
-                        "on-tertiary-container": "#858178",
-                        "on-error-container": "#ffdad6",
-                        "tertiary": "#cbc6bb",
-                        "on-primary-container": "#7b847b",
-                        "surface-bright": "#303c33",
-                        "forest-void": "#121A14",
-                        "surface-container-high": "#212d24",
-                        "surface-container": "#16221a",
-                        "secondary-container": "#5a431b",
-                        "moss-divider": "#2A3A2E",
-                        "error-container": "#93000a",
-                        "on-secondary-container": "#d1b07f",
-                        "inverse-surface": "#d8e6d9",
-                        "primary-container": "#121a14",
-                        "on-primary-fixed": "#151d17",
-                        "parchment-body": "#EDE7DC",
-                        "inverse-primary": "#586159",
-                        "on-tertiary-fixed": "#1d1b15",
-                        "primary": "#c0c9bf",
-                        "surface": "#0a160e",
-                        "on-error": "#690005",
-                        "tertiary-fixed-dim": "#cbc6bb",
-                        "on-primary": "#2a322c",
-                        "brass-soft": "#C9B488",
-                        "surface-dim": "#0a160e",
-                        "on-background": "#d8e6d9",
-                        "primary-fixed": "#dce5db",
-                        "inverse-on-surface": "#27332b",
-                        "forest-base": "#18241C",
-                        "surface-variant": "#2b382f",
-                        "on-surface": "#d8e6d9",
-                        "on-secondary-fixed": "#281900",
-                        "ink-dark": "#20261F",
-                        "on-secondary": "#412d07",
-                        "secondary": "#e4c18f"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0",
-                        "lg": "0",
-                        "xl": "0",
-                        "full": "0"
-                    },
-                    "spacing": {
-                        "unit": "4px",
-                        "margin-desktop": "64px",
-                        "margin-mobile": "20px",
-                        "section-gap": "160px",
-                        "gutter": "24px"
-                    },
-                    "fontFamily": {
-                        "headline-lg-mobile": ["Gowun Batang"],
-                        "body-md": ["Gowun Batang"],
-                        "label-caps": ["hankenGrotesk"],
-                        "italic-annotation": ["ebGaramond"],
-                        "headline-lg": ["Gowun Batang"],
-                        "body-lg": ["Gowun Batang"],
-                        "label-sm": ["hankenGrotesk"],
-                        "headline-display": ["Gowun Batang"]
-                    },
-                    "fontSize": {
-                        "headline-lg-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "1.7", "fontWeight": "400" }],
-                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
-                        "italic-annotation": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "body-lg": ["18px", { "lineHeight": "1.8", "fontWeight": "400" }],
-                        "label-sm": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }],
-                        "headline-display": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
-        body {
-            background-color: theme('colors.forest-void');
-            color: theme('colors.on-surface');
-            -webkit-font-smoothing: antialiased;
-            word-break: keep-all;
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-<style id="p2-connection-layer">
-/* P2 connection layer — temporary until shared CSS extraction */
-.page-bridge{border-top:1px solid rgba(201,180,136,.18);border-bottom:1px solid rgba(201,180,136,.12);background:#101b13;padding:clamp(72px,10vw,128px) 20px;position:relative;z-index:2}
-.page-bridge__inner{width:min(1040px,100%);margin:0 auto}
-.page-bridge__label{display:block;margin-bottom:18px;color:#C9B488;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-style:italic;letter-spacing:.12em;text-transform:uppercase}
-.page-bridge__title{margin:0 0 34px;color:#EDE7DC;font-family:'Gowun Batang','Nanum Myeongjo',serif;font-size:clamp(1.75rem,3.6vw,2.75rem);line-height:1.45;word-break:keep-all}
-.page-bridge__links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.page-bridge__link{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:72px;padding:18px 20px;border:1px solid rgba(201,180,136,.2);color:#d8e6d9;text-decoration:none;font-family:'Gowun Batang','Nanum Myeongjo',serif;transition:border-color .25s ease,background .25s ease,color .25s ease}
-.page-bridge__link:hover,.page-bridge__link:focus-visible{border-color:#A6885A;background:#18241C;color:#EDE7DC;outline:none}
-.page-bridge__link small{display:block;margin-top:5px;color:rgba(237,231,220,.58);font-family:system-ui,sans-serif;font-size:.75rem;letter-spacing:.05em}
-.site-logo-link{color:inherit;text-decoration:none}
-[aria-current="page"]{text-decoration-color:#A6885A}
-@media(max-width:700px){.page-bridge__links{grid-template-columns:1fr}.page-bridge{padding-inline:20px}}
-@media(prefers-reduced-motion:reduce){.page-bridge__link{transition:none}}
-</style></head>
-<body class="relative min-h-screen selection:bg-brass-accent selection:text-forest-void overflow-x-hidden">
-<!-- Ambient Grid Background -->
-<div class="fixed inset-0 pointer-events-none z-[-1] opacity-30">
-<div class="absolute left-1/4 w-px h-full bg-moss-divider"></div>
-<div class="absolute left-2/4 w-px h-full bg-moss-divider"></div>
-<div class="absolute left-3/4 w-px h-full bg-moss-divider"></div>
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mashcore Lab — 읽는 사람의 방">
+<meta property="og:description" content="툴은 많아졌고, 사람은 더 망설입니다. Mashcore Lab은 일이 어디서 방향을 잃는지 읽습니다.">
+<meta property="og:locale" content="ko_KR">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121A14'/%3E%3Cpath d='M8 22V10h2.4l3.1 7 3.1-7H22v12h-2.2v-7.8l-2.9 6.4h-1.8l-2.9-6.4V22z' fill='%23A6885A'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://hangeul.pstatic.net" crossorigin>
+<!-- 본문·UI: Pretendard Variable / 영문 라벨: EB Garamond / 폴백 서체: Gowun Batang -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/home.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Mashcore Lab",
+  "description": "사람과 브랜드, 관계와 일이 어디서 방향을 잃는지 읽는 해석실.",
+  "inLanguage": "ko",
+  "publisher": { "@type": "Organization", "name": "Mashcore Lab" }
+}
+</script>
+</head>
+
+<body class="hp">
+
+<a class="skip-link" href="#main">본문으로 건너뛰기</a>
+<div class="grid-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ══ NAV ══ -->
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__mark" href="index.html">MASHCORE LAB</a>
+    <nav class="nav__links" aria-label="주요">
+      <a class="nav__link" href="research/chore-to-play/index.html">연구</a>
+      <a class="nav__link" href="research/log/index.html">기록</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navPanel" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="nav__panel" id="navPanel" aria-hidden="true">
+  <ul>
+    <li><a href="research/chore-to-play/index.html">연구 <span class="en">Research</span></a></li>
+    <li><a href="research/log/index.html">기록 <span class="en">Log</span></a></li>
+  </ul>
 </div>
-<!-- TopAppBar -->
-<nav class="fixed top-0 w-full z-50 bg-forest-void/90 backdrop-blur-md border-b border-moss-divider flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 transition-opacity duration-300">
-<a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg tracking-[0.3em] text-on-surface site-logo-link" href="./">MASHCORE LAB</a>
-<div class="hidden md:flex space-x-12">
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-primary border-b border-brass-accent pb-2" href="./research/">연구</a>
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="./research/log/">연구 기록</a>
-<a class="font-headline-lg text-body-lg tracking-[0.2em] text-on-surface-variant hover:text-primary transition-colors duration-300" href="./about/">소개</a>
-</div>
-<!-- Mobile Menu Button -->
-<button class="md:hidden text-on-surface" id="mobile-menu-btn">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</nav>
-<!-- Mobile Navigation Menu -->
-<div class="fixed inset-0 bg-forest-void z-40 flex flex-col pt-[100px] px-margin-mobile space-y-8 hidden opacity-0 transition-opacity duration-300" id="mobile-nav">
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-primary" href="./research/">연구</a>
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="./research/log/">연구 기록</a>
-<a class="font-headline-lg text-headline-lg tracking-[0.2em] text-on-surface-variant" href="./about/">소개</a>
-</div>
-<main class="pt-[140px] pb-section-gap">
-<!-- Hero Section -->
-<section class="min-h-[70vh] flex flex-col justify-center px-margin-mobile md:px-margin-desktop max-w-[1040px] mx-auto relative reveal">
-<div class="mb-16">
-<span class="font-label-caps text-label-caps text-brass-soft tracking-widest">[PROLOGUE]</span>
-</div>
-<h1 class="font-headline-display text-headline-display text-on-surface mb-12 leading-tight max-w-3xl">
-                툴은 많아졌고,<br/>사람은 더 망설입니다.
-            </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl border-l border-moss-divider pl-6">
-                Mashcore Lab은 사람, 브랜드, 관계, 그리고 일이 제 방향을 잃어버리는 지점들을 읽습니다.
-            </p>
-</section>
-<!-- What the Lab Reads -->
-<section class="mt-section-gap px-margin-mobile md:px-margin-desktop max-w-[1040px] mx-auto reveal bg-surface-container-lowest/50 py-24 border-y border-moss-divider">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-<div class="md:col-span-4">
-<span class="font-label-caps text-label-caps text-brass-soft tracking-widest block mb-4">01 / SUBJECT</span>
-<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">What the Lab Reads</h2>
-</div>
-<div class="md:col-span-8 flex flex-col space-y-24">
-<div class="grid grid-cols-1 gap-8 items-baseline">
-<div>
-<h3 class="font-headline-lg text-headline-lg text-primary">사람의 망설임</h3>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-8 items-baseline">
-<div>
-<h3 class="font-headline-lg text-headline-lg text-primary">반복되는 행동의 성질</h3>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-8 items-baseline">
-<div>
-<h3 class="font-headline-lg text-headline-lg text-primary">역할과 책임의 불일치</h3>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-8 items-baseline">
-<div>
-<h3 class="font-headline-lg text-headline-lg text-primary">숙련과 소진</h3>
-</div>
-</div>
-<div class="grid grid-cols-1 gap-8 items-baseline">
-<div>
-<h3 class="font-headline-lg text-headline-lg text-primary">의미와 놀이의 관계</h3>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- The Parchment Moment (Research 01 Teaser) -->
-<section class="mt-section-gap bg-parchment-body text-ink-dark py-[200px] px-margin-mobile md:px-margin-desktop reveal border-y border-brass-soft/30">
-<div class="max-w-4xl mx-auto text-center flex flex-col items-center">
-<span class="font-label-caps text-label-caps text-brass-deep mb-16 block tracking-[0.3em] opacity-80">[RESEARCH 01]</span>
-<p class="font-headline-display text-[28px] md:text-[36px] mb-20 leading-[1.6] text-ink-dark/90">
-                    우리는 처음에 일을 여덟 개의 단계로 보았습니다. 그런데 들여다볼수록, Chore와 Task는 행동의 형식이었고, Job은 경제 구조였으며, Role은 관계 속 위치였습니다. 한 줄로 세웠던 단어들이 사실은 서로 다른 층에 놓여 있었습니다. 이 연구는 사람이 더 높은 단계로 올라가는 법보다, 같은 일이 언제 감옥이 되고 언제 힘이 되는지를 읽습니다.
-                </p>
-<a class="inline-flex items-center space-x-3 font-italic-annotation text-italic-annotation text-brass-deep border-b border-brass-deep/50 pb-2 hover:border-brass-deep hover:text-on-secondary-fixed transition-all duration-500" href="./research/chore-to-play/">
-<span class="tracking-widest">현재 연구 지도 읽기</span>
-<span class="material-symbols-outlined text-sm font-light" data-icon="east">east</span>
-</a>
-</div>
-</section>
-<!-- Research Fragments -->
-<section class="mt-section-gap px-margin-mobile md:px-margin-desktop max-w-[1040px] mx-auto reveal mb-32">
-<div class="grid grid-cols-1 gap-32">
-<div class="relative pl-12 max-w-2xl">
-<div class="absolute left-0 top-0 h-full w-px bg-moss-divider"></div>
-<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-8 tracking-widest">FRAGMENT A</span>
-<p class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-loose">
-                        반복은 언제 숙련이 되고, 언제 체념이 될까?
-                    </p>
-</div>
-<div class="relative pl-12 max-w-2xl ml-auto md:mt-16">
-<div class="absolute left-0 top-0 h-full w-px bg-moss-divider"></div>
-<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-8 tracking-widest">FRAGMENT B</span>
-<p class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-loose">
-                        권한이 없는 사람에게 책임을 물을 수 있을까?
-                    </p>
-</div>
-<div class="relative pl-12 max-w-2xl md:mt-16">
-<div class="absolute left-0 top-0 h-full w-px bg-moss-divider"></div>
-<span class="font-label-caps text-label-caps text-on-tertiary-container block mb-8 tracking-widest">FRAGMENT C</span>
-<p class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface leading-loose">
-                        의미는 분명한데 놀이가 사라졌다면, 그 일은 여전히 좋은 방향에 있는가?
-                    </p>
-</div>
-</div>
-</section>
+
+<main id="main">
+
+  <!-- ══ 01 · HERO ══ -->
+  <section class="hp-hero wrap reveal">
+    <span class="eyebrow">[ Prologue ]</span>
+    <h1>툴은 많아졌고,<br>사람은 더 망설입니다.</h1>
+    <p class="hp-hero__lead">
+      Mashcore Lab은<br>사람과 브랜드, 관계와 일이<br>어디서 방향을 잃는지 읽습니다.
+    </p>
+    <a class="hp-cta" href="research/chore-to-play/index.html">
+      <span>현재 연구 보기</span>
+      <svg class="arr" width="20" height="10" viewBox="0 0 20 10" fill="none" aria-hidden="true"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+    </a>
+  </section>
+
+  <!-- ══ 02 · EDITORIAL IMAGE ══ -->
+  <section class="section wrap reveal" aria-labelledby="obs-h">
+    <figure class="hp-figure">
+      <svg class="hp-figure__plate" viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="어두운 책상 위의 고쳐 쓴 메모. 줄을 그어 지운 단어와 그 위에 다시 적은 단어, 동그라미와 여백의 교정 표시, 펜이 놓인 모습이 보입니다.">
+        <defs>
+          <radialGradient id="hpVig" cx="50%" cy="44%" r="74%">
+            <stop offset="54%" stop-color="#0c130e" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#0a110c" stop-opacity="0.85"/>
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="680" fill="#14201A"/>
+        <g transform="rotate(-1.1 600 340)">
+          <rect x="150" y="92" width="900" height="496" fill="#1A271F" stroke="#C9B488" stroke-opacity="0.14" stroke-width="1"/>
+          <g fill="#D8E6D9" fill-opacity="0.14">
+            <rect x="212" y="150" width="752" height="2.5"/>
+            <rect x="212" y="198" width="700" height="2.5"/>
+            <rect x="212" y="246" width="536" height="2.5"/>
+            <rect x="212" y="294" width="726" height="2.5"/>
+            <rect x="212" y="342" width="612" height="2.5"/>
+            <rect x="212" y="390" width="690" height="2.5"/>
+            <rect x="212" y="438" width="500" height="2.5"/>
+            <rect x="212" y="486" width="372" height="2.5"/>
+          </g>
+          <!-- 고친 흔적: 3번째 줄 취소선 + 위에 다시 쓴 단어 + 삽입 캐럿 -->
+          <line x1="212" y1="245" x2="748" y2="247" stroke="#A6885A" stroke-width="2"/>
+          <rect x="560" y="222" width="96" height="3" fill="#C9B488"/>
+          <path d="M600 240 l9 -12 l9 12" fill="none" stroke="#C9B488" stroke-width="2" stroke-linejoin="round"/>
+          <!-- 여백 교정 표시 -->
+          <path d="M176 252 l9 -11 l9 11" fill="none" stroke="#A6885A" stroke-width="1.6"/>
+          <!-- 동그라미로 표시한 구절 -->
+          <ellipse cx="430" cy="342" rx="128" ry="22" fill="none" stroke="#A6885A" stroke-width="1.6" stroke-opacity="0.9"/>
+          <!-- 줄을 그어 지운 단어 -->
+          <line x1="640" y1="382" x2="724" y2="398" stroke="#C9B488" stroke-width="1.6"/>
+          <line x1="724" y1="382" x2="640" y2="398" stroke="#C9B488" stroke-width="1.6"/>
+          <!-- 희미한 펜 선 -->
+          <line x1="812" y1="150" x2="1012" y2="470" stroke="#C9B488" stroke-opacity="0.18" stroke-width="1"/>
+          <!-- 놓인 펜 -->
+          <line x1="892" y1="512" x2="1024" y2="566" stroke="#836A42" stroke-width="7" stroke-linecap="round" stroke-opacity="0.55"/>
+          <line x1="892" y1="512" x2="1024" y2="566" stroke="#C9B488" stroke-width="1.4" stroke-linecap="round" stroke-opacity="0.5"/>
+        </g>
+        <rect width="1200" height="680" fill="url(#hpVig)"/>
+      </svg>
+      <figcaption>
+        <span class="eyebrow" id="obs-h">Observation 01</span>
+        <p class="hp-figure__cap">생각은 종종, 정리된 문장보다 고쳐진 흔적에서 먼저 드러납니다.</p>
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ══ 03 · LAB이 읽는 것 ══ -->
+  <section class="section wrap reveal" aria-labelledby="reads-h">
+    <div class="hp-reads__head">
+      <span class="eyebrow">01 / Subject</span>
+      <h2 id="reads-h">Lab이 읽는 것</h2>
+    </div>
+
+    <div class="hp-theme">
+      <div class="hp-theme__head"><span class="hp-theme__n">01</span><h3 class="hp-theme__title">사람의 망설임</h3></div>
+      <p class="hp-theme__body">무엇을 해야 할지보다,<br>무엇을 믿고 움직여야 할지 흐려지는 순간.</p>
+    </div>
+    <div class="hp-theme">
+      <div class="hp-theme__head"><span class="hp-theme__n">02</span><h3 class="hp-theme__title">반복되는 행동의 성질</h3></div>
+      <p class="hp-theme__body">같은 반복이<br>누군가에게는 기준이 되고,<br>다른 누군가에게는 체념이 되는 조건.</p>
+    </div>
+    <div class="hp-theme">
+      <div class="hp-theme__head"><span class="hp-theme__n">03</span><h3 class="hp-theme__title">역할과 책임의 불일치</h3></div>
+      <p class="hp-theme__body">해야 할 몫은 분명하지만,<br>판단하고 고칠 권한은 없는 상태.</p>
+    </div>
+    <div class="hp-theme">
+      <div class="hp-theme__head"><span class="hp-theme__n">04</span><h3 class="hp-theme__title">숙련과 소진</h3></div>
+      <p class="hp-theme__body">오래 했다는 사실과<br>더 잘 판단하게 되었다는 사실은<br>같지 않을 수 있습니다.</p>
+    </div>
+    <div class="hp-theme">
+      <div class="hp-theme__head"><span class="hp-theme__n">05</span><h3 class="hp-theme__title">의미와 놀이의 관계</h3></div>
+      <p class="hp-theme__body">일의 의미가 깊어도<br>생기는 사라질 수 있습니다.<br><br>즐겁다는 이유만으로<br>소명이라 부를 수도 없습니다.</p>
+    </div>
+  </section>
+
+  <!-- ══ 04 · RESEARCH 01 — CHORE TO PLAY ══ -->
+  <section class="hp-research reveal" aria-labelledby="r01-h">
+    <div class="wrap hp-research__in">
+      <span class="eyebrow" id="r01-h">Research 01</span>
+      <p class="hp-research__kicker">Chore to Play</p>
+      <h2 class="hp-research__title">처음에는<br>계단이라고 생각했습니다.</h2>
+      <div class="hp-research__body">
+        <p>우리는 처음에<br>일을 여덟 개의 단계로 보았습니다.</p>
+        <p>그런데 들여다볼수록,<br>Chore와 Task는 행동의 형식이었고<br>Job은 경제 구조였으며<br>Role은 관계 속 위치였습니다.</p>
+        <p>한 줄로 세웠던 단어들이<br>사실은 서로 다른 층에 놓여 있었습니다.</p>
+      </div>
+      <p class="hp-research__support">
+        이 연구는 사람이 더 높은 단계로 올라가는 법보다,<br>같은 일이 어떤 조건에서 소모가 되고<br>어떤 조건에서 기준과 힘으로 남는지를 읽습니다.
+      </p>
+      <a class="qlink qlink--ink" href="research/chore-to-play/index.html">
+        <span>현재 연구 지도 읽기</span>
+        <svg class="arr" width="20" height="10" viewBox="0 0 20 10" fill="none" aria-hidden="true"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ 05 · OPEN QUESTIONS ══ -->
+  <section class="section wrap hp-oq reveal" aria-labelledby="oq-h">
+    <span class="eyebrow" id="oq-h">Open Questions</span>
+    <div class="hp-oq__list">
+      <p>반복은 언제 숙련이 되고, 언제 체념이 될까?</p>
+      <p>권한이 없는 사람에게 책임을 물을 수 있을까?</p>
+      <p>의미는 분명한데 놀이가 사라졌다면, 그 일은 여전히 좋은 방향에 있는가?</p>
+    </div>
+  </section>
+
+  <!-- ══ 06 · NEXT READING / BRIDGE ══ -->
+  <section class="section wrap hp-bridge reveal" aria-labelledby="next-h">
+    <span class="eyebrow" id="next-h">Next Reading</span>
+    <div class="hp-bridge__grid">
+      <a class="hp-bridge__item" href="research/chore-to-play/index.html">
+        <span class="hp-bridge__lb">Research</span>
+        <span class="hp-bridge__t">연구 전체 보기 <svg class="arr" width="18" height="9" viewBox="0 0 20 10" fill="none" aria-hidden="true"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+      <a class="hp-bridge__item" href="research/log/index.html">
+        <span class="hp-bridge__lb">Log</span>
+        <span class="hp-bridge__t">연구 기록 보기 <svg class="arr" width="18" height="9" viewBox="0 0 20 10" fill="none" aria-hidden="true"><path d="M0 5h18M14 1l4 4-4 4" stroke="currentColor" stroke-width="1"/></svg></span>
+      </a>
+      <div class="hp-bridge__item is-pending" aria-disabled="true">
+        <span class="hp-bridge__lb">About</span>
+        <span class="hp-bridge__t">Mashcore Lab 소개</span>
+        <span class="hp-bridge__note">준비 중</span>
+      </div>
+    </div>
+  </section>
+
 </main>
-<!-- Footer -->
-<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">현재 읽고 있는 연구의 전체 지도로 이어집니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="./research/"><span>연구 전체 지도<small>진행 중인 연구와 열린 질문</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="./about/"><span>Mashcore Lab 소개<small>읽다·옮기다·남기다의 관계</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="w-full border-t border-moss-divider bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
-<div class="font-body-md text-on-surface-variant text-sm mb-6 md:mb-0 tracking-widest uppercase">
-            © 2026 MASHCORE LAB ARCHIVE
-        </div>
-<div class="flex space-x-12">
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/#mashcore34">Mashcore34</a>
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/#weplace">Weplace</a>
-<a class="font-label-sm text-label-sm uppercase tracking-[0.2em] text-on-tertiary-container hover:text-on-surface transition-colors duration-500 underline-offset-8 hover:underline" href="./about/">소개</a>
-</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="foot">
+  <div class="foot__in">
+    <span class="foot__mark">© 2026 Mashcore Lab Archive</span>
+    <div class="foot__links">
+      <span class="foot__link" aria-label="Mashcore34 (준비 중)">Mashcore34</span>
+      <span class="foot__sep" aria-hidden="true">·</span>
+      <span class="foot__link" aria-label="Weplace (준비 중)">Weplace</span>
+      <span class="foot__sep" aria-hidden="true">·</span>
+      <a class="foot__link" href="mailto:weplace25@gmail.com">Contact</a>
+    </div>
+  </div>
 </footer>
-<script>
-        // Scroll reveal logic
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal(); // Trigger on load
 
-        // Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const nav = document.getElementById('mobile-nav');
-        let isOpen = false;
-
-        btn.addEventListener('click', () => {
-            isOpen = !isOpen;
-            if(isOpen) {
-                nav.classList.remove('hidden');
-                // Small delay to allow display block to apply before animating opacity
-                setTimeout(() => {
-                    nav.classList.remove('opacity-0');
-                    nav.classList.add('opacity-100');
-                }, 10);
-            } else {
-                nav.classList.remove('opacity-100');
-                nav.classList.add('opacity-0');
-                setTimeout(() => {
-                    nav.classList.add('hidden');
-                }, 300);
-            }
-        });
-    </script>
-</body></html>
+<script src="assets/js/navigation.js" defer></script>
+<script src="assets/js/reveal.js" defer></script>
+</body>
+</html>

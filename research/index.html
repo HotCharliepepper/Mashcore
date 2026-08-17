@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Research — Mashcore Lab</title>
-<meta content="Mashcore Lab의 현재 연구와 열린 질문, 연구 변경 기록을 모아둔 연구 지도입니다." name="description"/>
+<meta content="Mashcore Lab의 현재 연구와 열린 질문, 판단이 자라는 과정과 연구 변경 기록을 모아둔 연구 지도입니다." name="description"/>
 <meta content="#121A14" name="theme-color"/>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Gowun+Batang:wght@400;700&family=Hanken+Grotesk:wght@400;600&display=swap');
@@ -38,10 +38,10 @@
     .wrap{width:var(--page);margin:auto}
     .eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.23em;text-transform:uppercase;color:var(--brass-soft)}
     .hero{min-height:76vh;display:grid;align-items:center;padding:120px 0 96px}
-    .hero-inner{max-width:880px;margin:auto;text-align:center}
+    .hero-inner{max-width:900px;margin:auto;text-align:center}
     h1,h2,h3,p{margin-top:0}
     h1{font-size:clamp(46px,7vw,86px);line-height:1.24;letter-spacing:-.035em;margin-bottom:34px}
-    .hero p{max-width:680px;margin:0 auto;color:var(--parchment-mute);font-size:clamp(18px,2.2vw,23px);line-height:1.95}
+    .hero p{max-width:720px;margin:0 auto;color:var(--parchment-mute);font-size:clamp(18px,2.2vw,23px);line-height:1.95}
     .hero-rule{width:1px;height:112px;background:var(--moss);margin:58px auto 0}
     section{padding:140px 0;border-top:1px solid rgba(42,58,46,.58)}
     .section-grid{display:grid;grid-template-columns:minmax(180px,3fr) minmax(0,8fr);gap:clamp(40px,7vw,110px)}
@@ -49,10 +49,13 @@
     .intro-copy{font-size:clamp(19px,2vw,24px);line-height:1.95;color:var(--parchment-mute);max-width:760px}
     .featured{padding:0;border-top:0}
     .featured-panel{background:var(--parchment);color:var(--ink);padding:clamp(64px,9vw,132px) clamp(26px,7vw,92px);border-block:1px solid rgba(166,136,90,.36)}
+    .featured-panel.market{background:linear-gradient(140deg,#F4EFE6 0%,#E8DFCF 100%)}
     .featured-meta{display:flex;justify-content:space-between;gap:20px;align-items:center;font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(32,38,31,.58);border-bottom:1px solid rgba(32,38,31,.18);padding-bottom:18px;margin-bottom:52px}
     .featured-title{font-size:clamp(48px,7vw,82px);line-height:1.1;margin-bottom:26px}
     .featured-kicker{font-family:var(--garamond);font-style:italic;font-size:22px;color:var(--brass-deep);margin-bottom:48px}
-    .featured-copy{font-size:clamp(18px,2vw,22px);line-height:1.95;max-width:820px;margin-bottom:48px;color:rgba(32,38,31,.82)}
+    .featured-copy{font-size:clamp(18px,2vw,22px);line-height:1.95;max-width:860px;margin-bottom:48px;color:rgba(32,38,31,.82)}
+    .featured-quote{font-size:clamp(24px,3.4vw,42px);line-height:1.55;max-width:920px;margin:0 0 44px;color:var(--ink)}
+    .featured-quote strong{color:var(--brass-deep);font-weight:700}
     .link-arrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:8px;color:var(--brass-deep)}
     .link-arrow::after{content:'→';font-size:18px}
     .method-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--moss);border:1px solid var(--moss)}
@@ -60,17 +63,33 @@
     .method span{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:20px}
     .method h3{font-size:25px;margin:28px 0 16px}
     .method p{color:var(--parchment-mute);line-height:1.8;margin:0}
+    .judgment-stack{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--moss);border:1px solid var(--moss)}
+    .judgment-step{background:var(--forest);padding:42px 28px;min-height:300px}
+    .judgment-step .num{font-family:var(--garamond);font-style:italic;color:var(--brass-soft);font-size:20px}
+    .judgment-step h3{font-size:25px;line-height:1.45;margin:26px 0 16px}
+    .judgment-step p{color:var(--parchment-mute);line-height:1.85;margin:0;font-size:16px}
+    .protocol-line{margin-top:44px;border-top:1px solid var(--moss);border-bottom:1px solid var(--moss);padding:28px 0;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .protocol-line span{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--parchment-mute);border:1px solid var(--moss);padding:10px 12px;background:rgba(31,45,36,.55)}
+    .protocol-line i{font-family:var(--garamond);font-style:italic;color:var(--brass-soft)}
+    .pipeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:56px}
+    .pipeline-step{border:1px solid var(--moss);padding:28px 22px;min-height:190px;background:rgba(24,36,28,.62)}
+    .pipeline-step b{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass-soft);margin-bottom:18px}
+    .pipeline-step h3{font-size:21px;line-height:1.45;margin-bottom:12px}
+    .pipeline-step p{font-size:15px;line-height:1.75;color:var(--parchment-mute);margin:0}
+    .boundary-note{margin-top:38px;padding:26px 28px;border-left:2px solid var(--brass);background:rgba(166,136,90,.06);color:var(--parchment-mute);line-height:1.9}
+    .boundary-note strong{color:var(--parchment)}
     .questions{display:grid;gap:0;border-top:1px solid var(--moss)}
     .question{display:grid;grid-template-columns:86px 1fr;gap:28px;padding:42px 0;border-bottom:1px solid var(--moss);align-items:start}
     .question b{font-family:var(--garamond);font-style:italic;font-weight:400;color:var(--brass-soft);font-size:20px}
-    .question p{font-size:clamp(24px,3.2vw,42px);line-height:1.55;margin:0;max-width:830px}
+    .question p{font-size:clamp(24px,3.2vw,42px);line-height:1.55;margin:0;max-width:930px}
     .log-preview{display:grid;grid-template-columns:180px 1fr;gap:52px;padding:42px 0;border-top:1px solid var(--brass-line);border-bottom:1px solid var(--brass-line)}
+    .log-preview + .log-preview{border-top:0}
     .log-meta{font-family:var(--sans);font-size:12px;line-height:1.9;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-soft)}
     .log-title{font-size:clamp(28px,3.5vw,44px);line-height:1.45;margin-bottom:24px}
     .log-copy{color:var(--parchment-mute);font-size:18px;line-height:1.85;margin-bottom:28px}
     .bridge{padding:120px 0;text-align:center}
-    .bridge h2{font-size:clamp(32px,5vw,58px);line-height:1.5;max-width:860px;margin:0 auto 32px}
-    .bridge p{color:var(--parchment-mute);font-size:18px;line-height:1.9;max-width:620px;margin:0 auto 44px}
+    .bridge h2{font-size:clamp(32px,5vw,58px);line-height:1.5;max-width:940px;margin:0 auto 32px}
+    .bridge p{color:var(--parchment-mute);font-size:18px;line-height:1.9;max-width:700px;margin:0 auto 44px}
     .footer{border-top:1px solid var(--moss);padding:34px 0 46px;color:var(--parchment-mute);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
     .footer-inner{width:var(--page);margin:auto;display:flex;justify-content:space-between;gap:24px;align-items:center}
     .footer-nav{display:flex;gap:28px}
@@ -78,16 +97,16 @@
     :focus-visible{outline:2px solid var(--brass-soft);outline-offset:5px}
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
     .reveal.is-visible{opacity:1;transform:none}
+    @media(max-width:980px){.judgment-stack{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr 1fr}.pipeline-step:last-child{grid-column:1/-1}}
     @media(max-width:840px){
       .desktop-nav{display:none}.menu-btn{display:block}.section-grid{grid-template-columns:1fr}.method-list{grid-template-columns:1fr 1fr}.log-preview{grid-template-columns:1fr;gap:22px}.question{grid-template-columns:56px 1fr}.featured-meta{align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}.grid-bg{opacity:.28}.hero{text-align:left}.hero-inner{text-align:left;margin:0}.hero p{margin:0}.hero-rule{margin-left:0}
     }
     @media(max-width:560px){
-      :root{--page:calc(100vw - 40px)}.nav-inner{min-height:74px}.mobile-nav{inset:74px 0 0}.brand{font-size:19px}.hero{min-height:auto;padding:110px 0 86px}section{padding:98px 0}.method-list{grid-template-columns:1fr}.method{min-height:auto}.question{grid-template-columns:1fr;gap:10px;padding:34px 0}.featured-panel{padding-block:80px}.footer-nav{flex-wrap:wrap;gap:18px 24px}
+      :root{--page:calc(100vw - 40px)}.nav-inner{min-height:74px}.mobile-nav{inset:74px 0 0}.brand{font-size:19px}.hero{min-height:auto;padding:110px 0 86px}section{padding:98px 0}.method-list,.judgment-stack,.pipeline{grid-template-columns:1fr}.pipeline-step:last-child{grid-column:auto}.method,.judgment-step{min-height:auto}.question{grid-template-columns:1fr;gap:10px;padding:34px 0}.featured-panel{padding-block:80px}.footer-nav{flex-wrap:wrap;gap:18px 24px}.protocol-line{gap:8px}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}}
   </style>
 <style id="p2-connection-layer">
-/* P2 connection layer — temporary until shared CSS extraction */
 .page-bridge{border-top:1px solid rgba(201,180,136,.18);border-bottom:1px solid rgba(201,180,136,.12);background:#101b13;padding:clamp(72px,10vw,128px) 20px;position:relative;z-index:2}
 .page-bridge__inner{width:min(1040px,100%);margin:0 auto}
 .page-bridge__label{display:block;margin-bottom:18px;color:#C9B488;font-family:'EB Garamond',Georgia,serif;font-size:.8rem;font-style:italic;letter-spacing:.12em;text-transform:uppercase}
@@ -125,8 +144,8 @@
 <section class="hero wrap">
 <div class="hero-inner reveal">
 <div class="eyebrow">[ RESEARCH INDEX ]</div>
-<h1>답보다 먼저,<br/>바뀌는 기준을 기록합니다.</h1>
-<p>Mashcore Lab의 연구는 완성된 이론을 진열하는 일이 아닙니다. 처음의 문장이 어디서 흔들렸고, 무엇을 남기고 무엇을 다시 정의했는지 공개합니다.</p>
+<h1>답보다 먼저,<br/>판단이 자라는 과정을 기록합니다.</h1>
+<p>Mashcore Lab의 연구는 완성된 이론을 진열하는 일이 아닙니다. 무엇을 보았고, 왜 그렇게 해석했으며, 어떤 반례 앞에서 생각을 바꾸었는지 남깁니다. 지식이 실제 판단 기준으로 변하는 과정까지 연구합니다.</p>
 <div aria-hidden="true" class="hero-rule"></div>
 </div>
 </section>
@@ -137,10 +156,74 @@
 <h2 class="section-title">연구는<br/>고정된 답이 아닙니다.</h2>
 </div>
 <div>
-<p class="intro-copy">하나의 문장을 세우고, 실제 장면에 놓아봅니다. 설명되지 않는 사례가 나타나면 문장을 지키기보다 경계를 다시 봅니다. 이 페이지는 그 과정이 현재 어디까지 왔는지 보여주는 지도입니다.</p>
+<p class="intro-copy">하나의 문장을 세우고 실제 장면에 놓아봅니다. 설명되지 않는 사례가 나타나면 문장을 지키기보다 경계를 다시 봅니다. 그리고 이번에는 한 단계 더 묻습니다. 많이 아는 것과 잘 판단하는 것은 어떻게 다른가. 이 페이지는 그 질문이 실제 연구와 교육 구조 안에서 어떻게 발전하고 있는지 보여주는 지도입니다.</p>
 </div>
 </div>
 </section>
+
+<section aria-labelledby="market-interpretation-title" class="featured" id="market-interpretation">
+<div class="featured-panel market">
+<div class="wrap reveal">
+<div class="featured-meta">
+<span>Research 02 · Active</span>
+<span>Judgment R&amp;D · 2026.08</span>
+</div>
+<div class="eyebrow" style="color:var(--brass-deep)">Current Research</div>
+<h2 class="featured-title" id="market-interpretation-title">Market Interpretation</h2>
+<p class="featured-kicker">From market education to judgment research.</p>
+<p class="featured-quote">무엇을 사야 하는지가 아니라,<br/><strong>무엇을 보고 어떻게 생각할 것인지</strong>를 훈련합니다.</p>
+<p class="featured-copy">Market Field Lab에서는 사람 → 군중 → 문화 → 역사 → 경제 → 정책·자금 → 시장 → 차트의 연결을 연구합니다. Market Interpretation은 그 연구 결과를 한 사람이 직접 관찰하고 가설을 만들고, 반대근거를 확인하고, 필요할 때 생각을 바꾸며, 결과 이후 복기할 수 있는 교육 구조로 번역하는 실험입니다. 2026년 8월의 간이 교육을 거치며 이 과정의 핵심을 ‘시장 지식 전달’보다 ‘판단력 훈련’에 가깝다고 다시 정의했습니다.</p>
+<a class="link-arrow" href="#judgment-architecture">판단 구조 보기</a>
+</div>
+</div>
+</section>
+
+<section id="judgment-architecture">
+<div class="wrap reveal">
+<div class="section-grid" style="margin-bottom:70px">
+<div>
+<div class="eyebrow">02 / JUDGMENT ARCHITECTURE</div>
+<h2 class="section-title">지식이<br/>판단으로 변하는 구조</h2>
+</div>
+<div>
+<p class="intro-copy">지식은 필요합니다. 다만 지식 자체가 판단력은 아닙니다. 어떤 정보를 볼지 고르고, 사실과 해석을 나누고, 반대편 설명을 만들고, 틀렸을 때 수정할 수 있을 때 비로소 지식이 판단의 재료가 됩니다.</p>
+</div>
+</div>
+<div class="judgment-stack">
+<article class="judgment-step"><span class="num">01</span><h3>Knowledge Base</h3><p>사람, 군중, 문화, 역사, 경제, 정책, 자금, 기업, 시장, 차트와 기술적 분석을 판단의 재료로 축적합니다. 하나의 이론을 절대적인 설명으로 두지 않습니다.</p></article>
+<article class="judgment-step"><span class="num">02</span><h3>Judgment Protocol</h3><p>관찰과 해석을 분리하고, 가설과 반대가설을 함께 둡니다. 무엇이 나타나면 생각을 바꿀지 먼저 적고, 복수의 시나리오를 만듭니다.</p></article>
+<article class="judgment-step"><span class="num">03</span><h3>Case Library</h3><p>맞은 사례만 모으지 않습니다. 너무 빨리 확신한 판단, 결과는 맞았지만 근거가 약했던 판단, 틀렸지만 수정이 좋았던 판단까지 함께 저장합니다.</p></article>
+<article class="judgment-step"><span class="num">04</span><h3>Distribution</h3><p>연구에서 발견한 일반화 가능한 질문과 판단 구조를 교육 Note, Signal Content, Workshop, Small Group으로 번역합니다. 결론보다 다시 사용할 질문을 남깁니다.</p></article>
+</div>
+<div class="protocol-line" aria-label="Judgment protocol">
+<span>Observation</span><i>→</i><span>Context</span><i>→</i><span>Interpretation</span><i>→</i><span>Hypothesis</span><i>→</i><span>Counter-Hypothesis</span><i>→</i><span>Invalidation</span><i>→</i><span>Scenario</span><i>→</i><span>Result</span><i>→</i><span>Review</span>
+</div>
+<div class="boundary-note"><strong>연구의 성공 기준</strong>은 수익 여부나 예측 적중률 하나가 아닙니다. 무엇을 사실이라고 보았는지, 어디부터가 해석인지, 왜 그런 가설을 세웠는지, 어떤 조건에서 틀렸다고 인정할지, 결과 뒤 무엇을 수정했는지를 설명할 수 있어야 합니다.</div>
+</div>
+</section>
+
+<section>
+<div class="wrap reveal">
+<div class="section-grid">
+<div>
+<div class="eyebrow">03 / R&amp;D TO DISTRIBUTION</div>
+<h2 class="section-title">한 사람의 수업에서<br/>공공의 학습 구조로</h2>
+</div>
+<div>
+<p class="intro-copy">개인의 구체적인 판단과 기록은 보호하되, 그 과정에서 반복해서 나타난 질문과 오류, 좋은 복기 방식은 일반화할 수 있습니다. 1:1 교육은 동시에 교육 시스템을 검증하는 R&amp;D 현장이 됩니다.</p>
+</div>
+</div>
+<div class="pipeline">
+<article class="pipeline-step"><b>Stage 01</b><h3>1:1 R&amp;D</h3><p>실제 학습자가 무엇을 보고 어디서 혼동하며 어떤 질문에서 판단이 달라지는지 관찰합니다.</p></article>
+<article class="pipeline-step"><b>Stage 02</b><h3>Signal Content</h3><p>개인을 식별할 수 없는 일반화 가능한 질문과 판단 신호를 짧은 공개 콘텐츠로 번역합니다.</p></article>
+<article class="pipeline-step"><b>Stage 03</b><h3>Workshop</h3><p>하나의 실제 장면을 여러 사람이 관찰하고 서로 다른 가설과 무효화 조건을 비교합니다.</p></article>
+<article class="pipeline-step"><b>Stage 04</b><h3>Small Group</h3><p>6–8주 동안 반복 관찰, 시나리오, 복기를 통해 자기 기준을 형성합니다.</p></article>
+<article class="pipeline-step"><b>Stage 05</b><h3>Interpretation OS</h3><p>충분한 사례와 반례가 쌓이면 독립적으로 사용할 수 있는 반복 가능한 해석 시스템으로 발전시킵니다.</p></article>
+</div>
+<div class="boundary-note"><strong>콘텐츠의 최소 단위는 지식 하나보다 Judgment Moment에 가깝습니다.</strong> “CPI가 내려갔는데 왜 주식은 떨어졌을까?”, “저항선을 넘었는데 정말 Breakout일까?”처럼 이미 아는 사실을 다시 보게 만드는 질문에서 시작합니다.</div>
+</div>
+</section>
+
 <section aria-labelledby="research-01-title" class="featured">
 <div class="featured-panel">
 <div class="wrap reveal">
@@ -156,28 +239,30 @@
 </div>
 </div>
 </section>
+
 <section>
 <div class="wrap reveal">
 <div class="section-grid" style="margin-bottom:70px">
 <div>
-<div class="eyebrow">02 / METHOD</div>
+<div class="eyebrow">04 / METHOD</div>
 <h2 class="section-title">어떻게<br/>연구하는가</h2>
 </div>
-<p class="intro-copy">정답을 빨리 만들기보다, 관찰과 반례가 문장을 어떻게 바꾸는지 남깁니다.</p>
+<p class="intro-copy">정답을 빨리 만들기보다, 관찰과 반례가 문장을 어떻게 바꾸는지 남깁니다. 시장 연구에서도 같은 태도를 유지합니다.</p>
 </div>
 <div class="method-list">
-<article class="method"><span>01</span><h3>Observation</h3><p>사람과 현장에서 반복해서 나타나는 장면을 기록합니다.</p></article>
+<article class="method"><span>01</span><h3>Observation</h3><p>사람과 현장, 데이터와 차트에서 반복해서 나타나는 장면을 기록합니다.</p></article>
 <article class="method"><span>02</span><h3>Hypothesis</h3><p>흩어진 관찰 사이에 임시 문장과 구조를 세웁니다.</p></article>
-<article class="method"><span>03</span><h3>Counterexample</h3><p>설명되지 않는 사람과 장면을 찾아 경계를 흔듭니다.</p></article>
-<article class="method"><span>04</span><h3>Revision</h3><p>버릴 것과 남길 것을 나누고 현재 정의를 다시 적습니다.</p></article>
+<article class="method"><span>03</span><h3>Counterexample</h3><p>설명되지 않는 사람과 장면, 반대 데이터를 찾아 경계를 흔듭니다.</p></article>
+<article class="method"><span>04</span><h3>Revision</h3><p>버릴 것과 남길 것을 나누고 현재 정의와 판단 기준을 다시 적습니다.</p></article>
 </div>
 </div>
 </section>
+
 <section>
 <div class="wrap reveal">
 <div class="section-grid" style="margin-bottom:64px">
 <div>
-<div class="eyebrow">03 / OPEN QUESTIONS</div>
+<div class="eyebrow">05 / OPEN QUESTIONS</div>
 <h2 class="section-title">현재 열려 있는<br/>질문들</h2>
 </div>
 <p class="intro-copy">아직 연구 번호를 붙이지 않은 질문도 있습니다. 답이 생기기 전까지는 질문의 형태로 남겨둡니다.</p>
@@ -185,20 +270,32 @@
 <div class="questions">
 <article class="question"><b>Q.01</b><p>반복은 언제 숙련이 되고, 언제 체념이 되는가?</p></article>
 <article class="question"><b>Q.02</b><p>권한이 없는 사람에게 결과의 책임을 물을 수 있는가?</p></article>
-<article class="question"><b>Q.03</b><p>도구가 많은 시대에 사람의 판단은 어디서 자라는가?</p></article>
+<article class="question"><b>Q.03</b><p>도구와 정보가 많은 시대에 사람의 판단은 어디서 자라는가?</p></article>
 <article class="question"><b>Q.04</b><p>브랜드는 왜 설명을 더할수록 오히려 약해지는가?</p></article>
+<article class="question"><b>Q.05</b><p>지식은 어떤 과정을 거칠 때 독립적인 판단력으로 전환되는가?</p></article>
+<article class="question"><b>Q.06</b><p>맞은 예측과 좋은 판단은 어떻게 구분할 수 있는가?</p></article>
+<article class="question"><b>Q.07</b><p>다른 사람에게 결론이 아니라 스스로 던질 질문을 어떻게 가르칠 수 있는가?</p></article>
 </div>
 </div>
 </section>
+
 <section>
 <div class="wrap reveal">
 <div class="section-grid" style="margin-bottom:68px">
 <div>
-<div class="eyebrow">04 / SELECTED LOG</div>
+<div class="eyebrow">06 / SELECTED LOG</div>
 <h2 class="section-title">생각이 바뀐<br/>자리</h2>
 </div>
 <p class="intro-copy">연구 기록은 실패를 숨기는 문서가 아니라, 현재 정의가 어디서 왔는지 설명하는 근거입니다.</p>
 </div>
+<article class="log-preview">
+<div class="log-meta"><time datetime="2026-08-17">2026.08.17</time><br/>Revision · Market Interpretation</div>
+<div>
+<h3 class="log-title">시장 교육에서 판단력 R&amp;D로</h3>
+<p class="log-copy">간이 교육을 진행하며 경제와 차트 지식을 많이 전달하는 것보다, 학습자가 무엇을 관찰하고 왜 그렇게 생각하며 어떤 조건에서 생각을 바꾸는지를 반복 훈련하는 것이 이 과정의 핵심에 더 가깝다는 점이 선명해졌습니다. Market Interpretation을 ‘시장 정답 교육’이 아니라 ‘복잡한 현실에서 판단 기준을 만드는 교육’으로 다시 정의합니다.</p>
+<a class="link-arrow" href="#market-interpretation">Market Interpretation 연구 보기</a>
+</div>
+</article>
 <article class="log-preview">
 <div class="log-meta"><time datetime="2026-06-16">2026.06.16</time><br/>Revision · L1</div>
 <div>
@@ -209,16 +306,17 @@
 </article>
 </div>
 </section>
+
 <section class="bridge">
 <div class="wrap reveal">
 <div class="eyebrow">[ QUIET BRIDGE ]</div>
-<h2>연구는 더 많은 말을 만들기보다,<br/>다음에 무엇을 더 정확히 볼지 정합니다.</h2>
-<p>Mashcore Lab은 그 기준이 자라는 과정을 공개합니다. 현재 대표 연구부터 천천히 읽어볼 수 있습니다.</p>
-<a class="link-arrow" href="./chore-to-play/">Chore to Play로 들어가기</a>
+<h2>연구는 더 많은 말을 만드는 일이 아니라,<br/>다음에 무엇을 더 정확히 볼지 정하는 일입니다.</h2>
+<p>Mashcore Lab은 일이 사람에게 어떤 힘이 되는지, 복잡한 정보 속에서 판단이 어떻게 자라는지를 같은 태도로 연구합니다. 답을 고정하기보다 기준이 바뀐 자리를 남깁니다.</p>
+<a class="link-arrow" href="#market-interpretation">Market Interpretation부터 읽기</a>
 </div>
 </section>
 </main>
-<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">현재 가장 깊게 읽고 있는 연구부터 들어갑니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="./chore-to-play/"><span>Chore to Play<small>첫 번째 공개 연구 지도</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="./log/"><span>연구 변경 기록<small>생각이 바뀐 자리</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="footer">
+<aside aria-label="다음 읽기" class="page-bridge"><div class="page-bridge__inner"><span class="page-bridge__label">Next Reading</span><h2 class="page-bridge__title">현재 가장 깊게 읽고 있는 두 연구에서 시작합니다.</h2><div class="page-bridge__links"><a class="page-bridge__link" href="#market-interpretation"><span>Market Interpretation<small>판단력 교육 R&amp;D · 현재 활성 연구</small></span><span aria-hidden="true">→</span></a><a class="page-bridge__link" href="./chore-to-play/"><span>Chore to Play<small>일과 힘의 조건을 읽는 첫 번째 공개 연구 지도</small></span><span aria-hidden="true">→</span></a></div></div></aside><footer class="footer">
 <div class="footer-inner">
 <span>© 2026 Mashcore Lab</span>
 <nav aria-label="푸터 메뉴" class="footer-nav"><a href="../">홈</a><a aria-current="page" href="./">연구</a><a href="./log/">연구 기록</a><a href="../about/">소개</a></nav>

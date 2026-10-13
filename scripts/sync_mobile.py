@@ -1,0 +1,12 @@
+"""Regenerate the explicit mobile edition from the shared landing content."""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+source = (ROOT / 'index.html').read_text()
+source = source.replace('class="landing-page"', 'class="landing-page mobile-edition"')
+source = source.replace('<title>Mashcore —', '<title>Mashcore 모바일 —')
+# Shared root canonical intentionally avoids competing copies in search.
+destination = ROOT / 'mobile' / 'index.html'
+destination.parent.mkdir(exist_ok=True)
+destination.write_text(source)
+print('Updated mobile/index.html from the shared landing source.')

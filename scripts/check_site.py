@@ -10,26 +10,28 @@ class Page(HTMLParser):
     def __init__(self, path):
         super().__init__(convert_charrefs=True)
         self.path=path; self.ids=[]; self.refs=[]; self.links=[]; self.errors=[]
-        self.h1=0; self.title=0; self.description=False; self.json=False; self.data=''
+        self.h1=0; self.title=0; self.description=False; self.json=False; self.data=''; self.in_head=False
         self.feed(path.read_text())
     def handle_starttag(self, tag, attrs):
         a=dict(attrs)
+        if tag=='head': self.in_head=True
         if 'id' in a: self.ids.append(a['id'])
         if tag=='html' and a.get('lang')!='ko': self.errors.append('Expected lang=ko')
         if tag=='h1': self.h1+=1
-        if tag=='title': self.title+=1
+        if tag=='title' and self.in_head: self.title+=1
         if tag=='meta' and a.get('name')=='description': self.description=bool(a.get('content'))
         if tag=='img' and 'alt' not in a: self.errors.append('Missing image alt')
         for attr in ('aria-controls','aria-labelledby','aria-describedby'):
             self.refs.extend(a.get(attr,'').split())
         if tag=='label' and a.get('for'): self.refs.append(a['for'])
-        if tag in ('a','script','link','img'):
+        if tag in ('a','script','link','img','iframe'):
             url=a.get('href',a.get('src'))
             if url is not None: self.links.append(url)
         if tag=='script' and a.get('type')=='application/ld+json': self.json=True; self.data=''
     def handle_data(self, data):
         if self.json: self.data+=data
     def handle_endtag(self, tag):
+        if tag=='head': self.in_head=False
         if tag=='script' and self.json:
             try: json.loads(self.data)
             except ValueError as e: self.errors.append(f'Invalid JSON-LD: {e}')

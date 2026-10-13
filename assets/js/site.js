@@ -1,6 +1,20 @@
 (() => {
   'use strict';
   document.documentElement.classList.add('js');
+  const business = window.MASHCORE_BUSINESS || {};
+  const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화' };
+  document.querySelectorAll('[data-business-info]').forEach(list => {
+    Object.entries(businessLabels).forEach(([key, label]) => {
+      const value = typeof business[key] === 'string' ? business[key].trim() : '';
+      if (!value) return;
+      const row = document.createElement('div');
+      const term = document.createElement('dt');
+      const description = document.createElement('dd');
+      term.textContent = label; description.textContent = value;
+      row.append(term, description); list.append(row);
+    });
+    list.hidden = list.children.length === 0;
+  });
   const menuButton = document.querySelector('.menu-btn');
   const menu = document.getElementById('main-nav');
   function closeMenu(returnFocus = false) {

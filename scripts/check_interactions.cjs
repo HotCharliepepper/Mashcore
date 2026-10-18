@@ -16,10 +16,12 @@ function setup(route,search=''){
  return {document,Event,win,navigator,run,click,key,get copied(){return copied}};
 }
 async function main(){
- for(const route of ['index.html','mobile/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html']){
+ for(const route of ['index.html','mobile/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html','work/weplace/index.html']){
   const env=setup(route),{document,run,click,key,Event,win}=env;
   run('site-config.js');run('site.js');
-  assert.equal(document.querySelector('[data-business-info]').hidden,true);
+  assert.equal(document.querySelector('[data-business-info]').hidden,false);
+  assert.equal(document.querySelector('[data-business-info]').children.length,1);
+  assert.equal(document.querySelector('[data-business-info] dd').textContent,'247-02-04104');
   click(document.querySelector('.menu-btn'));assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'true');key(document.querySelector('.menu-btn'),'Escape');assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'false');
   if(document.getElementById('question')){
    const q=document.getElementById('question');q.select=()=>{};q.value='왜 망설일까요? & 작은 질문';q.dispatchEvent(new Event('input'));
@@ -38,7 +40,7 @@ async function main(){
     document.querySelector('input').dispatchEvent(new Event('change'));titles.add(document.getElementById('condition-title').textContent);
    }assert.equal(titles.size,4);click(document.getElementById('reset-conditions'));assert.equal(document.querySelector('[name="agency"]:checked').value,'low');assert.equal(document.querySelector('[name="feedback"]:checked').value,'low');
   }
-  checks.push(route+': navigation, blank business fields, retained page interactions pass');
+  checks.push(route+': navigation, confirmed registration number, hidden unknown fields, retained page interactions pass');
  }
  const biz=setup('index.html');biz.win.MASHCORE_BUSINESS={companyName:'Example <script>alert(1)</script>',registrationNumber:'',address:''};biz.run('site.js');assert.equal(biz.document.querySelector('[data-business-info]').hidden,false);assert.equal(biz.document.querySelector('[data-business-info]').children.length,1);assert.equal(biz.document.querySelector('[data-business-info] script'),null);checks.push('Business update: only nonempty fields render; values are text, not executable HTML');
  const scene=setup('index.html');scene.run('chapters.js');assert.equal(scene.document.querySelectorAll('[data-chapter]').length,4);scene.win.location.hash='#rooms';scene.run('chapters.js');assert.equal(scene.win.replaced,'/explore/#rooms');checks.push('Chapters: readable without IntersectionObserver; old deep links reach preserved content');

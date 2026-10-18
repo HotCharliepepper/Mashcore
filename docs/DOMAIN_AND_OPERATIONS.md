@@ -32,11 +32,11 @@
 
 ## 사업자 정보 바로 입력
 
-`assets/js/site-config.js`의 `companyName`, `representative`, `registrationNumber`, `address`, `phone`을 실제 등록 내용으로 채운다. 현재는 모두 빈 문자열이다. 푸터가 이 파일을 공유하므로 페이지별로 다시 입력할 필요가 없다. 빈 필드는 표시하지 않고, 입력값은 HTML 실행 없이 텍스트로 표시한다. 공개 정보만 넣고 비밀키·주민번호 등은 넣지 않는다.
+`assets/js/site-config.js`의 `companyName`, `representative`, `registrationNumber`, `address`, `phone`을 실제 등록 내용으로 채운다. 2026-10-19 KST 사용자가 사업자등록번호 `247-02-04104`를 확정해 제공했다. 이 번호만 반영했으며 다른 필드는 빈 문자열로 유지한다. 설정을 바꾼 뒤 `python3 scripts/sync_business.py`를 실행하면 정적 HTML 푸터까지 동기화되어 JavaScript 없이도 읽을 수 있다. 빈 필드는 표시하지 않고, 입력값은 HTML 실행 없이 텍스트로 표시한다. 공개 정보만 넣고 비밀키·주민번호 등은 넣지 않는다.
 
 ## 운영 확인
 
-- 센서: 휴대폰에서 `/mobile/#research`를 직접 열고 “기울기로 살펴보기”를 눌러 허용한다. 기울기는 시점만 바꾸며 실제 중력 물리 시뮬레이션이나 진단이 아니다.
+- 센서: 휴대폰에서 `/research/chore-to-play/`를 직접 열고 “기울기로 살펴보기”를 눌러 허용한다. 기울기는 시점만 바꾸며 실제 중력 물리 시뮬레이션이나 진단이 아니다.
 - 비교: `/preview/?view=desktop`, `/preview/?view=mobile`. 비교 iframe은 화면 구성 확인용이며 센서는 새 창에서 검토한다.
 - 문의: 자동 서버 전송 기능이 없다. 이메일 앱에서 초안을 확인하고 사용자가 직접 보낸다. 기존 연락처 weplace25@gmail.com을 유지했다.
 - 기록: 실제 반응, 읽기/문의에서 막힌 부분, 모션 피로 여부를 DESIGN.md에 근거와 함께 축적한다. 미측정 성과를 수치로 기록하지 않는다.

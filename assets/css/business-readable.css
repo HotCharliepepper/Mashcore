@@ -1,0 +1,5 @@
+/* Scoped upgrade for legacy research/portfolio footers; no research redesign. */
+.footer .business-info{font-size:16px;line-height:1.85;margin-top:24px;overflow-wrap:anywhere}
+.footer .business-info>div{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:10px;padding:5px 0}
+.footer .business-info dt,.footer .business-info dd{margin:0;color:inherit}
+@media(max-width:480px){.footer .business-info>div{grid-template-columns:1fr;gap:2px;padding:7px 0}}

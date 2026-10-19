@@ -1,0 +1,10 @@
+# Render shared content into static HTML. Do not deploy source docs/catalogs.
+[build]
+  command = "python3 scripts/build_public.py && python3 scripts/check_public.py"
+  publish = "dist"
+[context.production]
+  command = "python3 scripts/build_public.py --context production && python3 scripts/check_public.py"
+[context.deploy-preview]
+  command = "python3 scripts/build_public.py --context deploy-preview && python3 scripts/check_public.py"
+[context.branch-deploy]
+  command = "python3 scripts/build_public.py --context branch-deploy && python3 scripts/check_public.py"

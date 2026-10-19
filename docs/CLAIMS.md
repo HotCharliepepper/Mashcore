@@ -1,22 +1,25 @@
-# Public claims and evidence — 2026-10-19
+# Claims and source boundaries — v6.1
 
-| 항목 | 상태 | 근거·범위 |
-|---|---|---|
-| 사업자번호 247-02-04104 | CONFIRMED / 사용자 제공 | 이번 요청에서 직접 확정. 다른 사업자 필드나 정부 조회 결과를 뜻하지 않음 |
-| Weplace 포트폴리오 게재 | CONFIRMED / 사용자 승인 | 공개 홈페이지 전략·경험 설계 협업으로 소개 |
-| Mashcore 연구·전략과 Weplace 현장 실행 관계 | CONFIRMED / 사용자 설명·기존 소개 | 기존 /about/와 프로젝트 아키텍처. 소유·단독 성과로 확장하지 않음 |
-| Mashcore 출발 main·운영 일치 | CONFIRMED / 직접 확인 | main 45bba47…, production 6acea31aa6b6223a8eaafa43 ready, 동일 커밋. HTTPS HTML도 바이트 단위 일치 |
-| Weplace 공개 홈페이지 존재 | CONFIRMED / 직접 확인 | https://withweplace.kr/ HTTPS 200. main ec714758…의 공개 코드는 참고 자료로 확인 |
-| Weplace 신규 리빌딩 완료 | 미주장 | PR #8은 별도 Draft 검토안. 미완성 화면·기능을 완료 자료로 제시하지 않음 |
-| 배치 변경 효과 | HYPOTHESIS | 가상 안내의 위치·순서 비교. 실제 고객 반응 측정 자료가 아님 |
-| 특정 국적의 손 사용 비율·구매 증가 | 미주장 | 통계·실험 결과를 생성하지 않음 |
-| 공개 메일 | 기존 유지 | weplace25@gmail.com. Mashcore 전용 계정 여부는 미확인 |
+2026-10-19.
 
-## 근거 링크
+## USER PROVIDED
 
-- [Mashcore 출발 커밋](https://github.com/HotCharliepepper/Mashcore/commit/45bba47cee6e59e64fd74ea50e3779a9e4865208)
-- [기존 Mashcore 소개](https://github.com/HotCharliepepper/Mashcore/blob/45bba47cee6e59e64fd74ea50e3779a9e4865208/about/index.html)
-- [Weplace 참고 코드](https://github.com/HotCharliepepper/Weplace/blob/ec714758367b5bc448d61cc8c73b6fd2a3de9007/index.html)
-- [Weplace 홈페이지](https://withweplace.kr/)
+- 철학: 함께 하여 강화한다. 여러 사업자의 강점/경험과 규현의 전략·설계, 만덕의 데이터 분석을 결합해 Mashcore가 전략 설계의 중심 역할을 함.
+- 사업자번호: 247-02-04104. 주소: 선유로9길 10. 대표명 최규현은 사용자 제공 이름/프로젝트 맥락.
+- 프로토타입 금액: 400만원 / 250만원 / 150만원 / 50만원.
 
-현재 기록은 2026-10-19 작업 시점의 스냅샷이다. 재사용 시 실제 브랜치·배포를 다시 확인한다.
+## PROPOSED
+
+- 새 히어로/소개 문안, 네 상품의 이름·결과물·작업량·1~4주 기간·미팅·수정 범위·1회 프로젝트 기준.
+- 만덕의 역할 소개는 데이터 분석 협업 범위. 인력 배정과 계약/고용 관계를 확정하지 않음.
+- 자료에서 차이가 발견되어도 원인으로 단정하지 않음. 예시 상황은 실제 고객/성과 아님.
+
+## NEED VERIFY before public release
+
+등록증상 정확한 상호, 주소의 시·구/층·호수, 전화, 전용 문의 수신 경로. 기존 공개 weplace25@gmail.com을 유지하며 Mashcore 전용으로 확인된 메일이라고 부르지 않음. 부가세 포함 여부·과금 단위·상세 범위·일정·정식 투입 인력·사용권·계약 조건.
+
+Weplace의 고객원본·매출정보를 모으거나 다른 고객에게 공유하는 사업으로 설명하지 않는다. 법인/계열/단독 제작/매출 증가 수치를 주장하지 않는다.
+
+## Technical reference
+
+읽기와 확대 검수 참고: W3C WCAG 2.2 / 1.4.3 contrast, 1.4.4 resize text, 1.4.10 reflow. https://www.w3.org/TR/WCAG22/ 및 https://www.w3.org/WAI/WCAG21/Understanding/reflow . 전체 접근성 인증 또는 60대 사용자 테스트 통과를 의미하지 않는다.

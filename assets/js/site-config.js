@@ -1,9 +1,9 @@
-/* Public details: registration number confirmed by the owner on 2026-10-19 KST.
-   Unknown fields stay empty. Run scripts/sync_business.py after editing. */
+/* Public information provided by the owner on 2026-10-19 KST.
+   Registered trade name, address unit and phone are not inferred from Weplace. */
 window.MASHCORE_BUSINESS = Object.freeze({
   "companyName": "",
-  "representative": "",
+  "representative": "최규현",
   "registrationNumber": "247-02-04104",
-  "address": "",
+  "address": "선유로9길 10",
   "phone": ""
 });

@@ -1,40 +1,25 @@
-# Release notes — Mashcore v5 preview
+# v6.1 review — implementation and QA
 
-기록일: 2026-10-19 KST.
-대상: feature/mashcore-weplace-portfolio-20261019의 이 기록을 포함한 커밋.
-단계: 프리뷰 검토. 최종 main 병합·production 반영 승인 대기.
+작성일: 2026-10-19. 이 문서는 구현/검토 상태이며 Production 배포 완료 보고가 아니다.
 
-## 변경
+## Baseline and change
 
-히어로의 역할 구체화, 세 관점의 가상 화면 A/B, Weplace 홈 카드와 /work/weplace/ 상세, 사용자 제공 사업자번호 247-02-04104의 공통·정적 푸터 반영, 홈·모바일 동기화, 탐색·메타·사이트맵·운영 문서를 갱신했다.
+PR #2 / feature/mashcore-weplace-portfolio-20261019 / 시작 HEAD e79629da7a2775d19e8d0fb79de4453bbcdb180f.
+이전 중단된 작업의 Git tree는 커밋·브랜치·배포가 아니었다. 해당 초안을 보완해 같은 PR에 안전한 fast-forward로 연결한다.
 
-기존 연구 경로·Chore to Play 입체 모형·문의 작성과 복사를 유지한다.
+새 철학/역할, 네 가격대 상품 프로토타입, 대표·주소·번호 공통 표기, /about/·/services/, 정적 생성/검수/승인 게이트 추가. 이전 HTML 입력/연구 경로와 런타임 JS는 유지. 새 홈은 공통 strategy.css로 조판해 누적 스타일 충돌을 피함. 기존 연구/포트폴리오에서는 푸터 범위만 별도 CSS로 개선.
 
-## 완료한 검수
+## Local verification actually performed
 
-| 검수 | 결과 | 범위 |
-|---|---|---|
-| scripts/check_site.py | PASS | HTML 10개 경로의 링크·자산·ID·ARIA·한국어·H1·메타·JSON-LD |
-| scripts/check_interactions.cjs | PASS | 메뉴·Escape·문의 초안·복사·수동 대안·기존 탭/조건·사업자 표시·HTML 삽입 방지·비교 경로 |
-| scripts/check_observations.cjs | PASS | 홈/모바일의 세 관점·키보드·A/B 실순서·동일 정보·details 상태·no-JS·정적 번호·정확한 동기화 |
-| scripts/check_spatial.cjs | PASS | 연구 모형의 선택·회전·센서 권한/실패/미지원/지연·모션 감소·정리 시뮬레이션 |
-| JS/CSS 구문 | PASS | JS 6개·CSS 7개 구문 분석 |
-| 독립 코드·문안 검토 | PASS | 가상 A/B 표현·협업 범위·no-JS·반응형 CSS 구조에서 수정 필요 문제 발견 없음 |
+Python 생성기/검수기 구문 검사, JSON 읽기·금액 매칭, 미승인 production 차단 확인.
+오프라인 실제 Chromium set_content로 홈/모바일/소개/상품 검수본의 320/390/768/1440 폭, 4상품 details, 메뉴/Escape, 기존 3관점 A/B, 방향키 탭 이동, 메일 URI 인코딩, 복사 수동 대안, 390폭 글자 2배 강제 확대, no-JS, reduced-motion: 28개 점검 통과, page error 0.
 
-검수 환경은 정적 분석과 Node DOM 시뮬레이션이다. 개발 전용 임시 환경에 linkedom 0.18.12와 css-tree 3.1.0을 사용했으며 운영 의존성은 추가하지 않았다.
+중요한 한계: 컨테이너 외부 Git DNS와 브라우저 localhost 이동은 환경에서 차단됐다. 네트워크 정책을 바꾸지 않고, 생성한 HTML/CSS/JS를 메모리에 넣어 실제 Chromium으로 렌더링했다. 홈 로컬 입력은 PR에서 읽은 세 섹션으로 만든 integration fixture이며 원격 v5 index 원본을 대체하지 않는다. site.js·observations.js·chapters.js는 원격 Git blob SHA와 정확히 일치한다. 실제 배포본의 전체 링크·ARIA·모바일 동기화는 Netlify가 전체 저장소에서 실행하는 scripts/check_public.py로 별도 검증한다.
 
-## 남은 확인
+외부 Google 폰트 네트워크 대신 시스템 한국어 fallback으로 로컬 확인. 실물 iPhone/Android·센서·스크린리더·60대 사용자 이해도·실제 메일 앱/수신은 미실시. 로컬 검수를 배포 도메인의 종단 브라우저 검수로 표현하지 않는다.
 
-- NEED VERIFY: 320/390/768/1440px 실제 브라우저 렌더링·가로 넘침·줄바꿈·200% 확대.
-- NEED VERIFY: iPhone/Android 실기기·VoiceOver/TalkBack·실제 메일 앱·물리 센서.
-- 관리 환경에 허용된 control-browser가 없어 브라우저 렌더링 QA를 수행하지 않았다. 정적 CSS 구간 확인을 실기기 완료로 보고하지 않는다.
-- 실제 프리뷰 URL·배포 완료 상태는 이 변경의 GitHub PR·Netlify 체크에서 확인한다. URL 생성만으로 배포 완료라고 처리하지 않는다.
+## Deploy boundary and recovery
 
-## 운영 반영과 복구
-
-출발 main: 45bba47cee6e59e64fd74ea50e3779a9e4865208.
-출발 production: 6acea31aa6b6223a8eaafa43, ready, 위 커밋과 일치.
-
-첨부 05_CHANGE_AND_QA_PROTOCOL.md의 branch → preview → QA → 승인 → main → production 순서를 따른다. 검토 가능한 결과를 제시한 뒤 최종 운영 반영을 승인받는다.
-
-프리뷰 오류는 같은 브랜치에서 수정한다. 운영 반영 후 되돌려야 하면 변경을 되돌리는 새 커밋을 검토·병합하여 기존 Git CD로 배포한다. 과거 배포를 임의로 재발행하거나 DNS·호스팅 경로를 바꾸지 않는다.
+Netlify는 dist만 게시하며 docs/content/qa/script 미게시, preview noindex. 미승인 상품의 production build는 실패하도록 구성. 현재 운영 main/배포/도메인/DB는 수정하지 않음.
+완료 후 최신 커밋·Netlify deploy ID·ready 상태·검수 결과는 PR #2에 기록한다.
+복구는 v6 변경을 되돌리는 새 커밋으로 PR을 갱신하는 방식. Production에는 아직 변경된 것이 없어 되돌릴 운영 배포가 없다. git reset --hard/force push/Netlify restore를 사용하지 않는다.

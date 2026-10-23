@@ -2,17 +2,23 @@
   'use strict';
   document.documentElement.classList.add('js');
   const business = window.MASHCORE_BUSINESS || {};
-  const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화' };
+  const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화', email: '이메일' };
   document.querySelectorAll('[data-business-info]').forEach(list => {
-    // Refresh pre-rendered public details without creating duplicate rows.
-    list.replaceChildren();
+    // Build-time public details are authoritative and remain readable if config fails.
+    if (list.children.length) { list.hidden = false; return; }
     Object.entries(businessLabels).forEach(([key, label]) => {
       const value = typeof business[key] === 'string' ? business[key].trim() : '';
       if (!value) return;
       const row = document.createElement('div');
       const term = document.createElement('dt');
       const description = document.createElement('dd');
-      term.textContent = label; description.textContent = value;
+      term.textContent = label;
+      if (key === 'email') {
+        const link = document.createElement('a');
+        link.setAttribute('href', `mailto:${value}`);
+        link.textContent = value;
+        description.append(link);
+      } else description.textContent = value;
       row.append(term, description); list.append(row);
     });
     list.hidden = list.children.length === 0;
@@ -33,8 +39,9 @@
       menuButton.setAttribute('aria-expanded', String(open));
       menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
       menuButton.textContent = open ? '닫기' : '메뉴';
+      if (!open) menuButton.focus();
     });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu(true)));
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu(true);
     });
@@ -53,6 +60,7 @@
   if (mobile.addEventListener) mobile.addEventListener('change', responsiveTabs);
   responsiveTabs();
   document.querySelectorAll('[role="tablist"]').forEach(list => {
+    if (list.hasAttribute('data-observation-tabs')) return;
     const tabs = Array.from(list.querySelectorAll('[role="tab"]'));
     if (!tabs.length) return;
     function select(tab, focus = false) {
@@ -84,26 +92,70 @@
   const question = document.getElementById('question');
   if (question) {
     const status = document.getElementById('copy-status');
+    const error = document.getElementById('question-error');
+    const counter = document.getElementById('question-count');
     const email = document.getElementById('email-question');
-    const updateQuestion = () => {
-      document.getElementById('question-count').textContent = question.value.length.toLocaleString('ko-KR') + ' / 1,000';
-      status.textContent = '';
-      if (email) email.href = 'mailto:weplace25@gmail.com?subject=' + encodeURIComponent('Mashcore Lab — 함께 보고 싶은 장면') + '&body=' + encodeURIComponent(question.value.trim());
-    };
-    question.addEventListener('input', updateQuestion);
-    updateQuestion();
-    document.getElementById('copy-question').addEventListener('click', async () => {
-      const value = question.value.trim();
-      if (!value) { status.textContent = '함께 보고 싶은 장면을 한 줄 적어 주세요.'; question.focus(); return; }
-      try {
-        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Manual copy');
-        await navigator.clipboard.writeText(value);
-        status.textContent = '질문을 복사했습니다. 아직 전송되지 않았습니다.';
-      } catch {
-        question.focus(); question.select();
-        status.textContent = '문장을 선택했습니다. Ctrl+C 또는 ⌘C로 복사하거나 모바일 선택 메뉴에서 복사를 누르세요.';
+    const copyButton = document.getElementById('copy-question');
+    const selectButton = document.getElementById('select-question');
+    const recipient = typeof business.email === 'string' && business.email.trim() ? business.email.trim() : 'weplacehyun@naver.com';
+    const baseMail = 'mailto:' + recipient + '?subject=' + encodeURIComponent('[Mashcore] 함께할 일 문의');
+    const limit = 1000;
+    let composing = false;
+    // Count Unicode code points consistently; never trim, truncate, or rewrite input.
+    const length = () => Array.from(question.value).length;
+    const notify = message => { if (status) status.textContent = message; };
+    const overflowMessage = '1,000자 이내로 줄여주세요. 작성한 내용은 입력란에 남아 있습니다. 내용을 직접 선택해 복사하거나 아래 이메일로 보내실 수 있습니다.';
+    question.removeAttribute('maxlength');
+    function updateQuestion() {
+      const over = length() > limit;
+      if (counter) counter.textContent = length().toLocaleString('ko-KR') + ' / 1,000';
+      question.setAttribute('aria-invalid', String(over));
+      if (error) error.textContent = over ? overflowMessage : '';
+      if (email) {
+        email.setAttribute('aria-disabled', String(over));
+        email.href = baseMail + (!over && question.value.trim() ? '&body=' + encodeURIComponent(question.value) : '');
       }
+      if (copyButton) copyButton.setAttribute('aria-disabled', String(over));
+      if (over && !error) notify(overflowMessage);
+      return !over;
+    }
+    function canUseQuestion() {
+      if (composing) { notify('한글 입력을 마친 뒤 다시 눌러주세요.'); return false; }
+      if (!updateQuestion()) { notify(overflowMessage); return false; }
+      return true;
+    }
+    question.addEventListener('compositionstart', () => { composing = true; });
+    question.addEventListener('compositionend', () => { composing = false; updateQuestion(); });
+    question.addEventListener('input', () => { notify(''); updateQuestion(); });
+    if (email) email.addEventListener('click', event => {
+      if (!canUseQuestion()) { event.preventDefault(); return; }
+      notify('메일 앱에서 내용을 확인한 뒤 직접 보내주세요. 메일 앱이 열리지 않으면 질문을 복사해 아래 주소로 보내주세요.');
     });
+    if (copyButton) {
+      copyButton.hidden = false;
+      copyButton.addEventListener('click', async () => {
+        if (!canUseQuestion()) return;
+        const value = question.value;
+        if (!value.trim()) { notify('복사할 내용을 먼저 적어주세요.'); question.focus(); return; }
+        try {
+          if (!navigator.clipboard || !window.isSecureContext) throw new Error('Manual copy');
+          notify('복사를 시도하고 있습니다. 응답이 없으면 내용을 직접 선택해 복사해 주세요.');
+          await navigator.clipboard.writeText(value);
+          notify('질문을 복사했습니다. 아직 전송되지 않았습니다.');
+        } catch {
+          question.focus(); question.select();
+          notify('자동 복사가 되지 않았습니다. 내용을 선택해 직접 복사해 주세요. Ctrl+C 또는 ⌘C, 모바일 선택 메뉴의 복사를 사용할 수 있습니다.');
+        }
+      });
+    }
+    if (selectButton) {
+      selectButton.hidden = false;
+      selectButton.addEventListener('click', () => {
+        question.focus(); question.select();
+        notify('내용을 선택했습니다. Ctrl+C 또는 ⌘C, 모바일 선택 메뉴에서 직접 복사해 주세요. 아직 전송되지 않았습니다.');
+      });
+    }
+    updateQuestion();
   }
   const conditionLab = document.querySelector('.condition-lab');
   if (conditionLab) {

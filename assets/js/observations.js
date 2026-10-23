@@ -18,18 +18,29 @@
       captions: { a: '배치 A · 예약 방법 뒤에 이용 조건이 놓여 있습니다.', b: '배치 B · 이용 조건을 확인한 뒤 예약 방법을 살펴봅니다.' }
     }
   };
-  lab.querySelectorAll('[data-layout-study]').forEach(panel => {
+  const panels = Array.from(lab.querySelectorAll('[data-layout-study]'));
+  const tabs = lab.querySelector('[data-observation-tabs]');
+  if (!tabs || panels.length !== Object.keys(studies).length) return;
+  const choices = Array.from(tabs.querySelectorAll('button[aria-controls]'));
+  const prepared = panels.map(panel => {
     const study = studies[panel.dataset.layoutStudy];
     const surface = panel.querySelector('[data-layout-surface]');
     const controls = panel.querySelector('[data-layout-controls]');
     const status = panel.querySelector('[data-layout-status]');
-    if (!study || !surface || !controls || !status) return;
+    if (!study || !surface || !controls || !status) return null;
     const buttons = Array.from(controls.querySelectorAll('[data-layout-choice]'));
     const blocks = new Map(Array.from(surface.children).map(block => [block.dataset.layoutBlock, block]));
+    if (!study.a.every(key => blocks.has(key)) || !study.b.every(key => blocks.has(key)) || buttons.length !== 2) return null;
+    return { panel, study, surface, controls, status, buttons, blocks };
+  });
+  // No partial enhancement: a missing script/marker leaves every static A/B readable.
+  if (prepared.some(item => !item) || choices.length !== panels.length ||
+      !choices.every(button => panels.some(panel => panel.id === button.getAttribute('aria-controls')))) return;
+  prepared.forEach(({ panel, study, surface, controls, status, buttons, blocks }) => {
     function select(layout) {
-      if (!study[layout] || !study[layout].every(key => blocks.has(key))) return;
-      // Move the same nodes: visual and assistive reading order change together;
-      // native disclosures keep their state, and the information itself does not change.
+      if (!study[layout]) return;
+      // Move the same nodes so reading order and visual order stay identical.
+      // Disclosure state and all original information are preserved.
       study[layout].forEach(key => surface.append(blocks.get(key)));
       surface.dataset.layout = layout;
       buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.layoutChoice === layout)));
@@ -38,8 +49,33 @@
     buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.layoutChoice)));
     select('a');
     controls.hidden = false;
+    panel.removeAttribute('tabindex');
+    panel.setAttribute('role', 'region');
   });
-  // site.js provides the shared accessible tab behavior. No-JS documents show all studies.
-  const tabs = lab.querySelector('[data-observation-tabs]');
-  if (tabs) tabs.hidden = false;
+  tabs.setAttribute('role', 'group');
+  choices.forEach(button => {
+    button.removeAttribute('role');
+    button.removeAttribute('aria-selected');
+    button.tabIndex = 0;
+  });
+  function choose(button, focus = false) {
+    choices.forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
+    panels.forEach(panel => { panel.hidden = panel.id !== button.getAttribute('aria-controls'); });
+    if (focus) button.focus();
+  }
+  choices.forEach((button, index) => {
+    button.addEventListener('click', () => choose(button));
+    button.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % choices.length;
+      if (event.key === 'ArrowLeft') next = (index - 1 + choices.length) % choices.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = choices.length - 1;
+      if (next !== undefined) { event.preventDefault(); choose(choices[next], true); }
+    });
+  });
+  choose(choices[0]);
+  lab.querySelectorAll('[data-layout-fallback]').forEach(fallback => { fallback.hidden = true; });
+  lab.dataset.observationReady = 'true';
+  tabs.hidden = false;
 })();

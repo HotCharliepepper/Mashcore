@@ -13,10 +13,12 @@ from pathlib import Path
 import re
 import shutil
 from urllib.parse import urlencode
+from review_home import hero as review_hero, observation as review_observation, field as review_field, invitation as review_invitation, flow_figure
+from review_details import render_services, render_about
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = 'https://mashcore.netlify.app'
-EMAIL = 'weplace25@gmail.com'  # Existing public address, not a newly verified inbox.
+BASE = 'https://mashcore.co.kr'
+EMAIL = 'weplacehyun@naver.com'  # Latest main configuration; inbox delivery not tested.
 E = html.escape
 
 
@@ -57,17 +59,18 @@ def business_config(root: Path) -> dict:
 
 
 def business_rows(b: dict) -> str:
-    labels = {'companyName':'상호','representative':'대표자','registrationNumber':'사업자등록번호','address':'사업장 주소','phone':'전화'}
+    labels = {'companyName':'상호','representative':'대표자','registrationNumber':'사업자등록번호','address':'사업장 주소','phone':'전화','email':'이메일'}
     items = ''.join(f'<div><dt>{label}</dt><dd>{E(str(b[key]))}</dd></div>' for key,label in labels.items() if b.get(key))
+    items=items.replace('<dd>'+E(str(b.get('email','')))+'</dd>', '<dd><a href="mailto:'+E(str(b.get('email','')))+'">'+E(str(b.get('email','')))+'</a></dd>')
     return '<dl class="business-info" data-business-info="">' + items + '</dl>'
 
 
 def header() -> str:
-    return '''<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore<small>전략 · 브랜드 · 데이터 분석</small></a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/about/">하는 일</a><a href="/services/">상품 구성</a><a href="/work/weplace/">적용 사례</a><a href="/research/">연구</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'''
+    return '<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore</a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a class="mobile-inquiry" href="/#invitation">내 상황 이야기하기 ↗</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'
 
 
 def footer(b: dict) -> str:
-    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><div>{business_rows(b)}<p class="core-email">연락 이메일 <a href="mailto:{EMAIL}">{EMAIL}</a></p></div></div><div class="core-footer-bottom"><span>© 2026 Mashcore</span><nav aria-label="하단 메뉴"><a href="/about/">하는 일</a><a href="/services/">상품 구성</a><a href="/research/log/">연구 기록</a><a href="/about/#mashcore34">Mashcore34</a></nav></div></div></footer>'''
+    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>문안·구성 검토본</span><a href="#main">위로 ↑</a></div></div></footer>'''
 
 
 def page(path: str, title: str, description: str, main: str, b: dict, *, home: bool = False, review: bool = True) -> str:
@@ -132,8 +135,8 @@ def about_main(s: dict) -> str:
 
 def render_new_pages(output: Path, s: dict, c: dict, b: dict, context: str) -> None:
     for route,title,desc,body in [
-        ('about','하는 일·함께하는 사람 — Mashcore',s['description'],about_main(s)),
-        ('services','상품 구성 검토안 — Mashcore','400만원·250만원·150만원·50만원의 네 가지 협업 구성 프로토타입입니다. 정식 판매·결제 페이지가 아닙니다.',services(c,'h1'))
+        ('about','소개 — Mashcore',s['description'],render_about(s)),
+        ('services','상품 구성 검토안 — Mashcore','400만원·250만원·150만원·50만원의 네 가지 협업 구성 프로토타입입니다. 정식 판매·결제 페이지가 아닙니다.',render_services(c, product, services))
     ]:
         (output/route).mkdir(parents=True,exist_ok=True)
         (output/route/'index.html').write_text(page('/'+route+'/',title,desc,body,b,review=context!='production' or route=='services'),encoding='utf-8')
@@ -141,6 +144,8 @@ def render_new_pages(output: Path, s: dict, c: dict, b: dict, context: str) -> N
 
 def build(root: Path, output: Path, context: str) -> dict:
     s=read_json(root/'content/strategy.json');c=read_json(root/'content/services-prototype.json');b=business_config(root)
+    if b.get('email') != EMAIL or b.get('siteUrl','').rstrip('/') != BASE:
+        raise ValueError('Business config, BASE and EMAIL must match.')
     effective_context='production' if os.environ.get('CONTEXT')=='production' else context
     catalog_guard(c,effective_context)
     source=(root/'index.html').read_text(encoding='utf-8')
@@ -149,19 +154,15 @@ def build(root: Path, output: Path, context: str) -> dict:
         raise ValueError('Only the dedicated repo/dist directory may be replaced.')
     if output.exists():shutil.rmtree(output)
     output.mkdir()
-    for name in ('assets','mobile','preview','explore','research','about','work'):
+    for name in ('assets','mobile','preview','explore','research','about','work','policies'):
         if (root/name).is_dir():
             shutil.copytree(root/name,output/name,ignore=shutil.ignore_patterns('*.md','*.map','.DS_Store','node_modules','__pycache__'))
     for name in ('robots.txt','sitemap.xml','_redirects','_headers','mashcore-profile.jpg'):
         if (root/name).is_file():shutil.copy2(root/name,output/name)
-    observed=observed.replace('02 / SMALL THINGS, REAL QUESTIONS','02 / 작은 행동에서 찾는 질문')
-    portfolio=portfolio.replace('03 / A PERSPECTIVE, IN PRACTICE','03 / 현장에 적용한 관점')
-    invitation=invitation.replace('04 / AN OPEN QUESTION','04 / 함께 시작하는 대화')
-    # Keep the four main scene identities. Nested modules remain static and readable.
-    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+hero(s)+people(s)+'</section>'
-    last=portfolio.rfind('</section>')
-    if last<0:raise ValueError('Missing portfolio boundary')
-    portfolio=portfolio[:last]+services(c)+portfolio[last:]
+    observed=review_observation(observed)
+    portfolio=review_field()
+    invitation=review_invitation(EMAIL)
+    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+review_hero(s)+'</section>'
     main=origin+observed+portfolio+invitation
     home=page('/',s['title'],s['description'],main,b,home=True,review=context!='production')
     (output/'index.html').write_text(home,encoding='utf-8')
@@ -171,19 +172,21 @@ def build(root: Path, output: Path, context: str) -> dict:
     render_new_pages(output,s,c,b,context)
     count=0
     for path in sorted(output.rglob('*.html')):
-        text=path.read_text(encoding='utf-8')
-        text,n=re.subn(r'<dl\b[^>]*\bdata-business-info\b[^>]*>.*?</dl>',lambda _:business_rows(b),text,flags=re.S)
-        count+=bool(n)
-        if 'core-page' not in text and n:
-            text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/business-readable.css"></head>',1)
-            if 'id="main-nav"' in text:
-                text=text.replace('id="main-nav">','id="main-nav"><a href="/services/">상품 구성</a>',1)
+        text=path.read_text(encoding='utf-8').replace('https://mashcore.netlify.app',BASE).replace('weplace25@gmail.com',EMAIL)
+        if path.relative_to(output).as_posix()!='preview/index.html':
+            text=re.sub(r'<header class="site-header[^>]*>.*?</header>',lambda _:header(),text,count=1,flags=re.S)
+            text=re.sub(r'<footer\b.*?</footer>',lambda _:footer(b),text,count=1,flags=re.S)
+            count+=1
+            if '/assets/css/strategy.css' not in text:
+                text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/strategy.css"></head>',1)
+        text=re.sub(r'<link[^>]+(?:fonts.googleapis.com|fonts.gstatic.com)[^>]*>','',text)
+        text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"></head>',1)
         if context!='production' and not re.search(r'<meta\b[^>]*\bname=[\'"]robots[\'"]',text):
             text=text.replace('</head>','<meta name="robots" content="noindex,nofollow"></head>',1)
         path.write_text(text,encoding='utf-8')
     sitemap=output/'sitemap.xml'
     if sitemap.exists():
-        text=sitemap.read_text(encoding='utf-8')
+        text=sitemap.read_text(encoding='utf-8').replace('https://mashcore.netlify.app',BASE)
         if BASE+'/services/' not in text:
             text=text.replace('</urlset>',f'<url><loc>{BASE}/services/</loc></url></urlset>')
         sitemap.write_text(text,encoding='utf-8')

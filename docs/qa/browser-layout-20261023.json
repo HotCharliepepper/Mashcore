@@ -1,0 +1,395 @@
+{
+  "environment": "Cloud Chromium via CUA; CSS iframe widths; text-only 200% sizing, not browser zoom",
+  "widthChecks": [
+    {
+      "page": "/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/services/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/services/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/services/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/services/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/about/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/about/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/about/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/about/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/research/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/research/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/research/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/research/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/research/chore-to-play/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/research/chore-to-play/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/research/chore-to-play/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/research/chore-to-play/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/research/market-interpretation/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/research/market-interpretation/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/research/market-interpretation/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/research/market-interpretation/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/research/log/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/research/log/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/research/log/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/research/log/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/explore/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/explore/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/explore/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/explore/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/work/weplace/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/work/weplace/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/work/weplace/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/work/weplace/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/mobile/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/mobile/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/mobile/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/mobile/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    },
+    {
+      "page": "/policies/refund/",
+      "frame": 320,
+      "contentWidth": 305,
+      "overflow": false,
+      "scrollWidth": 305
+    },
+    {
+      "page": "/policies/refund/",
+      "frame": 390,
+      "contentWidth": 375,
+      "overflow": false,
+      "scrollWidth": 375
+    },
+    {
+      "page": "/policies/refund/",
+      "frame": 768,
+      "contentWidth": 753,
+      "overflow": false,
+      "scrollWidth": 753
+    },
+    {
+      "page": "/policies/refund/",
+      "frame": 1440,
+      "contentWidth": 1425,
+      "overflow": false,
+      "scrollWidth": 1425
+    }
+  ],
+  "text200Checks": [
+    {
+      "page": "/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/services/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/about/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/research/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/research/chore-to-play/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/research/market-interpretation/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/research/log/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/explore/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/work/weplace/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    },
+    {
+      "page": "/policies/refund/",
+      "frame": 390,
+      "text200": true,
+      "overflow": false,
+      "scrollWidth": 375,
+      "width": 375
+    }
+  ]
+}

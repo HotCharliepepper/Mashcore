@@ -2,7 +2,9 @@ const {parseHTML} = require('linkedom');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
-const root=require('node:path').resolve(__dirname,'..')+'/';
+// Exercise generated public output by default; an explicit alternate output may be supplied.
+const path = require('node:path');
+const root=path.resolve(process.env.MASHCORE_TEST_ROOT || path.resolve(__dirname,'..','dist'))+'/';
 const fragment = parseHTML(fs.readFileSync(root+'research/chore-to-play/index.html','utf8')).document.querySelector('[data-spatial]').outerHTML;
 const script = fs.readFileSync(root+'assets/js/chore-spatial.js','utf8');
 function environment(options={}) {
@@ -46,5 +48,5 @@ function environment(options={}) {
  const down=e.fire(e.stage,'pointerdown',{pointerId:1,pointerType:'touch',clientX:100,clientY:100});const vertical=e.fire(e.stage,'pointermove',{pointerId:1,pointerType:'touch',clientX:103,clientY:140});e.flush();assert.equal(down.defaultPrevented,false);assert.equal(vertical.defaultPrevented,false);assert.equal(captured,false);assert.equal(e.q('[data-spatial-world]').style.getPropertyValue('--sp-yaw'),'0.00deg');
  e.fire(e.stage,'pointerdown',{pointerId:2,pointerType:'touch',clientX:100,clientY:100});e.fire(e.stage,'pointermove',{pointerId:2,pointerType:'touch',clientX:150,clientY:103});e.flush();assert.equal(captured,true);assert.equal(e.q('[data-spatial-world]').style.getPropertyValue('--sp-yaw'),'9.00deg');e.fire(e.stage,'pointercancel',{pointerId:2});assert.equal(captured,false);checks.push('Vertical touch motion remains browser-owned; horizontal drag rotates and pointer cancellation clears capture');
  e.click('[data-spatial-sensor-button]');await e.settle();e.emit('pagehide',{});assert.equal(e.listeners.get('deviceorientation').size,0);e.fire(e.root,'mashcore:spatial-destroy');for(const set of e.listeners.values())assert.equal(set.size,0);checks.push('Pagehide and explicit component disposal clean up listeners');
- console.log(JSON.stringify({status:'passed',environment:'Node DOM simulation; no physical sensor or rendered-browser assertion',checks},null,2));
+ console.log(JSON.stringify({status:'passed',testedRoot:root,environment:'Node + linkedom DOM simulation of generated dist; no physical device/sensor or rendered-browser assertion',checks},null,2));
 })().catch(error=>{console.error(error);process.exit(1)});

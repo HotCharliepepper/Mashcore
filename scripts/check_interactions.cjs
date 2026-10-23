@@ -1,3 +1,14 @@
+/* Legacy buildless harness: keep the original body as history. */
+(() => {
+  const legacyFs = require('node:fs');
+  const legacyPath = require('node:path');
+  const legacyRoot = legacyPath.resolve(__dirname, '..');
+  if (legacyFs.existsSync(legacyPath.join(legacyRoot, 'scripts/build_public.py')) &&
+      legacyFs.existsSync(legacyPath.join(legacyRoot, 'content/services-prototype.json'))) {
+    console.error('LEGACY COMMAND BLOCKED in this generator project. Use: python3 scripts/build_public.py --context deploy-preview; python3 scripts/check_public.py; node scripts/check_review_interactions.cjs; node scripts/check_spatial.cjs.');
+    process.exit(2);
+  }
+})();
 const {parseHTML}=require('linkedom');
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=require('node:path').resolve(__dirname,'..')+'/';

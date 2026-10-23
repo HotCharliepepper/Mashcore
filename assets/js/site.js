@@ -2,15 +2,25 @@
   'use strict';
   document.documentElement.classList.add('js');
   const business = window.MASHCORE_BUSINESS || {};
-  const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화' };
+  const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화', email: '이메일' };
   document.querySelectorAll('[data-business-info]').forEach(list => {
+    // If the static HTML contains verified business data, do not duplicate it.
+    if (list.children.length) { list.hidden = false; return; }
     Object.entries(businessLabels).forEach(([key, label]) => {
       const value = typeof business[key] === 'string' ? business[key].trim() : '';
       if (!value) return;
       const row = document.createElement('div');
       const term = document.createElement('dt');
       const description = document.createElement('dd');
-      term.textContent = label; description.textContent = value;
+      term.textContent = label;
+      if (key === 'email') {
+        const anchor = document.createElement('a');
+        anchor.href = 'mailto:' + value;
+        anchor.textContent = value;
+        description.append(anchor);
+      } else {
+        description.textContent = value;
+      }
       row.append(term, description); list.append(row);
     });
     list.hidden = list.children.length === 0;
@@ -86,7 +96,7 @@
     const updateQuestion = () => {
       document.getElementById('question-count').textContent = question.value.length.toLocaleString('ko-KR') + ' / 1,000';
       status.textContent = '';
-      if (email) email.href = 'mailto:weplace25@gmail.com?subject=' + encodeURIComponent('Mashcore Lab — 함께 보고 싶은 장면') + '&body=' + encodeURIComponent(question.value.trim());
+      if (email) email.href = 'mailto:weplacehyun@naver.com?subject=' + encodeURIComponent('Mashcore Lab — 함께 보고 싶은 장면') + '&body=' + encodeURIComponent(question.value.trim());
     };
     question.addEventListener('input', updateQuestion);
     updateQuestion();

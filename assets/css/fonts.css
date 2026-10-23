@@ -1,0 +1,22 @@
+/* Full-coverage local fonts. License files are distributed with each family. */
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/NotoSansKR-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/NotoSansKR-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Gowun Batang";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/GowunBatang-Regular.woff2") format("woff2");
+}

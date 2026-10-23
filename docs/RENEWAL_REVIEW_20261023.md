@@ -11,8 +11,8 @@
 | 격리된 작업 사본 | `/workspace/scratch/4af8868c2e72/mashcore-review` |
 | 최종 화면 대상 | 위 작업 사본의 `dist/`; 루트 입력 HTML과 구분 |
 | 내부 브라우저 QA | `http://terminal.local:4173/`에서 생성된 결과 검사. 사용자에게 제공하는 외부 호스팅 주소가 아님 |
-| 새 Draft PR | PENDING — 원격 생성 결과를 확인한 뒤 번호·주소·커밋을 기록 |
-| 이번 검토 Preview | PENDING — 실제 생성·접근 확인 뒤 기록. 과거 PR #2 Preview를 이번 결과로 대체하지 않음 |
+| 새 Draft PR | [Draft PR #6](https://github.com/HotCharliepepper/Mashcore/pull/6), open / Draft / unmerged; 현재 main과 병합 충돌 없음 |
+| 이번 검토 Preview | [검토 홈](https://deploy-preview-6--mashcore.netlify.app/) · [화면 비교](https://deploy-preview-6--mashcore.netlify.app/preview/); 기존 Netlify mashcore의 deploy-preview, 12개 경로 HTTP 200 확인 |
 | 실제 화면 캡처 | `docs/screenshots/`의 실제 Chromium 캡처 4장; 이번 dist에서 촬영 |
 
 구현 범위는 홈·모바일·서비스·소개·연구 허브·Chore to Play·Market Interpretation·연구 로그·Explore·Weplace 협업·환불·화면 비교의 12개 HTML 경로다. 모든 검토 페이지에 noindex를 유지하고, 내부 명세·content·scripts·docs·qa·Git 데이터는 배포 산출물에서 제외한다. noindex는 접근 제어가 아니다.
@@ -25,7 +25,9 @@
 | PR #2 | `9e857fdca62b66bd7d81ecc3492940124a02c08a` | 동일 HEAD, open / Draft / not merged | 없음 |
 | PR #2 브랜치 | `feature/mashcore-weplace-portfolio-20261019` | 기존 작업 유지 | 닫기·reset·force push 없음 |
 | 후속 작업 ref | — | `review/mashcore-renewal-20261023` | PR #2 HEAD에서 분기한 격리 작업 사본. 최신 main을 이 검토 브랜치 안으로 병합해 두 계보를 함께 보존(main 자체 변경 없음) |
-| 후속 최종 커밋 | — | PENDING — 검수와 최종 커밋 후 기록 | 운영 반영과 별개 |
+| 후속 최종 커밋 | — | 화면 구현 커밋 `36516abcd7a3375d10645a3a7d547e299f5e3719`; 이후 기록 갱신 HEAD는 Draft PR #6에서 확인 | 운영 반영과 별개 |
+
+일반 Git push는 셸 인증 부재로 실패했다. 연결된 GitHub 기능으로 로컬 검수본과 동일한 tree `c8617cbce7a705081245ebff7cf24c2eaf05acd2`를 등록하고 두 기준 SHA를 부모로 하는 커밋을 만들었다. 파일 tree 일치를 확인한 뒤 그 원격 ref를 현재 작업 사본으로 가져왔다. 원래 로컬 두 커밋은 `local/mashcore-renewal-20261023`에 보존했다. reset·force push·기존 PR 변경은 하지 않았다.
 
 PR 메타데이터의 base SHA `45bba47…`는 현재 main SHA와 다르므로 main의 현재 상태로 사용하지 않았다. 두 기준 이후 신규 커밋은 없었지만, 서로 다른 계보 사이에 존재하던 운영 정보·생성 방식·화면 차이는 아래와 같이 통합했다.
 
@@ -101,6 +103,8 @@ PR 메타데이터의 base SHA `45bba47…`는 현재 main SHA와 다르므로 m
 | 실제 A/B | PASS: 읽는 순서 B 선택·정보 순서/상태 확인 | 전환율·고객 이해도 시험 아님 |
 | 실제 문의 | PASS: URI, 1,001자 원문 보존·행동 차단, 빈 복사 안내 | 외부 메일 앱·SMTP 발송 없음 |
 | 실제 메뉴·3D | PASS: 메뉴 Escape/초점 복귀, 3D 선택·초기화·방향 버튼·키보드 | 물리 터치·센서 시험 아님 |
+| Netlify 이번 Preview | READY, 12 HTML 경로와 JS/CSS/폰트 8개 HTTP 200 | 자산 8개는 dist와 바이트 일치. HTML은 Netlify가 삽입한 동일한 Preview toolbar 블록 하나만 제외하면 dist와 일치. 원격 렌더 브라우저 재검사는 아님 |
+| 비공개 산출 제외 HTTP | content 2개·docs·scripts·.git 경로 5개 모두 404 | noindex와 별도로 실제 공개 경로 제외를 확인 |
 | 외부 CTA/정책 참조 HTTP | Weplace 공식 홈 200; 국가법령정보센터 기존 참조는 이 환경에서 503 | Weplace HTTP 접근만 확인. 법령 링크의 최종 내용/운영 접근은 NEED_VERIFY; 원문 링크는 임의 변경하지 않음 |
 | JavaScript 비활성 sandbox | PASS: A 3개+B 3개 정적 대안·이메일 경로 | 실제 스크립트 비활성 렌더 확인 |
 | 실제 브라우저 클립보드 API 결과 | PASS: iframe 거절 시 실패 안내·원문 전체 선택·직접 복사 대안 | 성공 오표시 없음. 실제 clipboard 성공은 NOT RUN; 성공 분기는 Node VM에서 확인 |
@@ -108,6 +112,8 @@ PR 메타데이터의 base SHA `45bba47…`는 현재 main SHA와 다르므로 m
 **NOT RUN / NEED_VERIFY:** 실제 iPhone/Android·소프트 키보드·물리 센서·스크린리더·외부 메일 앱 실행·메일 송수신/SMTP·등록증 대조·PG 심사/개통·사용자 이해도·운영 URL의 이번 변경 바이트 일치·브라우저 자체 200% 확대·브라우저 모션 감소 설정·폰트/이미지 네트워크 강제 실패. 소스의 fallback·reduced-motion 처리는 존재하지만 해당 브라우저 실패 상태 시험 완료로 기록하지 않는다.
 
 main 전용 동기화·검수 스크립트로 dist를 만들거나 검증하지 않았다. 이력 통합 후 legacy 스크립트에는 생성기 프로젝트에서 실행을 중단하는 안내를 추가했다. 실제 산출물 검수는 `build_public.py`·`check_public.py`·두 런타임 검사로 수행했다. 자동 이메일 발송도 하지 않았다.
+
+원격 근거: `docs/qa/remote-preview-20261023.json`. 배포 ID `6adb79ffba2a561ec0faebc8`, context `deploy-preview`, 구현 커밋 `36516abcd7a3375d10645a3a7d547e299f5e3719`. main은 `b31a55c`, 기존 운영 배포 ID는 `6adb113e296767181eb98f02`로 그대로다.
 
 브라우저 폭/글자 확대의 원시 결과: `docs/qa/browser-layout-20261023.json`. 캡처는 홈 데스크톱, 홈 390px, 모바일 복사 실패 대안, 여섯 관점 선택 화면이다. 폰트·색상은 로딩 후 대표 화면에서 확인했으며 모든 상태의 자동 대비 인증을 주장하지 않는다.
 

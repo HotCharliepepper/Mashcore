@@ -138,25 +138,25 @@ Mashcore의 전체 디자인·연구 체계를 복제하지 않는다. Weplace�
 | 순서 | 07 반영 주제 | 이번 Mashcore에서 실제 구현한 것 | Weplace에서 앞으로 할 일 |
 |---|---|---|---|
 | 1 | 기준·상태 | 01–06·08 기준으로 홈/주요 상세 12개 HTML을 생성. 새 문안·배치는 PROPOSED. 상품 승인 상태 유지 | 공통 철학 재수집 없이 독립 상세설계로 시작 |
-| 2 | 계보·배치 | 착수 main `b31a55cea32cd83113624f9cdc27bd8d8bc36926`, PR #2 `9e857fdca62b66bd7d81ecc3492940124a02c08a`; 둘 다 기준 이후 변경 없음. PR #2 open/Draft/unmerged 유지. `review/mashcore-renewal-20261023`에서 후속 구현. 홈 A/B, Chore 상세 여섯 관점/3D | 이 구현 기록을 Weplace의 코드/배포 상태로 확대하지 않음 |
+| 2 | 계보·배치 | 착수 main `b31a55cea32cd83113624f9cdc27bd8d8bc36926`, PR #2 `9e857fdca62b66bd7d81ecc3492940124a02c08a`; 둘 다 기준 이후 변경 없음. PR #2 open/Draft/unmerged 유지. `review/mashcore-renewal-20261023`에서 후속 구현하고 최신 main을 검토 브랜치의 부모 이력으로 통합. 홈 A/B, Chore 상세 여섯 관점/3D | 이 구현 기록을 Weplace의 코드/배포 상태로 확대하지 않음 |
 | 3 | 브랜드 관계 | ‘현장 실행 브랜드 · 전략·디지털 설계 협업’을 홈 Field와 협업 상세에 사용. 독립적 판단·실행·계약/자료 경계 유지 | Weplace의 관계 문구를 동일 사실 기준으로 편집 |
 | 4 | 실제 경로 | 검토 dist에 `/#field → /work/weplace/` 존재. 상세의 Weplace 공식 홈과 Mashcore `/#invitation` 링크를 구분. 외부 링크는 기본 같은 탭 | Weplace 역방향 링크의 문맥과 목적지는 대화 2에서 선택, 양쪽 실제 배포 URL은 대화 3에서 확인 |
 | 5 | 공동 사례 | 네 질문의 ‘정보 흐름을 요약한 구성’을 설명용 재구성으로 구현. PR 협업 원문의 질문·기여 범위를 이어 읽게 함. 실제 화면/성과 증거로 표시하지 않음 | 공개 가능한 원자료·확인일·실제 기여·사용 허락을 한 건부터 확보. Mashcore는 판단 이유, Weplace는 구현·운영 편집 |
 | 6 | 문의·가격·데이터 | Mashcore 메일/복사, 1,000자 초과 보존·행동 제한·수동 대안. 최신 main 사업자·환불 통합. 두 상품 트랙 별도 표시, production 차단/noindex 유지. 계정/CRM 공유 없음 | Weplace의 실제 수신자·접수·저장·상품/총액·사업자를 별도로 확인. 두 99,000원 가안 혼동 금지 |
 | 7 | 상세설계 범위 | Mashcore 서비스·소개·기존 연구·협업 상세의 방문자 질문/CTA 구현. 빈 Else·새 CMS·분류 URL 없음 | Weplace 전문서비스·업종별 경험·작업실·고객 공간을 자체 목적에 맞게 설계. Mashcore 전체 화면 복제하지 않음 |
-| 8 | 양쪽 연결 검수 | Mashcore 정적 참조 330개와 주요 화면·상태 검수. 실제 운영·Weplace 종단 검증과 구분 | 두 사이트의 도착 경로·뒤로가기·모바일·관계·사례·가격·문의·사업자·데이터 경계를 최종 대조 |
+| 8 | 양쪽 연결 검수 | Mashcore 정적 참조 341개와 주요 화면·상태 검수. 실제 운영·Weplace 종단 검증과 구분 | 두 사이트의 도착 경로·뒤로가기·모바일·관계·사례·가격·문의·사업자·데이터 경계를 최종 대조 |
 
 ## 링크 상태와 아직 확정하지 않은 것
 
 - Mashcore 검토 화면의 내부 경로: 실제 생성 파일과 anchor 검증 완료.
-- 새 Draft PR 및 이번 Preview: **PENDING**. 실제 원격 결과를 확인한 뒤 주소·커밋을 추가한다. 과거 PR #2의 Preview를 이번 결과라고 표기하지 않는다.
-- `https://withweplace.kr/`: 공식 홈을 연결 대상으로 유지. 이 기록만으로 Weplace의 현재 HTTP/DOM·문의·DB 동작을 검증했다고 하지 않는다.
+- 새 [Draft PR #6](https://github.com/HotCharliepepper/Mashcore/pull/6), 구현 커밋 `36516abcd7a3375d10645a3a7d547e299f5e3719`, [이번 Preview](https://deploy-preview-6--mashcore.netlify.app/). 기존 Netlify 프로젝트의 검토 배포를 생성했고 HTTP 200과 dist 내용 일치를 확인했다. HTML의 Netlify Preview toolbar 삽입만 분리했다. 운영 공개나 Weplace 배포가 아니다.
+- `https://withweplace.kr/`: 공식 홈을 연결 대상으로 유지. 이번 HTTP 요청 200을 확인했다. Weplace의 DOM·문의·DB 동작 검증은 별도다.
 - 운영 `mashcore.co.kr/work/weplace/` 제공 여부: 이번 로컬 구현과 구분하며, main 병합·운영 공개 전의 실제 도착 검증 필요.
 - Weplace의 역방향 하위 경로/메뉴: 대화 2 결정 대기. 존재하지 않는 주소를 예상해 만들지 않는다.
 
 ## 이번 검수 근거와 한계
 
-`build_public.py --context deploy-preview`는 HTML 12개·정적 푸터 11개를 생성했고, `check_public.py`는 로컬 참조 330개와 운영 값·정책·가격 상태·모바일 동기화·공개 산출 범위를 통과했다. Node VM 동작 검사 9개와 실제 브라우저의 44개 페이지/폭 조합, 10개 경로의 390px 글자 200% 확대를 확인했다. 상세 기록과 미실시 범위는 `RENEWAL_REVIEW_20261023.md`를 따른다.
+`build_public.py --context deploy-preview`는 HTML 12개·정적 푸터 11개를 생성했고, `check_public.py`는 로컬 참조 341개와 운영 값·정책·가격 상태·모바일 동기화·공개 산출 범위를 통과했다. Node VM 동작 검사 9개와 실제 브라우저의 44개 페이지/폭 조합, 10개 경로의 390px 글자 200% 확대를 확인했다. 상세 기록과 미실시 범위는 `RENEWAL_REVIEW_20261023.md`를 따른다.
 
 실제 기기·물리 센서·SMTP/메일 앱·PG·운영 배포·Weplace 종단·브라우저 자체 200% 줌·모션 감소 브라우저 설정·폰트/이미지 강제 네트워크 실패는 이 기록의 완료 범위가 아니다. DOM/Node 검사와 실제 브라우저·실운영을 섞지 않는다. 클립보드 API의 실제 브라우저 결과는 추가 확인 전 성공으로 기록하지 않는다.
 

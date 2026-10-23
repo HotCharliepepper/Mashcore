@@ -57,3 +57,11 @@ node --check assets/js/preview.js
 - 실제 사업자등록증 상호/주소 표기와 전화번호 **NEED VERIFY**.
 - 기존 인터랙션/애니메이션 기능은 보존했으며 Work 후속 작업 범위로 분리함.
 - PG '탑재 불가' 표시 원인은 미확인. 심사기관 답변 없이 개인 신용 사유로 단정하지 않음.
+
+## Business info visibility patch (2026-10-23)
+
+The public business details are now in a labelled, full-width `footer-legal` section (not an 11px block crowded under the wordmark). Every customer-facing route carries the same static business details, with mobile-specific layout and a regression check in `scripts/check_site.py`. Existing animations and interactive research components are unchanged.
+
+- Customer-visible legal information: footer of https://mashcore.co.kr/
+- `scripts/sync_business_info.py` still reads the public configuration as its source of truth.
+- Business telephone is not yet provided. Do not invent contact information; a real telephone remains necessary for PG storefront review.

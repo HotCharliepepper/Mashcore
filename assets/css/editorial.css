@@ -22,3 +22,18 @@
 @media(max-width:820px){.reason-row dd,.room-panel p,.essay-body p,.field-block p{font-size:15px}}
 .hero-copy>p:not(.draft-note),.reason-row dd,.room-panel p,.field-block p,.essay-body p,.invite-copy p,.question-form textarea{font-size:16px}
 @media print{.site-header,.hero-actions,.menu-btn,.question-form,.review-tag{display:none!important}.dark,.footer{background:#fff;color:#202124}.dark p{color:#202124!important}.section{padding:35px 0}.wrap{width:100%}[hidden]{display:block!important}.room-panel,.essay{break-inside:avoid}}
+
+
+/* Public business details: prominent, readable on every template and visible to PG reviewers. */
+.footer .footer-legal{border-top:1px solid var(--line-dark);margin-top:32px;padding-top:25px;color:var(--paper)}
+.footer .footer-legal h2{font-family:var(--body);font-size:15px;line-height:1.5;font-weight:600;color:#f3f0e8;letter-spacing:-.015em;margin:0 0 19px}
+.footer .footer-legal .business-info{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;row-gap:14px;max-width:none;margin:0;padding:0;min-width:0;color:#e9e3d8;font-size:13px;line-height:1.7}
+.footer .footer-legal .business-info[hidden]{display:none}
+.footer .footer-legal .business-info>div{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;align-items:start;min-width:0}
+.footer .footer-legal .business-info dt{font-size:12px;font-weight:500;color:#bcb3a4;white-space:nowrap}
+.footer .footer-legal .business-info dd{min-width:0;margin:0;font-size:13px;font-weight:400;line-height:1.75;color:#f3f0e8;overflow-wrap:anywhere}
+.footer .footer-legal .business-info a{color:#f3f0e8;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.footer .footer-legal .business-info a:hover{color:white}
+.footer .footer-bottom{margin-top:28px}
+@media(max-width:900px){.footer .footer-legal .business-info{grid-template-columns:1fr;row-gap:12px}.footer .footer-legal .business-info>div{grid-template-columns:108px minmax(0,1fr)}}
+@media(max-width:520px){.footer .footer-legal{margin-top:26px;padding-top:24px}.footer .footer-legal h2{font-size:14px;margin-bottom:14px}.footer .footer-legal .business-info>div{grid-template-columns:104px minmax(0,1fr);gap:8px}.footer .footer-legal .business-info dt{font-size:11px}.footer .footer-legal .business-info dd{font-size:12px}}

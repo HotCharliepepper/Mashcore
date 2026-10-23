@@ -16,9 +16,13 @@ function setup(route,search=''){
  return {document,Event,win,navigator,run,click,key,get copied(){return copied}};
 }
 async function main(){
- for(const route of ['index.html','mobile/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html']){
+ for(const route of ['index.html','mobile/index.html','services/index.html','policies/refund/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html']){
   const env=setup(route),{document,run,click,key,Event,win}=env;
   run('site-config.js');run('site.js');
+  const businessPanel=document.querySelector('footer .footer-legal');
+  assert.ok(businessPanel, 'Missing visible business footer section');
+  assert.equal(businessPanel.querySelector('h2').textContent.trim(),'사업자 정보');
+  assert.equal(businessPanel.closest('.footer-grid'),null);
   assert.equal(document.querySelector('[data-business-info]').hidden,false);
   assert.match(document.querySelector('[data-business-info]').textContent,/247-02-04104/);
   assert.equal(document.querySelector('[data-business-info] a[href^="mailto:"]').getAttribute('href'),'mailto:weplacehyun@naver.com');

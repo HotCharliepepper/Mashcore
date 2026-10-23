@@ -5,7 +5,7 @@ const checks=[];
 function setup(route,search=''){
  const {document,Event}=parseHTML(fs.readFileSync(root+route,'utf8'));
  const listener={};const media={matches:false,addEventListener(){}};
- const win={matchMedia:()=>media,addEventListener(n,f){listener[n]=f},isSecureContext:true,innerHeight:800,scrollY:0,location:{href:'https://mashcore.netlify.app/'+search,hash:'',replace(v){win.replaced=v}},history:{replaceState(a,b,u){win.location.href=String(u)}}};
+ const win={matchMedia:()=>media,addEventListener(n,f){listener[n]=f},isSecureContext:true,innerHeight:800,scrollY:0,location:{href:'https://mashcore.co.kr/'+search,hash:'',replace(v){win.replaced=v}},history:{replaceState(a,b,u){win.location.href=String(u)}}};
  let copied='';const navigator={clipboard:{writeText:async value=>{copied=value}}};
  Object.defineProperty(document.documentElement,'scrollHeight',{value:2400});
  for(const input of document.querySelectorAll('input[type="radio"]'))Object.defineProperty(input,'checked',{get(){return this.hasAttribute('checked')},set(v){if(v)this.setAttribute('checked','');else this.removeAttribute('checked')}});
@@ -19,7 +19,9 @@ async function main(){
  for(const route of ['index.html','mobile/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html']){
   const env=setup(route),{document,run,click,key,Event,win}=env;
   run('site-config.js');run('site.js');
-  assert.equal(document.querySelector('[data-business-info]').hidden,true);
+  assert.equal(document.querySelector('[data-business-info]').hidden,false);
+  assert.match(document.querySelector('[data-business-info]').textContent,/247-02-04104/);
+  assert.equal(document.querySelector('[data-business-info] a[href^="mailto:"]').getAttribute('href'),'mailto:weplacehyun@naver.com');
   click(document.querySelector('.menu-btn'));assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'true');key(document.querySelector('.menu-btn'),'Escape');assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'false');
   if(document.getElementById('question')){
    const q=document.getElementById('question');q.select=()=>{};q.value='왜 망설일까요? & 작은 질문';q.dispatchEvent(new Event('input'));

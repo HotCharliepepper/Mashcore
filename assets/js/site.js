@@ -4,6 +4,8 @@
   const business = window.MASHCORE_BUSINESS || {};
   const businessLabels = { companyName: '상호', representative: '대표자', registrationNumber: '사업자등록번호', address: '사업장 주소', phone: '전화', email: '이메일' };
   document.querySelectorAll('[data-business-info]').forEach(list => {
+    // If the static HTML contains verified business data, do not duplicate it.
+    if (list.children.length) { list.hidden = false; return; }
     Object.entries(businessLabels).forEach(([key, label]) => {
       const value = typeof business[key] === 'string' ? business[key].trim() : '';
       if (!value) return;

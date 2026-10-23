@@ -43,6 +43,22 @@ for path,page in pages.items():
     label=str(path.relative_to(ROOT))
     errors.extend(f'{label}: {e}' for e in page.errors)
     if page.h1!=1 or page.title!=1 or not page.description: errors.append(f'{label}: missing/duplicate heading or metadata')
+    # A successful deploy is not enough if required business information is
+    # visually buried or only hydrated by JavaScript. Keep its full-width panel
+    # and the legal details in the static HTML of every customer-facing footer.
+    source=path.read_text(encoding='utf-8')
+    if '<footer class="footer">' in source:
+        if '<section class="footer-legal"' not in source or '<h2 id="footer-business-title">사업자 정보</h2>' not in source:
+            errors.append(f'{label}: missing labelled business info panel')
+        if '<dl class="business-info" data-business-info="">' not in source:
+            errors.append(f'{label}: business info must be visible without JavaScript')
+        if '247-02-04104' not in source or 'weplacehyun@naver.com' not in source:
+            errors.append(f'{label}: expected owner-provided business details not rendered')
+        footer=source[source.index('<footer class="footer">'):]
+        footer_grid_end=footer.find('</nav></div>')
+        legal_start=footer.find('<section class="footer-legal"')
+        if footer_grid_end<0 or legal_start<=footer_grid_end:
+            errors.append(f'{label}: business info must be outside the narrow footer grid')
     for id,count in Counter(page.ids).items():
         if count>1: errors.append(f'{label}: duplicate id {id}')
     for id in page.refs:

@@ -40,3 +40,12 @@
 
 - https://docs.tosspayments.com/guides/v2/get-started/payment-products
 - https://docs.netlify.com/manage/domains/manage-domains/assign-a-domain-to-your-site-app/
+
+## 2026-10-23 시인성 개선 및 회귀 방지
+
+- 홈페이지 하단의 사업자 정보가 좁은 좌측 푸터 영역, 11px 수준으로 놓여 있어 실제 확인이 어렵다는 문제 제기를 받음.
+- 모든 주요 HTML 페이지에 독립적인 `footer-legal` 영역을 만들고 제목 '사업자 정보', 대표자·등록번호·주소·이메일을 명료하게 배치.
+- `assets/css/editorial.css`의 공통 스타일로 모바일·데스크톱 가독성을 제어. 기존 인터랙션/애니메이션은 변경하지 않음.
+- `scripts/check_site.py`에서 영역 누락, JS 없이 표시되는 데이터, 저장소 공개 사업자 정보와의 정합성을 검사.
+- 운영 주소는 `https://mashcore.co.kr/`. 고객 측 캐시가 남으면 새로고침(Windows Ctrl+F5, macOS Cmd+Shift+R)을 안내.
+- **전화번호는 미확정**, 토스페이먼츠 입점 심사에는 추가 준비가 필요함.

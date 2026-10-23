@@ -1,11 +1,19 @@
 """Zero-dependency link, asset, semantic-reference and JSON-LD regression check."""
 from html.parser import HTMLParser
+from html import escape
 from collections import Counter
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import json
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
+CONFIG_TEXT = (ROOT/'assets/js/site-config.js').read_text(encoding='utf-8')
+BUSINESS_FIELDS = ('companyName', 'representative', 'registrationNumber', 'address', 'phone', 'email')
+PUBLIC_BUSINESS = {}
+for key in BUSINESS_FIELDS:
+    found = re.search(r'\\b' + key + r"\\s*:\\s*'([^']*)'", CONFIG_TEXT)
+    PUBLIC_BUSINESS[key] = found.group(1).strip() if found else ''
 class Page(HTMLParser):
     def __init__(self, path):
         super().__init__(convert_charrefs=True)
@@ -52,8 +60,11 @@ for path,page in pages.items():
             errors.append(f'{label}: missing labelled business info panel')
         if '<dl class="business-info" data-business-info="">' not in source:
             errors.append(f'{label}: business info must be visible without JavaScript')
-        if '247-02-04104' not in source or 'weplacehyun@naver.com' not in source:
-            errors.append(f'{label}: expected owner-provided business details not rendered')
+        legal_section = re.search(r'<section class="footer-legal"[^>]*>[\\s\\S]*?</section>', source)
+        if legal_section:
+            for key, value in PUBLIC_BUSINESS.items():
+                if value and escape(value) not in legal_section.group(0):
+                    errors.append(f'{label}: business detail {key} differs from site-config.js')
         footer=source[source.index('<footer class="footer">'):]
         footer_grid_end=footer.find('</nav></div>')
         legal_start=footer.find('<section class="footer-legal"')

@@ -4,3 +4,5 @@ node_modules/
 __pycache__/
 *.pyc
 qa/screenshots/
+qa/r1/before-dist/
+qa/r1/site/

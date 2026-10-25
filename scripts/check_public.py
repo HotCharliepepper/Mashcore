@@ -140,12 +140,12 @@ def check_products(page: Page):
         assert compact(value) in main_text, f'Main price track condition lost: {value}'
     assert not any('data-product-contact' in n.attrs for n in main_track.descendants()), 'Price tracks merged'
     axis_terms = (
-        ('신호 해석', '무엇이 달라졌고, 무엇을 더 확인해야 할까요?', '관찰한 장면·근거·가능한 설명·우선 확인할 질문'),
-        ('사업 구조', '누구에게 어떤 가치를 어떤 흐름으로 제공할까요?', '고객·가치·제공 방식·실행 우선순위'),
-        ('고객 분석', '고객은 어디에서 망설이고, 무엇을 다시 묻나요?', '고객 질문·접점 지도·확인할 자료와 방법'),
-        ('영업 설계', '무엇을 어떤 순서로 이해하면 다음 행동이 자연스러울까요?', '상담 질문·제안 순서·후속 대화 기준'),
-        ('디지털 요구사항', '홈페이지와 업무 흐름에 무엇이 먼저 필요할까요?', '페이지·기능 지도, 정보 순서, 완료 판단 기준'),
-        ('학습과 회고', '실행 뒤 무엇을 유지하고 바꿀까요?', '결정 기록·다른 설명·다음 확인 계획'),
+        ('신호 해석', '무엇이 달라졌고, 무엇을 더 확인해야 할까요?', '관찰 기록, 가능한 설명, 우선 확인 질문'),
+        ('사업 구조', '누구에게 어떤 가치를 제공할까요?', '고객·가치·제공 방식과 실행 우선순위'),
+        ('고객 분석', '고객은 무엇을 다시 확인하고 있나요?', '고객 질문, 접점 지도, 확인 계획'),
+        ('영업 설계', '다음 대화로 이어지려면 무엇을 먼저 말해야 할까요?', '상담 질문, 제안 순서, 후속 대화 기준'),
+        ('디지털 요구사항', '화면과 업무에 무엇이 먼저 필요할까요?', '정보 구조, 기능 요구사항, 완료 판단 기준'),
+        ('학습과 회고', '바꾼 뒤 무엇을 유지하고 고칠까요?', '결정 기록, 관찰 결과, 다음 실행'),
     )
     axes = page.one('id', 'service-axes')
     for terms in axis_terms:
@@ -254,7 +254,7 @@ def main():
             nav_links = [n for n in nav.descendants() if n.tag == 'a']
             core_links = [n for n in nav_links if 'mobile-inquiry' not in n.attrs.get('class', '').split()]
             mobile_links = [n for n in nav_links if 'mobile-inquiry' in n.attrs.get('class', '').split()]
-            assert [n.attrs.get('href') for n in core_links] == ['/services/', '/research/', '/explore/', '/about/'], f'Common navigation mismatch: {rel}'
+            assert [n.attrs.get('href') for n in core_links] == ['/services/', '/#field', '/research/', '/about/'], f'Common navigation mismatch: {rel}'
             assert len(mobile_links) <= 1, f'Duplicate mobile inquiry link: {rel}'
             if mobile_links:
                 assert mobile_links[0].attrs.get('href') == '/#invitation', f'Mobile inquiry destination mismatch: {rel}'

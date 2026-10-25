@@ -66,11 +66,11 @@ def business_rows(b: dict) -> str:
 
 
 def header() -> str:
-    return '<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore</a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a class="mobile-inquiry" href="/#invitation">내 상황 이야기하기 ↗</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'
+    return '<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore</a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/services/">하는 일</a><a href="/#field">현장과 작업</a><a href="/research/">연구</a><a href="/about/">소개</a><a class="mobile-inquiry" href="/#invitation">내 상황 이야기하기 ↗</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'
 
 
 def footer(b: dict) -> str:
-    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>문안·구성 검토본</span><a href="#main">위로 ↑</a></div></div></footer>'''
+    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/research/log/">연구 기록</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>문안·구성 검토본</span><a href="#main">위로 ↑</a></div></div></footer>'''
 
 
 def page(path: str, title: str, description: str, main: str, b: dict, *, home: bool = False, review: bool = True) -> str:
@@ -79,7 +79,7 @@ def page(path: str, title: str, description: str, main: str, b: dict, *, home: b
     robots = '<meta name="robots" content="noindex,nofollow">' if review else ''
     scripts = '<script defer src="/assets/js/site-config.js"></script><script defer src="/assets/js/site.js"></script>'
     if home:
-        scripts += '<script defer src="/assets/js/observations.js"></script><script defer src="/assets/js/chapters.js"></script>'
+        scripts += '<script defer src="/assets/js/hero-media.js"></script><script defer src="/assets/js/observations.js"></script><script defer src="/assets/js/chapters.js"></script>'
     body_class = 'landing-page core-page' if home else 'document-page core-page'
     return f'''<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{E(title)}</title><meta name="description" content="{E(description,quote=True)}"><meta name="theme-color" content="#202124"><link rel="canonical" href="{BASE}{path}"><meta property="og:type" content="website"><meta property="og:title" content="{E(title,quote=True)}"><meta property="og:description" content="{E(description,quote=True)}"><meta property="og:url" content="{BASE}{path}">{robots}<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121A14'/%3E%3Cpath d='M8 22V10h2.4l3.1 7 3.1-7H22v12h-2.2v-7.8l-2.9 6.4h-1.8l-2.9-6.4V22z' fill='%23A6885A'/%3E%3C/svg%3E"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@400;500;600&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/strategy.css"><script type="application/ld+json">{schema}</script>{scripts}</head><body class="{body_class}"><a class="core-skip" href="#main">본문으로 바로 가기</a>{header()}<main id="main">{main}</main>{footer(b)}</body></html>'''
@@ -110,11 +110,6 @@ def services(c: dict, heading: str = 'h2') -> str:
     return f'''<section class="core-band core-services" id="services" aria-labelledby="services-title"><div class="core-wrap"><p class="core-overline">함께 시작하는 네 가지 방법</p><{heading} id="services-title">지금 필요한 만큼,<br>함께 시작합니다.</{heading}><p class="core-lead">처음 방향을 찾는 일부터, 자료 분석과 실행 설계까지.<br>지금 필요한 도움과 결과물을 먼저 살펴보세요.</p><aside class="core-review-notice" aria-label="상품 검토안 안내"><strong>현재는 상품 구성 검토 단계입니다.</strong><p>{E(c['common_notice'])}</p></aside><div class="core-product-grid">{cards}</div><div class="core-common"><h3>모든 구성에서 먼저 합의할 내용</h3><p>{E(c['common_scope'])}</p><details><summary>공통 별도 항목과 계약 범위 보기</summary><ul>{exclusions}</ul><p>자료 전달 방식, 실제 투입 인력, 변경·취소·해지 조건, 결과물의 사용 범위는 계약 전에 정합니다. 특정 매출·검색 순위·계약 건수를 보장하지 않습니다.</p></details></div><p class="core-final-question">어떤 구성이 맞는지 아직 모르셔도 괜찮습니다.<br><a href="/#invitation">지금 상황부터 이야기하기 →</a></p></div></section>'''
 
 
-def hero(s: dict) -> str:
-    title=s['hero_title']
-    return f'''<div class="core-hero"><div class="core-wrap core-hero-grid"><div><p class="core-overline">{E(s['principle'])}</p><h1 id="opening-title">{E(title[0])}<br><em>{E(title[1])}<br>{E(title[2])}</em></h1><p class="core-hero-description">{E(s['hero_description'])}</p><div class="core-hero-actions"><a class="core-button core-button-light" href="#together">함께하는 방식 보기 ↓</a><a class="core-hero-secondary" href="#services">상품 구성 살펴보기 ↗</a></div></div><div class="core-convergence" role="group" aria-label="현장의 경험과 전략 설계, 데이터 분석이 Mashcore에서 하나의 실행 방향으로 연결됩니다."><p class="core-diagram-label">서로 다른 강점, 하나의 방향</p><div class="core-inputs"><div><span>대표님</span><strong>현장의 경험</strong></div><div><span>최규현</span><strong>전략·디자인·기술</strong></div><div><span>만덕</span><strong>데이터 분석</strong></div></div><div class="core-join" aria-hidden="true"><i></i><i></i><i></i></div><div class="core-hub"><span>Mashcore</span><strong>사업의 중심을 잡는<br>전략 설계</strong></div><p class="core-diagram-result">무엇을 살릴지 · 무엇부터 바꿀지</p></div></div><div class="core-wrap core-hero-floor"><span>경험을 모으고, 근거를 살피고, 실행으로.</span><a href="#research">작은 행동을 살피는 방법 ↓</a></div></div>'''
-
-
 def extract_sections(source: str) -> tuple[str,str,str]:
     markers=['<section aria-labelledby="observation-title"','<section aria-labelledby="connection-title"','<section aria-labelledby="invite-title"']
     pos=[]
@@ -136,7 +131,7 @@ def about_main(s: dict) -> str:
 def render_new_pages(output: Path, s: dict, c: dict, b: dict, context: str) -> None:
     for route,title,desc,body in [
         ('about','소개 — Mashcore',s['description'],render_about(s)),
-        ('services','상품 구성 검토안 — Mashcore','400만원·250만원·150만원·50만원의 네 가지 협업 구성 프로토타입입니다. 정식 판매·결제 페이지가 아닙니다.',render_services(c, product, services))
+        ('services','하는 일 — Mashcore','사업의 방향, 고객에게 건네는 말, 홈페이지와 상담의 흐름을 함께 설계합니다. 상품 구성과 조건은 검토 중입니다.',render_services(c, product, services))
     ]:
         (output/route).mkdir(parents=True,exist_ok=True)
         (output/route/'index.html').write_text(page('/'+route+'/',title,desc,body,b,review=context!='production' or route=='services'),encoding='utf-8')
@@ -159,10 +154,11 @@ def build(root: Path, output: Path, context: str) -> dict:
             shutil.copytree(root/name,output/name,ignore=shutil.ignore_patterns('*.md','*.map','.DS_Store','node_modules','__pycache__'))
     for name in ('robots.txt','sitemap.xml','_redirects','_headers','mashcore-profile.jpg'):
         if (root/name).is_file():shutil.copy2(root/name,output/name)
-    observed=review_observation(observed)
-    portfolio=review_field()
-    invitation=review_invitation(EMAIL)
-    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+review_hero(s)+'</section>'
+    media=read_json(root/'content/hero-media.json')
+    observed=review_observation(observed,s)
+    portfolio=review_field(s)
+    invitation=review_invitation(EMAIL,s)
+    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+review_hero(s,media)+'</section>'
     main=origin+observed+portfolio+invitation
     home=page('/',s['title'],s['description'],main,b,home=True,review=context!='production')
     (output/'index.html').write_text(home,encoding='utf-8')

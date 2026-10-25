@@ -1,0 +1,30 @@
+{
+  "r1_head": "4cd7504878f3118e876beb179f490a141a0e5b61",
+  "r2_implementation": "f2d51d8d3701fc7d8245e4b1603211c98b78d020",
+  "r2_final_code": "d5179086661cdd7b1c08e0231f11a6e216cc185f",
+  "deploy": {
+    "id": "6ade289eeba0b597dafdfbb5",
+    "state": "ready",
+    "context": "deploy-preview",
+    "commit_ref": "d5179086661cdd7b1c08e0231f11a6e216cc185f",
+    "published_at": null,
+    "review_url": "https://deploy-preview-6--mashcore.netlify.app"
+  },
+  "production_deploy": {
+    "id": "6adb113e296767181eb98f02",
+    "state": "ready"
+  },
+  "pr2_head": "9e857fdca62b66bd7d81ecc3492940124a02c08a",
+  "open_items": [
+    {
+      "number": 6,
+      "pr": true
+    },
+    {
+      "number": 2,
+      "pr": true
+    }
+  ],
+  "changed_production": false,
+  "changed_gbp": false
+}

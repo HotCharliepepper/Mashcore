@@ -10,9 +10,12 @@
   const controls = root.querySelector('[data-hero-controls]');
   const button = root.querySelector('[data-hero-toggle]');
   const status = root.querySelector('[data-hero-status]');
+  const poster = root.querySelector('[data-hero-poster]');
+  let posterReady = !poster || (poster.complete && poster.naturalWidth > 0);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const narrow = window.matchMedia('(max-width: 900px)').matches;
-  const source = narrow ? (config.video.mobile || config.video.desktop) : (config.video.desktop || config.video.mobile);
+  const viewport = window.matchMedia('(max-width: 700px)');
+  const sourceForViewport = () => viewport.matches ? (config.video.mobile || config.video.desktop) : (config.video.desktop || config.video.mobile);
+  let source = sourceForViewport();
   // Only explicit local media paths are used. Invalid configuration keeps the poster.
   if (!video || typeof source !== 'string' || !source.startsWith('/') || source.startsWith('//')) return;
   let state = 'loading', userPaused = false, ended = false, inView = false;
@@ -87,10 +90,17 @@
   }
   function reconcile() {
     if (!eligible()) { pauseForEnvironment(); return; }
+    // Let the eager image finish first. No fixed loading screen or timing gate.
+    if (!posterReady && !manualPending) return;
     if (!requested && !reduced.matches && !saveData) load();
     if (video.readyState >= 3) attempt(manualPending);
   }
   video.addEventListener('canplay', reconcile);
+  if (poster) {
+    poster.addEventListener('load', () => { posterReady = true; reconcile(); });
+    // A broken poster must not prevent an explicit, available video from working.
+    poster.addEventListener('error', () => { posterReady = true; reconcile(); });
+  }
   video.addEventListener('playing', () => {
     if (!eligible()) { video.pause(); return; }
     hasPlayed = true; pending = false; setState('playing');
@@ -116,6 +126,24 @@
       video.pause(); setState('reduced_motion');
     }
     // Toggling the preference back is not consent to restart.
+  });
+  viewport.addEventListener('change', () => {
+    const nextSource = sourceForViewport();
+    if (nextSource === source || typeof nextSource !== 'string' || !nextSource.startsWith('/') || nextSource.startsWith('//')) return;
+    const wasPlaying = state === 'playing' || pending;
+    const position = video.currentTime;
+    generation++; pending = false; video.pause();
+    source = nextSource; requested = false; hasPlayed = false; failed = false;
+    video.removeAttribute('src'); video.load();
+    // Pause/end choices survive orientation changes; preparing a new crop is not consent to restart.
+    environmentResume = wasPlaying && !userPaused && !ended;
+    const switchGeneration = generation;
+    posterReady = !poster || (poster.complete && poster.naturalWidth > 0);
+    setState(ended ? 'ended' : userPaused ? 'paused_user' : reduced.matches ? 'reduced_motion' : blocked || saveData ? 'blocked' : 'loading');
+    if (environmentResume) video.addEventListener('loadedmetadata', () => {
+      if (generation === switchGeneration && Number.isFinite(position) && Number.isFinite(video.duration)) video.currentTime = Math.min(position, Math.max(0, video.duration - 0.1));
+    }, {once:true});
+    reconcile();
   });
   let observer;
   if ('IntersectionObserver' in window) {

@@ -15,6 +15,9 @@ import shutil
 from urllib.parse import urlencode
 from review_home import hero as review_hero, observation as review_observation, field as review_field, invitation as review_invitation, flow_figure
 from review_details import render_services, render_about
+from review_r2 import hero as r2_hero, situations, judgment, outputs_process, home_faq
+from media_assets import verify_media
+from review_seo import apply_seo
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://mashcore.co.kr'
@@ -70,7 +73,7 @@ def header() -> str:
 
 
 def footer(b: dict) -> str:
-    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/research/log/">연구 기록</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>문안·구성 검토본</span><a href="#main">위로 ↑</a></div></div></footer>'''
+    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/research/log/">연구 기록</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>전략·브랜드·디지털 설계</span><a href="#main">위로 ↑</a></div></div></footer>'''
 
 
 def page(path: str, title: str, description: str, main: str, b: dict, *, home: bool = False, review: bool = True) -> str:
@@ -158,7 +161,10 @@ def build(root: Path, output: Path, context: str) -> dict:
     observed=review_observation(observed,s)
     portfolio=review_field(s)
     invitation=review_invitation(EMAIL,s)
-    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+review_hero(s,media)+'</section>'
+    origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+r2_hero(s,media)+situations()+'</section>'
+    observed=observed.rsplit('</section>',1)[0]+judgment()+'</section>'
+    portfolio=portfolio.rsplit('</section>',1)[0]+outputs_process()+'</section>'
+    invitation=invitation.replace('<div class="chapter-inner invitation-layout">',home_faq()+'<div class="chapter-inner invitation-layout">',1)
     main=origin+observed+portfolio+invitation
     home=page('/',s['title'],s['description'],main,b,home=True,review=context!='production')
     (output/'index.html').write_text(home,encoding='utf-8')
@@ -176,7 +182,12 @@ def build(root: Path, output: Path, context: str) -> dict:
             if '/assets/css/strategy.css' not in text:
                 text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/strategy.css"></head>',1)
         text=re.sub(r'<link[^>]+(?:fonts.googleapis.com|fonts.gstatic.com)[^>]*>','',text)
-        text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"></head>',1)
+        # Establish the existing progressive-enhancement class before first paint.
+        # If site.js fails, restore the readable navigation fallback.
+        if path.relative_to(output).as_posix()!='preview/index.html':
+            text=text.replace('<head>','<head><script>document.documentElement.classList.add("js");addEventListener("error",e=>{if((e.target?.src||e.filename||"").split("?")[0].endsWith("/site.js"))document.documentElement.classList.remove("js")},true)</script>',1)
+        text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"><link rel="stylesheet" href="/assets/css/experience-r2.css"></head>',1)
+        text=apply_seo(text,path.relative_to(output).as_posix(),root,b)
         if context!='production' and not re.search(r'<meta\b[^>]*\bname=[\'"]robots[\'"]',text):
             text=text.replace('</head>','<meta name="robots" content="noindex,nofollow"></head>',1)
         path.write_text(text,encoding='utf-8')
@@ -190,6 +201,7 @@ def build(root: Path, output: Path, context: str) -> dict:
         (output/'robots.txt').write_text('User-agent: *\nDisallow: /\n',encoding='utf-8')
         h=output/'_headers';existing=h.read_text(encoding='utf-8') if h.exists() else ''
         h.write_text(existing+'\n/*\n  X-Robots-Tag: noindex, nofollow\n',encoding='utf-8')
+    verify_media(root,output)
     result={'context':context,'html_pages':len(list(output.rglob('*.html'))),'business_footers':count,'products':len(c['products'])}
     print(json.dumps(result,ensure_ascii=False));return result
 

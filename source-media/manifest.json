@@ -1,0 +1,29 @@
+{
+  "files": [
+    {
+      "output": "assets/media/hero-desktop.mp4",
+      "sha256": "49ce11edd5daf0d26d95b192c4e9de7512107a2c6b69c47190f5f93c292a001a",
+      "bytes": 362892
+    },
+    {
+      "output": "assets/media/hero-desktop.webp",
+      "sha256": "d1843366a7dee33ab6ca91b4a9fa1c1f179d5851d56e6a81b86bf06e0074fa30",
+      "bytes": 146030
+    },
+    {
+      "output": "assets/media/hero-mobile.mp4",
+      "sha256": "360d049d87de0a1d60eca85135671c415c3fe8ea2fd99b3bf5f49f02828820c7",
+      "bytes": 196263
+    },
+    {
+      "output": "assets/media/hero-mobile.webp",
+      "sha256": "cb994a6d9226300dc957fa793e906e9825c7fb8e7a3e407f0b1a8f894426b41a",
+      "bytes": 97192
+    },
+    {
+      "output": "assets/media/mashcore-og.png",
+      "sha256": "2dda45d25c69d52881c30f7ef924f6b5c27a02a1a07def402c2fe9c2458859d0",
+      "bytes": 26586
+    }
+  ]
+}

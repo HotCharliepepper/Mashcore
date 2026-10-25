@@ -5,6 +5,7 @@ generator. Main's separate price text is preserved in a source-only fragment.
 """
 from html import escape
 from pathlib import Path
+from review_r2 import worksheet
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,13 +40,8 @@ def render_services(c: dict, product_renderer, services_renderer) -> str:
 </div></section>
 <section class="core-band core-example" aria-labelledby="outputs-title"><div class="core-wrap">
   <p class="core-overline">무엇이 남나요?</p><h2 id="outputs-title">다음 선택에 다시 꺼내 볼 기준.</h2>
-  <p class="core-lead">질문과 자료를 모으고, 선택한 이유와 다음 실행을 한 흐름으로 정리합니다.</p>
-  <figure class="review-output-example"><figcaption>결과물 구성 예시 · 실제 고객 사례나 완성 납품물이 아닙니다.</figcaption><div class="review-output-grid">
-    <article><span>01</span><h3>질문</h3><p>지금 함께 풀어야 할 것은 무엇인가?</p></article>
-    <article><span>02</span><h3>확인할 자료</h3><p>어떤 사실과 다른 설명을 더 살펴볼까?</p></article>
-    <article><span>03</span><h3>선택한 방향</h3><p>무엇을 먼저 바꾸고, 왜 이 순서를 골랐나?</p></article>
-    <article><span>04</span><h3>다음 실행</h3><p>무엇을 해 보고, 어떤 반응을 확인할까?</p></article>
-  </div></figure>
+  <p class="core-lead">질문·확인 자료·선택 방향·다음 실행을 한 장에서 다시 볼 수 있게 정리합니다.</p>
+  {worksheet()}
 </div></section>
 <section class="core-band" aria-labelledby="process-title"><div class="core-wrap"><p class="core-overline">함께 일하는 과정</p><h2 id="process-title">기대와 범위를 맞춘 뒤 시작합니다.</h2><ol class="review-process">{process_html}</ol><p class="core-note">기간·회차·수정 횟수·담당 역할은 필요한 일과 자료를 확인한 뒤 합의합니다.</p></div></section>
 <section class="core-band review-pricing-intro" aria-labelledby="price-tracks-title"><div class="core-wrap"><p class="core-overline">상품 구성 검토</p><h2 id="price-tracks-title">두 상품안을 비교 중입니다.</h2><p class="core-lead">금액과 범위는 아래 검토 상태를 함께 확인해 주세요. 같은 금액이어도 서로 다른 상품이며, 정식 판매 조건은 아직 확정하지 않았습니다.</p><p class="core-note">실제 개발·배포·DB·보안·대규모 제작은 별도 범위를 합의합니다. 이 페이지에서는 결제나 계약이 진행되지 않습니다.</p><nav class="review-price-nav" aria-label="가격 검토안"><a href="#prototype-price-track">프로젝트별 구성안 ↓</a><a href="#main-price-track">진단·실행 구성안 ↓</a></nav></div></section>

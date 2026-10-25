@@ -274,7 +274,9 @@ def main():
     catalog = check_products(parsed[DIST / 'services/index.html'])
     home_raw = (DIST / 'index.html').read_text(encoding='utf-8')
     mobile_raw = (DIST / 'mobile/index.html').read_text(encoding='utf-8')
-    assert mobile_raw.replace('class="landing-page core-page mobile-edition"', 'class="landing-page core-page"', 1).replace('<title>Mashcore 모바일 —', '<title>Mashcore —', 1) == home_raw, 'Mobile is not generated from the same source'
+    # R2 has route-specific metadata, while both home routes retain the same body.
+    mobile_body=mobile_raw[mobile_raw.index('<body'):].replace('class="landing-page core-page mobile-edition"','class="landing-page core-page"',1)
+    assert mobile_body == home_raw[home_raw.index('<body'):], 'Mobile content is not generated from the same source'
     home = parsed[DIST / 'index.html']
     assert [n.attrs.get('id') for n in home.where('data-chapter')] == ['origin', 'research', 'field', 'invitation'], 'Home scene IDs/order changed'
     assert not home.product_links, 'Home must lead to service details, not duplicate product terms'

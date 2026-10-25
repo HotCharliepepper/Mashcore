@@ -1,0 +1,223 @@
+{
+  "deploy_id": "6ade057424cd7fdda7398c2e",
+  "url": "https://deploy-preview-6--mashcore.netlify.app",
+  "environment": "HTTP bytes, separate from rendered-browser QA",
+  "pass": true,
+  "results": [
+    {
+      "path": "/about/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/about/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "11eaca6234cf9bbe05278485b7e36294abd98de589a2037eb3937795a1e2c8f2",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/explore/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/explore/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "b7c3e29d8e112861ad566d3f08a93b1b7effad7a962aed911866603aece91805",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "2cb603554a92c87f26515a23aad28a4b1dbe0df92e118305f3480d3af23d5680",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/mobile/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/mobile/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "3c0ae8ff0c07719e26c5021ac4a6e4d252a7d220c493f4b006a08acd9ee0a509",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/policies/refund/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/policies/refund/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "f191e89be9b7595ffff949afc93ecc15ac23fa0614b50ad5a8a0a511f0530010",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/preview/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/preview/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "2dce90f0eccefb96d03d22b5ec46897f5ac68479d4fa34076274b487cdf7f11c",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/chore-to-play/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/chore-to-play/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "3c41464c8b612fd56f1c14c51e76e4b42cd2caadcd8569542ad59da01c73ead0",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "d3e45821839a8b21ad94473d7fd10df188c8feb768a8b720b96ab25cafbf08e9",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/log/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/log/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "5344a26476ef262aa616edc2bcd8175b6a12763689b7c9c4cca5937d4f4992e5",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/market-interpretation/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/market-interpretation/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "c446f3d55f1b2cee9e3bb93cc3f1b8e5c4ce9a3dceb3ceb2f626149bfdb59d46",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/services/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/services/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "f3b6be370bf67c7708f5818a3b6bd413e9f84f167f0ed19baa24d05112979def",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/work/weplace/",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/work/weplace/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "7f598d27135012f3638fc9d1536780ae58db85f610ccd59cfd674695ddd1d590",
+      "toolbar_blocks_removed": 1,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/hero-media.js",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/hero-media.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "bf9f39f2c0cdbb2575c35e2356bbc1de1b5712afea0bb0caa81eacc49de849e7",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/site.js",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/site.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "3b53a94a8d1c4adde3f9fc6bf663ccf49674253a3af7830f5437facdeb0d95f9",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/observations.js",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/observations.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "81c15772d2d5d6d0823e3c7f71487af022902046e146780da3700b8d29290e1c",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/chore-spatial.js",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/chore-spatial.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "8f81fb2ad84c246fcd8b10711754d010aae38c29c6330e29a080adaf16a6fd6f",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/css/renewal.css",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/css/renewal.css",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "fb835f921f4ee6d4ae85c2e9a6a6493a0b21a7e72f7c47deaa9d40699eeee3d3",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/origin-threshold-desktop.svg",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/media/origin-threshold-desktop.svg",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "7bc748724e10d1e1a0423581b4dc88712c663179cce6f912a6687154af4ccd94",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/origin-threshold-mobile.svg",
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/media/origin-threshold-mobile.svg",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "31a3416c3d71a4c0cb544fa9386b2a070ecfac954a75f4a74b78f303b795328b",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/content/hero-media.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/docs/qa/r1/deploy.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/scripts/build_public.py",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/qa/browser.html",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/.git/config",
+      "http": 404,
+      "pass": true
+    }
+  ]
+}

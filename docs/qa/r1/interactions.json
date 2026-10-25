@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "testedRoot": "/workspace/scratch/f924b8ad2b7d/mashcore/dist",
+  "environment": "Node VM with minimal DOM/event harness using generated dist scripts; no browser layout, device, mail app or SMTP execution",
+  "checks": [
+    "Empty inquiry: recipient and subject only; empty copy gives guidance without success",
+    "Exact unicode, whitespace, newline, ampersand, hash and percent survive URI and clipboard",
+    "1000 code points accepted; 1001 blocks scripted actions, retains original and manual selection",
+    "Korean composition is never rewritten; actions wait until composition ends",
+    "Rejected or unavailable clipboard never shows success; selection and manual guidance remain",
+    "Menu Escape and link close return focus to the menu trigger",
+    "Pre-rendered business footer survives runtime; only empty fallback is filled",
+    "Three perspectives and reversible A/B use the same nodes and disclosure state; keyboard and pressed state work",
+    "Incomplete A/B initialization keeps static content and comparison alternatives visible"
+  ]
+}

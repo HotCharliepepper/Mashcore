@@ -8,6 +8,16 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
+# Legacy buildless workflow: preserve its implementation, but never mutate or
+# validate the generator project with a different configuration/output contract.
+if (ROOT / 'scripts/build_public.py').is_file() and (ROOT / 'content/services-prototype.json').is_file():
+    raise SystemExit(
+        'LEGACY COMMAND BLOCKED in this generator project. '
+        'Use: python3 scripts/build_public.py --context deploy-preview; '
+        'python3 scripts/check_public.py. '
+        'Runtime checks: node scripts/check_review_interactions.cjs; node scripts/check_spatial.cjs.'
+    )
+
 CONFIG_TEXT = (ROOT/'assets/js/site-config.js').read_text(encoding='utf-8')
 BUSINESS_FIELDS = ('companyName', 'representative', 'registrationNumber', 'address', 'phone', 'email')
 PUBLIC_BUSINESS = {}

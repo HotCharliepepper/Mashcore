@@ -1,0 +1,155 @@
+[
+  {
+    "name": "poster_only",
+    "status": "PASS",
+    "evidence": "No video or media request; eager picture and H1 in HTML"
+  },
+  {
+    "name": "A/B same nodes all 3 perspectives",
+    "status": "PASS",
+    "evidence": "3 perspectives, reversible order, exact original nodes"
+  },
+  {
+    "name": "1001 Korean input",
+    "status": "PASS"
+  },
+  {
+    "name": "clipboard denial",
+    "status": "PASS",
+    "evidence": "자동 복사가 되지 않았습니다. 내용을 선택해 직접 복사해 주세요. Ctrl+C 또는 ⌘C, 모바일 선택 메뉴의 복사를 사용할 수 있습니다."
+  },
+  {
+    "name": "mailto exact encoding",
+    "status": "PASS"
+  },
+  {
+    "name": "composition guard",
+    "status": "PASS"
+  },
+  {
+    "name": "empty copy",
+    "status": "PASS"
+  },
+  {
+    "name": "reduced-motion 3D JS preference injection",
+    "status": "PASS",
+    "evidence": "matchMedia injected; real system preference NOT RUN"
+  },
+  {
+    "name": "reduced-motion media",
+    "status": "PASS",
+    "evidence": "matchMedia injected; no autoplay"
+  },
+  {
+    "name": "reduced-motion explicit play",
+    "status": "PASS"
+  },
+  {
+    "name": "autoplay denied",
+    "status": "PASS",
+    "evidence": "one injected NotAllowedError"
+  },
+  {
+    "name": "manual recovery actual playback",
+    "status": "PASS"
+  },
+  {
+    "name": "paused_user",
+    "status": "PASS"
+  },
+  {
+    "name": "user pause survives scroll return",
+    "status": "PASS"
+  },
+  {
+    "name": "ended and replay",
+    "status": "PASS"
+  },
+  {
+    "name": "ended remains ended",
+    "status": "PASS"
+  },
+  {
+    "name": "explicit replay",
+    "status": "PASS"
+  },
+  {
+    "name": "environment pause (visibility injection)",
+    "status": "PASS"
+  },
+  {
+    "name": "environment resume",
+    "status": "PASS"
+  },
+  {
+    "name": "user pause survives visibility return",
+    "status": "PASS"
+  },
+  {
+    "name": "video 404",
+    "status": "PASS"
+  },
+  {
+    "name": "save-data poster first",
+    "status": "PASS",
+    "evidence": "navigator.connection injection; no network throttle claim"
+  },
+  {
+    "name": "actual R2 mobile sample",
+    "status": "PASS",
+    "evidence": {
+      "source": "http://terminal.local:4173/assets/media/hero-mobile.mp4",
+      "duration": 6.5,
+      "poster": "http://terminal.local:4173/assets/media/hero-mobile.webp"
+    }
+  },
+  {
+    "name": "actual R2 desktop sample",
+    "status": "PASS",
+    "evidence": {
+      "source": "http://terminal.local:4173/assets/media/hero-desktop.mp4",
+      "duration": 6.5
+    }
+  },
+  {
+    "name": "first viewport 320",
+    "status": "PASS",
+    "evidence": {
+      "ctaTop": 546.65625,
+      "ctaBottom": 594.90625,
+      "ctaHeight": 48.25,
+      "poster": "http://terminal.local:4173/assets/media/hero-mobile.webp"
+    }
+  },
+  {
+    "name": "first viewport 390",
+    "status": "PASS",
+    "evidence": {
+      "ctaTop": 630.625,
+      "ctaBottom": 678.875,
+      "ctaHeight": 48.25,
+      "poster": "http://terminal.local:4173/assets/media/hero-mobile.webp"
+    }
+  },
+  {
+    "name": "site.js 404 navigation fallback",
+    "status": "PASS",
+    "evidence": "Real script 404; native navigation remains readable"
+  },
+  {
+    "name": "tablet landscape media",
+    "status": "PASS"
+  },
+  {
+    "name": "resize preserves user pause",
+    "status": "PASS"
+  },
+  {
+    "name": "resize replay uses mobile crop",
+    "status": "PASS"
+  },
+  {
+    "name": "resize preserves ended",
+    "status": "PASS"
+  }
+]

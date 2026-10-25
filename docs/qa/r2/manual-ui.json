@@ -1,0 +1,54 @@
+{
+  "environment": "Cloud Chrome via CUA; local generated site, 390px iframe unless noted",
+  "at_utc": "2026-10-25T15:57:55.239706+00:00",
+  "results": [
+    {
+      "test": "Services hero → service-axes anchor",
+      "status": "PASS",
+      "action": "Enter on 어떤 일을 함께하나요? ↓; title visible"
+    },
+    {
+      "test": "Menu Enter → About navigation",
+      "status": "PASS",
+      "result": "about-title rendered"
+    },
+    {
+      "test": "Menu Escape / focus return",
+      "status": "PASS",
+      "result": {
+        "aria_expanded": "false",
+        "focused_menu_button": true
+      }
+    },
+    {
+      "test": "Chore to Play native Space selection",
+      "status": "PASS",
+      "result": "data-spatial-selected=meaning"
+    },
+    {
+      "test": "Inquiry navigation and mailto encoding",
+      "status": "PASS",
+      "result": "Menu link to invitation, typed Korean sample retained, exact percent-encoded body; no mail app opened or message sent"
+    },
+    {
+      "test": "Home FAQ native disclosure / contrast",
+      "status": "PASS",
+      "result": {
+        "text_rgb": [
+          217,
+          212,
+          200
+        ],
+        "background_rgb": [
+          32,
+          33,
+          36
+        ]
+      }
+    },
+    {
+      "test": "Human 5-second comprehension / physical touch / sensors / OS reduced motion / browser zoom / SMTP",
+      "status": "NOT RUN"
+    }
+  ]
+}

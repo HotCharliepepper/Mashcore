@@ -66,3 +66,22 @@
 
 @container(max-width:460px){.spatial-stage{--sp-scale:.9}}
 @container(max-width:340px){.spatial-stage{--sp-scale:.84}}
+
+/* Readable alternatives retain all six original descriptions without JavaScript. */
+.spatial-static-reading{margin:18px 0;border-block:1px solid var(--sp-rule);padding:4px 0 16px}
+.spatial-static-reading summary{min-height:48px;padding:14px 0;cursor:pointer;font-size:16px;line-height:1.6}
+.spatial-static-reading dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;margin:0}
+.spatial-static-reading dl>div{padding:20px 0;border-top:1px solid var(--sp-rule)}
+.spatial-static-reading dt{font-size:18px;line-height:1.7;font-weight:500}
+.spatial-static-reading dt span{display:block;font-family:var(--latin,serif);font-size:17px;font-weight:400}
+.spatial-static-reading dd{margin:12px 0 0;font-size:16px;line-height:1.85;color:var(--sp-muted)}
+.spatial-static-reading dd strong{display:block;font-weight:500;color:var(--sp-ink);margin-bottom:6px}
+.spatial-model .spatial-lens{min-height:72px;font-size:16px;padding:14px 12px;gap:10px}
+.spatial-model .spatial-lens small{font-size:16px;line-height:1.5}
+.spatial-model .spatial-reading p{font-size:18px;line-height:1.85;max-width:860px}
+.spatial-model .spatial-status,.spatial-model .spatial-research-note{font-size:16px;line-height:1.85;min-height:0}
+.spatial-model .spatial-control{font-size:16px;min-height:48px}
+.spatial-model .spatial-caption{font-size:13px;line-height:1.8}
+.spatial-model .spatial-lens:focus-visible,.spatial-model .spatial-control:focus-visible,.spatial-static-reading summary:focus-visible{outline:3px solid #6b563b;outline-offset:3px}
+@media(max-width:600px){.spatial-static-reading dl{grid-template-columns:1fr}.spatial-model .spatial-lenses{grid-template-columns:repeat(2,minmax(0,1fr))}.spatial-model .spatial-lens{font-size:16px;padding:14px 7px}.spatial-model .spatial-control[data-spatial-sensor-button]{font-size:16px}.spatial-model .spatial-caption{flex-direction:column;gap:3px}}
+@media(max-width:360px){.spatial-model .spatial-lenses{grid-template-columns:1fr}.spatial-model .spatial-control[data-spatial-sensor-button]{flex-basis:100%}}

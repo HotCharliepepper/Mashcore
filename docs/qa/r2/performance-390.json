@@ -1,0 +1,63 @@
+{
+  "environment": "local Chromium, real iframe navigation, no network/CPU throttle",
+  "started": "2026-10-25T15:49:57.907Z",
+  "viewport": 390,
+  "lcp_ms": 388,
+  "cls": 0,
+  "observed_event_duration_ms": 0,
+  "inp": "NOT RUN: no field population or full-session web-vitals computation",
+  "layout_shifts": [],
+  "sample_age_ms": 19336,
+  "media_state": "ended",
+  "resources": [
+    {
+      "file": "site-config.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 78
+    },
+    {
+      "file": "site.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 112
+    },
+    {
+      "file": "hero-media.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 113
+    },
+    {
+      "file": "observations.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 113
+    },
+    {
+      "file": "chapters.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 116
+    },
+    {
+      "file": "hero-mobile.webp",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 82
+    },
+    {
+      "file": "hero-desktop.webp",
+      "transferSize": 300,
+      "encodedBodySize": 146030,
+      "duration_ms": 7
+    },
+    {
+      "file": "hero-mobile.mp4",
+      "transferSize": 196563,
+      "encodedBodySize": 196263,
+      "duration_ms": 21
+    }
+  ],
+  "lcp_element": "IMG"
+}

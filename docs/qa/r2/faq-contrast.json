@@ -1,0 +1,30 @@
+{
+  "FAQ paragraph": {
+    "foreground_rgb": [
+      217,
+      212,
+      200
+    ],
+    "background_rgb": [
+      32,
+      33,
+      36
+    ],
+    "contrast_ratio": 10.89,
+    "passes_4_5": true
+  },
+  "FAQ eyebrow": {
+    "foreground_rgb": [
+      208,
+      194,
+      168
+    ],
+    "background_rgb": [
+      32,
+      33,
+      36
+    ],
+    "contrast_ratio": 9.17,
+    "passes_4_5": true
+  }
+}

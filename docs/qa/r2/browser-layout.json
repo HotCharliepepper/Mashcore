@@ -1,0 +1,468 @@
+[
+  {
+    "name": "layout 320 /",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /mobile/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /services/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /about/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /research/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /research/market-interpretation/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /research/log/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /explore/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /work/weplace/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 320 /policies/refund/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 320,
+      "client": 305,
+      "scroll": 305
+    }
+  },
+  {
+    "name": "layout 390 /",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /mobile/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /services/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /about/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /research/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /research/market-interpretation/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /research/log/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /explore/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /work/weplace/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 390 /policies/refund/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "client": 375,
+      "scroll": 375
+    }
+  },
+  {
+    "name": "layout 768 /",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /mobile/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /services/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /about/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /research/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /research/market-interpretation/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /research/log/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /explore/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /work/weplace/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 768 /policies/refund/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 768,
+      "client": 753,
+      "scroll": 753
+    }
+  },
+  {
+    "name": "layout 1440 /",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /mobile/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /services/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /about/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /research/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /research/market-interpretation/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /research/log/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /explore/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /work/weplace/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "layout 1440 /policies/refund/",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 1440,
+      "client": 1425,
+      "scroll": 1425
+    }
+  },
+  {
+    "name": "text 200% /",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /mobile/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /services/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /about/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /research/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /research/market-interpretation/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /research/log/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /explore/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /work/weplace/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "text 200% /policies/refund/",
+    "status": "PASS",
+    "evidence": "CSS text enlargement, not browser zoom"
+  },
+  {
+    "name": "no JS /",
+    "status": "PASS",
+    "evidence": "sandbox blocks actual script execution"
+  },
+  {
+    "name": "no JS /services/",
+    "status": "PASS",
+    "evidence": "sandbox blocks actual script execution"
+  },
+  {
+    "name": "no JS /research/chore-to-play/",
+    "status": "PASS",
+    "evidence": "sandbox blocks actual script execution"
+  }
+]

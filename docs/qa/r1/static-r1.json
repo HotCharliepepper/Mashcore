@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Strategy is the rendered hero copy source; obsolete hardcoded hero removed",
+    "Eager real SVG poster; null sources emit no video; controls hidden; runtime receives exact configuration",
+    "Asset status visible; three hypotheses collapsed, experiment limits always outside disclosure",
+    "Situation choices target six existing service axes; FAQ works without JS; no visitor-facing Git labels",
+    "Inquiry/A-B/3D/chapter/business runtimes and product catalog byte-identical to baseline",
+    "Local QA runner/test media absent from public output"
+  ],
+  "poster_bytes": {
+    "desktop": 1549,
+    "mobile": 1339
+  }
+}

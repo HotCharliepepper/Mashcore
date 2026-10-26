@@ -1,0 +1,118 @@
+{
+  "id": "MC-WEB-P01-ORIGIN",
+  "version": "1.1",
+  "date": "2026-10-26",
+  "status": "IMPLEMENTED_IN_DRAFT",
+  "production_approved": false,
+  "baseline_commit": "165ccba83b34b599731ef88029971c5c74875c00",
+  "question": "그 사람은, 왜 잠시 멈췄을까요?",
+  "action": {
+    "desktop_label": "함께할 수 있는 일 보기",
+    "mobile_label": "함께할 일 보기",
+    "href": "/services/"
+  },
+  "motion_card": {
+    "id": "MC-MOTION-ORIGIN-CUE-01",
+    "purpose": "Connect the visible sign/card observation to the unchanged question; not measured gaze guidance.",
+    "trigger": "First activation of B or explicit replay, only when visible and eligible",
+    "timeline_ms": {
+      "ring": [
+        0,
+        680
+      ],
+      "path": [
+        180,
+        1330
+      ],
+      "arrow": [
+        1050,
+        1330
+      ]
+    },
+    "repeat": false,
+    "user_controls": [
+      "pause",
+      "resume",
+      "replay"
+    ],
+    "states": [
+      "complete",
+      "running",
+      "paused"
+    ],
+    "offscreen_or_hidden": "Pause current cue; user pause wins on return",
+    "reduced_motion_or_save_data_or_motion_still": "Complete static cue; no automatic video request",
+    "compact_width_max": 1100,
+    "mobile_copy_first_max": 900,
+    "poster_failure": "Hide spatial cue; keep text and action",
+    "js_failure": "Default server-rendered A",
+    "figma_card": "57:179",
+    "figma_card_kind": "Editable storyboard; no new Figma animation track"
+  },
+  "assets": [
+    {
+      "id": "mashcore-origin-r2-concept",
+      "kind": "GENERATED",
+      "paths": [
+        "assets/media/hero-desktop.webp",
+        "assets/media/hero-mobile.webp",
+        "assets/media/hero-desktop.mp4",
+        "assets/media/hero-mobile.mp4"
+      ],
+      "changed": false,
+      "rights_verified": false,
+      "public_use_approved": false,
+      "use": "existing review only; fictional person and location; 6.5-second digital push-in, not live footage"
+    },
+    {
+      "id": "p01-signal-path",
+      "kind": "PROTOTYPE",
+      "path": "scripts/review_r2.py",
+      "use": "code-authored SVG cue; not customer evidence",
+      "production_approved": false
+    },
+    {
+      "id": "p01-figma-motion-card",
+      "kind": "RECONSTRUCTED",
+      "figma_node": "57:179",
+      "use": "editable explanatory storyboard; not a screenshot or real scene",
+      "production_approved": false
+    }
+  ],
+  "decisions": [
+    {
+      "id": "P01-D01",
+      "choice": "Continue Draft #7 in a new branch",
+      "reason": "Preserve R2/reverse lineage and unmerged research/inquiry development"
+    },
+    {
+      "id": "P01-D02",
+      "choice": "CSS/SVG, no GSAP/Spline/Three.js addition",
+      "reason": "One finite two-dimensional cue needs no additional timeline/3D runtime"
+    },
+    {
+      "id": "P01-D03",
+      "choice": "Question/CTA before scene on mobile B",
+      "reason": "Put service action earlier; preserve A as layout comparison"
+    },
+    {
+      "id": "P01-D04",
+      "choice": "Figma storyboard plus executable browser validation",
+      "reason": "Do not treat a Figma motion description as a working website test"
+    },
+    {
+      "id": "P01-D05",
+      "choice": "No platform migration or production approval change",
+      "reason": "No new CMS/login/operations need or release approval was supplied"
+    },
+    {
+      "id": "P01-D06",
+      "choice": "Inline the authored CSS only on two home entry pages and select layout/reserve toolbar before paint",
+      "reason": "Deployed iframe evidence exposed unstyled first paint and delayed A/B/control-bar shifts",
+      "tradeoff": "About 57 KB raw CSS per home HTML; shared CSS files remain the sole source and non-home pages keep cached links"
+    }
+  ],
+  "measured_user_outcome": false,
+  "weplace_handoff_change": "NONE",
+  "verified_implementation_commit": "ebdfbf093d240e53ba79b99498e1fe389457bec8"
+}

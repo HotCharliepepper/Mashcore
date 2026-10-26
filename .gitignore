@@ -1,0 +1,15 @@
+.netlify/
+dist/
+node_modules/
+__pycache__/
+*.pyc
+qa/screenshots/
+qa/r1/before-dist/
+qa/r1/site/
+docs/screenshots/r1/
+qa/r2/before-dist/
+qa/r2/site/
+docs/screenshots/r2/
+source-media/local/
+source-media/*.b64
+qa/r2/fixture.webm.b64

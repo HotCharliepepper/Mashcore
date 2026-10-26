@@ -1,0 +1,9 @@
+{
+  "command": [
+    "node",
+    "scripts/check_p01_motion.cjs"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"passed\",\n  \"environment\": \"Node VM event/DOM simulation; not a browser/device test\",\n  \"count\": 10,\n  \"checks\": [\n    \"A default; B updates URL/pressed state; repeated B does not restart; user pause survives background; finite completion offers replay\",\n    \"Rapid B→A cancels queued animation; URL back/forward state is reconciled\",\n    \"reduced: no animation, usable A/B controls remain\",\n    \"compact: no animation, usable A/B controls remain\",\n    \"saveData: no animation, usable A/B controls remain\",\n    \"posterError: no animation, usable A/B controls remain\",\n    \"Explicit static preview is complete without queued motion\",\n    \"Offscreen and persisted page restoration pause/resume; clearing reduced-motion preference never restarts\",\n    \"Poster failure removes misleading cue; recovered poster does not auto-replay\",\n    \"Static mode makes no video request; explicit play still works and reveal requires actual playing event\"\n  ]\n}\n",
+  "stderr": ""
+}

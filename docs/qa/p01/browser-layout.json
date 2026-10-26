@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-26",
+  "environment": "Cloud Chrome; local dist; same-origin review iframe; CSS viewport widths, not physical devices",
+  "source": "DOM metrics displayed by /preview/; visually inspected desktop and mobile",
+  "rows": [
+    {
+      "mode": "A",
+      "viewport": [
+        320,
+        844
+      ],
+      "h1_top": 447,
+      "h1_bottom": 539,
+      "cta_top": 624,
+      "cta_bottom": 672,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "A",
+      "viewport": [
+        390,
+        844
+      ],
+      "h1_top": 511,
+      "h1_bottom": 614,
+      "cta_top": 708,
+      "cta_bottom": 756,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "A",
+      "viewport": [
+        768,
+        1024
+      ],
+      "h1_top": 595,
+      "h1_bottom": 698,
+      "cta_top": 718,
+      "cta_bottom": 766,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "A",
+      "viewport": [
+        1440,
+        960
+      ],
+      "h1_top": 370,
+      "h1_bottom": 515,
+      "cta_top": 632,
+      "cta_bottom": 686,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "B",
+      "viewport": [
+        320,
+        844
+      ],
+      "h1_top": 209,
+      "h1_bottom": 301,
+      "cta_top": 386,
+      "cta_bottom": 434,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "B",
+      "viewport": [
+        390,
+        844
+      ],
+      "h1_top": 209,
+      "h1_bottom": 312,
+      "cta_top": 406,
+      "cta_bottom": 454,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "B",
+      "viewport": [
+        768,
+        1024
+      ],
+      "h1_top": 223,
+      "h1_bottom": 326,
+      "cta_top": 346,
+      "cta_bottom": 394,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    },
+    {
+      "mode": "B",
+      "viewport": [
+        1440,
+        960
+      ],
+      "h1_top": 370,
+      "h1_bottom": 515,
+      "cta_top": 632,
+      "cta_bottom": 686,
+      "h1_above_fold": true,
+      "cta_above_fold": true,
+      "overflow_px": 0
+    }
+  ],
+  "text_200": {
+    "viewport": [
+      320,
+      844
+    ],
+    "mode": "B",
+    "overflow_px": 0,
+    "h1_top": 410,
+    "h1_bottom": 687,
+    "cta_top": 981,
+    "cta_bottom": 1056,
+    "cta_visible_with_scroll": true,
+    "not_browser_zoom": true
+  },
+  "not_run": [
+    "physical iOS/Android",
+    "browser-wide 200% zoom",
+    "network/CPU throttling",
+    "actual OS reduced-motion setting change",
+    "actual BFCache return",
+    "GPU failure injection",
+    "production RUM",
+    "INP",
+    "user understanding/conversion experiment"
+  ],
+  "final_deployed_recheck": {
+    "commit": "ebdfbf093d240e53ba79b99498e1fe389457bec8",
+    "same_eight_rows_confirmed": true,
+    "all_h1_and_cta_above_fold": true,
+    "all_horizontal_overflow_px": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "6ade057424cd7fdda7398c2e",
+  "site_id": "0aca3b54-9691-4381-b853-61c09ab620e5",
+  "state": "ready",
+  "context": "deploy-preview",
+  "commit_ref": "2585b11b5d59c1b6ef43d49b9b55523242e5f365",
+  "review_id": 6,
+  "branch": "review/mashcore-renewal-20261023",
+  "deploy_ssl_url": "https://deploy-preview-6--mashcore.netlify.app",
+  "commit_url": "https://github.com/HotCharliepepper/Mashcore/commit/2585b11b5d59c1b6ef43d49b9b55523242e5f365",
+  "published_at": null,
+  "links": {
+    "permalink": "https://6ade057424cd7fdda7398c2e--mashcore.netlify.app",
+    "alias": "https://deploy-preview-6--mashcore.netlify.app",
+    "branch": null
+  }
+}

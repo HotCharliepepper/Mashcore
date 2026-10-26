@@ -1,0 +1,184 @@
+{
+  "baseline": "a3c81d821f4bcbe542bb0aee332a1803fd8ae8a4",
+  "context": "deploy-preview",
+  "files": {
+    "__review/build.json": {
+      "bytes": 1137,
+      "sha256": "a54d9b9ae014cec5caef28be263e39dd65fcca17a54c94747fbbe0312fa4f20e"
+    },
+    "_headers": {
+      "bytes": 38,
+      "sha256": "29488e4be35403c6a43689d476bc868ad2809d93321f7e51d83e8b47ec389108"
+    },
+    "about/index.html": {
+      "bytes": 11292,
+      "sha256": "71d197d54f7869e0c4f38565c95715cdc88e4464ed3b26b1cbed7aa04a98ccd7"
+    },
+    "assets/css/business-readable.css": {
+      "bytes": 461,
+      "sha256": "eec5d9875d725ebf865b277a49445dfc12e5eedc23abd2e9c7624013b7757d9c"
+    },
+    "assets/css/chore-spatial.css": {
+      "bytes": 11390,
+      "sha256": "0a6047a7d1b1083115ab79e1f6db755f861baa24dfadaf01948d3b7f26f2e966"
+    },
+    "assets/css/commerce.css": {
+      "bytes": 6899,
+      "sha256": "a5292c9986936719f37c832f8ff6663571100955506d3fe317ead7a512e135f0"
+    },
+    "assets/css/editorial.css": {
+      "bytes": 20404,
+      "sha256": "481e406dd571d93ada6644817f5acef4ce5116bc45082624468afebf8a6fe8b1"
+    },
+    "assets/css/fonts.css": {
+      "bytes": 623,
+      "sha256": "e143245d68ffb24b94c442ab2a5ad7ca7e5ed472677dfcdcf04537bfebb288df"
+    },
+    "assets/css/landing.css": {
+      "bytes": 15291,
+      "sha256": "74f724daf2d8d9f3d6b4a1735329f358d2229e3e1d98979796cb49485e1b70c6"
+    },
+    "assets/css/observations.css": {
+      "bytes": 13131,
+      "sha256": "dc47fb6e62662773620dc97dd152a01fe10086dd022ed0ad78be65aaeee2f809"
+    },
+    "assets/css/preview.css": {
+      "bytes": 2359,
+      "sha256": "1a94ec28fabfc084f96b3eeba293976d7ad60c3c3111bf3a16b09afd8f4464df"
+    },
+    "assets/css/renewal.css": {
+      "bytes": 18759,
+      "sha256": "fb835f921f4ee6d4ae85c2e9a6a6493a0b21a7e72f7c47deaa9d40699eeee3d3"
+    },
+    "assets/css/research-review.css": {
+      "bytes": 4818,
+      "sha256": "d34d7b0cbfe41713c5a3953da11efa793ed48a22e106770ea96fb8abd85c3976"
+    },
+    "assets/css/research.css": {
+      "bytes": 20855,
+      "sha256": "aff99152ff9bd67b81d95e3e9b12707f184189462d6f0415fc484059e04baa96"
+    },
+    "assets/css/strategy.css": {
+      "bytes": 22357,
+      "sha256": "b615a72165f276f67679b7dc503a9eefaf7a37dd9f9958fe21e81189b5dd9bb1"
+    },
+    "assets/css/work.css": {
+      "bytes": 8881,
+      "sha256": "b9571254045c0e94ed77c678ce9606c28b64cb575aba92cebde363ed8c080cf5"
+    },
+    "assets/fonts/GowunBatang-Regular.woff2": {
+      "bytes": 536760,
+      "sha256": "333ec20c81cebe1d20793beaceaa7d1cd524daf2a043df40f1ee4b4d0b40a573"
+    },
+    "assets/fonts/NotoSansKR-Regular.woff2": {
+      "bytes": 2071988,
+      "sha256": "b5b2630fbfd805032cd6ef046b889f1862ea8b96f7b351a4ef74f605ead73d81"
+    },
+    "assets/fonts/NotoSansKR-SemiBold.woff2": {
+      "bytes": 2105828,
+      "sha256": "c12839e5c9589225432a98a1634355ad0736034afd9daa153294ecb6719945ec"
+    },
+    "assets/fonts/OFL-GowunBatang.txt": {
+      "bytes": 4397,
+      "sha256": "49a57cc769fa9affd6eefb9070a61e3d3f6b757c97cafb15848bc6d1c81acc78"
+    },
+    "assets/fonts/OFL-NotoSansKR.txt": {
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    "assets/js/chapters.js": {
+      "bytes": 1632,
+      "sha256": "6853ef455b003c1adafdc9b3377f8d05c87f1ee0cd8b2ac4ec18e4379b3d8ad1"
+    },
+    "assets/js/chore-spatial.js": {
+      "bytes": 11997,
+      "sha256": "8f81fb2ad84c246fcd8b10711754d010aae38c29c6330e29a080adaf16a6fd6f"
+    },
+    "assets/js/hero-media.js": {
+      "bytes": 6884,
+      "sha256": "bf9f39f2c0cdbb2575c35e2356bbc1de1b5712afea0bb0caa81eacc49de849e7"
+    },
+    "assets/js/observations.js": {
+      "bytes": 4373,
+      "sha256": "81c15772d2d5d6d0823e3c7f71487af022902046e146780da3700b8d29290e1c"
+    },
+    "assets/js/preview.js": {
+      "bytes": 2531,
+      "sha256": "aaa39c81ef6ec4574b35178614d61fa12a88569d8f9641253b05418e4e3e48e8"
+    },
+    "assets/js/site-config.js": {
+      "bytes": 397,
+      "sha256": "3153522cd155c906b684679ea58a80d8ba9067f3da588adda66ba7454e5ee928"
+    },
+    "assets/js/site.js": {
+      "bytes": 10894,
+      "sha256": "3b53a94a8d1c4adde3f9fc6bf663ccf49674253a3af7830f5437facdeb0d95f9"
+    },
+    "assets/media/origin-threshold-desktop.svg": {
+      "bytes": 1549,
+      "sha256": "7bc748724e10d1e1a0423581b4dc88712c663179cce6f912a6687154af4ccd94"
+    },
+    "assets/media/origin-threshold-mobile.svg": {
+      "bytes": 1339,
+      "sha256": "31a3416c3d71a4c0cb544fa9386b2a070ecfac954a75f4a74b78f303b795328b"
+    },
+    "explore/index.html": {
+      "bytes": 25936,
+      "sha256": "6a31ee2553243963de82d4ee641f2556c2730761f3fce0e939556d8cb768bb8d"
+    },
+    "index.html": {
+      "bytes": 23084,
+      "sha256": "538dfa918ba913abb662b0f7afbacc36a642e442079c132c100e9669f105c87e"
+    },
+    "mashcore-profile.jpg": {
+      "bytes": 77007,
+      "sha256": "757c6fa94ced1ff7201543f7cdc13fbcf94edf3969187f356c26c9c456cc6cf7"
+    },
+    "mobile/index.html": {
+      "bytes": 23109,
+      "sha256": "6f044b1f7e62fbd34ca483371c891d2cfcdf51a12552d46110693c8cf71b6d0c"
+    },
+    "policies/refund/index.html": {
+      "bytes": 11313,
+      "sha256": "7eb4fb4388ef8271baa46c50b6154c37b59d373efce23c424ed8de57d523865f"
+    },
+    "preview/index.html": {
+      "bytes": 2425,
+      "sha256": "c639e1fd39352cf6934252cb83c17aa63fea5236172c98a8cdad3d1da409af58"
+    },
+    "research/chore-to-play/index.html": {
+      "bytes": 21996,
+      "sha256": "4b6b0f7dbd8ad9b42aac50db5c45e14efa72ed86b94b71381634a94ac2940794"
+    },
+    "research/index.html": {
+      "bytes": 19071,
+      "sha256": "f4ad8d0fe9c8cb3b8ed4a754704a3cc4c0ad15bfcb278d68c1e82d449b49628f"
+    },
+    "research/log/index.html": {
+      "bytes": 6749,
+      "sha256": "c557b700d26fdeb7bf4412c3471758548e3abc7d4334c72e95345b4a6504ad35"
+    },
+    "research/market-interpretation/index.html": {
+      "bytes": 22409,
+      "sha256": "5d3a0af95fcd39cc113b7b796218685f6d1ed8bf074c2a28e31a7b0d89f17276"
+    },
+    "robots.txt": {
+      "bytes": 26,
+      "sha256": "331ea9090db0c9f6f597bd9840fd5b171830f6e0b3ba1cb24dfa91f0c95aedc1"
+    },
+    "services/index.html": {
+      "bytes": 31529,
+      "sha256": "eeace509fc9d2cc7aff6f630d8865bba8579479bfd7d2c5c60d5be575a61f510"
+    },
+    "sitemap.xml": {
+      "bytes": 687,
+      "sha256": "ad6c6e62440bba47567ad77428a4dae3a3b9eed336c5c3ffe9c63fc24b921971"
+    },
+    "work/weplace/index.html": {
+      "bytes": 12433,
+      "sha256": "afc05a5a77884a43c11170ee5a310099f588dd642309253794c98e0961fb2626"
+    }
+  },
+  "implementation_commit": "2585b11b5d59c1b6ef43d49b9b55523242e5f365",
+  "implementation_tree": "866df09736fe6025778479f4d3bed44101298430"
+}

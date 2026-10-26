@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "testedRoot": "/workspace/scratch/f924b8ad2b7d/mashcore/dist/",
+  "environment": "Node + linkedom DOM simulation of generated dist; no physical device/sensor or rendered-browser assertion",
+  "checks": [
+    "Selection, exclusive pressed state, keyboard rotation and reset; no unsolicited sensor request",
+    "Permission denial returns to manual controls",
+    "Permission exception has usable fallback",
+    "Unsupported API and insecure context do not request access",
+    "Granted permission and no-permission API paths time out safely without sensor data",
+    "Sensor calibration, bounded camera pose, screen rotation recalibration, background cleanup",
+    "Reduced-motion preference blocks movement while preserving content selection; live preference changes stop sensors",
+    "Vertical touch motion remains browser-owned; horizontal drag rotates and pointer cancellation clears capture",
+    "Pagehide and explicit component disposal clean up listeners"
+  ]
+}

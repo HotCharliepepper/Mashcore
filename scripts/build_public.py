@@ -82,7 +82,7 @@ def page(path: str, title: str, description: str, main: str, b: dict, *, home: b
     robots = '<meta name="robots" content="noindex,nofollow">' if review else ''
     scripts = '<script defer src="/assets/js/site-config.js"></script><script defer src="/assets/js/site.js"></script>'
     if home:
-        scripts += '<script defer src="/assets/js/hero-media.js"></script><script defer src="/assets/js/observations.js"></script><script defer src="/assets/js/chapters.js"></script>'
+        scripts += '<script defer src="/assets/js/hero-media.js"></script><script defer src="/assets/js/hero-reverse.js"></script><script defer src="/assets/js/observations.js"></script><script defer src="/assets/js/chapters.js"></script>'
     body_class = 'landing-page core-page' if home else 'document-page core-page'
     return f'''<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>{E(title)}</title><meta name="description" content="{E(description,quote=True)}"><meta name="theme-color" content="#202124"><link rel="canonical" href="{BASE}{path}"><meta property="og:type" content="website"><meta property="og:title" content="{E(title,quote=True)}"><meta property="og:description" content="{E(description,quote=True)}"><meta property="og:url" content="{BASE}{path}">{robots}<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121A14'/%3E%3Cpath d='M8 22V10h2.4l3.1 7 3.1-7H22v12h-2.2v-7.8l-2.9 6.4h-1.8l-2.9-6.4V22z' fill='%23A6885A'/%3E%3C/svg%3E"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&amp;family=Noto+Sans+KR:wght@400;500;600&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/strategy.css"><script type="application/ld+json">{schema}</script>{scripts}</head><body class="{body_class}"><a class="core-skip" href="#main">본문으로 바로 가기</a>{header()}<main id="main">{main}</main>{footer(b)}</body></html>'''
@@ -187,6 +187,8 @@ def build(root: Path, output: Path, context: str) -> dict:
         if path.relative_to(output).as_posix()!='preview/index.html':
             text=text.replace('<head>','<head><script>document.documentElement.classList.add("js");addEventListener("error",e=>{if((e.target?.src||e.filename||"").split("?")[0].endsWith("/site.js"))document.documentElement.classList.remove("js")},true)</script>',1)
         text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"><link rel="stylesheet" href="/assets/css/experience-r2.css"></head>',1)
+        if path.relative_to(output).as_posix() in ('index.html', 'mobile/index.html'):
+            text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/hero-reverse.css"></head>',1)
         text=apply_seo(text,path.relative_to(output).as_posix(),root,b)
         if context!='production' and not re.search(r'<meta\b[^>]*\bname=[\'"]robots[\'"]',text):
             text=text.replace('</head>','<meta name="robots" content="noindex,nofollow"></head>',1)

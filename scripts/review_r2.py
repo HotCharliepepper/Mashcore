@@ -9,9 +9,28 @@ def hero(s, media):
     mobile_title='<br>'.join(E(x) for x in s['hero_title_mobile'])
     config=json.dumps(media,ensure_ascii=False).replace('<','\\u003c')
     video='<video data-hero-video muted playsinline preload="none" aria-label="AI 콘셉트 정지 이미지의 느린 모션 시안" hidden></video>' if any(media['video'].get(k) for k in ('desktop','mobile')) else ''
-    return f'''<div class="r1-origin r2-origin core-wrap">
+    return f'''<div class="r1-origin r2-origin core-wrap" data-hero-experience data-hero-mode="default">
+<div class="hero-variant-bar" data-hero-mode-controls hidden aria-label="히어로 화면 구성 비교">
+ <div class="hero-variant-heading"><span>REVIEW / HERO EXPERIENCE</span><small>같은 문안·같은 행동, 다른 시선 동선</small></div>
+ <div class="hero-variant-buttons" role="group" aria-label="히어로 구성 선택">
+  <button type="button" data-hero-mode-choice="default" aria-pressed="true">A · 기존 R2</button>
+  <button type="button" data-hero-mode-choice="reverse" aria-pressed="false">B · 역방향 탐색</button>
+ </div>
+ <p class="hero-variant-feedback" data-hero-variant-status role="status" aria-live="polite">기존 R2 구성을 보고 있습니다.</p>
+</div>
 <div class="origin-stage" data-hero-media data-media-state="poster_only" data-media-has-source="{str(bool(video)).lower()}">
- <figure class="origin-media"><picture><source media="(max-width: 700px)" srcset="{E(poster['mobile'],quote=True)}" width="780" height="1040"><img data-hero-poster src="{E(poster['desktop'],quote=True)}" alt="{E(poster['alt'],quote=True)}" width="1600" height="900" fetchpriority="high" loading="eager"></picture>{video}<figcaption>{E(media['provenance']['review_label'])}</figcaption></figure>
+ <figure class="origin-media"><picture><source media="(max-width: 700px)" srcset="{E(poster['mobile'],quote=True)}" width="780" height="1040"><img data-hero-poster src="{E(poster['desktop'],quote=True)}" alt="{E(poster['alt'],quote=True)}" width="1600" height="900" fetchpriority="high" loading="eager"></picture>{video}
+ <div class="hero-reverse-layer" data-hero-reverse-layer aria-hidden="true">
+  <svg class="hero-reverse-svg" viewBox="0 0 1200 650" preserveAspectRatio="none" focusable="false">
+   <defs><linearGradient id="hero-reverse-stroke" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fcf8ec"/><stop offset=".44" stop-color="#d9bd87"/><stop offset="1" stop-color="#8b623d"/></linearGradient></defs>
+   <path class="hero-reverse-halo" d="M 1022 264 C 925 250 866 311 799 394 S 636 514 460 548" fill="none" stroke="#fcf8ec" stroke-opacity=".74" stroke-width="8" stroke-linecap="round" pathLength="100"/>
+   <path class="hero-reverse-trace" d="M 1022 264 C 925 250 866 311 799 394 S 636 514 460 548" fill="none" stroke="url(#hero-reverse-stroke)" stroke-width="2.8" stroke-linecap="round" pathLength="100"/>
+   <circle class="hero-reverse-ring" cx="1022" cy="264" r="29" fill="none" stroke="#fcf8ec" stroke-width="2" stroke-opacity=".92"/>
+   <circle class="hero-reverse-source" cx="1022" cy="264" r="5" fill="#fdf9ef"/>
+   <path class="hero-reverse-arrow" d="M 476 534 L 454 548 L 481 555" fill="none" stroke="#8b623d" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </svg>
+  <div class="hero-reverse-question"><span>OBSERVATION / 01</span><strong>어디서, 왜<br>멈추었을까?</strong></div>
+ </div><figcaption>{E(media['provenance']['review_label'])}</figcaption></figure>
  <div class="hero-copy"><p class="core-overline"><span class="r2-desktop-copy">MASHCORE / {E(s['hero_role'])}</span><span class="r2-mobile-copy">MASHCORE / {E(s['hero_role_mobile'])}</span></p><h1 id="opening-title"><span class="r2-desktop-copy">{title}</span><span class="r2-mobile-copy">{mobile_title}</span></h1><p class="core-hero-description">{E(s['hero_description'])}</p><a class="core-button hero-primary" href="/services/"><span class="r2-desktop-copy">{E(ui['services_label'])}</span><span class="r2-mobile-copy">{E(ui['services_label_mobile'])}</span><span aria-hidden="true">↗</span></a></div>
  <div class="hero-controls-slot"><div class="hero-media-controls" hidden data-hero-controls><button type="button" data-hero-toggle>{E(ui['play_label'])}</button><span data-hero-status role="status" aria-live="polite"></span></div></div>
  <script type="application/json" data-hero-config>{config}</script>

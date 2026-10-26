@@ -24,5 +24,56 @@
   "error_and_text_scaling_samples_excluded": true,
   "inp": "NOT_MEASURED",
   "production_cwv_claim": false,
-  "caveat": "Not a cold-load benchmark, field measurement or pass/fail CWV verdict."
+  "caveat": "Not a cold-load benchmark, field measurement or pass/fail CWV verdict.",
+  "deployed_review_initial_sample": {
+    "commit": "d43421c1de1c645a2a6d0cb3914f1040aa6dc19c",
+    "viewport": [
+      390,
+      844
+    ],
+    "lcp_ms": 232,
+    "cls": 1.36862,
+    "source": "Netlify Deploy Preview /preview/ iframe",
+    "status": "DIAGNOSED_AND_FIXED",
+    "not_in_local_samples": true
+  },
+  "diagnosis": {
+    "initial_sources": [
+      "unstyled body default margin 8px → styled margin 0",
+      "delayed A-to-B order",
+      "comparison bar insertion: stage y 89 → 166"
+    ],
+    "intermediate_cls": 0.07146,
+    "fix": "Inline authored CSS in existing order on two homes, choose B before paint, reserve comparison bar against inherited hidden !important rule"
+  },
+  "final_deployed_samples": {
+    "commit": "ebdfbf093d240e53ba79b99498e1fe389457bec8",
+    "environment": "Netlify Deploy Preview /preview/ iframe; Cloud Chrome; cache state uncontrolled",
+    "samples": [
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "mode": "B",
+        "lcp_ms": 428,
+        "cls": 0,
+        "layout_shift_samples": []
+      },
+      {
+        "viewport": [
+          1440,
+          960
+        ],
+        "mode": "B",
+        "lcp_ms": 284,
+        "cls": 0.00432,
+        "shift_sources": [
+          "DIV r1-origin r2-origin core-wrap",
+          "DIV core-wrap header-inner"
+        ]
+      }
+    ],
+    "not_production_rum": true
+  }
 }

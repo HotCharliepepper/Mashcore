@@ -140,5 +140,11 @@
     "production RUM",
     "INP",
     "user understanding/conversion experiment"
-  ]
+  ],
+  "final_deployed_recheck": {
+    "commit": "ebdfbf093d240e53ba79b99498e1fe389457bec8",
+    "same_eight_rows_confirmed": true,
+    "all_h1_and_cta_above_fold": true,
+    "all_horizontal_overflow_px": 0
+  }
 }

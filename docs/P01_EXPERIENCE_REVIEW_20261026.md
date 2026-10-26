@@ -44,6 +44,7 @@ GSAP은 이 단일 경로에 별도 타임라인 의존성을 추가할 필요�
 
 ## 4. 적용 파일·버전·자산
 
+- `scripts/build_public.py`: 홈·모바일 홈에 기존 CSS를 같은 순서로 인라인하고, 요청한 A/B 구도와 비교 바 공간을 첫 표시 전에 준비합니다. 다른 9개 페이지의 출력은 바꾸지 않습니다. 홈 HTML당 약 57KB의 원본 CSS가 포함되는 대신 초기 외부 CSS 대기와 후속 재배치를 줄입니다.
 - `scripts/review_r2.py`: 비교 바, 접근 가능한 재생 컨트롤, 안내 카드 위치를 가리키는 SVG.
 - `assets/css/hero-reverse.css`: 유한 모션, 포커스, 정지 상태, B 모바일 순서.
 - `assets/js/hero-reverse.js`: 정지·이어보기·다시보기, 빠른 A/B 전환 취소, 화면 이탈·복귀, 모션 감소·데이터 절약·포스터 오류 처리.
@@ -51,7 +52,7 @@ GSAP은 이 단일 경로에 별도 타임라인 의존성을 추가할 필요�
 - `preview/index.html`, `assets/js/preview.js`, `assets/css/preview.css`: 실제 폭 A/B, 정지·JS 차단·텍스트 확대·미디어 404 시험, DOM·LCP·CLS 측정 표시.
 - `scripts/check_p01_motion.cjs`: 위 상태 전환 10개 시나리오 그룹.
 
-P01 기록 버전은 `1.0`입니다. 기존 R2 media config `2.0`은 변경하지 않았습니다. 기존 `hero-desktop/mobile.webp`와 6.5초 MP4는 **GENERATED**: 가상의 인물·장소를 만든 AI 정지 이미지 및 느린 디지털 확대입니다. 실제 현장 촬영·고객 증거가 아닙니다. `rights_verified=false`, `public_use_approved=false`를 그대로 유지했습니다. SVG 단서와 Figma 보드는 **PROTOTYPE / RECONSTRUCTED**, 사용자 이해를 돕는 설계 자료입니다. 새 사진·영상이나 실제 고객 자료를 업로드하지 않았습니다.
+P01 기록 버전은 `1.1`입니다. 기존 R2 media config `2.0`은 변경하지 않았습니다. 기존 `hero-desktop/mobile.webp`와 6.5초 MP4는 **GENERATED**: 가상의 인물·장소를 만든 AI 정지 이미지 및 느린 디지털 확대입니다. 실제 현장 촬영·고객 증거가 아닙니다. `rights_verified=false`, `public_use_approved=false`를 그대로 유지했습니다. SVG 단서와 Figma 보드는 **PROTOTYPE / RECONSTRUCTED**, 사용자 이해를 돕는 설계 자료입니다. 새 사진·영상이나 실제 고객 자료를 업로드하지 않았습니다.
 
 Figma 원본 페이지: <https://www.figma.com/design/e2C0JjYTRiwiW9Fxh3f8X7?node-id=46-179>
 
@@ -61,7 +62,9 @@ P01 Motion Card: <https://www.figma.com/design/e2C0JjYTRiwiW9Fxh3f8X7?node-id=57
 
 ## 5. 실행 Preview와 비교법
 
-후속 Draft PR의 Netlify 검토 주소에서 다음 경로를 사용합니다. 실제 발급 URL과 commit/deploy 연결은 PR 및 `qa/p01/deploy.json`(발급 확인 후 기록)에서 확인합니다.
+실행 확인한 [Draft #8](https://github.com/HotCharliepepper/Mashcore/pull/8)의 [B Preview](https://deploy-preview-8--mashcore.netlify.app/?hero=reverse)와 [화면 비교](https://deploy-preview-8--mashcore.netlify.app/preview/?view=mobile&page=%2F&hero=reverse)를 사용합니다. 실행 코드 commit은 `ebdfbf093d240e53ba79b99498e1fe389457bec8`입니다. 검증한 구현 deploy는 `qa/p01/deploy.json`에 기록하며, 뒤따르는 문서·QA 증거 커밋은 실행 코드를 바꾸지 않습니다.
+
+![최종 B 히어로 — 실제 Deploy Preview, 키보드 포커스 상태](qa/p01/p01-final-home-b-1793028654261.jpg)
 
 | 경로 | 확인할 것 |
 |---|---|
@@ -79,7 +82,7 @@ P01 Motion Card: <https://www.figma.com/design/e2C0JjYTRiwiW9Fxh3f8X7?node-id=57
 
 | 검사 | 실행 결과 |
 |---|---|
-| 생성·정적 계약 | 12 HTML, 11 사업자 footer, 394 로컬 참조 통과; prototype 4개와 별도 main 가격 계보 보존 |
+| 생성·정적 계약 | 12 HTML, 11 사업자 footer, 384 로컬 참조 통과; prototype 4개와 별도 main 가격 계보 보존 |
 | 후속 모션 Node VM | 10 시나리오 그룹 통과 |
 | 기존 문의·Research Node VM | 9 시나리오 그룹 통과 |
 | 기존 3D Node + linkedom | 9 시나리오 그룹 통과. 처음에는 테스트 의존성 미설치로 실패했고 임시 검사 환경에 설치 후 재실행 통과 |
@@ -96,7 +99,7 @@ P01 Motion Card: <https://www.figma.com/design/e2C0JjYTRiwiW9Fxh3f8X7?node-id=57
 | 문의 브라우저 | 시험 문자열의 mailto recipient/subject/body 확인, 입력 삭제. 발송·외부 앱 실행 안 함 |
 | 서비스/Weplace/환불 | H1·사업자 정보 실제 DOM 확인 |
 
-정상 B 렌더링 후 로컬 단일 표본: 1440px LCP 200ms / CLS 0, 390px LCP 272ms / CLS 0. 초기 즉시 측정은 LCP가 아직 없어 null이었으며 정상 렌더링 후 다시 측정했습니다. 로컬 캐시·iframe·한 번의 관찰이므로 운영 Core Web Vitals 합격이나 실제 사용자 성능으로 일반화하지 않습니다. 오류 주입·글자 확대 상태의 값은 정상 성능 표본에 섞지 않습니다.
+최종 Deploy Preview B의 단일 표본: **1440px LCP 284ms / CLS 0.00432, 390px LCP 428ms / CLS 0**. 배포 후 최초 검사에서 CLS 1.36862를 발견해 실제 이동한 DOM을 기록했고, 스타일 적용·A/B 초기화·비교 바 높이 변화의 순서를 보완했습니다. 같은 원본 CSS를 홈에 인라인하고 초기 구도·공간을 예약한 뒤 재측정한 결과입니다. 초기 로컬 LCP 200/272ms·CLS 0과 수정 과정은 원시 기록에 남겼습니다. 이 값들은 캐시 조건을 통제하지 않은 검토 iframe의 단일 관찰이며 운영 Core Web Vitals·INP나 실제 사용자 성능으로 일반화하지 않습니다.
 
 **미실시:** 물리 iOS/Android 터치·센서, 실제 OS 모션 감소 설정 전환, 브라우저 전체 200% zoom, 네트워크/CPU 저속 제한, 실제 BFCache 재진입, GPU/합성기 강제 실패, 운영 RUM·INP·실제 사용자 이해도·문의 전환. Node 모형의 관련 검사는 실기기 결과를 대체하지 않습니다. 기존 3D는 WebGL 의존성이 없으며 GPU 실패를 검증했다는 주장을 하지 않습니다.
 

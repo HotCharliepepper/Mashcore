@@ -97,5 +97,14 @@
       "result": "passed",
       "headings_and_registered_business_footer_read": true
     }
-  ]
+  ],
+  "final_deployed_recheck": {
+    "commit": "ebdfbf093d240e53ba79b99498e1fe389457bec8",
+    "poster_error": true,
+    "poster_failure_cue_visible": false,
+    "static_video_src": null,
+    "nojs_fallback": "default A, poster_only, CTA top727 bottom775 at390×844",
+    "keyboard": "replay → paused → resume → complete verified again",
+    "screenshot": "p01-final-home-b-1793028654261.jpg"
+  }
 }

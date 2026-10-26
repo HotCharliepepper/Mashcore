@@ -1,0 +1,24 @@
+{
+  "id": "6adf71194f89cd269bb5f416",
+  "state": "ready",
+  "context": "deploy-preview",
+  "commit_ref": "ebdfbf093d240e53ba79b99498e1fe389457bec8",
+  "published_at": null,
+  "alias": "https://deploy-preview-8--mashcore.netlify.app",
+  "permalink": "https://6adf71194f89cd269bb5f416--mashcore.netlify.app",
+  "deploy_time": 13,
+  "error_message": null,
+  "record_kind": "verified implementation deployment",
+  "production_deploy_before": "6adb113e296767181eb98f02",
+  "production_deploy_after": "6adb113e296767181eb98f02",
+  "production_changed": false,
+  "main_ref": "b31a55cea32cd83113624f9cdc27bd8d8bc36926",
+  "draft_pr": "https://github.com/HotCharliepepper/Mashcore/pull/8",
+  "browser_verified_urls": [
+    "https://deploy-preview-8--mashcore.netlify.app/",
+    "https://deploy-preview-8--mashcore.netlify.app/?hero=reverse",
+    "https://deploy-preview-8--mashcore.netlify.app/?hero=reverse&motion=still",
+    "https://deploy-preview-8--mashcore.netlify.app/preview/?view=mobile&page=%2F&hero=reverse"
+  ],
+  "evidence_commit_note": "Later documentation/screenshot commits do not change the runtime. This immutable implementation deploy is the browser-tested code."
+}

@@ -1,6 +1,6 @@
 /* P01: preserve R2 A; make B's cue finite, controllable and readable at rest. */
 .hero-variant-bar[hidden],.hero-motion-toggle[hidden]{display:none}
-html[data-hero-initial-mode] .hero-variant-bar[hidden]{display:flex;visibility:hidden}
+html[data-hero-initial-mode] .hero-variant-bar[hidden]{display:flex!important;visibility:hidden}
 .hero-variant-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 0 16px;border-top:1px solid #c9c2b4;color:#292d29}
 .hero-variant-heading{display:flex;align-items:center;gap:14px;flex:1 1 230px;min-width:0}
 .hero-variant-heading>span{font:600 11px/1.5 var(--sans);letter-spacing:.12em}
@@ -14,7 +14,7 @@ html[data-hero-initial-mode] .hero-variant-bar[hidden]{display:flex;visibility:h
 .r2-origin .origin-media{z-index:0}.r2-origin .hero-copy{z-index:3}.r2-origin .hero-media-controls{z-index:5}.r2-origin .origin-media figcaption{z-index:4}
 .hero-reverse-layer{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
 :is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .hero-reverse-layer{display:block}
-[data-hero-poster-error="true"] .hero-reverse-layer{display:none}
+[data-hero-poster-error="true"] .hero-reverse-layer{display:none!important}
 .hero-reverse-svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .hero-reverse-question{position:absolute;top:7%;right:4%;padding:12px 17px;background:#f6f2e7f2;border-left:2px solid #8a6b3d;color:#2d302a;max-width:220px}
 .hero-reverse-question span{display:block;margin-bottom:7px;font:600 10px/1.5 var(--sans);letter-spacing:.13em;color:#6c5838}

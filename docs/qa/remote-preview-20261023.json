@@ -1,0 +1,214 @@
+{
+  "preview": "https://deploy-preview-6--mashcore.netlify.app",
+  "deployed_commit": "36516abcd7a3375d10645a3a7d547e299f5e3719",
+  "environment": "HTTP byte comparison, not remote rendered-browser/device QA",
+  "files": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/",
+      "sha256": "0d2575c5b14bfe38f388334550746842d92ec244c4e623c6e75f7633ff1eefdb",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/research/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/",
+      "sha256": "e0790e5179efc5b30a27597d8b57de0485c1db1da52ebec9317404208d646971",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/services/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/services/",
+      "sha256": "de99bf5b5b43fe56d49783a84735a11d2076078bede4964be647201609dcb07d",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/explore/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/explore/",
+      "sha256": "ac51569333d7b054b4f13369962c3ac56840c2dc378c89c67e789dd55334b487",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/about/",
+      "sha256": "68547d6be5c287c4fd2cd7be4ac5f2179087011453935db935dbb8541c5e64f7",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/preview/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/preview/",
+      "sha256": "48158f9d4c9505b86d50fea086198bca8d0d71490f6beabdedb8d721722d8fed",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/mobile/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/mobile/",
+      "sha256": "2ea182b13545ceee80ae91e5f012d68aa3c5e6727fcc0101e45b6e59524aec27",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/research/log/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/log/",
+      "sha256": "db78f1a500f3dc12d7ebb26436a8063abb4c31034fc718adb1eb63cf67259997",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/research/market-interpretation/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/market-interpretation/",
+      "sha256": "5f1530ee2ae495f63cd16fcb65885f84c7e6acb30f21a43a00f7e676f4e2d17c",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/research/chore-to-play/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/research/chore-to-play/",
+      "sha256": "9be26d9db22b763058b9518cdffb418fbb0e5a765fb83fcc19003665edae2164",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/work/weplace/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/work/weplace/",
+      "sha256": "fde243ed3c3728f4f028bccfdac47139989c87116760fbe5a5d2706695f0c017",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/policies/refund/",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/policies/refund/",
+      "sha256": "6e846c2090b48e172e57651d835fd23a2cdaf27a17ef376855b4dac37bfc18a3",
+      "matches_dist": false,
+      "robots": "noindex, nofollow",
+      "netlify_preview_toolbar_count": 1,
+      "content_matches_dist_after_only_toolbar_removal": true
+    },
+    {
+      "path": "/assets/js/site.js",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/site.js",
+      "sha256": "3b53a94a8d1c4adde3f9fc6bf663ccf49674253a3af7830f5437facdeb0d95f9",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/js/observations.js",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/observations.js",
+      "sha256": "81c15772d2d5d6d0823e3c7f71487af022902046e146780da3700b8d29290e1c",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/js/chore-spatial.js",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/js/chore-spatial.js",
+      "sha256": "8f81fb2ad84c246fcd8b10711754d010aae38c29c6330e29a080adaf16a6fd6f",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/css/renewal.css",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/css/renewal.css",
+      "sha256": "9660419f0b445529e454867077744619d5d9873a2c2e578bddb51e649fc9a97e",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/css/fonts.css",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/css/fonts.css",
+      "sha256": "e143245d68ffb24b94c442ab2a5ad7ca7e5ed472677dfcdcf04537bfebb288df",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/fonts/GowunBatang-Regular.woff2",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/fonts/GowunBatang-Regular.woff2",
+      "sha256": "333ec20c81cebe1d20793beaceaa7d1cd524daf2a043df40f1ee4b4d0b40a573",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/fonts/NotoSansKR-Regular.woff2",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/fonts/NotoSansKR-Regular.woff2",
+      "sha256": "b5b2630fbfd805032cd6ef046b889f1862ea8b96f7b351a4ef74f605ead73d81",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/assets/fonts/NotoSansKR-SemiBold.woff2",
+      "status": 200,
+      "url": "https://deploy-preview-6--mashcore.netlify.app/assets/fonts/NotoSansKR-SemiBold.woff2",
+      "sha256": "c12839e5c9589225432a98a1634355ad0736034afd9daa153294ecb6719945ec",
+      "matches_dist": true,
+      "robots": "noindex, nofollow"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "/content/strategy.json",
+      "status": 404
+    },
+    {
+      "path": "/content/services-prototype.json",
+      "status": 404
+    },
+    {
+      "path": "/docs/RENEWAL_REVIEW_20261023.md",
+      "status": 404
+    },
+    {
+      "path": "/scripts/build_public.py",
+      "status": 404
+    },
+    {
+      "path": "/.git/config",
+      "status": 404
+    }
+  ],
+  "html_transform": "Netlify adds one fixed-position Deploy Preview toolbar before body close; only that exact deploy/site/script block removed for comparison. Original byte mismatch retained."
+}

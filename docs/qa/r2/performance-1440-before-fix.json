@@ -1,0 +1,100 @@
+{
+  "environment": "local Chromium, real iframe navigation, no network/CPU throttle",
+  "started": "2026-10-25T15:29:09.432Z",
+  "viewport": 1440,
+  "lcp_ms": 228,
+  "cls": 0.000056917993998153275,
+  "observed_event_duration_ms": 0,
+  "inp": "NOT RUN: no field population or full-session web-vitals computation",
+  "layout_shifts": [
+    {
+      "value": 0.000051644736842105264,
+      "time": 344,
+      "sources": [
+        {
+          "node": "SPAN",
+          "from": {
+            "x": 254.03125,
+            "y": 704.375,
+            "width": 152.21875,
+            "height": 29.25
+          },
+          "to": {
+            "x": 276.109375,
+            "y": 704.375,
+            "width": 69.625,
+            "height": 29.25
+          }
+        }
+      ]
+    },
+    {
+      "value": 0.000005273257156048014,
+      "time": 6859,
+      "sources": [
+        {
+          "node": "SPAN",
+          "from": {
+            "x": 276.109375,
+            "y": 704.375,
+            "width": 69.625,
+            "height": 29.25
+          },
+          "to": {
+            "x": 279.46875,
+            "y": 704.375,
+            "width": 98.609375,
+            "height": 29.25
+          }
+        }
+      ]
+    }
+  ],
+  "sample_age_ms": 7716,
+  "media_state": "ended",
+  "resources": [
+    {
+      "file": "site-config.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 66
+    },
+    {
+      "file": "site.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 92
+    },
+    {
+      "file": "hero-media.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 94
+    },
+    {
+      "file": "observations.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 94
+    },
+    {
+      "file": "chapters.js",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 94
+    },
+    {
+      "file": "hero-desktop.webp",
+      "transferSize": 300,
+      "encodedBodySize": 0,
+      "duration_ms": 65
+    },
+    {
+      "file": "hero-desktop.mp4",
+      "transferSize": 363192,
+      "encodedBodySize": 362892,
+      "duration_ms": 18
+    }
+  ],
+  "lcp_element": "IMG"
+}

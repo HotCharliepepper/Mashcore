@@ -1,0 +1,56 @@
+{
+  "environment": "local Chromium, real iframe navigation, no network/CPU throttle",
+  "started": "2026-10-25T15:28:06.871Z",
+  "viewport": 390,
+  "lcp_ms": 232,
+  "cls": 0.10838653470178868,
+  "observed_event_duration_ms": 0,
+  "inp": "NOT RUN: no field population or full-session web-vitals computation",
+  "lcp_element": "IMG",
+  "sample_age_ms": 13337,
+  "media_state": "ended",
+  "resources": [
+    {
+      "file": "site-config.js",
+      "transferSize": 300,
+      "encodedBodySize": 397,
+      "duration_ms": 31
+    },
+    {
+      "file": "site.js",
+      "transferSize": 300,
+      "encodedBodySize": 10894,
+      "duration_ms": 43
+    },
+    {
+      "file": "hero-media.js",
+      "transferSize": 300,
+      "encodedBodySize": 7457,
+      "duration_ms": 51
+    },
+    {
+      "file": "observations.js",
+      "transferSize": 300,
+      "encodedBodySize": 4373,
+      "duration_ms": 52
+    },
+    {
+      "file": "chapters.js",
+      "transferSize": 300,
+      "encodedBodySize": 1632,
+      "duration_ms": 53
+    },
+    {
+      "file": "hero-mobile.webp",
+      "transferSize": 300,
+      "encodedBodySize": 97192,
+      "duration_ms": 39
+    },
+    {
+      "file": "hero-mobile.mp4",
+      "transferSize": 196563,
+      "encodedBodySize": 196263,
+      "duration_ms": 21
+    }
+  ]
+}

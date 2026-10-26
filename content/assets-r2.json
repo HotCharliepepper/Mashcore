@@ -1,0 +1,108 @@
+{
+  "status": "REVIEW_ONLY",
+  "release_approved": false,
+  "assets": [
+    {
+      "id": "A01",
+      "kind": "AI_GENERATED",
+      "files": [
+        "/assets/media/hero-desktop.webp",
+        "/assets/media/hero-mobile.webp"
+      ],
+      "use": "Hero poster / independent mobile composition",
+      "status": "PREVIEW_READY",
+      "permission": "Generated for this review; production/public-use approval pending",
+      "real_person_or_site": false,
+      "label": "AI 콘셉트 · 실제 촬영 아님 · 정지 이미지 모션"
+    },
+    {
+      "id": "A02-A03",
+      "kind": "AI_STILL_MOTION",
+      "files": [
+        "/assets/media/hero-desktop.mp4",
+        "/assets/media/hero-mobile.mp4"
+      ],
+      "duration_seconds": 6.5,
+      "audio": false,
+      "status": "PREVIEW_READY",
+      "description": "Digital push-in only. Not filmed footage or animated human motion. Final people/field film still missing."
+    },
+    {
+      "id": "A04",
+      "kind": "REAL_FIELD",
+      "files": [],
+      "status": "NEED_VERIFY",
+      "required": "공개 허락된 실제 현장 사진/자료, 촬영자·인물·장소·상호 노출 범위"
+    },
+    {
+      "id": "A05",
+      "kind": "RECONSTRUCTED",
+      "files": [
+        "scripts/review_home.py:flow_figure",
+        "work/weplace/index.html#work-material"
+      ],
+      "status": "PREVIEW_READY",
+      "description": "Native HTML information-flow reconstruction, not a screenshot or performance evidence",
+      "final_required": "Weplace 실제 화면/기여 내역/원자료와 공개 허락"
+    },
+    {
+      "id": "A06",
+      "kind": "RECONSTRUCTED",
+      "files": [
+        "scripts/review_r2.py:worksheet"
+      ],
+      "status": "PREVIEW_READY",
+      "description": "Native HTML decision note; fictional example, no customer data, visible figcaption"
+    },
+    {
+      "id": "A07",
+      "kind": "CODE_NATIVE_DIAGRAM",
+      "files": [
+        "scripts/review_r2.py:judgment"
+      ],
+      "status": "PREVIEW_READY",
+      "description": "Working-method diagram, not an observed case"
+    },
+    {
+      "id": "A08",
+      "kind": "CODE_NATIVE_BRAND_GRAPHIC",
+      "files": [
+        "/assets/media/mashcore-og.png",
+        "source-media/og-source.svg"
+      ],
+      "dimensions": [
+        1200,
+        630
+      ],
+      "status": "PREVIEW_READY",
+      "description": "Original typographic brand card; PNG rendered with DejaVu Serif / Noto Sans KR; final typography approval pending"
+    }
+  ],
+  "media_integrity": [
+    {
+      "output": "assets/media/hero-desktop.mp4",
+      "sha256": "49ce11edd5daf0d26d95b192c4e9de7512107a2c6b69c47190f5f93c292a001a",
+      "bytes": 362892
+    },
+    {
+      "output": "assets/media/hero-desktop.webp",
+      "sha256": "d1843366a7dee33ab6ca91b4a9fa1c1f179d5851d56e6a81b86bf06e0074fa30",
+      "bytes": 146030
+    },
+    {
+      "output": "assets/media/hero-mobile.mp4",
+      "sha256": "360d049d87de0a1d60eca85135671c415c3fe8ea2fd99b3bf5f49f02828820c7",
+      "bytes": 196263
+    },
+    {
+      "output": "assets/media/hero-mobile.webp",
+      "sha256": "cb994a6d9226300dc957fa793e906e9825c7fb8e7a3e407f0b1a8f894426b41a",
+      "bytes": 97192
+    },
+    {
+      "output": "assets/media/mashcore-og.png",
+      "sha256": "2dda45d25c69d52881c30f7ef924f6b5c27a02a1a07def402c2fe9c2458859d0",
+      "bytes": 26586
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "source_commit": "2585b11b5d59c1b6ef43d49b9b55523242e5f365",
+  "environment": "Cloud Chromium, CUA keyboard/click actions on actual dist and Netlify preview",
+  "checks": [
+    {
+      "name": "menu Enter then Escape",
+      "status": "PASS",
+      "evidence": {
+        "expanded_after_enter": "true",
+        "expanded_after_escape": "false",
+        "focus_returned_to_trigger": true
+      }
+    },
+    {
+      "name": "home down anchor via Enter",
+      "status": "PASS",
+      "target_heading_top_css_px": 292.359375
+    },
+    {
+      "name": "services situation anchor",
+      "status": "PASS",
+      "target_axis_2_top_css_px": 223.875
+    },
+    {
+      "name": "A to B via Space",
+      "status": "PASS",
+      "status_text": "배치 B · 내용을 읽은 뒤 안내를 열 수 있습니다."
+    },
+    {
+      "name": "Field → Weplace detail → Services",
+      "status": "PASS",
+      "destination_h1": [
+        "현장의 질문을,고객이 읽는 순서로.",
+        "무엇부터 바꿀지,함께 정합니다."
+      ]
+    },
+    {
+      "name": "inquiry copy unavailable",
+      "status": "PASS",
+      "evidence": "Original text selected; manual copy guidance shown, no false success; mailto recipient and percent encoding inspected, no mail sent"
+    },
+    {
+      "name": "remote home, down anchor, A/B B, services",
+      "status": "PASS",
+      "deploy_id": "6ade057424cd7fdda7398c2e"
+    }
+  ],
+  "not_run": [
+    "physical devices and sensors",
+    "screen reader",
+    "browser zoom 200%",
+    "OS reduced-motion",
+    "physical background-tab lifecycle test",
+    "save-data device setting",
+    "real network throttle and final media decoding",
+    "real mail app and SMTP",
+    "user impression/conversion testing"
+  ]
+}

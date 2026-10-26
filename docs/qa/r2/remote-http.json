@@ -1,0 +1,308 @@
+{
+  "deploy_id": "6ade289eeba0b597dafdfbb5",
+  "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app",
+  "environment": "HTTP bytes, separate from rendered-browser QA",
+  "pass": true,
+  "results": [
+    {
+      "path": "/about/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/about/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "6134bd1b95aad28fb4ebcd56b511fdf9c7edcad194d2c50d0dfbe28ee6cc52fd",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/explore/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/explore/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "08c18d41dbab23838f9392caed66dfc3e4e37b866c772129daca0660cd69ac7f",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "642e06fec8b3ea4ad391bd91c89086f6af9a4cdee6637553e5a5496ed5f4e03b",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/mobile/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/mobile/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "489a12ab239086ccca342f2f29f2bfca8119685b499df54828786e924fe052de",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/policies/refund/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/policies/refund/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "aef36150fe2c9e1224c3fa9058b00a135ab23dc052b044716e9ea9d984bfc51d",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/preview/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/preview/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "f04c45570ca4a84801ec625d3804058f0b7c35ade083ee202dcf7359fdd41a45",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/chore-to-play/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/research/chore-to-play/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "15246da9c5a44451c7137994d030b80b6a9e0c9255b04791700429d81ebf7e2b",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/research/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "d9915c6024561ecc7abef2165cce1afa859159a5470d1bd125161e6b1f19a120",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/log/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/research/log/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "def04fe833fff1e2e5b222d08164cb100e647b0330a23749fdabc6ed3bbae0c3",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/research/market-interpretation/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/research/market-interpretation/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "1fb6e249101f9b6de8c2d6295b2183ee15c4a0291953345f98746e5f106fb833",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/services/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/services/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "ba07eb9764ce50432dfc4b8686b846dfe10e9fad92d0a0a681083b4b0165c35e",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/work/weplace/",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/work/weplace/",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "a2d6a8ab428a0606a6d1ae7d1918bc3890d864df293e6e4fd07ae64b0616f7b4",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/css/experience-r2.css",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/css/experience-r2.css",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "70c8da3d676c40e79c72a45795efe4cafdf50546c49f39fe18fb7039eebbc88b",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/preview.js",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/js/preview.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "1f490102b6f84cf85faf9a13c49c6a8d322f15b2f2b60b8ff52f3b6605ec0c3e",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/hero-desktop.webp",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/hero-desktop.webp",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "d1843366a7dee33ab6ca91b4a9fa1c1f179d5851d56e6a81b86bf06e0074fa30",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/hero-mobile.webp",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/hero-mobile.webp",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "cb994a6d9226300dc957fa793e906e9825c7fb8e7a3e407f0b1a8f894426b41a",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/hero-desktop.mp4",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/hero-desktop.mp4",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "49ce11edd5daf0d26d95b192c4e9de7512107a2c6b69c47190f5f93c292a001a",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/hero-mobile.mp4",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/hero-mobile.mp4",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "360d049d87de0a1d60eca85135671c415c3fe8ea2fd99b3bf5f49f02828820c7",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/mashcore-og.png",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/mashcore-og.png",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "2dda45d25c69d52881c30f7ef924f6b5c27a02a1a07def402c2fe9c2458859d0",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/hero-media.js",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/js/hero-media.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "fad6bc15b3a5f75a0cfe68df4f7d4ac6eb1069694cc583b8d5761ae4f077ca0d",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/site.js",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/js/site.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "3b53a94a8d1c4adde3f9fc6bf663ccf49674253a3af7830f5437facdeb0d95f9",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/observations.js",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/js/observations.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "81c15772d2d5d6d0823e3c7f71487af022902046e146780da3700b8d29290e1c",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/js/chore-spatial.js",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/js/chore-spatial.js",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "8f81fb2ad84c246fcd8b10711754d010aae38c29c6330e29a080adaf16a6fd6f",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/css/renewal.css",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/css/renewal.css",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "fb835f921f4ee6d4ae85c2e9a6a6493a0b21a7e72f7c47deaa9d40699eeee3d3",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/origin-threshold-desktop.svg",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/origin-threshold-desktop.svg",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "7bc748724e10d1e1a0423581b4dc88712c663179cce6f912a6687154af4ccd94",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/assets/media/origin-threshold-mobile.svg",
+      "url": "https://6ade289eeba0b597dafdfbb5--mashcore.netlify.app/assets/media/origin-threshold-mobile.svg",
+      "http": 200,
+      "robots": "noindex, nofollow",
+      "raw_sha256": "31a3416c3d71a4c0cb544fa9386b2a070ecfac954a75f4a74b78f303b795328b",
+      "toolbar_blocks_removed": 0,
+      "matches_after_only_toolbar_removal": true,
+      "pass": true
+    },
+    {
+      "path": "/source-media/manifest.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/source-media/hero-mobile.mp4.b64",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/content/seo.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/content/hero-media.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/docs/qa/r1/deploy.json",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/scripts/build_public.py",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/qa/browser.html",
+      "http": 404,
+      "pass": true
+    },
+    {
+      "path": "/.git/config",
+      "http": 404,
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "checks": [
+    "R1 business, A/B, six-perspective/3D, inquiry, both price tracks and policy sources byte-identical",
+    "Four original scenes + R2 sales sequence; real detail links checked by check_public",
+    "Poster-first HTML, no eager video src, 6.5s sample, no loop, explicit AI provenance, media checksums and source exclusion",
+    "11 unique titles/descriptions, canonical URLs, Organization tied to actual business config; no invented phone/hours/GBP/ratings/offers; review noindex retained"
+  ],
+  "media_bytes": {
+    "assets/media/hero-desktop.mp4": 362892,
+    "assets/media/hero-desktop.webp": 146030,
+    "assets/media/hero-mobile.mp4": 196263,
+    "assets/media/hero-mobile.webp": 97192,
+    "assets/media/mashcore-og.png": 26586
+  }
+}

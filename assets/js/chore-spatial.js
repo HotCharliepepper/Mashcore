@@ -15,6 +15,7 @@
     const status = root.querySelector('[data-spatial-status]');
     const resetButton = root.querySelector('[data-spatial-reset]');
     const turnButtons = Array.from(root.querySelectorAll('[data-spatial-turn]'));
+    const staticReading = root.querySelector('[data-spatial-static]');
     if (!stage || !world || !buttons.length || !title || !copy || !sensorButton || !status || !resetButton) return;
     const motionQuery = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
     const cleanups = [];
@@ -196,6 +197,7 @@
       resetButton.disabled = reduced;
       sensorButton.disabled = reduced;
       reset(false);
+      if (staticReading) staticReading.open = reduced;
       say(reduced ? '움직임을 줄인 보기입니다. 관점 버튼으로 내용을 살펴보세요.' : fallback);
     };
     if (motionQuery.addEventListener) listen(motionQuery, 'change', updateMotion);

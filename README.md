@@ -1,67 +1,92 @@
-# Mashcore
+# Mashcore — interactive renewal review
 
-사람의 망설임과 브랜드의 신호를 읽고, 연구와 현장을 연결하는 공개 홈페이지.
+‘함께 하여 강화한다’를 중심으로 홈 네 장면, 서비스·소개·연구·Weplace 협업·독립 문의를 탐색하는 검토본입니다. 새 문안·배치·모션은 **PROPOSED**, 두 가격 트랙은 검토 상태입니다. main 병합·운영 공개·가격 확정·결제 개통은 별도 단계입니다.
 
-## Scene & Spatial v4
+## 구현 계보
 
-짧은 철학과 네 장면, Chore to Play의 여섯 관점 입체 모형, 휴대폰 기울기 선택 사용, 모바일 전용 구성과 화면 비교를 추가했다. Editorial Review v2와 기존 GitHub 연구를 이어 받은 v3 내용은 `/explore/`에 보존한다.
+- 작업 ref: `review/mashcore-renewal-20261023`.
+- 기존 Draft PR #2 HEAD `9e857fdca62b66bd7d81ecc3492940124a02c08a`에서 이어갑니다. PR #2를 폐기하거나 과거 SHA로 reset하지 않습니다.
+- 비교 main: `b31a55cea32cd83113624f9cdc27bd8d8bc36926`. 최신 사업자정보·정적 푸터·환불·서비스 검토안을 통합합니다.
+- 로컬 검수 체크포인트(보존 ref `local/mashcore-renewal-20261023`): `d97499f89297f522d1703ff8668ace11662b3cf0`. main의 변경을 이 검토 브랜치로 가져오는 통합은 **main으로 병합하는 작업이 아닙니다**.
+- 실제 원격 구현 커밋은 `36516abcd7a3375d10645a3a7d547e299f5e3719`이며, 동일 파일 tree와 PR #2/main의 부모 이력을 보존합니다. [Draft PR #6](https://github.com/HotCharliepepper/Mashcore/pull/6) · [검토 화면](https://deploy-preview-6--mashcore.netlify.app/).
+- 최신 커밋·검토 주소·실제 검수 결과는 [리뉴얼 검토 기록](docs/RENEWAL_REVIEW_20261023.md)에 기록합니다. 과거 Preview를 이번 결과로 취급하지 않습니다.
+
+## 원본과 산출물
+
+이 브랜치는 **`scripts/build_public.py → dist/`** 한 생성 경로를 사용합니다. Netlify 게시 디렉터리도 `dist/`입니다. 루트 HTML을 그대로 배포하거나 생성된 HTML만 직접 고치지 않습니다.
+
+| 파일 | 역할 |
+|---|---|
+| `index.html` | PR 관찰 A/B의 입력 원문과 추출 마커 |
+| `content/strategy.json` | 철학·문안의 검토 기준, PROPOSED 상태 |
+| `content/services-prototype.json` | PR 네 상품의 금액·범위·기간·VAT·승인 상태 원본 |
+| `content/services-main-review.html` | main의 별도 가격 검토 카드 원문 |
+| `assets/js/site-config.js` | 최신 공개 사업자 값, `Object.freeze` 안 strict JSON |
+| `scripts/review_home.py`, `scripts/review_details.py` | 08의 홈·서비스·소개 검토 구성을 생성 |
+| `research/`, `explore/`, `work/weplace/`, `policies/refund/` | 보존·편집할 상세 원본 |
+| `assets/css/renewal.css`, `assets/css/research-review.css` | 검토본 시각 구성 |
+| `dist/` | 실제 화면·링크·상태의 최종 검수 대상 |
+
+모바일은 같은 홈 결과에서 생성합니다. `content/`, `docs/`, `scripts/`, `qa/`, Git 데이터와 비공개 원문은 `dist/`에 포함하지 않습니다. `noindex`는 검색 제외 요청이며 접근 제어가 아닙니다.
+
+## 생성과 검사
+
+Python 표준 라이브러리를 사용하는 생성기입니다. 저장소 루트에서 실행합니다.
+
+```sh
+python3 scripts/build_public.py --context deploy-preview
+python3 scripts/check_public.py
+node scripts/check_review_interactions.cjs
+node scripts/check_spatial.cjs
+```
+
+- `check_public.py`: 실제 `dist`의 경로·링크·메타데이터·정적 푸터·정책·가격 상태·A/B 원문·모바일 동기화·공개 범위를 검사합니다.
+- `check_review_interactions.cjs`: 실제 런타임 코드의 문의·메뉴·A/B 상태를 Node VM 이벤트 모형에서 검사합니다.
+- `check_spatial.cjs`: 실제 `dist`의 3D 원문과 런타임을 DOM 모형에서 검사합니다. 개발 검사 의존성 `linkedom`이 필요합니다. 설치되지 않은 환경에서는 실행 불가를 기록하며, 성공으로 처리하지 않습니다.
+- 위 검사는 렌더 브라우저·물리 기기·센서·외부 메일 앱·SMTP 검증을 대신하지 않습니다.
+
+미승인 상품의 운영 차단을 확인하는 다음 명령은 **실패가 기대 결과**입니다. 배포 명령이 아닙니다. 확인 후 검토용 산출물을 다시 생성합니다.
+
+```sh
+python3 scripts/build_public.py --context production
+python3 scripts/build_public.py --context deploy-preview
+python3 scripts/check_public.py
+```
+
+`production_approved`, `status`, `basis_status`, `vat_status`를 플래그만 바꿔 출시하지 않습니다. `CONTEXT=production`이 설정된 환경에서는 명령 인자와 별개로 운영 차단이 적용됩니다.
+
+기존 `sync_mobile.py`, `sync_business.py`, `sync_business_info.py`, `check_site.py`, `check_interactions.cjs`는 이전 빌드 없는 구조의 이력입니다. 본문은 보존하되 이 생성기 프로젝트에서는 명시적으로 중단하도록 했습니다. 이 명령을 위 생성·검사 명령과 혼용하지 않습니다.
+
+## 검토 경로
 
 | 경로 | 내용 |
 |---|---|
-| `/` | 네 장면 랜딩, 반응형 기본 화면 |
-| `/mobile/` | 같은 콘텐츠의 모바일 전용 세로 구성 |
-| `/preview/?view=desktop` | 1440px 데스크톱 비교 |
-| `/preview/?view=mobile` | 390px 모바일 비교 |
-| `/explore/` | 기존 관점·주제 탭, 글 초안, 질문 정리 |
-| `/research/` | 연구 전체 |
-| `/research/chore-to-play/` | 입체 모형·일의 조건 탐색·연구 이력 |
-| `/research/market-interpretation/` | 판단력 교육 R&D |
-| `/research/log/` | 공개 연구 변경 기록 |
-| `/about/` | Mashcore Lab·Weplace·Mashcore34 역할 |
+| `/`, `/mobile/` | 네 장면·원문 A/B·협업·문의 |
+| `/services/` | 여섯 설명 축, 산출물 예시, 진행 방식, 두 가격 검토 트랙 |
+| `/about/` | 규현의 역할·판단 방식·프로젝트별 협업 |
+| `/research/` | Lab/Market 편집 입구와 기존 원문 연결 |
+| `/research/chore-to-play/` | 여섯 동시 관점·3D·정지 목록·조건 탐색·수정 이력 |
+| `/research/market-interpretation/`, `/research/log/` | 판단 연구와 기존 날짜의 변경 기록 |
+| `/explore/` | 기존 관점·주제·글·질문 |
+| `/work/weplace/` | 협업의 질문·선택 이유·자료 상태·독립 문의·Weplace 공식 홈 연결 |
+| `/policies/refund/` | main에서 보존한 취소·환불 안내 |
+| `/preview/` | 화면 폭·페이지 선택·글자 확대·스크립트 차단 비교. 실제 브라우저 줌/실기기와 구분 |
 
-빌드 없는 HTML/CSS/JavaScript. 운영 주소는 Netlify 프로젝트에서 확인한 `https://mashcore.co.kr/`이다(2026-10-23 확인). `main` 병합 시 Git 기반 배포가 이루어진다. 기존 `mashcore.netlify.app`은 Netlify 기본 호스트이며, 다른 도메인 `mashcore.kr`은 별도 확인 대상이다.
+## 문의·판매·운영 정보
 
-- [DESIGN.md](DESIGN.md): 근거 상태, A–F 설계·Stitch 프롬프트·검수
-- [FIGMA_HANDOFF_v4.md](docs/FIGMA_HANDOFF_v4.md): 기존 Figma와의 인계. 이번에 캔버스 동기화는 하지 않음
-- [DOMAIN_AND_OPERATIONS.md](docs/DOMAIN_AND_OPERATIONS.md): 도메인 연결·사업자 정보 입력
-- `assets/js/site-config.js`: 공개 사업자 정보의 원본 (2026-10-23 사용자 제공값 반영, 전화번호·등록증 표기 대조는 미완료)
+- 공식 도메인·canonical: `https://mashcore.co.kr/`. 기존 `mashcore.netlify.app`은 Netlify 기본 호스트이며 DNS를 변경한 작업이 아닙니다.
+- 공개 설정: Mashcore / 최규현 / `247-02-04104` / 서울특별시 영등포구 선유로9길 10, 812호 Mashcore / `weplacehyun@naver.com`.
+- 전화번호는 미제공이며 만들지 않습니다. 등록증의 상호·주소 대조와 실제 메일 송수신은 별도 확인 사항입니다.
+- 문의는 메일 앱의 작성창 열기 또는 질문 복사입니다. 사용자가 메일 앱에서 직접 보냅니다. 서버 접수·저장·CRM 등록이 없습니다.
+- 1,000자 초과 원문은 남겨 두고 메일·자동 복사만 제한합니다. 직접 선택·복사·이메일 경로를 제공합니다.
+- PR의 400/250/150/50만원 프로토타입과 main의 99,000원/50만/100만/150만원 검토안은 서로 다른 상품입니다. 공식 가격·범위·VAT가 확정된 판매 페이지가 아닙니다.
+- 실제 카드결제·자동결제는 미개통 상태입니다. 정책 게시를 PG 승인이나 결제 개통으로 설명하지 않습니다.
 
-홈 내용 수정 후 모바일을 동기화한다:
+## 관련 기록
 
-```sh
-python3 scripts/sync_mobile.py
-python3 scripts/sync_business_info.py
-python3 scripts/check_site.py
-node --check assets/js/site.js
-node --check assets/js/chapters.js
-node --check assets/js/chore-spatial.js
-node --check assets/js/preview.js
-```
+- [구현·검수·미실시·남은 결정](docs/RENEWAL_REVIEW_20261023.md)
+- [운영 정보와 이 브랜치의 수정 절차](docs/DOMAIN_AND_OPERATIONS.md)
+- [Weplace 인계 추가 델타](docs/07_WEPLACE_HANDOFF_DELTA_20261023.md)
+- [폰트 출처·라이선스·대안](docs/REVIEW_FONT_SOURCES.md)
 
-추가 DOM 회귀 검사(운영 런타임 의존성 없음): 개발 환경에 `linkedom` 설치 후 `node scripts/check_interactions.cjs`, `node scripts/check_spatial.cjs`. 실제 렌더링·센서 검사가 아니므로 iPhone/Android의 직접 확인을 대체하지 않는다.
-
-외부 JavaScript 라이브러리 없이 작동한다. 외부 폰트가 차단되어도 시스템 폰트를 쓴다. 센서 값과 입력한 질문은 자동 저장·전송하지 않는다. 입력은 복사하거나 메일 앱에서 직접 전송한다. `docs/01`–`05`와 v3 archive는 과거 이력이며 현재 구현 기준은 루트 DESIGN.md다.
-
-## Service & policy readiness (2026-10-23)
-
-- `/services/`: 서비스와 가격 검토안 및 문의 흐름. **아직 실제 카드결제 불가.**
-- `/policies/refund/`: 공개 취소·환불 기준 및 연락 방법.
-- 모든 공개 페이지 상단의 서비스 안내, 하단 환불정책 링크를 유지한다.
-- 상품별 확정 제공 범위·기간·부가세는 확인 후 업데이트한다. 사업자 정보는 표시하되 실제 사업자등록증과 법정 상호·주소를 최종 대조하고 사업용 전화번호를 추가해야 한다.
-- 토스페이먼츠 정식 심사·라이브 결제 구현은 **미완료**. 사이트 정책 게시를 결제 개통으로 간주하면 안 된다.
-- 링크 검사: `python3 scripts/check_site.py` · 모바일 동기화: `python3 scripts/sync_mobile.py` (홈 원본 수정 시)
-
-## 2026-10-23 Business contact patch
-
-- 이메일 `weplacehyun@naver.com`, 등록번호 `247-02-04104`, 대표자 최규현, 사용자 제공 사업장 주소를 정적 푸터에 표시.
-- 실제 사업자등록증 상호/주소 표기와 전화번호 **NEED VERIFY**.
-- 기존 인터랙션/애니메이션 기능은 보존했으며 Work 후속 작업 범위로 분리함.
-- PG '탑재 불가' 표시 원인은 미확인. 심사기관 답변 없이 개인 신용 사유로 단정하지 않음.
-
-## Business info visibility patch (2026-10-23)
-
-The public business details are now in a labelled, full-width `footer-legal` section (not an 11px block crowded under the wordmark). Every customer-facing route carries the same static business details, with mobile-specific layout and a regression check in `scripts/check_site.py`. Existing animations and interactive research components are unchanged.
-
-- Customer-visible legal information: footer of https://mashcore.co.kr/
-- `scripts/sync_business_info.py` still reads the public configuration as its source of truth.
-- Business telephone is not yet provided. Do not invent contact information; a real telephone remains necessary for PG storefront review.
+과거 `DESIGN.md`, v3/v5/v6 문서는 이력이며 이번 실행 명령을 대체하지 않습니다. 연구·현장 설명의 실제/재구성/검토 상태를 유지하고, 사용자 최종 확인 전 main 병합·운영 공개를 진행하지 않습니다.

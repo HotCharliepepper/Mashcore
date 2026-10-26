@@ -1,0 +1,8 @@
+{
+  "id": "6ade289eeba0b597dafdfbb5",
+  "state": "ready",
+  "context": "deploy-preview",
+  "commit_ref": "d5179086661cdd7b1c08e0231f11a6e216cc185f",
+  "published_at": null,
+  "review_url": "https://deploy-preview-6--mashcore.netlify.app"
+}

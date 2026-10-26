@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """R3 additive reverse hero contract; run after build_public and check_public."""
-from check_public import ROOT, DIST
+from check_public import ROOT, DIST, Page
 for route in ['index.html', 'mobile/index.html']:
     html = (DIST / route).read_text(encoding='utf-8')
-    assert html.count('data-hero-experience') == 1, route
+    parsed = Page(html)
+    assert sum('data-hero-experience' in node.attrs for node in parsed.nodes) == 1, route
     assert html.count('data-hero-mode-choice=') == 2, route
     assert 'data-hero-mode="default"' in html, route
     assert 'data-hero-reverse-layer' in html, route

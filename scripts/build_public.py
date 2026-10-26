@@ -189,6 +189,17 @@ def build(root: Path, output: Path, context: str) -> dict:
         text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"><link rel="stylesheet" href="/assets/css/experience-r2.css"></head>',1)
         if path.relative_to(output).as_posix() in ('index.html', 'mobile/index.html'):
             text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/hero-reverse.css"></head>',1)
+            # Select the requested layout before first paint. With scripts
+            # blocked, the server-rendered A remains the readable fallback.
+            text=text.replace('<head>', '<head><script>document.documentElement.dataset.heroInitialMode=new URLSearchParams(location.search).get("hero")==="reverse"?"reverse":"default";addEventListener("error",e=>{if((e.target?.src||e.filename||"").split("?")[0].endsWith("/hero-reverse.js"))delete document.documentElement.dataset.heroInitialMode},true)</script>', 1)
+            # The deployed review iframe exposed an unstyled first paint.
+            # Inline the authored CSS in its existing order on these two entry
+            # pages only. No second hand-maintained critical stylesheet.
+            for css_name in ('strategy.css','fonts.css','renewal.css','experience-r2.css','hero-reverse.css'):
+                css_path='/assets/css/'+css_name
+                link='<link rel="stylesheet" href="'+css_path+'">'
+                style='<style data-source="'+css_path+'">'+(root/css_path.lstrip('/')).read_text(encoding='utf-8')+'</style>'
+                text=text.replace(link,style,1)
         text=apply_seo(text,path.relative_to(output).as_posix(),root,b)
         if context!='production' and not re.search(r'<meta\b[^>]*\bname=[\'"]robots[\'"]',text):
             text=text.replace('</head>','<meta name="robots" content="noindex,nofollow"></head>',1)

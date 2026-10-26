@@ -52,6 +52,7 @@
     if (!['default', 'reverse'].includes(next)) return;
     const changed = mode !== next;
     mode = next; root.dataset.heroMode = mode;
+    document.documentElement.dataset.heroInitialMode = mode;
     buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.heroModeChoice === mode)));
     if (updateUrl) {
       const url = new URL(window.location.href);

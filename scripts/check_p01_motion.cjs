@@ -22,6 +22,7 @@ class Element {
 }
 function environment(options = {}) {
   const doc = new Element(), win = new Element(), root = new Element();
+  doc.documentElement = new Element();
   const bar = new Element(), status = new Element(), toggle = new Element(), trace = new Element(), stage = new Element(), poster = new Element();
   const choices = ['default','reverse'].map(mode => {const el = new Element(); el.dataset.heroModeChoice = mode; return el;});
   const reduced = new Element(), compact = new Element(), connection = new Element();
@@ -54,7 +55,7 @@ const checks = [];
   checks.push('A default; B updates URL/pressed state; repeated B does not restart; user pause survives background; finite completion offers replay');
 }
 {
-  const e=environment(); e.choices[1].fire('click'); e.choices[0].fire('click'); e.flush(); assert.equal(e.root.dataset.heroMode,'default'); assert.equal(e.root.dataset.heroMotion,'complete'); assert.equal(e.root.classList.contains('hero-reverse-replay'),false);
+  const e=environment(); e.choices[1].fire('click'); e.choices[0].fire('click'); e.flush(); assert.equal(e.root.dataset.heroMode,'default'); assert.equal(e.doc.documentElement.dataset.heroInitialMode,'default'); assert.equal(e.root.dataset.heroMotion,'complete'); assert.equal(e.root.classList.contains('hero-reverse-replay'),false);
   e.win.location=new URL('https://review.example/?hero=reverse'); e.win.fire('popstate'); e.flush(); assert.equal(e.root.dataset.heroMode,'reverse');
   checks.push('Rapid B→A cancels queued animation; URL back/forward state is reconciled');
 }

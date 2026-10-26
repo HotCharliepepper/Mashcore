@@ -1,5 +1,6 @@
 /* P01: preserve R2 A; make B's cue finite, controllable and readable at rest. */
 .hero-variant-bar[hidden],.hero-motion-toggle[hidden]{display:none}
+html[data-hero-initial-mode] .hero-variant-bar[hidden]{display:flex;visibility:hidden}
 .hero-variant-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 0 16px;border-top:1px solid #c9c2b4;color:#292d29}
 .hero-variant-heading{display:flex;align-items:center;gap:14px;flex:1 1 230px;min-width:0}
 .hero-variant-heading>span{font:600 11px/1.5 var(--sans);letter-spacing:.12em}
@@ -12,7 +13,7 @@
 .hero-variant-buttons button:focus-visible,.hero-motion-toggle:focus-visible{outline:3px solid #8c592b;outline-offset:3px}
 .r2-origin .origin-media{z-index:0}.r2-origin .hero-copy{z-index:3}.r2-origin .hero-media-controls{z-index:5}.r2-origin .origin-media figcaption{z-index:4}
 .hero-reverse-layer{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-[data-hero-mode="reverse"] .hero-reverse-layer{display:block}
+:is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .hero-reverse-layer{display:block}
 [data-hero-poster-error="true"] .hero-reverse-layer{display:none}
 .hero-reverse-svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .hero-reverse-question{position:absolute;top:7%;right:4%;padding:12px 17px;background:#f6f2e7f2;border-left:2px solid #8a6b3d;color:#2d302a;max-width:220px}
@@ -29,10 +30,10 @@
 @media(max-width:1100px){.hero-reverse-svg{display:none}.hero-reverse-question{top:12px;right:12px;max-width:min(54%,215px);padding:8px 11px}.hero-reverse-question span{font-size:9px;margin-bottom:3px}.hero-reverse-question strong{font-size:14px;line-height:1.4}}
 @media(max-width:900px){
  .hero-variant-bar{gap:8px 12px;padding:10px 0 14px}.hero-variant-heading{flex-basis:auto}.hero-variant-heading small{display:none}.hero-variant-buttons{margin-left:auto}.hero-variant-buttons button{font-size:11px;padding:8px 10px}
- [data-hero-mode="reverse"] .origin-stage{display:flex;flex-direction:column}
- [data-hero-mode="reverse"] .hero-copy{order:0;padding:12px 0 26px}
- [data-hero-mode="reverse"] .origin-media{order:1;width:100%}
- [data-hero-mode="reverse"] .hero-controls-slot{order:2}
+ :is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .origin-stage{display:flex;flex-direction:column}
+ :is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .hero-copy{order:0;padding:12px 0 26px}
+ :is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .origin-media{order:1;width:100%}
+ :is([data-hero-mode="reverse"],[data-hero-initial-mode="reverse"] [data-hero-experience]) .hero-controls-slot{order:2}
 }
 @media(max-width:380px){.hero-variant-heading>span{font-size:10px;letter-spacing:.06em}.hero-variant-buttons button{font-size:10px;padding:8px}.hero-reverse-question{max-width:62%}}
 @media(prefers-reduced-motion:reduce){.hero-reverse-layer *{animation:none!important}}

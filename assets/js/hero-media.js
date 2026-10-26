@@ -13,6 +13,7 @@
   const poster = root.querySelector('[data-hero-poster]');
   let posterReady = !poster || (poster.complete && poster.naturalWidth > 0);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const reduceMotion = () => reduced.matches || new URLSearchParams(window.location.search).get('motion') === 'still';
   const viewport = window.matchMedia('(max-width: 700px)');
   const sourceForViewport = () => viewport.matches ? (config.video.mobile || config.video.desktop) : (config.video.desktop || config.video.mobile);
   let source = sourceForViewport();
@@ -30,7 +31,7 @@
     paused_environment: '화면으로 돌아오면 이어집니다.', ended: '영상이 끝났습니다.',
     blocked: '버튼을 눌러 영상을 재생할 수 있습니다.',
     error: '영상을 불러오지 못해 정지 이미지를 표시합니다.',
-    reduced_motion: '모션 감소 설정으로 자동재생하지 않습니다.'
+    reduced_motion: '정지 보기 또는 모션 감소 설정으로 자동재생하지 않습니다.'
   };
   function setState(next) {
     state = next; root.dataset.mediaState = next;
@@ -65,7 +66,7 @@
   }
   async function attempt(manual = false) {
     if (!eligible() || pending) return;
-    if (!manual && (blocked || (!explicitChoice && (reduced.matches || saveData)))) return;
+    if (!manual && (blocked || (!explicitChoice && (reduceMotion() || saveData)))) return;
     if (!manual && !environmentResume && autoplayAttempted) return;
     if (!manual) autoplayAttempted = true;
     if (manual) { blocked = false; explicitChoice = true; manualPending = false; }
@@ -92,7 +93,7 @@
     if (!eligible()) { pauseForEnvironment(); return; }
     // Let the eager image finish first. No fixed loading screen or timing gate.
     if (!posterReady && !manualPending) return;
-    if (!requested && !reduced.matches && !saveData) load();
+    if (!requested && !reduceMotion() && !saveData) load();
     if (video.readyState >= 3) attempt(manualPending);
   }
   video.addEventListener('canplay', reconcile);
@@ -121,7 +122,7 @@
   });
   document.addEventListener('visibilitychange', reconcile);
   reduced.addEventListener('change', () => {
-    if (reduced.matches) {
+    if (reduceMotion()) {
       explicitChoice = false; manualPending = false; userPaused = true; generation++; pending = false;
       video.pause(); setState('reduced_motion');
     }
@@ -139,7 +140,7 @@
     environmentResume = wasPlaying && !userPaused && !ended;
     const switchGeneration = generation;
     posterReady = !poster || (poster.complete && poster.naturalWidth > 0);
-    setState(ended ? 'ended' : userPaused ? 'paused_user' : reduced.matches ? 'reduced_motion' : blocked || saveData ? 'blocked' : 'loading');
+    setState(ended ? 'ended' : userPaused ? 'paused_user' : reduceMotion() ? 'reduced_motion' : blocked || saveData ? 'blocked' : 'loading');
     if (environmentResume) video.addEventListener('loadedmetadata', () => {
       if (generation === switchGeneration && Number.isFinite(position) && Number.isFinite(video.duration)) video.currentTime = Math.min(position, Math.max(0, video.duration - 0.1));
     }, {once:true});
@@ -155,6 +156,6 @@
   window.addEventListener('pagehide', () => { inView = false; pauseForEnvironment(); observer?.disconnect(); });
   window.addEventListener('pageshow', event => { if (event.persisted) { if (observer) observer.observe(root); else { inView = true; reconcile(); } } });
   controls.hidden = false;
-  setState(reduced.matches ? 'reduced_motion' : saveData ? 'blocked' : 'loading');
+  setState(reduceMotion() ? 'reduced_motion' : saveData ? 'blocked' : 'loading');
   reconcile();
 })();

@@ -1,57 +1,39 @@
-/* Reverse Discovery R3: additive layer; R2 content, film and inquiry untouched. */
-.hero-variant-bar[hidden]{display:none}
-.hero-variant-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;padding:12px 0 16px;border-top:1px solid #c9c2b4;color:#292d29}
-.hero-variant-heading{display:flex;align-items:center;gap:12px;flex:1 1 275px;min-width:0}
+/* P01: preserve R2 A; make B's cue finite, controllable and readable at rest. */
+.hero-variant-bar[hidden],.hero-motion-toggle[hidden]{display:none}
+.hero-variant-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 0 16px;border-top:1px solid #c9c2b4;color:#292d29}
+.hero-variant-heading{display:flex;align-items:center;gap:14px;flex:1 1 230px;min-width:0}
 .hero-variant-heading>span{font:600 11px/1.5 var(--sans);letter-spacing:.12em}
 .hero-variant-heading small{font-size:12px;color:#5a6059}
-.hero-variant-buttons{display:flex;gap:3px;padding:3px;border:1px solid #aaa89b;border-radius:4px;background:#e6e3da}
-.hero-variant-buttons button{border:0;background:transparent;color:#3a403a;padding:9px 13px;min-height:44px;cursor:pointer;font:500 12px/1.5 var(--sans);white-space:nowrap}
-.hero-variant-buttons button[aria-pressed="true"]{background:#292d29;color:#f7f4eb}
-.hero-variant-buttons button:focus-visible{outline:3px solid #a46c37;outline-offset:2px}
-.hero-variant-feedback{font-size:12px;line-height:1.55;color:#596057;margin:0;flex:1 1 100%;min-height:19px}
-.r2-origin .origin-media{z-index:0}
-.r2-origin .hero-copy{z-index:3}
-.r2-origin .hero-media-controls{z-index:5}
-.r2-origin .origin-media figcaption{z-index:4}
+.hero-variant-buttons{display:flex;gap:3px;padding:3px;border:1px solid #aaa89b;background:#e6e3da}
+.hero-variant-buttons button,.hero-motion-toggle{border:0;background:transparent;color:#3a403a;padding:9px 13px;min-height:44px;cursor:pointer;font:500 12px/1.5 var(--sans)}
+.hero-variant-buttons button{white-space:nowrap}
+.hero-variant-buttons button[aria-pressed="true"]{background:#253e34;color:#fffdf7}
+.hero-motion-toggle{border:1px solid #a9a595;min-width:118px}
+.hero-variant-buttons button:focus-visible,.hero-motion-toggle:focus-visible{outline:3px solid #8c592b;outline-offset:3px}
+.r2-origin .origin-media{z-index:0}.r2-origin .hero-copy{z-index:3}.r2-origin .hero-media-controls{z-index:5}.r2-origin .origin-media figcaption{z-index:4}
 .hero-reverse-layer{display:none;position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-[data-hero-mode="reverse"] .hero-reverse-layer{display:block;background:radial-gradient(circle at 84% 39%,rgba(245,222,172,.16),transparent 28%)}
-.hero-reverse-svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 3px rgba(31,26,16,.38))}
-.hero-reverse-question{position:absolute;top:8%;right:5%;padding:12px 17px;background:rgba(246,242,231,.94);border-left:2px solid #966b43;color:#2d302a;box-shadow:0 8px 30px rgba(20,20,18,.13);max-width:220px}
-.hero-reverse-question span{display:block;margin-bottom:7px;font:600 10px/1.5 var(--sans);letter-spacing:.13em;color:#776449}
+[data-hero-mode="reverse"] .hero-reverse-layer{display:block}
+[data-hero-poster-error="true"] .hero-reverse-layer{display:none}
+.hero-reverse-svg{display:block;position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hero-reverse-question{position:absolute;top:7%;right:4%;padding:12px 17px;background:#f6f2e7f2;border-left:2px solid #8a6b3d;color:#2d302a;max-width:220px}
+.hero-reverse-question span{display:block;margin-bottom:7px;font:600 10px/1.5 var(--sans);letter-spacing:.13em;color:#6c5838}
 .hero-reverse-question strong{font:400 18px/1.5 var(--serif);letter-spacing:-.03em}
-.hero-reverse-halo{opacity:.46}
-.hero-reverse-ring,.hero-reverse-source{transform-origin:1022px 264px}
-.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-trace{animation:hero-reverse-draw 1.15s cubic-bezier(.15,.55,.17,1) both}
-.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-halo{animation:hero-reverse-draw 1.15s cubic-bezier(.15,.55,.17,1) both}
+.hero-reverse-halo{opacity:.4}.hero-reverse-ring{transform-origin:738px 330px}
+.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-trace,.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-halo{animation:hero-reverse-draw 1.15s cubic-bezier(.15,.55,.17,1) .18s both}
 .hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-ring{animation:hero-reverse-ring .68s ease-out both}
-.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-question{animation:hero-reverse-type .75s ease-out both}
+.hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-arrow{animation:hero-reverse-arrow .28s ease-out 1.05s both}
+[data-hero-motion="paused"] .hero-reverse-layer *{animation-play-state:paused!important}
 @keyframes hero-reverse-draw{from{stroke-dasharray:100;stroke-dashoffset:100}to{stroke-dasharray:100;stroke-dashoffset:0}}
-@keyframes hero-reverse-ring{from{opacity:.15;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
-@keyframes hero-reverse-type{from{opacity:.5;clip-path:inset(0 0 0 100%)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+@keyframes hero-reverse-ring{from{opacity:.3;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes hero-reverse-arrow{from{opacity:0}to{opacity:1}}
+@media(max-width:1100px){.hero-reverse-svg{display:none}.hero-reverse-question{top:12px;right:12px;max-width:min(54%,215px);padding:8px 11px}.hero-reverse-question span{font-size:9px;margin-bottom:3px}.hero-reverse-question strong{font-size:14px;line-height:1.4}}
 @media(max-width:900px){
- .hero-variant-bar{gap:8px;padding:10px 0 15px}
- .hero-variant-heading{width:100%;flex-basis:100%}
- .hero-variant-feedback{flex:1;min-width:190px}
- .hero-reverse-svg{display:none}
- .hero-reverse-layer{background:none!important}
- .hero-reverse-question{top:12px;right:12px;max-width:min(54%,215px);padding:8px 11px}
- .hero-reverse-question span{font-size:9px;margin-bottom:3px}
- .hero-reverse-question strong{font-size:14px;line-height:1.35}
+ .hero-variant-bar{gap:8px 12px;padding:10px 0 14px}.hero-variant-heading{flex-basis:auto}.hero-variant-heading small{display:none}.hero-variant-buttons{margin-left:auto}.hero-variant-buttons button{font-size:11px;padding:8px 10px}
+ [data-hero-mode="reverse"] .origin-stage{display:flex;flex-direction:column}
+ [data-hero-mode="reverse"] .hero-copy{order:0;padding:12px 0 26px}
+ [data-hero-mode="reverse"] .origin-media{order:1;width:100%}
+ [data-hero-mode="reverse"] .hero-controls-slot{order:2}
 }
-@media(max-width:380px){
- .hero-variant-heading{flex-wrap:wrap;gap:2px 8px}
- .hero-variant-heading small{font-size:11px}
- .hero-variant-buttons{width:100%;display:grid;grid-template-columns:1fr 1fr}
- .hero-variant-buttons button{white-space:normal;font-size:11px;padding:8px}
- .hero-reverse-question{max-width:62%}
-}
-@media(prefers-reduced-motion:reduce){
- .hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-trace,
- .hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-halo,
- .hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-ring,
- .hero-reverse-replay[data-hero-mode="reverse"] .hero-reverse-question{animation:none!important;clip-path:none!important;opacity:1!important}
-}
-[data-hero-reduced="true"] .hero-reverse-trace,
-[data-hero-reduced="true"] .hero-reverse-halo,
-[data-hero-reduced="true"] .hero-reverse-ring,
-[data-hero-reduced="true"] .hero-reverse-question{animation:none!important;clip-path:none!important;opacity:1!important}
+@media(max-width:380px){.hero-variant-heading>span{font-size:10px;letter-spacing:.06em}.hero-variant-buttons button{font-size:10px;padding:8px}.hero-reverse-question{max-width:62%}}
+@media(prefers-reduced-motion:reduce){.hero-reverse-layer *{animation:none!important}}
+[data-hero-reduced="true"] .hero-reverse-layer *,[data-hero-poster-error="true"] .hero-reverse-layer *{animation:none!important}

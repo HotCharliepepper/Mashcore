@@ -1,0 +1,28 @@
+{
+  "environment": "Cloud Chrome / local preview iframe; unthrottled; after visible rendering; single sample, cache state uncontrolled",
+  "samples": [
+    {
+      "viewport": [
+        1440,
+        960
+      ],
+      "mode": "B",
+      "lcp_ms": 200,
+      "cls": 0
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "mode": "B",
+      "lcp_ms": 272,
+      "cls": 0
+    }
+  ],
+  "initial_immediate_lcp": null,
+  "error_and_text_scaling_samples_excluded": true,
+  "inp": "NOT_MEASURED",
+  "production_cwv_claim": false,
+  "caveat": "Not a cold-load benchmark, field measurement or pass/fail CWV verdict."
+}

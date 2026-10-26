@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-26",
+  "environment": "Cloud Chrome; local dist; DOM+rendered inspection",
+  "checks": [
+    {
+      "name": "390 static B",
+      "result": "passed",
+      "media_state": "reduced_motion",
+      "video_src": null,
+      "h1_and_cta_visible": true,
+      "overflow_px": 0
+    },
+    {
+      "name": "390 video 404",
+      "result": "passed",
+      "media_state": "error",
+      "poster_loaded": true,
+      "h1_and_cta_visible": true,
+      "overflow_px": 0
+    },
+    {
+      "name": "390 poster 404",
+      "result": "passed",
+      "poster_loaded": false,
+      "h1_and_cta_visible": true,
+      "overflow_px": 0
+    },
+    {
+      "name": "1440 static and poster 404",
+      "result": "passed",
+      "media_state": "reduced_motion",
+      "poster_loaded": false,
+      "video_src": null,
+      "h1_and_cta_visible": true,
+      "overflow_px": 0
+    },
+    {
+      "name": "390 JavaScript blocked",
+      "result": "passed",
+      "fallback": "default A / poster_only",
+      "h1_top": 530,
+      "h1_bottom": 633,
+      "cta_top": 727,
+      "cta_bottom": 775,
+      "overflow_px": 0
+    },
+    {
+      "name": "keyboard cue control",
+      "result": "passed",
+      "sequence": [
+        "Enter replay",
+        "Enter pause → paused",
+        "Enter resume",
+        "complete → replay label"
+      ],
+      "focus_visible": true
+    },
+    {
+      "name": "Research 3 lenses A/B",
+      "result": "passed",
+      "lenses": [
+        "손의 움직임",
+        "읽는 순서",
+        "결정의 조건"
+      ],
+      "each_order_changed": true,
+      "each_same_content": true,
+      "B_activated_with_Enter": true,
+      "restored_A": true
+    },
+    {
+      "name": "Chore six lenses",
+      "result": "passed",
+      "each_selected_aria_pressed": true,
+      "arrow_right_yaw": "8.00deg",
+      "Home_yaw_after_frame": "0.00deg",
+      "flat_description_available": true
+    },
+    {
+      "name": "Chore no JS",
+      "result": "passed",
+      "native_details_opened_and_closed": true,
+      "six_terms_visible": true
+    },
+    {
+      "name": "Independent inquiry",
+      "result": "passed",
+      "recipient": "weplacehyun@naver.com",
+      "subject": "[Mashcore] 함께할 일 문의",
+      "test_body_encoded": true,
+      "test_input_cleared": true,
+      "mail_app_opened": false,
+      "message_sent": false
+    },
+    {
+      "name": "Services, Weplace, refund",
+      "result": "passed",
+      "headings_and_registered_business_footer_read": true
+    }
+  ]
+}

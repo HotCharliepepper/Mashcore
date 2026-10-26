@@ -21,3 +21,8 @@ In an isolated repo: python3 scripts/build_public.py --context deploy-preview &&
 
 ## Status and remaining decisions
 Code review and Netlify build results must be recorded separately. Physical mobile, screen reader, live user 5-second comprehension, actual footage rights, slow network, Core Web Vitals, Figma Motion edit, live email send and production deploy are NOT RUN until evidenced. No Weplace code, independent inquiry, DB, DNS or deployment changed.
+
+## Git branch lineage and review gate (2026-10-26)
+- Follow-up Draft PR #7 uses base `main` so a Netlify deploy-preview can be requested. The PR diff against main therefore includes preserved R2 work, but only the seven explicitly named files differ from its exact parent R2 HEAD (`b0aeca2946701b25a32c34a66f58eac412b1b416`).
+- The branch was created directly from that HEAD; no reset, force push or change to PR #6/PR #2 occurred.
+- Do not mark remote Preview READY or browser QA PASS without fresh status and test evidence for this follow-up commit. The R2 checks dated 2026-10-25 apply only to their own baseline.

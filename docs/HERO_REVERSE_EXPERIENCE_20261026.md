@@ -26,3 +26,15 @@ Code review and Netlify build results must be recorded separately. Physical mobi
 - Follow-up Draft PR #7 uses base `main` so a Netlify deploy-preview can be requested. The PR diff against main therefore includes preserved R2 work, but only the seven explicitly named files differ from its exact parent R2 HEAD (`b0aeca2946701b25a32c34a66f58eac412b1b416`).
 - The branch was created directly from that HEAD; no reset, force push or change to PR #6/PR #2 occurred.
 - Do not mark remote Preview READY or browser QA PASS without fresh status and test evidence for this follow-up commit. The R2 checks dated 2026-10-25 apply only to their own baseline.
+
+## Figma editable review board & motion evidence
+- Existing Figma design remains intact. New isolated page: https://www.figma.com/design/e2C0JjYTRiwiW9Fxh3f8X7?node-id=46-179
+- Desktop A schematic frame: node 48:179; desktop B schematic frame: node 48:202; mobile B schematic frame: node 48:232; motion storyboard: node 48:246.
+- 87 editable layers were created for the vector illustration, labels, copy, CTA and timeline in the new page. This is a **vector reconstruction / screen-layout review**, not a pixel screenshot of the actual R2 AI-photo poster.
+- Applied Figma Motion presets to B's editable vector path 48:226 (Path / draw / forward; duration 1.15s), right-side observation ring 48:227 (opacity in, 0.68s), and arrow 48:228 (opacity in, 0.38s with 0.82s delay); read-back confirmed animation properties and a 2s containing timeline.
+- Existing five Figma pages were not edited; no new font files or imported external client content. A reduced-motion static state remains explicitly documented as code fallback.
+
+## Preview build confirmation
+- GitHub status `netlify/mashcore/deploy-preview = success` was observed for the preceding follow-up commit after targeting `main`. Preview base URL: https://deploy-preview-7--mashcore.netlify.app/.
+- This is build/deploy status, NOT direct browser QA. Remote HTML retrieval through the available browser/search endpoint and container HTTP were unsuccessful, so a new independent DOM/real-device pass was not performed here.
+- The live Mashcore published deploy remained at `6adb113e296767181eb98f02` (read-only check); production was not changed.

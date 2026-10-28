@@ -62,6 +62,11 @@ def overflow(page):
     return page.evaluate('document.documentElement.scrollWidth - document.documentElement.clientWidth')
 
 
+def poster_ready(page):
+    page.wait_for_function('document.querySelector(".r31-poster").complete', timeout=15000)
+    return page.locator('.r31-poster').evaluate('(img) => img.naturalWidth > 0')
+
+
 def screenshot(page, filename, full=False):
     page.screenshot(path=str(OUT / filename), full_page=full, animations='disabled', timeout=45000)
 
@@ -94,7 +99,7 @@ def viewports(browser):
                 media = page.locator('#origin-video').bounding_box()
                 record(f'{width}: copy and CTA precede media', bool(cta and media and cta['y'] + cta['height'] <= media['y'] + 2))
                 record(f'{width}: no automatic video playback', page.locator('#origin-video').evaluate('(v) => v.paused && v.currentTime === 0'))
-                record(f'{width}: poster loaded', page.locator('.r31-poster').evaluate('(img) => img.complete && img.naturalWidth > 0'))
+                record(f'{width}: poster loaded', poster_ready(page))
             record(f'{width}: no uncaught JS errors', not errors, errors)
             screenshot(page, f'r31-{width}-fold.png')
             if width in (390, 1440):
@@ -233,7 +238,7 @@ def alternatives(browser):
             if name in ('no-js', 'reduced-motion', 'save-data'):
                 record(name + ': video remains still', page.locator('#origin-video').evaluate('(v) => v.paused && v.currentTime === 0'))
             if name != 'image-failed':
-                record(name + ': valid poster retained', page.locator('.r31-poster').evaluate('(img) => img.complete && img.naturalWidth > 0'))
+                record(name + ': valid poster retained', poster_ready(page))
             if name == 'no-js':
                 record('No JS: all research explanations readable', all(visible(page, f'[data-step-panel="{step}"]') for step in ('observation', 'alternative', 'next')))
             else:

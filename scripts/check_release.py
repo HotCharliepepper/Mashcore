@@ -79,11 +79,13 @@ def run(context):
             if url.scheme or url.netloc or ref.startswith("//"):continue
             target=OUT/unquote(url.path).lstrip("/") if url.path.startswith("/") else (OUT/rel).parent/unquote(url.path)
             if not url.path:target=OUT/rel
+            target=target.resolve()
+            assert target.is_relative_to(OUT.resolve()), f"{rel}: link leaves public root: {ref}"
             if target.is_dir():target=target/"index.html"
             assert target.is_file(), f"{rel}: broken local path {ref}"
             if url.fragment and target.suffix==".html":
-                dest=target.relative_to(OUT).as_posix()
-                assert unquote(url.fragment) in pages[dest].ids, f"{rel}: broken fragment {ref}"
+                dest=target.relative_to(OUT.resolve()).as_posix()
+                assert dest in pages and unquote(url.fragment) in pages[dest].ids, f"{rel}: broken fragment {ref}"
         checks+=1
     home=(OUT/"index.html").read_text(encoding="utf-8")
     assert re.findall(r'<section\b[^>]*\bdata-chapter=""[^>]*\bid="([^"]+)"',home)==["origin","research","field","invitation"],"Four scene IDs"

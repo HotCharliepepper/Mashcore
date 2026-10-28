@@ -4,14 +4,16 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-APP = '614a7351525e5b8bad00e4bfbea621be1352389f775830e46a3d3cb441c74d71'
-CORE = 'dd7dc87e023b3480f9707296342565ca2e361c8393cabb30f9557e06eb1bed4d'
+APP = 'eef90b6e470e1af7a1c72c444208589c4033cf64095a848d4a4f4de4c18b6bc8'
+CORE = '92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb'
 TITLE = '그 사람은,<br><em>왜 잠시<br class="r31-break"> 멈췄을까요?</em>'
 RESEARCH = '같은 장면을,<br><em>다르게 읽는 일.</em>'
 ROLE = '현장과 고객을 살펴, 사업의 방향과 브랜드의 말,<br class="r31-wide"> 홈페이지와 상담의 흐름을 설계합니다.'
 CTA = '<a class="mc-hero-action r31-primary" href="/services/">함께할 수 있는 일 보기 <span aria-hidden="true">↗</span></a>'
 for file, digest in [('app.js', APP), ('gsap.min.js', CORE)]:
-    assert hashlib.sha256((ROOT/'assets/r31'/file).read_bytes()).hexdigest() == digest, file + ' changed'
+    # Git stores LF; Windows autocrlf checkouts must compare the same source bytes.
+    canonical = (ROOT/'assets/r31'/file).read_text(encoding='utf-8').encode('utf-8')
+    assert hashlib.sha256(canonical).hexdigest() == digest, file + ' changed'
 for file in ['gsap.min.js', 'SplitText.min.js', 'ScrollTrigger.min.js']:
     text = (ROOT/'assets/r31'/file).read_text(encoding='utf-8')
     assert '3.15.0' in text[:120] and '@license' in text[:500], 'Version/license: ' + file

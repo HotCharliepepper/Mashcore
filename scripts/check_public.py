@@ -313,6 +313,9 @@ def main():
             assert 'weplace25@gmail.com' not in path.read_text(encoding='utf-8'), f'Stale runtime mail recipient: {rel}'
     assert not any((DIST / 'research' / name).exists() for name in ('else', 'market')), 'Empty proposed research routes must not be published'
     assert '/research/lab/' in home.refs and '/research/notes/' in home.refs and '/signal-studio/' in home.refs, 'Public research and Studio pathways disconnected'
+    research_hub = parsed[DIST / 'research/index.html']
+    assert '/research/lab/' in research_hub.refs and '/research/notes/' in research_hub.refs, 'Research hub must reach LAB and NOTES'
+    assert len(research_hub.where('id', 'research-public-paths')) == 1, 'Research hub bridge missing or duplicated'
     lab = parsed[DIST / 'research/lab/index.html']
     notes = parsed[DIST / 'research/notes/index.html']
     studio = parsed[DIST / 'signal-studio/index.html']

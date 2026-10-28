@@ -295,7 +295,9 @@ def main():
     refund = parsed[DIST / 'policies/refund/index.html']
     assert compact(refund_source.one('id', 'main').text()) == compact(refund.one('id', 'main').text()), 'Refund terms must be preserved from the selected main source'
     if os.environ.get('CONTEXT') != 'production':
-        assert 'Disallow: /' in (DIST / 'robots.txt').read_text(encoding='utf-8')
+        robots_file = (DIST / 'robots.txt').read_text(encoding='utf-8')
+        assert 'Allow: /' in robots_file and 'Disallow: /' not in robots_file, 'Preview noindex must be crawlable to be effective'
+        assert '<url>' not in (DIST / 'sitemap.xml').read_text(encoding='utf-8'), 'Draft sitemap must not list unapproved routes'
         assert 'X-Robots-Tag: noindex' in (DIST / '_headers').read_text(encoding='utf-8')
     work = parsed[DIST / 'work/weplace/index.html']
     assert 'https://withweplace.kr/' in work.refs and '/#invitation' in work.refs

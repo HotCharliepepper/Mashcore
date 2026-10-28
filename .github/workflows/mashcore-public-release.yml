@@ -1,0 +1,61 @@
+name: MASHCORE Public Release Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - '.github/workflows/mashcore-public-release.yml'
+      - 'scripts/**'
+      - 'assets/**'
+      - 'index.html'
+      - 'mobile/**'
+      - 'research/**'
+      - 'about/**'
+      - 'explore/**'
+      - 'services/**'
+      - 'work/**'
+      - 'signal-studio/**'
+      - 'policies/**'
+      - 'sitemap.xml'
+      - 'robots.txt'
+      - 'netlify.toml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mashcore-public-safe-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  production-and-preview-build:
+    if: github.event.pull_request.number == 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source static QA
+        run: python3 scripts/check_site.py
+      - name: Draft packaging
+        run: |
+          python3 scripts/prepare_public.py --context deploy-preview
+          python3 scripts/check_release.py --context deploy-preview
+      - name: Simulate exact production packaging offline
+        run: |
+          python3 scripts/prepare_public.py --context production
+          python3 scripts/check_release.py --context production
+      - name: Record static QA evidence
+        if: always()
+        run: |
+          mkdir -p evidence
+          git rev-parse HEAD > evidence/tested_git_sha.txt
+          printf 'source and production packaging test in Actions runner; no deploy executed\n' > evidence/scope.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mashcore-public-release-gate-${{ github.event.pull_request.head.sha }}
+          path: evidence/
+          retention-days: 14

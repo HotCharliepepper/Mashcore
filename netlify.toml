@@ -1,0 +1,16 @@
+# Source HTML link and syntax checks run in the independent GitHub Release Gate.
+# Netlify validates only the isolated publish artifact to avoid stale build-cache interactions.
+# MASHCORE live-safe static release. No runtime API, payment or private data.
+# Only an allowlisted public output is deployed; the original HTML source stays editable.
+[build]
+  command = "python3 scripts/prepare_public.py --context production && python3 scripts/check_release.py --context production"
+  publish = "dist"
+
+[context.production]
+  command = "python3 scripts/prepare_public.py --context production && python3 scripts/check_release.py --context production"
+
+[context.deploy-preview]
+  command = "python3 scripts/prepare_public.py --context deploy-preview && python3 scripts/check_release.py --context deploy-preview"
+
+[context.branch-deploy]
+  command = "python3 scripts/prepare_public.py --context branch-deploy && python3 scripts/check_release.py --context branch-deploy"

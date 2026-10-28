@@ -36,8 +36,8 @@ Actual OS reduced-motion and saveData always win and skip plugin requests.
 An explicit replay button restarts only this module, preserving app.js state.
 These controls are included in preview/branch artifacts and omitted from the
 production packaging. No-JS retains the poster, all copy, CTA and native links;
-the replay button stays disabled. The original JS-off navigation fallback is
-given its own row to keep it away from the question.
+the replay button stays disabled. A native disclosure menu keeps the header
+height stable before and after JS initialization and works without site.js.
 
 ## Preserved contracts
 

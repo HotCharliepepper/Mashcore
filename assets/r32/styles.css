@@ -7,6 +7,7 @@ html:not([data-r32-layout="before"]) .r31-page { --r31-word-emphasis: #e6cb99; }
 .r32-review a[aria-current="page"] { background: #e6d8bc; color: #18241c; }
 .r32-review p { font-size: 10px; line-height: 1.8; margin: 0 0 18px; color: #b9c2ae; }
 .r31-page .r32-word { vertical-align: baseline; transform-origin: 50% 50%; }
+.r32-native-menu { display: none; }
 @media (min-width:821px) {
   .r32-review { position: relative; z-index: 4; }
   html:not([data-r32-layout="before"]) .r31-origin { padding-bottom: 0; }
@@ -35,9 +36,12 @@ html:not([data-r32-layout="before"]) .r31-page { --r31-word-emphasis: #e6cb99; }
   html:not([data-r32-layout="before"]) .r31-observation span { color: #c9b18a; font-size: 8px; }
   html:not([data-r32-layout="before"]) .r31-hero-floor { grid-column: 1; grid-row: 3; padding: 16px 24px 8px; margin: 0 24px; border-top: 1px solid #a6885a44; }
   html:not([data-r32-layout="before"]) .r32-review { grid-column: 1; grid-row: 4; padding: 0 24px; }
-  html:not(.js):not([data-r32-layout="before"]) .r31-page .header-inner { height: auto; min-height: 76px; flex-wrap: wrap; padding-top: 15px; padding-bottom: 8px; }
-  html:not(.js):not([data-r32-layout="before"]) .r31-page .desktop-nav { position: static; order: 3; flex-basis: 100%; display: flex; overflow-x: auto; padding: 12px 0 5px; white-space: nowrap; gap: 22px; max-height: none; }
-  html:not(.js):not([data-r32-layout="before"]) .r31-page .desktop-nav a { font-size: 11px; flex-shrink: 0; }
+  html:not([data-r32-layout="before"]) .r31-page .desktop-nav:not(.open) { display: none; }
+  html:not(.js):not([data-r32-layout="before"]) .r32-native-menu { display: block; }
+  .r32-native-menu summary { list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; border: 1px solid #a6885a66; font-size: 12px; cursor: pointer; }
+  .r32-native-menu summary::-webkit-details-marker { display: none; }
+  .r32-native-menu nav { position: absolute; top: 100%; left: 22px; right: 22px; padding: 16px; background: #18241c; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; z-index: 10; border: 1px solid #a6885a66; }
+  .r32-native-menu a { font-size: 12px; min-height: 44px; display: flex; align-items: center; }
 }
 @media (max-width:360px) {
   html:not([data-r32-layout="before"]) .r31-hero-copy { padding: 23px 20px 20px; }

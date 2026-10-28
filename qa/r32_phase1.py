@@ -20,7 +20,7 @@ METRICS = []
 PROBE = r"""(() => {
   window.__wordQA = {cls:0, shifts:[], longTasks:[], starts:{origin:0,research:0}};
   try { new PerformanceObserver(list => list.getEntries().forEach(e => {
-    if(!e.hadRecentInput) { __wordQA.cls += e.value; __wordQA.shifts.push(e.value); }
+    if(!e.hadRecentInput) { __wordQA.cls += e.value; __wordQA.shifts.push({value:e.value,sources:e.sources.map(s=>({tag:s.node?.tagName,cls:String(s.node?.className||''),from:s.previousRect.y,to:s.currentRect.y}))}); }
   })).observe({type:'layout-shift',buffered:true}); } catch(_) {}
   try { new PerformanceObserver(list => list.getEntries().forEach(e => __wordQA.longTasks.push(e.duration)))
     .observe({type:'longtask',buffered:true}); } catch(_) {}
@@ -79,6 +79,7 @@ def snapshot(page):
         layout:document.documentElement.dataset.r32Layout,
         role:box(document.querySelector('.r31-role')),words:document.querySelectorAll('.r32-word').length,
         first:window.__wordQA?.first,cls:window.__wordQA?.cls,starts:window.__wordQA?.starts,
+        shifts:window.__wordQA?.shifts,
         longTasks:window.__wordQA?.longTasks,
         fonts:[...document.fonts].map(f=>({family:f.family,status:f.status})),
         wordRequests:performance.getEntriesByType('resource').filter(e=>/word-motion|SplitText|ScrollTrigger/.test(e.name))
@@ -139,13 +140,13 @@ def screen(browser, width, height, route='', engine='chromium'):
         record(name + ' Origin wrappers reverted', page.locator('#opening-title .r32-word').count() == 0)
         page.evaluate("document.querySelector('#origin-video').pause()")
         page.screenshot(path=str(OUT / (name + '-after.png')))
-        page.locator('#r31-research-title').scroll_into_view_if_needed()
+        page.locator('#r31-research-title').evaluate("e=>e.scrollIntoView({block:'center',behavior:'instant'})")
         page.wait_for_function("document.querySelector('#r31-research-title').dataset.wordMotionState === 'complete'", timeout=10000)
         page.screenshot(path=str(OUT / (name + '-research.png')))
         count = page.evaluate('__wordQA.starts.research')
         page.evaluate('scrollTo(0,0)')
         page.wait_for_timeout(200)
-        page.locator('#r31-research-title').scroll_into_view_if_needed()
+        page.locator('#r31-research-title').evaluate("e=>e.scrollIntoView({block:'center',behavior:'instant'})")
         page.wait_for_timeout(300)
         record(name + ' Research runs once', count == 1 and page.evaluate('__wordQA.starts.research') == 1, count)
         record(name + ' Research wrappers reverted', page.locator('#r31-research-title .r32-word').count() == 0)
@@ -206,6 +207,9 @@ def fallback(browser, mode):
             record(mode + ' no additional plugin requests', not any('SplitText.min.js' in x or 'ScrollTrigger.min.js' in x for x in requests), requests)
         if mode == 'no-js':
             record('no-js all research explanations readable', page.locator('[data-step-panel]:visible').count() == 3)
+            page.locator('.r32-native-menu summary').click()
+            record('no-js native navigation usable', page.locator('.r32-native-menu[open] a[href="/services/"]').is_visible())
+            page.locator('.r32-native-menu summary').click()
         else:
             research_regression(page, mode)
         record(mode + ' no page exceptions', not errors, errors)

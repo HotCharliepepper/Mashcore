@@ -82,7 +82,7 @@ def details(browser):
       "research/notes/":("2026.05.11","/#invitation"),
       "signal-studio/":("Gate 0","/#invitation"),
       "work/weplace/":("독립","/#invitation"),
-      "research/":("익숙한 장면","/research/lab/"),
+      "research/":("판단이 자라는","/research/lab/"),
       "services/":("서비스","/#invitation"),
       "about/":("Mashcore","/research/"),
       "policies/refund/":("환불","/services/")

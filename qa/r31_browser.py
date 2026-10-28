@@ -43,8 +43,8 @@ def ready():
     raise RuntimeError(f'Preview revision not ready: {last}')
 
 
-def visit(page):
-    response = page.goto(BASE, wait_until='domcontentloaded', timeout=45000)
+def visit(page, wait_until='load'):
+    response = page.goto(BASE, wait_until=wait_until, timeout=45000)
     if not response or response.status != 200:
         raise RuntimeError('Preview HTTP failure')
     marker = page.locator('meta[name="r31-commit"]').get_attribute('content')
@@ -63,12 +63,61 @@ def overflow(page):
 
 
 def poster_ready(page):
-    page.wait_for_function('document.querySelector(".r31-poster").complete', timeout=15000)
-    return page.locator('.r31-poster').evaluate('(img) => img.naturalWidth > 0')
+    # The browser's requestAnimationFrame polling may not advance with page JS
+    # disabled. Read the DOM from Python instead; this also tests the no-JS case.
+    deadline = time.monotonic() + 15
+    while time.monotonic() < deadline:
+        state = page.locator('.r31-poster').evaluate('(img) => ({complete: img.complete, width: img.naturalWidth})')
+        if state['complete']:
+            return state['width'] > 0
+        time.sleep(.05)
+    return False
 
 
 def screenshot(page, filename, full=False):
     page.screenshot(path=str(OUT / filename), full_page=full, animations='disabled', timeout=45000)
+
+
+
+def section_contrast(page, section, label):
+    """Check computed foreground against composited solid ancestor backgrounds.
+
+    Scoped regression guard for the retained field/invitation headings, including
+    differently colored emphasis. This is not a full-page accessibility audit.
+    """
+    rows = page.locator(f'#{section} h2, #{section} h2 em').evaluate_all(r"""elements => {
+      const rgba = value => {
+        const parts = value.match(/[\d.]+/g).map(Number);
+        return [parts[0], parts[1], parts[2], parts.length > 3 ? parts[3] : 1];
+      };
+      const over = (fg, bg) => [0,1,2].map(i => fg[i] * fg[3] + bg[i] * (1-fg[3]));
+      const luminance = rgb => rgb.map(v => {
+        v /= 255;
+        return v <= .04045 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4);
+      }).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
+      return elements.map(el => {
+        const chain = [];
+        for (let node = el; node; node = node.parentElement) chain.unshift(node);
+        let background = [255,255,255];
+        let solid = true;
+        for (const node of chain) {
+          const css = getComputedStyle(node);
+          if (css.backgroundImage !== 'none') solid = false;
+          background = over(rgba(css.backgroundColor), background);
+        }
+        const css = getComputedStyle(el);
+        const foreground = over(rgba(css.color), background);
+        const a = luminance(foreground), b = luminance(background);
+        const ratio = (Math.max(a,b)+.05) / (Math.min(a,b)+.05);
+        const large = parseFloat(css.fontSize) >= 24 ||
+          (parseFloat(css.fontSize) >= 18.6667 && Number(css.fontWeight) >= 700);
+        return {text: el.textContent.trim(), foreground: css.color, background,
+          ratio, required: large ? 3 : 4.5, solid};
+      });
+    }""")
+    for index, row in enumerate(rows):
+        record(f'{label}: {section} heading contrast {index+1}',
+               row['solid'] and row['ratio'] >= row['required'], row)
 
 
 def common(page, label):
@@ -115,6 +164,11 @@ def viewports(browser):
             if width == 390:
                 page.locator('[data-spatial-select="economy"]').click()
                 record('Existing six-lens interaction works', page.locator('[data-spatial-select="economy"]').get_attribute('aria-pressed') == 'true')
+            for section in ('field', 'invitation'):
+                page.locator('#' + section).scroll_into_view_if_needed()
+                section_contrast(page, section, str(width))
+                if width in (390, 1440):
+                    screenshot(page, f'r31-{width}-{section}.png')
         except Exception as error:
             record(f'{width}: viewport scenario', False, str(error))
             try:
@@ -176,7 +230,7 @@ def media_and_motion(browser):
       });
     """)
     try:
-        visit(page)
+        visit(page, wait_until='domcontentloaded')
         video = page.locator('#origin-video')
         record('Video: muted, inline, never loops', video.evaluate('(v) => v.muted && v.playsInline && !v.loop'))
         page.wait_for_function('document.querySelector("#origin-video").readyState >= 2', timeout=20000)

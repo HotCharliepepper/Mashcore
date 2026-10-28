@@ -45,7 +45,7 @@ class Page(HTMLParser):
             except ValueError as e: self.errors.append(f'Invalid JSON-LD: {e}')
             self.json=False
 
-pages={p.resolve():Page(p) for p in ROOT.rglob('*.html') if '.git' not in p.parts}
+pages={p.resolve():Page(p) for p in ROOT.rglob('*.html') if '.git' not in p.parts and 'dist' not in p.parts}
 errors=[]
 for path,page in pages.items():
     label=str(path.relative_to(ROOT))

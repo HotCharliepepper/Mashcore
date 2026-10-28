@@ -22,6 +22,8 @@ EXPECTED_ROUTES = {
     'research/market-interpretation/index.html', 'research/log/index.html',
     'explore/index.html', 'work/weplace/index.html', 'policies/refund/index.html',
     'preview/index.html',
+    'research/lab/index.html', 'research/notes/index.html',
+    'signal-studio/index.html',
 }
 BUSINESS = {
     'companyName': 'Mashcore', 'representative': '최규현',
@@ -254,7 +256,7 @@ def main():
             nav_links = [n for n in nav.descendants() if n.tag == 'a']
             core_links = [n for n in nav_links if 'mobile-inquiry' not in n.attrs.get('class', '').split()]
             mobile_links = [n for n in nav_links if 'mobile-inquiry' in n.attrs.get('class', '').split()]
-            assert [n.attrs.get('href') for n in core_links] == ['/services/', '/#field', '/research/', '/about/'], f'Common navigation mismatch: {rel}'
+            assert [n.attrs.get('href') for n in core_links] == ['/services/', '/research/', '/work/weplace/', '/signal-studio/', '/about/'], f'Common navigation mismatch: {rel}'
             assert len(mobile_links) <= 1, f'Duplicate mobile inquiry link: {rel}'
             if mobile_links:
                 assert mobile_links[0].attrs.get('href') == '/#invitation', f'Mobile inquiry destination mismatch: {rel}'
@@ -309,7 +311,18 @@ def main():
             assert rel.as_posix() == '__review/build.json', f'Unapproved data/metadata file in output: {rel}'
         if path.is_file() and path.suffix in {'.html', '.js', '.xml'}:
             assert 'weplace25@gmail.com' not in path.read_text(encoding='utf-8'), f'Stale runtime mail recipient: {rel}'
-    assert not any((DIST / 'research' / name).exists() for name in ('else', 'lab', 'market', 'notes')), 'Empty proposed research routes must not be published'
+    assert not any((DIST / 'research' / name).exists() for name in ('else', 'market')), 'Empty proposed research routes must not be published'
+    assert '/research/lab/' in home.refs and '/research/notes/' in home.refs and '/signal-studio/' in home.refs, 'Public research and Studio pathways disconnected'
+    lab = parsed[DIST / 'research/lab/index.html']
+    notes = parsed[DIST / 'research/notes/index.html']
+    studio = parsed[DIST / 'signal-studio/index.html']
+    assert '관찰' in lab.root.text() and '반례' in lab.root.text() and '가상 상황' in lab.root.text(), 'LAB interpretation and evidence boundaries lost'
+    assert '2026.05.11' in notes.root.text() and 'https://mashcore-market-notes.netlify.app/' in notes.refs, 'Market Notes date or original URL missing'
+    assert 'Gate 0' in studio.root.text() and 'Mock' in studio.root.text() and '미검증' in studio.root.text(), 'Studio review limitations must remain visible'
+    for review_page in (lab, notes, studio):
+        assert any(n.attrs.get('href') == '/#invitation' for n in review_page.nodes if n.tag == 'a'), 'Independent inquiry path missing'
+    for review_page in (lab, notes, studio):
+        assert 'LEDGER' not in review_page.root.text().upper(), 'Private Ledger must not be presented as public site content'
     result = {
         'static_validation': 'PASS', 'html_pages': len(paths), 'expected_routes': sorted(EXPECTED_ROUTES),
         'local_references': references, 'business_footers': len(EXPECTED_ROUTES) - 1,

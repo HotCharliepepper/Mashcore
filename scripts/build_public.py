@@ -18,7 +18,7 @@ from review_details import render_services, render_about
 from review_r2 import hero as r2_hero, situations, judgment, outputs_process, home_faq
 from media_assets import verify_media
 from review_seo import apply_seo
-from review_integrated import render_review_pages, research_bridge, field_bridge
+from review_integrated import render_review_pages, enhance_research_hub, research_bridge, field_bridge
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://mashcore.co.kr'
@@ -174,6 +174,7 @@ def build(root: Path, output: Path, context: str) -> dict:
     (output/'mobile/index.html').write_text(mobile,encoding='utf-8')
     render_new_pages(output,s,c,b,context)
     render_review_pages(output,b,page,review=context!='production')
+    enhance_research_hub(output)
     count=0
     for path in sorted(output.rglob('*.html')):
         text=path.read_text(encoding='utf-8').replace('https://mashcore.netlify.app',BASE).replace('weplace25@gmail.com',EMAIL)

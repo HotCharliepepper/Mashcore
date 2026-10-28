@@ -1,0 +1,53 @@
+name: MASHCORE R3.1 Preview Browser QA
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'experiments/r31-origin-research/**'
+      - 'scripts/**'
+      - 'qa/r31_browser.py'
+      - '.github/workflows/r31-preview-browser.yml'
+      - 'netlify.toml'
+permissions:
+  contents: read
+concurrency:
+  group: mashcore-r31-browser-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  preview-browser:
+    if: startsWith(github.head_ref, 'review/r31-origin-research-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify deployment boundaries offline
+        run: |
+          python scripts/test_r31_boundary.py
+          python scripts/prepare_public.py --context production
+          python scripts/check_release.py --context production
+          python scripts/prepare_public.py --context branch-deploy
+          python scripts/check_release.py --context branch-deploy
+          python scripts/prepare_public.py --context deploy-preview
+          python scripts/check_release.py --context deploy-preview
+      - name: Install browser QA dependencies
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Inspect exact PR revision on Netlify Deploy Preview
+        env:
+          PREVIEW_URL: https://deploy-preview-${{ github.event.pull_request.number }}--mashcore.netlify.app/r31-review/
+          QA_COMMIT: ${{ github.event.pull_request.head.sha }}
+        run: python qa/r31_browser.py
+      - name: Keep screenshots and machine-readable QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mashcore-r31-browser-${{ github.event.pull_request.head.sha }}
+          path: qa/r31-evidence/
+          if-no-files-found: warn
+          retention-days: 30

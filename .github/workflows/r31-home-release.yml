@@ -1,0 +1,75 @@
+name: MASHCORE R3.1 Homepage Release QA
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'index.html'
+      - 'mobile/**'
+      - 'assets/**'
+      - 'scripts/**'
+      - 'qa/r31_browser.py'
+      - '.github/workflows/r31-home-release.yml'
+      - 'netlify.toml'
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'mobile/**'
+      - 'assets/**'
+      - 'scripts/**'
+      - 'qa/r31_browser.py'
+      - '.github/workflows/r31-home-release.yml'
+      - 'netlify.toml'
+permissions:
+  contents: read
+concurrency:
+  group: r31-home-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  release-verification:
+    if: github.event_name == 'push' || startsWith(github.head_ref, 'release/r31-home-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source and all packaging contexts
+        run: |
+          python scripts/check_site.py
+          python scripts/test_r31_boundary.py
+          python scripts/prepare_public.py --context production
+          python scripts/check_release.py --context production
+          python scripts/prepare_public.py --context branch-deploy
+          python scripts/check_release.py --context branch-deploy
+          python scripts/prepare_public.py --context deploy-preview
+          python scripts/check_release.py --context deploy-preview
+      - name: Retained navigation, inquiry and spatial controls
+        run: |
+          npm install --prefix "$RUNNER_TEMP/r31-qa" --no-audit --no-fund linkedom@0.18.12
+          NODE_PATH="$RUNNER_TEMP/r31-qa/node_modules" node scripts/check_interactions.cjs
+          NODE_PATH="$RUNNER_TEMP/r31-qa/node_modules" node scripts/check_spatial.cjs
+      - name: Install browser dependencies
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Inspect deployed homepage and mobile route
+        env:
+          PREVIEW_URL: ${{ github.event_name == 'pull_request' && format('https://deploy-preview-{0}--mashcore.netlify.app/', github.event.pull_request.number) || 'https://mashcore.co.kr/' }}
+          QA_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+          QA_CONTEXT: ${{ github.event_name == 'push' && 'production' || 'deploy-preview' }}
+          QA_OUTPUT: qa/r31-release-evidence
+          QA_MOBILE_ROUTE: '1'
+          QA_WEBKIT: '1'
+        run: python qa/r31_browser.py
+      - name: Retain screenshots and checks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r31-home-${{ github.event_name }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: qa/r31-release-evidence/
+          retention-days: 30
+          if-no-files-found: warn

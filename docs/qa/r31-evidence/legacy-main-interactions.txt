@@ -1,0 +1,14 @@
+BASE_SHA: 2d38bb0cf68ea636cccb84e7ef9c0ce17043c017
+EXIT: 1
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+5 !== 1
+
+    at main (/workspace/scratch/bb6e1bdcbe85/legacy-main-qa/scripts/check_interactions.cjs:49:245) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 5,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

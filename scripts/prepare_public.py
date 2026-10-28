@@ -31,6 +31,14 @@ R31_FILES = (
 # Approved for the public homepage by the user's 2026-10-28 deployment request.
 # The historical experiment remains independently isolated to Deploy Previews.
 R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
+R32_PUBLIC_FILES = ("styles.css", "word-motion.js", "SplitText.min.js", "ScrollTrigger.min.js")
+R32_REVIEW_TOOLS = '''<details class="r32-review" id="r32-review"><summary>R3.2 화면·워드 모션 비교</summary>
+<nav aria-label="R3.2 비교 선택"><a href="?layout=before" data-r32-motion-choice="before">R3.1 기준</a>
+<a href="?motion=calm" data-r32-motion-choice="calm">일반 · 1.25초</a>
+<a href="?motion=slow" data-r32-motion-choice="slow">일반 · 1.4초</a>
+<a href="?motion=still" data-r32-motion-choice="still">워드 정지</a>
+<button type="button" data-r32-replay disabled>워드 다시 보기</button></nav>
+<p data-r32-motion-status role="status">기기의 모션 감소·데이터 절약 설정을 우선합니다.</p></details>'''
 FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 
 
@@ -47,6 +55,11 @@ def prepare(context: str) -> None:
         raise ValueError("Symlink in public R3.1 assets")
     if {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()} != set(R31_PUBLIC_FILES):
         raise ValueError("Public R3.1 assets must match the approved allowlist")
+    r32 = ROOT / "assets/r32"
+    if any(p.is_symlink() for p in (r32, *r32.parents, *r32.rglob("*"))):
+        raise ValueError("Symlink in R3.2 assets")
+    if {p.relative_to(r32).as_posix() for p in r32.rglob("*") if p.is_file()} != set(R32_PUBLIC_FILES):
+        raise ValueError("R3.2 assets must match the explicit allowlist")
     for name in PUBLIC_DIRS:
         src = ROOT / name
         if not src.is_dir():
@@ -102,6 +115,7 @@ def prepare(context: str) -> None:
         (DEST / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")
         for path in DEST.rglob("*.html"):
             text = path.read_text(encoding="utf-8")
+            text = text.replace("<!-- R32_REVIEW_TOOLS -->", R32_REVIEW_TOOLS)
             if '<meta name="robots"' not in text and '<meta content="noindex' not in text:
                 text = text.replace("</head>", '<meta name="robots" content="noindex,nofollow"></head>', 1)
             path.write_text(text, encoding="utf-8")

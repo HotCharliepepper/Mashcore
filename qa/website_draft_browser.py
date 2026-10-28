@@ -158,6 +158,60 @@ def detail_routes(browser):
         page.close()
 
 
+
+def content_interactions(browser):
+    """Verify inquiry drafting and inherited studies without sending anything."""
+    context = browser.new_context(viewport={"width":390,"height":844},
+                                  permissions=["clipboard-read","clipboard-write"])
+    page=context.new_page()
+    try:
+        load(page, "?hero=reverse&motion=still")
+        question="홈페이지 정보를 고객이 다시 묻는 이유를 알고 싶습니다."
+        field=page.locator("#question")
+        field.fill(question)
+        link=page.locator("#email-question").get_attribute("href") or ""
+        check("inquiry: mailto contains unsubmitted draft", link.startswith("mailto:") and "body=" in link and "%ED" in link)
+        check("inquiry: no server submission button", page.locator('button[type="submit"]').count()==0)
+        copy=page.locator("#copy-question")
+        check("inquiry: copy control available", copy.is_visible())
+        if copy.is_visible():
+            copy.click()
+            page.wait_for_timeout(300)
+            message=page.locator("#copy-status").inner_text()
+            check("inquiry: copy feedback explains state", "복사" in message or "선택" in message, message)
+
+        tabs=page.locator("[data-observation-tabs] button")
+        check("research: three observation selectors", tabs.count()==3)
+        if tabs.count()==3:
+            tabs.nth(1).click()
+            check("research: selected scenario exposes state", tabs.nth(1).get_attribute("aria-pressed")=="true")
+            panel_id=tabs.nth(1).get_attribute("aria-controls")
+            panel=page.locator("#"+panel_id)
+            check("research: selected scenario visible",panel.is_visible())
+            layout_b=panel.locator('[data-layout-choice="b"]')
+            if layout_b.count():
+                layout_b.click()
+                check("research: comparison B applied",panel.locator("[data-layout-surface]").get_attribute("data-layout")=="b")
+    except Exception as exc:
+        check("content interaction scenario completed",False,str(exc))
+    finally:
+        context.close()
+
+    page=browser.new_page(viewport={"width":390,"height":844})
+    try:
+        load(page,"research/chore-to-play/")
+        selectors=page.locator("[data-spatial-select]")
+        check("Chore-to-Play: six perspectives",selectors.count()==6)
+        if selectors.count()==6:
+            second=selectors.nth(1)
+            second.click()
+            check("Chore-to-Play: perspective is selected",second.get_attribute("aria-pressed")=="true")
+            check("Chore-to-Play: reset available",page.locator("[data-spatial-reset]").count()==1)
+    except Exception as exc:
+        check("Chore-to-Play scenario completed",False,str(exc))
+    finally:
+        page.close()
+
 def failure_modes(browser):
     # JS disabled still exposes complete static H1, role, CTA and inquiry link.
     context = browser.new_context(viewport={"width":390,"height":844}, java_script_enabled=False)
@@ -222,6 +276,7 @@ def main():
             for w,h in ((320,700),(390,844),(768,1024),(1440,900)):
                 scenario(browser,w,h)
             detail_routes(browser)
+            content_interactions(browser)
             failure_modes(browser)
             browser.close()
     except Exception as exc:

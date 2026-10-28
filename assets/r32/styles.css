@@ -1,0 +1,54 @@
+/* R3.2 Phase 1. R3.1 is kept intact behind ?layout=before. */
+html:not([data-r32-layout="before"]) .r31-page { --r31-word-emphasis: #e6cb99; }
+.r31-page .r32-review { color: #ddcfb6; background: #142018; border-top: 1px solid #a6885a55; padding: 0 5%; }
+.r32-review summary { cursor: pointer; font-size: 11px; padding: 16px 0; }
+.r32-review nav { display: flex; flex-wrap: wrap; gap: 9px; padding-bottom: 15px; }
+.r32-review a, .r32-review button { font: 11px/1.6 'Noto Sans KR',sans-serif; color: inherit; border: 1px solid #a6885a77; padding: 10px 13px; background: transparent; cursor: pointer; }
+.r32-review a[aria-current="page"] { background: #e6d8bc; color: #18241c; }
+.r32-review p { font-size: 10px; line-height: 1.8; margin: 0 0 18px; color: #b9c2ae; }
+.r31-page .r32-word { vertical-align: baseline; transform-origin: 50% 50%; }
+.r32-native-menu { display: none; }
+@media (min-width:821px) {
+  .r32-review { position: relative; z-index: 4; }
+  html:not([data-r32-layout="before"]) .r31-origin { padding-bottom: 0; }
+  .r31-origin > .r32-review { position: absolute; left: 0; right: 0; top: 100%; }
+  html:has(.r32-review[open]) .r31-research { padding-top: 240px; }
+}
+@media (max-width:820px) {
+  html:not([data-r32-layout="before"]) .r31-origin { display: grid; grid-template-columns: minmax(0,1fr); color: #f4efe6; background: #18241c; }
+  html:not([data-r32-layout="before"]) .r31-scene { grid-column: 1; grid-row: 1; position: relative; margin: 0; }
+  html:not([data-r32-layout="before"]) .r31-media { height: clamp(205px,58vw,320px); max-height: none; aspect-ratio: auto; }
+  html:not([data-r32-layout="before"]) .r31-poster,
+  html:not([data-r32-layout="before"]) #origin-video { object-position: 79% 49%; }
+  html:not([data-r32-layout="before"]) .r31-shade { background: linear-gradient(0deg,#101c14cc,transparent 45%); }
+  html:not([data-r32-layout="before"]) .r31-media-caption { position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 22px; background: transparent; min-height: 56px; gap: 12px; font-size: 8px; }
+  html:not([data-r32-layout="before"]) .r31-media-caption > span { max-width: 195px; color: #f1ebdd; }
+  html:not([data-r32-layout="before"]) #video-toggle { background: #122017bb; min-height: 40px; font-size: 10px; }
+  html:not([data-r32-layout="before"]) .r31-hero-copy { grid-column: 1; grid-row: 2; width: 100%; padding: 26px 24px 22px; }
+  html:not([data-r32-layout="before"]) .r31-hero-copy .r31-eyebrow { color: #c9b18a; font-size: 8px; }
+  html:not([data-r32-layout="before"]) .r31-hero-copy h1 { color: #f4efe6; font-size: clamp(30px,8.7vw,43px); line-height: 1.45; margin: 16px 0 18px; }
+  html:not([data-r32-layout="before"]) .r31-hero-copy h1 em { color: #e4d3b7; }
+  html:not([data-r32-layout="before"]) .r31-role { color: #d0d5c7; font-size: 13px; line-height: 1.9; max-width: 560px; }
+  html:not([data-r32-layout="before"]) .r31-actions { margin-top: 22px; gap: 12px 18px; }
+  html:not([data-r32-layout="before"]) .r31-actions .r31-primary { background: #eee6d7; color: #1c2b20; min-height: 50px; font-size: 12px; padding: 12px 16px; gap: 20px; }
+  html:not([data-r32-layout="before"]) .r31-actions .r31-text-link { font-size: 11px; gap: 13px; min-height: 38px; }
+  html:not([data-r32-layout="before"]) .r31-observation { color: #b9c2ae; font-size: 9px; margin: 22px 0 0; gap: 8px 12px; }
+  html:not([data-r32-layout="before"]) .r31-observation span { color: #c9b18a; font-size: 8px; }
+  html:not([data-r32-layout="before"]) .r31-hero-floor { grid-column: 1; grid-row: 3; padding: 16px 24px 8px; margin: 0 24px; border-top: 1px solid #a6885a44; }
+  html:not([data-r32-layout="before"]) .r32-review { grid-column: 1; grid-row: 4; padding: 0 24px; }
+  html:not([data-r32-layout="before"]) .r31-page .desktop-nav:not(.open) { display: none; }
+  html:not(.js):not([data-r32-layout="before"]) .r32-native-menu { display: block; }
+  .r32-native-menu summary { list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; border: 1px solid #a6885a66; font-size: 12px; cursor: pointer; }
+  .r32-native-menu summary::-webkit-details-marker { display: none; }
+  .r32-native-menu nav { position: absolute; top: 100%; left: 22px; right: 22px; padding: 16px; background: #18241c; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; z-index: 10; border: 1px solid #a6885a66; }
+  .r32-native-menu a { font-size: 12px; min-height: 44px; display: flex; align-items: center; }
+}
+@media (max-width:360px) {
+  html:not([data-r32-layout="before"]) .r31-hero-copy { padding: 23px 20px 20px; }
+  html:not([data-r32-layout="before"]) .r31-hero-copy h1 { font-size: 29px; margin: 14px 0 16px; }
+  html:not([data-r32-layout="before"]) .r31-actions .r31-primary { width: 100%; }
+  html:not([data-r32-layout="before"]) .r31-media-caption { padding-left: 18px; padding-right: 18px; }
+  html:not([data-r32-layout="before"]) .r31-media-caption > span { max-width: 155px; }
+  html:not([data-r32-layout="before"]) .r31-observation { font-size: 9px; }
+}
+@media (prefers-reduced-motion:reduce) { .r31-page .r32-word { transform: none !important; } }

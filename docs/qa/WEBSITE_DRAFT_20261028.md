@@ -1,5 +1,7 @@
 # MASHCORE Website Draft · 2026-10-28 QA & Handoff
 
+> **Follow-up available:** The initial NOT RUN items below are historical. The later 2026-10-28 automated Chromium run #40638511881 checked the specified browser items; physical devices, native 200% zoom, actual user comprehension and mail delivery remain NOT RUN. Details at the end.
+
 **Status:** CODE PRESENT / DRAFT PREVIEW READY / PRODUCTION NOT APPLIED  
 **Scope:** Follow-up to PR #8 on an independent branch. Not a production release or content-rights approval.
 
@@ -74,3 +76,55 @@
 The `/work/weplace/` page and existing external link to https://withweplace.kr/ remain intact. New home bridge explains independent strategic-design versus field-execution responsibilities; no shared identity, account, CRM, payment, customer records or actual Weplace code change. Continue to require project-specific rights/role verification.
 
 **Guardrail:** No main merge, production deploy, DNS, PG, real database, customer data migration or social posting was performed.
+
+
+## Live Chromium follow-up — 2026-10-28
+
+This section supplements and preserves the initial report above.
+
+- Branch: review/mashcore-website-draft-20261028 (Draft PR #9).
+- Exact code SHA tested: ea2ba5887f9e1eb3257d0da7e94637d1ad8af691.
+- [GitHub Actions run #40638511881](https://github.com/HotCharliepepper/Mashcore/actions/runs/40638511881) concluded success.
+- [114-check JSON and screenshots, artifact ID 12794851680](https://github.com/HotCharliepepper/Mashcore/actions/runs/40638511881/artifacts/12794851680).
+- Automated result: **114 PASS / 0 FAIL** in headless Chromium 143, Ubuntu 24.04, Playwright 1.57.0.
+- Tested actual Draft: https://deploy-preview-9--mashcore.netlify.app/ (not production).
+- That code commit's netlify/mashcore/deploy-preview status was success; production code/deploy not changed.
+
+### Verified browser behavior
+
+| Group | This run |
+|---|---|
+| Home 320/390/768/1440 CSS px | HTTP 200, one H1, visible service CTA, four scene IDs, LAB/NOTES/Studio paths, no horizontal overflow, no runtime page errors |
+| Navigation | At 320/390 the menu opens and Escape closes; 768 displays the authored desktop navigation rather than a menu. |
+| Hero | A/B switches in the desktop browser, preserving role/CTA. Mobile B question/CTA precedes concept image. |
+| Detail routes | LAB / NOTES / Studio / services / research / about / work-Weplace / refund all returned 200, single H1, canonical matching future public URL, and Draft noindex meta + header. |
+| Research | Three observation situations, switching to B, and all six Chore-to-Play perspectives work. |
+| Inquiry | Typed message updates mailto draft; copy feedback explicitly confirms no message was sent. Email sending was not triggered. |
+| Alternate modes | JS disabled, media request failure, reduced-motion emulation and touch mobile preserve H1 and CTA. |
+| 200% reflow proxy | 400 CSS-px viewport / doubled device-pixel ratio approximates responsive reflow; no overflow. Not genuine browser-native zoom. |
+| Preview search boundaries | Draft robots permits crawler access to the noindex directive, Draft sitemap contains no unapproved URL, and X-Robots-Tag noindex is present. |
+| Content provenance | Existing 2026-05-11 Market Notes original linked; Studio Gate 0 and Mock limits shown; no payment CTA added. |
+
+### Real screenshot review
+
+- Desktop 1440 B: readable question, role, CTA and separate generated-concept label.
+- Mobile 390 B: clear question -> role -> CTA -> image order, no horizontal overflow.
+- LAB/NOTES/Studio: consistent editorial palette and type, meaningful HTML explanations, visible dates/limitations.
+- **Editorial review candidate:** full mobile home screenshot is about 13,716 px high. Consider consolidating repeated explanations in a subsequent copy/layout revision. This is a screen-density observation, not measured reader fatigue or conversion decline.
+
+### Remaining untested or unapproved
+
+- Actual physical iOS/Android devices, screen readers, keyboard accessibility with assistive technology, native browser Ctrl+plus zoom, real OS preference switching.
+- Slow CPU/network, production Core Web Vitals field measurement (75th percentile), actual 5-second comprehension or A/B conversion test.
+- Message delivery, server-side inquiry receipt, purchases, real customer data, live social posting.
+- Commercial public rights for the existing AI concept hero are not approved. In source: rights_verified=false and public_use_approved=false.
+- Brand copy, customer/field photographs, price basis and VAT, Notes publication, Studio external pilot, final Hero choice and operating release remain OPEN.
+
+### Follow-up changes
+
+- Connected old research index directly to new LAB and NOTES, leaving original research intact.
+- Updated Draft robots/noindex interaction based on [Google's official noindex guidance](https://developers.google.com/search/docs/crawling-indexing/block-indexing); Draft sitemap excludes unapproved routes.
+- Added isolated PR #9-only Chromium QA workflow and script, collecting screenshots/JSON but no customer actions.
+- The first Chromium run was **100/102** due to a wrong assumed menu breakpoint and an invalid document CSS zoom simulation. QA logic was corrected, and the later run passed **114/114**. Initial failures remain in the run history and are not mislabeled as site bugs.
+
+**Final meaning:** Code present + successfully deployed review Preview + automated Chromium QA passed. Not a merged/published website or customer-validated public release.

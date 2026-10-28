@@ -30,7 +30,8 @@ R31_FILES = (
 )
 # Approved for the public homepage by the user's 2026-10-28 deployment request.
 # The historical experiment remains independently isolated to Deploy Previews.
-R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
+R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js",
+                    "word-motion.js", "word-motion.css", "SplitText.min.js", "ScrollTrigger.min.js")
 FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 
 

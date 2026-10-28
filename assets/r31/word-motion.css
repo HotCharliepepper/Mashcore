@@ -1,0 +1,13 @@
+/* Only temporary SplitText word wrappers; static content owns its visibility. */
+.r31-page { --r31-word-emphasis: #e6cb99; }
+.r31-page .r31-word {
+  vertical-align: baseline;
+  /* Transform affects paint only, not heading/CTA geometry. */
+  transform-origin: 50% 50%;
+}
+@media (max-width: 820px) {
+  .r31-page .r31-origin { --r31-word-emphasis: #795a33; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .r31-page .r31-word { transform: none !important; }
+}

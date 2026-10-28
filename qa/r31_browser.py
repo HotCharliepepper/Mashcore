@@ -136,6 +136,10 @@ def viewports(browser):
         try:
             response = visit(page)
             common(page, str(width))
+            page.locator('.header-cta').click()
+            page.wait_for_function('Math.abs(document.getElementById("invitation").getBoundingClientRect().top) < 100', timeout=8000)
+            record(f'{width}: inquiry anchor reaches destination', True)
+            page.goto(BASE, wait_until='load')
             record(f'{width}: one H1', page.locator('h1').count() == 1)
             record(f'{width}: original scene IDs', all(page.locator(f'#{item}[data-chapter]').count() == 1 for item in ('origin', 'research', 'field', 'invitation')))
             record(f'{width}: original routes retained', all(page.locator(f'a[href="{path}"]').count() for path in ('/services/', '/research/lab/', '/research/notes/', '/signal-studio/', '/work/weplace/', '/research/chore-to-play/')))

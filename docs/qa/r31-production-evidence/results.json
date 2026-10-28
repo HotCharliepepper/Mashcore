@@ -1,0 +1,1205 @@
+{
+  "url": "https://mashcore.co.kr/",
+  "sha": "a8dae1c4b6e69cd02e24b5e28bc9600f5a756fcf",
+  "context": "production",
+  "environment": "GitHub Actions / Chromium + optional WebKit / Playwright 1.57.0",
+  "not_run": [
+    "physical iOS/Android devices",
+    "Safari and Firefox",
+    "screen reader listening",
+    "browser native 200% zoom",
+    "customer comprehension",
+    "real inquiry delivery",
+    "production Core Web Vitals"
+  ],
+  "checks": 197,
+  "passed": 197,
+  "failed": 0,
+  "result": "PASS",
+  "rows": [
+    {
+      "check": "320: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "320: inquiry anchor reaches destination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: one H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: original scene IDs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: original routes retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: six independent Chore to Play perspectives",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: production is indexable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: canonical remains public homepage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: CTA above initial fold",
+      "status": "PASS",
+      "detail": {
+        "x": 20,
+        "y": 361.359375,
+        "width": 280,
+        "height": 52
+      }
+    },
+    {
+      "check": "320: copy and CTA precede media",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: no automatic video playback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: poster loaded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "320: three research controls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: research observation selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: research alternative selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: research next selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "320: field heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "질문은,현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "320: field heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "320: invitation heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "지금, 어떤 장면이마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "320: invitation heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "390: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "390: inquiry anchor reaches destination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: one H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: original scene IDs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: original routes retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: six independent Chore to Play perspectives",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: production is indexable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: canonical remains public homepage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: CTA above initial fold",
+      "status": "PASS",
+      "detail": {
+        "x": 24,
+        "y": 380.671875,
+        "width": 218,
+        "height": 52
+      }
+    },
+    {
+      "check": "390: copy and CTA precede media",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: no automatic video playback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: poster loaded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "390: three research controls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: research observation selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: research alternative selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: research next selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing six-lens interaction works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "390: field heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "질문은,현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "390: field heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "390: invitation heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "지금, 어떤 장면이마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "390: invitation heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "768: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "768: inquiry anchor reaches destination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: one H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: original scene IDs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: original routes retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: six independent Chore to Play perspectives",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: production is indexable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: canonical remains public homepage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: CTA above initial fold",
+      "status": "PASS",
+      "detail": {
+        "x": 24,
+        "y": 395.359375,
+        "width": 218,
+        "height": 52
+      }
+    },
+    {
+      "check": "768: copy and CTA precede media",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: no automatic video playback",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: poster loaded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "768: three research controls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: research observation selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: research alternative selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: research next selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "768: field heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "질문은,현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "768: field heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "768: invitation heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "지금, 어떤 장면이마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "768: invitation heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "1440: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "1440: inquiry anchor reaches destination",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: one H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: original scene IDs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: original routes retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: six independent Chore to Play perspectives",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: production is indexable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: canonical remains public homepage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: CTA above initial fold",
+      "status": "PASS",
+      "detail": {
+        "x": 72,
+        "y": 556.09375,
+        "width": 218,
+        "height": 52
+      }
+    },
+    {
+      "check": "1440: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "1440: three research controls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: research observation selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: research alternative selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: research next selection",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "1440: field heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "질문은,현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "1440: field heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "현장을 만나 깊어집니다.",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          233,
+          227,
+          216
+        ],
+        "ratio": 12.60619579824669,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "1440: invitation heading contrast 1",
+      "status": "PASS",
+      "detail": {
+        "text": "지금, 어떤 장면이마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "1440: invitation heading contrast 2",
+      "status": "PASS",
+      "detail": {
+        "text": "마음에 남아 있나요?",
+        "foreground": "rgb(32, 33, 36)",
+        "background": [
+          243,
+          240,
+          232
+        ],
+        "ratio": 14.136574675558585,
+        "required": 3,
+        "solid": true
+      }
+    },
+    {
+      "check": "Keyboard: skip link first",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Keyboard: skip reaches main",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Keyboard: research is in tab order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Keyboard: Enter selects research",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Keyboard: Space selects next step",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Keyboard: visible focus styling",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Research live announcement container",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: muted, inline, never loops",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: real 1920x1080 asset decoded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: approximately six seconds",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Desktop: GSAP 3.15.0 available",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Desktop: rendered GSAP signal styles actually change",
+      "status": "PASS",
+      "detail": 9
+    },
+    {
+      "check": "Video: actual playback time advances",
+      "status": "PASS",
+      "detail": {
+        "before": 0.050726,
+        "after": 0.708741
+      }
+    },
+    {
+      "check": "Video: user pause works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: user resume works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: pauses outside viewport",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: finishes once, does not loop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Video: explicit replay",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no-js: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no-js: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no-js: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no-js: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "no-js: video remains still",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no-js: valid poster retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "No JS: all research explanations readable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "reduced-motion: video remains still",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: valid poster retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: research still works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reduced-motion: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "reduced-motion: no active GSAP animation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "video-failed: valid poster retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: research still works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "video-failed: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "Video failure actually simulated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "gsap-failed: valid poster retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: research still works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "gsap-failed: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "GSAP failure actually simulated",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "image-failed: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "image-failed: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "image-failed: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "image-failed: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "image-failed: research still works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "image-failed: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "save-data: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "save-data: video remains still",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: valid poster retained",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: research still works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "save-data: no uncaught JS errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "save-data: no active GSAP animation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: explicit video play works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: pause works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: research selection works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: menu opens",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile: Escape closes menu",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Inquiry: mail draft is prepared, never sent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Inquiry: does not claim automatic submission",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /services/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /research/lab/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /research/notes/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /research/chore-to-play/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /signal-studio/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Existing /work/weplace/: HTTP 200 + H1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Production sitemap has 13 canonical URLs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Preview permits crawling noindex",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium: mobile URL ready and current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium /mobile/: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium /mobile/: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium /mobile/: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium /mobile/: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "chromium: mobile URL CTA before media",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium: mobile URL poster first",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium: mobile URL research tap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "chromium: mobile URL inquiry anchor",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: explicit video play works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: pause works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: research selection works",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile touch: menu opens",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "Mobile: Escape closes menu",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit: mobile URL ready and current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit /mobile/: question visible",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit /mobile/: service CTA usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit /mobile/: inquiry usable",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit /mobile/: no horizontal overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "webkit: mobile URL CTA before media",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit: mobile URL poster first",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit: mobile URL research tap",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "webkit: mobile URL inquiry anchor",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

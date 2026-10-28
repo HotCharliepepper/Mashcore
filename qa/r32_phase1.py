@@ -203,6 +203,7 @@ def fallback(browser, mode):
             page.wait_for_timeout(700)
         readable(page, mode)
         record(mode + ' no leftover word wrappers', page.locator('.r32-word').count() == 0)
+        page.screenshot(path=str(OUT / (mode + '-origin.png')))
         if mode in ['saveData', 'reduced', 'still', 'core-fail', 'no-js']:
             record(mode + ' no additional plugin requests', not any('SplitText.min.js' in x or 'ScrollTrigger.min.js' in x for x in requests), requests)
         if mode == 'no-js':

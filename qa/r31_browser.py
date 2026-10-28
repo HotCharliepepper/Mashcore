@@ -14,7 +14,8 @@ from playwright.sync_api import sync_playwright
 
 BASE = os.environ['PREVIEW_URL'].rstrip('/') + '/'
 SHA = os.environ['QA_COMMIT']
-OUT = Path('qa/r31-evidence')
+PRODUCTION = os.environ.get('QA_CONTEXT') == 'production'
+OUT = Path(os.environ.get('QA_OUTPUT', 'qa/r31-evidence'))
 OUT.mkdir(parents=True, exist_ok=True)
 ROWS = []
 
@@ -144,7 +145,12 @@ def viewports(browser):
             record(f'{width}: original scene IDs', all(page.locator(f'#{item}[data-chapter]').count() == 1 for item in ('origin', 'research', 'field', 'invitation')))
             record(f'{width}: original routes retained', all(page.locator(f'a[href="{path}"]').count() for path in ('/services/', '/research/lab/', '/research/notes/', '/signal-studio/', '/work/weplace/', '/research/chore-to-play/')))
             record(f'{width}: six independent Chore to Play perspectives', page.locator('[data-spatial-select]').count() == 6)
-            record(f'{width}: noindex meta and HTTP', 'noindex' in page.locator('meta[name="robots"]').get_attribute('content').lower() and 'noindex' in response.headers.get('x-robots-tag', '').lower())
+            robots = page.locator('meta[name="robots"]').all_text_contents()
+            robots_content = page.locator('meta[name="robots"]').get_attribute('content') if robots else ''
+            if PRODUCTION:
+                record(f'{width}: production is indexable', 'noindex' not in (robots_content or '').lower() and 'noindex' not in response.headers.get('x-robots-tag', '').lower())
+            else:
+                record(f'{width}: noindex meta and HTTP', 'noindex' in (robots_content or '').lower() and 'noindex' in response.headers.get('x-robots-tag', '').lower())
             record(f'{width}: canonical remains public homepage', page.locator('link[rel="canonical"]').get_attribute('href') == 'https://mashcore.co.kr/')
             cta = page.locator('.mc-hero-action').bounding_box()
             record(f'{width}: CTA above initial fold', bool(cta and cta['y'] + cta['height'] <= height + 2), cta)
@@ -356,7 +362,10 @@ def preserved_routes(browser):
             response = page.goto(urljoin(BASE, '/' + path), wait_until='domcontentloaded')
             record(f'Existing /{path}: HTTP 200 + H1', response.status == 200 and page.locator('h1').count() == 1)
         response = page.goto(urljoin(BASE, '/sitemap.xml'))
-        record('Preview sitemap excludes review route', 'r31-review' not in response.text() and '<url>' not in response.text())
+        if PRODUCTION:
+            record('Production sitemap has 13 canonical URLs', response.text().count('<loc>') == 13 and '<loc>https://mashcore.co.kr/</loc>' in response.text() and 'r31-review' not in response.text())
+        else:
+            record('Preview sitemap excludes review route', 'r31-review' not in response.text() and '<url>' not in response.text())
         response = page.goto(urljoin(BASE, '/robots.txt'))
         record('Preview permits crawling noindex', 'Allow: /' in response.text() and 'Disallow: /' not in response.text())
     except Exception as error:
@@ -365,8 +374,32 @@ def preserved_routes(browser):
         page.close()
 
 
+def mobile_route(browser, engine):
+    """Exercise the explicit mobile URL, not just the root's responsive viewport."""
+    context = browser.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True, has_touch=True)
+    page = context.new_page()
+    try:
+        response = page.goto(urljoin(BASE, '/mobile/'), wait_until='load')
+        record(engine + ': mobile URL ready and current', response.status == 200 and page.locator('meta[name="r31-commit"]').get_attribute('content') == SHA)
+        common(page, engine + ' /mobile/')
+        cta = page.locator('.mc-hero-action').bounding_box()
+        media = page.locator('#origin-video').bounding_box()
+        record(engine + ': mobile URL CTA before media', cta['y'] + cta['height'] <= media['y'] and cta['y'] + cta['height'] < 844)
+        record(engine + ': mobile URL poster first', poster_ready(page) and page.locator('#origin-video').evaluate('(v) => v.paused && v.currentTime === 0'))
+        screenshot(page, f'r31-{engine}-mobile-route.png')
+        page.locator('[data-research-step="alternative"]').tap()
+        record(engine + ': mobile URL research tap', page.locator('[data-research-step="alternative"]').get_attribute('aria-pressed') == 'true')
+        page.locator('.header-cta').tap()
+        page.wait_for_function('Math.abs(document.getElementById("invitation").getBoundingClientRect().top) < 100', timeout=8000)
+        record(engine + ': mobile URL inquiry anchor', True)
+    except Exception as error:
+        record(engine + ': mobile URL scenario', False, str(error))
+    finally:
+        context.close()
+
+
 def main():
-    meta = {'url': BASE, 'sha': SHA, 'environment': 'GitHub Actions / Chromium / Playwright 1.57.0',
+    meta = {'url': BASE, 'sha': SHA, 'context': 'production' if PRODUCTION else 'deploy-preview', 'environment': 'GitHub Actions / Chromium + optional WebKit / Playwright 1.57.0',
             'not_run': ['physical iOS/Android devices', 'Safari and Firefox', 'screen reader listening', 'browser native 200% zoom', 'customer comprehension', 'real inquiry delivery', 'production Core Web Vitals']}
     try:
         ready()
@@ -378,7 +411,14 @@ def main():
             alternatives(browser)
             mobile_touch(browser)
             preserved_routes(browser)
+            if os.environ.get('QA_MOBILE_ROUTE') == '1':
+                mobile_route(browser, 'chromium')
             browser.close()
+            if os.environ.get('QA_WEBKIT') == '1':
+                webkit = playwright.webkit.launch(headless=True)
+                mobile_touch(webkit)
+                mobile_route(webkit, 'webkit')
+                webkit.close()
     except Exception as error:
         record('Browser runner', False, str(error))
     failures = sum(row['status'] == 'FAIL' for row in ROWS)

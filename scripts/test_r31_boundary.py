@@ -7,6 +7,7 @@ Run after the R3.1 source and its six review assets are present.
 from contextlib import redirect_stdout
 from io import StringIO
 import os
+import re
 from pathlib import Path
 import shutil
 import tempfile
@@ -61,12 +62,37 @@ class PreviewBoundary(unittest.TestCase):
                     self.assertIn('name="r31-commit" content="' + "a" * 40,
                                   (review / "index.html").read_text())
                 if context == "production":
+                    def strip_marker(data):
+                        return re.sub(br'<meta name="r31-commit" content="[0-9a-f]{40}">', b'', data)
                     for name in pack.PUBLIC_FILES:
-                        self.assertEqual((self.out / name).read_bytes(), (self.root / name).read_bytes())
+                        self.assertEqual(strip_marker((self.out / name).read_bytes()), (self.root / name).read_bytes())
                     for directory in pack.PUBLIC_DIRS:
                         for source in (self.root / directory).rglob("*.html"):
                             self.assertEqual(source.read_bytes(),
-                                             (self.out / source.relative_to(self.root)).read_bytes())
+                                             strip_marker((self.out / source.relative_to(self.root)).read_bytes()))
+
+    def test_public_media_missing_or_unlisted_blocks_all_contexts(self):
+        media = self.root / "assets/r31"
+        (media / "master.mp4").write_bytes(b"not approved")
+        for context in ("production", "branch-deploy", "deploy-preview"):
+            with self.assertRaisesRegex(ValueError, "approved allowlist"):
+                pack.prepare(context)
+        (media / "master.mp4").unlink()
+        (media / "origin.mp4").unlink()
+        with self.assertRaisesRegex(ValueError, "approved allowlist"):
+            pack.prepare("production")
+
+    def test_public_master_rejected(self):
+        self.checked_build("production")
+        with (self.out / "assets/r31/origin.mp4").open("wb") as f:
+            f.truncate(3_000_000)
+        with self.assertRaisesRegex(AssertionError, "budget exceeded"):
+            release.run("production")
+
+    def test_mobile_matches_homepage(self):
+        home=(self.root / "index.html").read_text()
+        mobile=(self.root / "mobile/index.html").read_text()
+        self.assertEqual(home, mobile.replace("landing-page mobile-edition", "landing-page").replace("<title>Mashcore 모바일 —", "<title>Mashcore —"))
 
     def test_unlisted_experiment_files_never_copy(self):
         source = self.root / pack.R31_SOURCE

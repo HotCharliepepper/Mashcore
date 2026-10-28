@@ -8,7 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
-from prepare_public import R31_FILES, R31_ROUTE
+from prepare_public import R31_FILES, R31_ROUTE, R31_PUBLIC_FILES
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"dist"
@@ -36,6 +36,7 @@ class Scan(HTMLParser):
         self.canon=[]
         self.robots=[]
         self.source_commits=[]
+        self.chapters=[]
         self.nav=[]
         self.errors=[]
         self._in_head=False
@@ -44,6 +45,7 @@ class Scan(HTMLParser):
         a=dict(attrs)
         if tag=='head':self._in_head=True
         if "id" in a:self.ids.append(a["id"])
+        if tag=="section" and "data-chapter" in a:self.chapters.append(a.get("id"))
         if tag=="h1":self.h1+=1
         if tag=="title" and self._in_head:self.titles+=1
         if tag=="meta" and a.get("name")=="description":self.desc.append(a.get("content",""))
@@ -73,7 +75,12 @@ def run(context):
         assert (preview_root/"assets/origin.mp4").stat().st_size < 3_000_000, "Web video budget exceeded; do not deploy master"
     else:
         assert not preview_root.exists(), "R3.1 is only allowed in deploy-preview"
-        assert not any(p.suffix.lower() == ".mp4" for p in OUT.rglob("*")), "Preview video leaked outside deploy-preview"
+    public_media = OUT / "assets/r31"
+    actual_media = {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()}
+    assert actual_media == set(R31_PUBLIC_FILES), "Public R3.1 asset allowlist mismatch"
+    assert (public_media / "origin.mp4").stat().st_size < 3_000_000, "Public video budget exceeded; do not deploy master"
+    allowed_videos = {"assets/r31/origin.mp4"} | ({"r31-review/assets/origin.mp4"} if preview_enabled else set())
+    assert {p.relative_to(OUT).as_posix() for p in OUT.rglob("*.mp4")} == allowed_videos, "Unapproved video in release"
     pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in expected_pages}
     checks=0
     for rel,page in pages.items():
@@ -82,7 +89,7 @@ def run(context):
         assert page.canon==[expected], f"{rel}: canonical {page.canon} vs {expected}"
         assert len(page.ids)==len(set(page.ids)), f"{rel}: duplicate IDs"
         assert not page.errors, f"{rel}: {page.errors}"
-        if rel == R31_ROUTE+"/index.html":
+        if rel in ("index.html", "mobile/index.html", R31_ROUTE+"/index.html"):
             assert len(page.source_commits)==1 and re.fullmatch(r"[0-9a-f]{40}", page.source_commits[0]), "R3.1 source commit marker missing or invalid"
         source=(OUT/rel).read_text(encoding="utf-8")
         for value in BUSINESS:
@@ -108,8 +115,13 @@ def run(context):
                 assert dest in pages and unquote(url.fragment) in pages[dest].ids, f"{rel}: broken fragment {ref}"
         checks+=1
     home=(OUT/"index.html").read_text(encoding="utf-8")
-    assert re.findall(r'<section\b[^>]*\bdata-chapter=""[^>]*\bid="([^"]+)"',home)==["origin","research","field","invitation"],"Four scene IDs"
-    assert 'id="opening-title"' in home and "왜 잠시 멈췄을까요?" in home and 'href="/services/"' in home
+    assert pages["index.html"].chapters==["origin","research","field","invitation"],"Four scene IDs"
+    assert 'id="opening-title"' in home and "왜 잠시 멈췄을까요?" in " ".join(re.sub(r"<[^>]+>", " ", home).split()) and 'href="/services/"' in home
+    for rel in ("index.html", "mobile/index.html"):
+        source=(OUT/rel).read_text(encoding="utf-8")
+        assert "DESIGN PREVIEW" not in source and "검토본</title>" not in source, "Review label in public homepage"
+        assert '/assets/r31/origin.mp4' in source and '/assets/r31/origin.webp' in source
+        assert 'id="origin-video"' in source and 'data-research-step="next"' in source
     notes=(OUT/"research/notes/index.html").read_text(encoding="utf-8")
     studio=(OUT/"signal-studio/index.html").read_text(encoding="utf-8")
     assert "2026.05.11" in notes and "https://mashcore-market-notes.netlify.app/" in notes
@@ -139,6 +151,7 @@ def run(context):
     print(json.dumps({"result":"PASS","context":context,"pages":len(expected_pages),"checked_page_shells":checks,
          "sitemap_urls":len(locs),"r31_preview_included":preview_enabled,
          "r31_allowlisted_files":len(R31_FILES) if preview_enabled else 0,
+         "approved_public_r31_assets":len(R31_PUBLIC_FILES),
          "legacy_preview_excluded":True},ensure_ascii=False))
 
 

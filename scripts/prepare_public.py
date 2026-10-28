@@ -28,6 +28,9 @@ R31_FILES = (
     "index.html", "styles.css", "app.js", "assets/origin.mp4",
     "assets/origin.webp", "assets/gsap.min.js",
 )
+# Approved for the public homepage by the user's 2026-10-28 deployment request.
+# The historical experiment remains independently isolated to Deploy Previews.
+R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
 FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 
 
@@ -39,6 +42,11 @@ def prepare(context: str) -> None:
     if DEST.exists():
         shutil.rmtree(DEST)
     DEST.mkdir()
+    public_media = ROOT / "assets/r31"
+    if any(p.is_symlink() for p in (public_media, *public_media.parents, *public_media.rglob("*"))):
+        raise ValueError("Symlink in public R3.1 assets")
+    if {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()} != set(R31_PUBLIC_FILES):
+        raise ValueError("Public R3.1 assets must match the approved allowlist")
     for name in PUBLIC_DIRS:
         src = ROOT / name
         if not src.is_dir():
@@ -63,14 +71,17 @@ def prepare(context: str) -> None:
             target = DEST / R31_ROUTE / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, target)
-        commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
-            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-        if not re.fullmatch(r"[0-9a-f]{40}", commit):
-            raise ValueError("R3.1 preview requires a full source commit SHA")
-        preview_html = DEST / R31_ROUTE / "index.html"
-        html = preview_html.read_text(encoding="utf-8")
+    commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", commit):
+        raise ValueError("R3.1 requires a full source commit SHA")
+    marked_pages = [DEST / "index.html", DEST / "mobile/index.html"]
+    if context == "deploy-preview":
+        marked_pages.append(DEST / R31_ROUTE / "index.html")
+    for page in marked_pages:
+        html = page.read_text(encoding="utf-8")
         html = html.replace("</head>", f'<meta name="r31-commit" content="{commit}"></head>', 1)
-        preview_html.write_text(html, encoding="utf-8")
+        page.write_text(html, encoding="utf-8")
 
     # /preview/ is an internal review tool, not a public destination.
     assert not (DEST / "preview").exists()

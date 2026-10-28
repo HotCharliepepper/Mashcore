@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 source = (ROOT / 'index.html').read_text()
+# R3.1 uses the same responsive layout on both URLs; legacy pages retain their fixed mobile viewer.
 source = source.replace('class="landing-page"', 'class="landing-page mobile-edition"')
 source = source.replace('<title>Mashcore —', '<title>Mashcore 모바일 —')
 # Shared root canonical intentionally avoids competing copies in search.

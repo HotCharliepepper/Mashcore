@@ -1,3 +1,14 @@
+/* Legacy buildless harness: keep the original body as history. */
+(() => {
+  const legacyFs = require('node:fs');
+  const legacyPath = require('node:path');
+  const legacyRoot = legacyPath.resolve(__dirname, '..');
+  if (legacyFs.existsSync(legacyPath.join(legacyRoot, 'scripts/build_public.py')) &&
+      legacyFs.existsSync(legacyPath.join(legacyRoot, 'content/services-prototype.json'))) {
+    console.error('LEGACY COMMAND BLOCKED in this generator project. Use: python3 scripts/build_public.py --context deploy-preview; python3 scripts/check_public.py; node scripts/check_review_interactions.cjs; node scripts/check_spatial.cjs.');
+    process.exit(2);
+  }
+})();
 const {parseHTML}=require('linkedom');
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=require('node:path').resolve(__dirname,'..')+'/';
@@ -5,7 +16,7 @@ const checks=[];
 function setup(route,search=''){
  const {document,Event}=parseHTML(fs.readFileSync(root+route,'utf8'));
  const listener={};const media={matches:false,addEventListener(){}};
- const win={matchMedia:()=>media,addEventListener(n,f){listener[n]=f},isSecureContext:true,innerHeight:800,scrollY:0,location:{href:'https://mashcore.co.kr/'+search,hash:'',replace(v){win.replaced=v}},history:{replaceState(a,b,u){win.location.href=String(u)}}};
+ const win={matchMedia:()=>media,addEventListener(n,f){listener[n]=f},isSecureContext:true,innerHeight:800,scrollY:0,location:{href:'https://mashcore.netlify.app/'+search,hash:'',replace(v){win.replaced=v}},history:{replaceState(a,b,u){win.location.href=String(u)}}};
  let copied='';const navigator={clipboard:{writeText:async value=>{copied=value}}};
  Object.defineProperty(document.documentElement,'scrollHeight',{value:2400});
  for(const input of document.querySelectorAll('input[type="radio"]'))Object.defineProperty(input,'checked',{get(){return this.hasAttribute('checked')},set(v){if(v)this.setAttribute('checked','');else this.removeAttribute('checked')}});
@@ -16,16 +27,12 @@ function setup(route,search=''){
  return {document,Event,win,navigator,run,click,key,get copied(){return copied}};
 }
 async function main(){
- for(const route of ['index.html','mobile/index.html','services/index.html','policies/refund/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html']){
+ for(const route of ['index.html','mobile/index.html','explore/index.html','about/index.html','research/index.html','research/chore-to-play/index.html','research/market-interpretation/index.html','research/log/index.html','work/weplace/index.html']){
   const env=setup(route),{document,run,click,key,Event,win}=env;
   run('site-config.js');run('site.js');
-  const businessPanel=document.querySelector('footer .footer-legal');
-  assert.ok(businessPanel, 'Missing visible business footer section');
-  assert.equal(businessPanel.querySelector('h2').textContent.trim(),'사업자 정보');
-  assert.equal(businessPanel.closest('.footer-grid'),null);
   assert.equal(document.querySelector('[data-business-info]').hidden,false);
-  assert.match(document.querySelector('[data-business-info]').textContent,/247-02-04104/);
-  assert.equal(document.querySelector('[data-business-info] a[href^="mailto:"]').getAttribute('href'),'mailto:weplacehyun@naver.com');
+  assert.equal(document.querySelector('[data-business-info]').children.length,1);
+  assert.equal(document.querySelector('[data-business-info] dd').textContent,'247-02-04104');
   click(document.querySelector('.menu-btn'));assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'true');key(document.querySelector('.menu-btn'),'Escape');assert.equal(document.querySelector('.menu-btn').getAttribute('aria-expanded'),'false');
   if(document.getElementById('question')){
    const q=document.getElementById('question');q.select=()=>{};q.value='왜 망설일까요? & 작은 질문';q.dispatchEvent(new Event('input'));
@@ -44,7 +51,7 @@ async function main(){
     document.querySelector('input').dispatchEvent(new Event('change'));titles.add(document.getElementById('condition-title').textContent);
    }assert.equal(titles.size,4);click(document.getElementById('reset-conditions'));assert.equal(document.querySelector('[name="agency"]:checked').value,'low');assert.equal(document.querySelector('[name="feedback"]:checked').value,'low');
   }
-  checks.push(route+': navigation, blank business fields, retained page interactions pass');
+  checks.push(route+': navigation, confirmed registration number, hidden unknown fields, retained page interactions pass');
  }
  const biz=setup('index.html');biz.win.MASHCORE_BUSINESS={companyName:'Example <script>alert(1)</script>',registrationNumber:'',address:''};biz.run('site.js');assert.equal(biz.document.querySelector('[data-business-info]').hidden,false);assert.equal(biz.document.querySelector('[data-business-info]').children.length,1);assert.equal(biz.document.querySelector('[data-business-info] script'),null);checks.push('Business update: only nonempty fields render; values are text, not executable HTML');
  const scene=setup('index.html');scene.run('chapters.js');assert.equal(scene.document.querySelectorAll('[data-chapter]').length,4);scene.win.location.hash='#rooms';scene.run('chapters.js');assert.equal(scene.win.replaced,'/explore/#rooms');checks.push('Chapters: readable without IntersectionObserver; old deep links reach preserved content');

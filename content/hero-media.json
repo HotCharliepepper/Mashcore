@@ -1,0 +1,92 @@
+{
+  "_document_status": "IMPLEMENTED_REVIEW_CONFIGURATION",
+  "_usage": "Consumed by R2 renderer and hero-media.js; null video paths omit the player.",
+  "version": "2.0",
+  "asset_id": "mashcore-origin-r2-concept",
+  "asset_kind": "ai_generated_still_and_motion_study",
+  "provenance": {
+    "source": "OpenAI image generation, 2026-10-25; fictional person and location. Slow digital push-in encoded locally; no live-action footage.",
+    "rights_verified": false,
+    "public_use_approved": false,
+    "review_label": "AI 콘셉트 · 실제 촬영 아님 · 정지 이미지 모션"
+  },
+  "poster": {
+    "desktop": "/assets/media/hero-desktop.webp",
+    "mobile": "/assets/media/hero-mobile.webp",
+    "alt": "문 앞에서 안내 카드를 살펴보는 가상의 인물. 실제 고객이나 현장이 아닌 AI 콘셉트 이미지.",
+    "focal_point_desktop": "50% 50%",
+    "focal_point_mobile": "50% 41%"
+  },
+  "video": {
+    "desktop": "/assets/media/hero-desktop.mp4",
+    "mobile": "/assets/media/hero-mobile.mp4",
+    "target_duration_seconds": [
+      6,
+      8
+    ],
+    "muted": true,
+    "plays_inline": true,
+    "loop": false,
+    "max_initial_autoplay_attempts": 1,
+    "duration_seconds": 6.5,
+    "kind": "slow_digital_push_in_from_ai_still"
+  },
+  "experience": {
+    "mode": "poster_first",
+    "fixed_loading_delay_ms": 0,
+    "navigation_always_available": true,
+    "scroll_hijack": false,
+    "transition_requires_actual_playing": true,
+    "autoplay_on_reduced_motion": false,
+    "autoplay_when_save_data": false,
+    "pause_when_out_of_view": true,
+    "pause_when_document_hidden": true,
+    "respect_user_pause": true,
+    "do_not_restart_after_ended_automatically": true
+  },
+  "ui": {
+    "next_anchor": "#research",
+    "next_label": "이 장면에서 시작하기 ↓",
+    "services_href": "/services/",
+    "services_label": "함께할 수 있는 일 보기",
+    "controls_only_when_playable_source_exists": true,
+    "play_label": "영상 재생",
+    "pause_label": "영상 일시정지",
+    "replay_label": "영상 다시 보기",
+    "services_label_mobile": "함께할 일 보기"
+  },
+  "required_states": [
+    "poster_only",
+    "loading",
+    "playing",
+    "paused_user",
+    "paused_environment",
+    "ended",
+    "blocked",
+    "error",
+    "reduced_motion"
+  ],
+  "proposed_web_asset_budgets": {
+    "poster_kb": [
+      150,
+      250
+    ],
+    "desktop_video_mb": [
+      2,
+      4
+    ],
+    "mobile_video_mb": [
+      1,
+      2
+    ],
+    "note": "시험용 가안. 실제 화질·장면·기기 결과로 조정하며 현재 달성 수치가 아니다."
+  },
+  "do_not": [
+    "infer_asset_rights",
+    "use_generated_scene_as_observed_customer_evidence",
+    "burn_core_copy_into_video",
+    "expose_customer_data",
+    "load_null_or_guessed_paths",
+    "label_test_fixture_as_brand_film"
+  ]
+}

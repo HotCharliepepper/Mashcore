@@ -1,0 +1,10 @@
+{
+  "command": [
+    "node",
+    "--check",
+    "assets/js/hero-reverse.js"
+  ],
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

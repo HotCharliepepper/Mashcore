@@ -1,0 +1,9 @@
+{
+  "command": [
+    "node",
+    "scripts/check_spatial.cjs"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"passed\",\n  \"testedRoot\": \"/workspace/scratch/50252eb99175/mashcore-p01/dist/\",\n  \"environment\": \"Node + linkedom DOM simulation of generated dist; no physical device/sensor or rendered-browser assertion\",\n  \"checks\": [\n    \"Selection, exclusive pressed state, keyboard rotation and reset; no unsolicited sensor request\",\n    \"Permission denial returns to manual controls\",\n    \"Permission exception has usable fallback\",\n    \"Unsupported API and insecure context do not request access\",\n    \"Granted permission and no-permission API paths time out safely without sensor data\",\n    \"Sensor calibration, bounded camera pose, screen rotation recalibration, background cleanup\",\n    \"Reduced-motion preference blocks movement while preserving content selection; live preference changes stop sensors\",\n    \"Vertical touch motion remains browser-owned; horizontal drag rotates and pointer cancellation clears capture\",\n    \"Pagehide and explicit component disposal clean up listeners\"\n  ]\n}\n",
+  "stderr": ""
+}

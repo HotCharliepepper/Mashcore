@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "scripts/build_public.py",
+    "--context",
+    "deploy-preview"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"context\": \"deploy-preview\", \"html_pages\": 12, \"business_footers\": 11, \"products\": 4}\n",
+  "stderr": ""
+}

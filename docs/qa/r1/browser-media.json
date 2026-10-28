@@ -1,0 +1,92 @@
+[
+  {
+    "name": "poster_only",
+    "status": "PASS",
+    "evidence": "No video or media request; eager picture and H1 in HTML"
+  },
+  {
+    "name": "A/B same nodes all 3 perspectives",
+    "status": "PASS",
+    "evidence": "3 perspectives, reversible order, exact original nodes"
+  },
+  {
+    "name": "1001 Korean input",
+    "status": "PASS"
+  },
+  {
+    "name": "clipboard denial",
+    "status": "PASS",
+    "evidence": "자동 복사가 되지 않았습니다. 내용을 선택해 직접 복사해 주세요. Ctrl+C 또는 ⌘C, 모바일 선택 메뉴의 복사를 사용할 수 있습니다."
+  },
+  {
+    "name": "mailto exact encoding",
+    "status": "PASS"
+  },
+  {
+    "name": "composition guard",
+    "status": "PASS"
+  },
+  {
+    "name": "empty copy",
+    "status": "PASS"
+  },
+  {
+    "name": "reduced-motion 3D JS preference injection",
+    "status": "PASS",
+    "evidence": "matchMedia injected; real system preference NOT RUN"
+  },
+  {
+    "name": "reduced-motion media",
+    "status": "PASS",
+    "evidence": "matchMedia injected; no autoplay"
+  },
+  {
+    "name": "reduced-motion explicit play",
+    "status": "PASS"
+  },
+  {
+    "name": "autoplay denied",
+    "status": "PASS",
+    "evidence": "one injected NotAllowedError"
+  },
+  {
+    "name": "manual recovery actual playback",
+    "status": "PASS"
+  },
+  {
+    "name": "paused_user",
+    "status": "PASS"
+  },
+  {
+    "name": "user pause survives scroll return",
+    "status": "PASS"
+  },
+  {
+    "name": "ended and replay",
+    "status": "PASS"
+  },
+  {
+    "name": "ended remains ended",
+    "status": "PASS"
+  },
+  {
+    "name": "explicit replay",
+    "status": "PASS"
+  },
+  {
+    "name": "environment pause (visibility injection)",
+    "status": "PASS"
+  },
+  {
+    "name": "environment resume",
+    "status": "PASS"
+  },
+  {
+    "name": "user pause survives visibility return",
+    "status": "PASS"
+  },
+  {
+    "name": "video 404",
+    "status": "PASS"
+  }
+]

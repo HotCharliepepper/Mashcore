@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python3",
+    "scripts/build_public.py",
+    "--context",
+    "production"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "PRODUCTION BLOCKED: prototype scope, billing basis and VAT need explicit approval. The current published site is not changed.\n"
+}

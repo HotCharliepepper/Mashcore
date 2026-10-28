@@ -1,0 +1,9 @@
+{
+  "command": [
+    "python3",
+    "scripts/check_hero_reverse.py"
+  ],
+  "exit_code": 0,
+  "stdout": "PASS: R3 hero A/B overlay, accessible switch, reduced motion, unchanged R2 content and preserved dependencies\n",
+  "stderr": ""
+}

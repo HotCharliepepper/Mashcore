@@ -1,0 +1,9 @@
+{
+  "command": [
+    "node",
+    "scripts/check_review_interactions.cjs"
+  ],
+  "exit_code": 0,
+  "stdout": "{\n  \"status\": \"passed\",\n  \"testedRoot\": \"/workspace/scratch/50252eb99175/mashcore-p01/dist\",\n  \"environment\": \"Node VM with minimal DOM/event harness using generated dist scripts; no browser layout, device, mail app or SMTP execution\",\n  \"checks\": [\n    \"Empty inquiry: recipient and subject only; empty copy gives guidance without success\",\n    \"Exact unicode, whitespace, newline, ampersand, hash and percent survive URI and clipboard\",\n    \"1000 code points accepted; 1001 blocks scripted actions, retains original and manual selection\",\n    \"Korean composition is never rewritten; actions wait until composition ends\",\n    \"Rejected or unavailable clipboard never shows success; selection and manual guidance remain\",\n    \"Menu Escape and link close return focus to the menu trigger\",\n    \"Pre-rendered business footer survives runtime; only empty fallback is filled\",\n    \"Three perspectives and reversible A/B use the same nodes and disclosure state; keyboard and pressed state work\",\n    \"Incomplete A/B initialization keeps static content and comparison alternatives visible\"\n  ]\n}\n",
+  "stderr": ""
+}

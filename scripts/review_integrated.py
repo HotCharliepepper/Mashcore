@@ -128,6 +128,30 @@ STUDIO = """
 """
 
 
+
+RESEARCH_HUB_BRIDGE = """
+<section class="mc-bridge mc-bridge--hub core-wrap" id="research-public-paths" aria-labelledby="research-public-paths-title">
+ <div class="mc-bridge-heading"><p class="core-overline">RESEARCH / 탐색 입구</p>
+ <h2 id="research-public-paths-title">연구 방법과 공개 원문,<br>다른 자리에서 읽습니다.</h2>
+ <p>LAB에서는 어떤 질문과 반례로 판단하는지 살펴보고, NOTES에서는 공개된 원문의 날짜·자료 범위·한계를 확인합니다.</p></div>
+ <div class="mc-bridge-links">
+  <a class="mc-feature-link" href="/research/lab/"><span>LAB / 연구하는 방법</span><strong>고객이 멈추는 이유를 어떻게 살펴볼까?</strong><small>관찰한 사실과 가능한 설명, 다음에 바꿀 조건을 나눕니다.</small><em>판단의 방법 보기 ↗</em></a>
+  <a class="mc-feature-link" href="/research/notes/"><span>NOTES / 읽을 수 있는 원문</span><strong>기록에는 시점과 근거가 있습니다.</strong><small>기존 Chore to Play·Market Interpretation·2026.05.11 시장 원문</small><em>노트와 원문 읽기 ↗</em></a>
+ </div>
+ <p class="mc-bridge-caution">공개된 내용은 연구 기록과 검토 중인 방법을 포함하며 검증된 고객 행동 예측·성과 보장을 뜻하지 않습니다.</p>
+</section>
+"""
+
+
+def enhance_research_hub(output: Path):
+    """Add clear entry points without rewriting preserved legacy studies."""
+    hub = output / "research/index.html"
+    text = hub.read_text(encoding="utf-8")
+    marker = '<section class="legacy-chapter">'
+    if marker not in text or 'id="research-public-paths"' in text:
+        raise ValueError("Research hub marker moved or review bridge already exists")
+    hub.write_text(text.replace(marker, RESEARCH_HUB_BRIDGE + marker, 1), encoding="utf-8")
+
 PAGE_ITEMS = (
     ("research/lab", "Mashcore Lab — 관찰과 판단의 방법 | MASHCORE",
      "현장의 질문을 관찰하고 근거·해석·반례와 다음 판단을 구분하는 Mashcore Lab의 연구 방법을 소개합니다.", LAB),

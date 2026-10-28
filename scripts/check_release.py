@@ -36,13 +36,14 @@ class Scan(HTMLParser):
         self.robots=[]
         self.nav=[]
         self.errors=[]
-        self._title=False
+        self._in_head=False
         self.feed(data)
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
+        if tag=='head':self._in_head=True
         if "id" in a:self.ids.append(a["id"])
         if tag=="h1":self.h1+=1
-        if tag=="title":self.titles+=1
+        if tag=="title" and self._in_head:self.titles+=1
         if tag=="meta" and a.get("name")=="description":self.desc.append(a.get("content",""))
         if tag=="meta" and a.get("name")=="robots":self.robots.append(a.get("content",""))
         if tag=="link" and a.get("rel")=="canonical":self.canon.append(a.get("href",""))
@@ -51,6 +52,9 @@ class Scan(HTMLParser):
             if a.get(k):self.links.append(a[k])
         if tag=="a" and a.get("href") in ("/services/","/research/","/work/weplace/","/signal-studio/","/about/"):
             self.nav.append(a["href"])
+
+    def handle_endtag(self,tag):
+        if tag=='head':self._in_head=False
 
 
 def run(context):

@@ -7,8 +7,11 @@ internal assets from being uploaded as public web files.
 """
 from __future__ import annotations
 import argparse
+import os
 from pathlib import Path
+import re
 import shutil
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "dist"
@@ -17,7 +20,15 @@ PUBLIC_DIRS = (
     "research", "services", "signal-studio", "work",
 )
 PUBLIC_FILES = ("index.html", "robots.txt", "sitemap.xml", "mashcore-profile.jpg")
-FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources"}
+R31_SOURCE = "experiments/r31-origin-research"
+R31_ROUTE = "r31-review"
+# Deliberate file-by-file boundary: never copy the experiments tree, source ZIP,
+# master video, working notes, or new files merely because they share a folder.
+R31_FILES = (
+    "index.html", "styles.css", "app.js", "assets/origin.mp4",
+    "assets/origin.webp", "assets/gsap.min.js",
+)
+FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 
 
 def prepare(context: str) -> None:
@@ -39,6 +50,27 @@ def prepare(context: str) -> None:
         if not src.is_file():
             raise ValueError("Expected public source file: " + name)
         shutil.copy2(src, DEST / name)
+
+    if context == "deploy-preview":
+        preview_source = ROOT / R31_SOURCE
+        for name in R31_FILES:
+            src = preview_source / name
+            # Reject symlinks in every path component, including the source root.
+            if any(part.is_symlink() for part in (src, *src.parents)):
+                raise ValueError("Symlink in R3.1 source: " + name)
+            if not src.is_file():
+                raise ValueError("Missing allowlisted R3.1 source: " + name)
+            target = DEST / R31_ROUTE / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, target)
+        commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+        if not re.fullmatch(r"[0-9a-f]{40}", commit):
+            raise ValueError("R3.1 preview requires a full source commit SHA")
+        preview_html = DEST / R31_ROUTE / "index.html"
+        html = preview_html.read_text(encoding="utf-8")
+        html = html.replace("</head>", f'<meta name="r31-commit" content="{commit}"></head>', 1)
+        preview_html.write_text(html, encoding="utf-8")
 
     # /preview/ is an internal review tool, not a public destination.
     assert not (DEST / "preview").exists()

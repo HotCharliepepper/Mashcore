@@ -1,0 +1,6 @@
+dist/
+.netlify/
+.openai/
+__pycache__/
+*.pyc
+qa/r31-evidence/

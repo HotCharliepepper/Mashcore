@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
+from prepare_public import R31_FILES, R31_ROUTE
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"dist"
@@ -20,7 +21,7 @@ EXPECTED={
 }
 CANON="https://mashcore.co.kr"
 BUSINESS=("247-02-04104","최규현","weplacehyun@naver.com")
-FORBIDDEN={"docs","content","scripts","qa",".git",".github","source-media","project_sources","upload"}
+FORBIDDEN={"docs","content","scripts","qa",".git",".github","source-media","project_sources","upload","experiments"}
 VOID={"br","img","input","link","meta","source","track","hr","wbr","area"}
 
 
@@ -34,6 +35,7 @@ class Scan(HTMLParser):
         self.desc=[]
         self.canon=[]
         self.robots=[]
+        self.source_commits=[]
         self.nav=[]
         self.errors=[]
         self._in_head=False
@@ -46,9 +48,10 @@ class Scan(HTMLParser):
         if tag=="title" and self._in_head:self.titles+=1
         if tag=="meta" and a.get("name")=="description":self.desc.append(a.get("content",""))
         if tag=="meta" and a.get("name")=="robots":self.robots.append(a.get("content",""))
+        if tag=="meta" and a.get("name")=="r31-commit":self.source_commits.append(a.get("content",""))
         if tag=="link" and a.get("rel")=="canonical":self.canon.append(a.get("href",""))
         if tag=="img" and "alt" not in a:self.errors.append("Missing img alt")
-        for k in ("href","src"): 
+        for k in ("href","src","poster","data-src"):
             if a.get(k):self.links.append(a[k])
         if tag=="a" and a.get("href") in ("/services/","/research/","/work/weplace/","/signal-studio/","/about/"):
             self.nav.append(a["href"])
@@ -59,15 +62,28 @@ class Scan(HTMLParser):
 
 def run(context):
     assert context in ("production","deploy-preview","branch-deploy")
+    preview_enabled = context == "deploy-preview"
+    expected_pages = EXPECTED | ({R31_ROUTE+"/index.html"} if preview_enabled else set())
     actual={p.relative_to(OUT).as_posix() for p in OUT.rglob("*.html")}
-    assert actual==EXPECTED, f"Unexpected/missing route: extra={actual-EXPECTED}, missing={EXPECTED-actual}"
-    pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in EXPECTED}
+    assert actual==expected_pages, f"Unexpected/missing route: extra={actual-expected_pages}, missing={expected_pages-actual}"
+    preview_root = OUT / R31_ROUTE
+    if preview_enabled:
+        actual_preview = {p.relative_to(preview_root).as_posix() for p in preview_root.rglob("*") if p.is_file()}
+        assert actual_preview == set(R31_FILES), f"R3.1 file allowlist mismatch: {actual_preview ^ set(R31_FILES)}"
+        assert (preview_root/"assets/origin.mp4").stat().st_size < 3_000_000, "Web video budget exceeded; do not deploy master"
+    else:
+        assert not preview_root.exists(), "R3.1 is only allowed in deploy-preview"
+        assert not any(p.suffix.lower() == ".mp4" for p in OUT.rglob("*")), "Preview video leaked outside deploy-preview"
+    pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in expected_pages}
     checks=0
     for rel,page in pages.items():
         assert page.h1==1 and page.titles==1 and len(page.desc)==1 and page.desc[0], f"{rel}: title/H1/description"
-        expected=CANON+("/" if rel in ("index.html","mobile/index.html") else "/"+rel.removesuffix("index.html"))
+        expected=CANON+("/" if rel in ("index.html","mobile/index.html",R31_ROUTE+"/index.html") else "/"+rel.removesuffix("index.html"))
         assert page.canon==[expected], f"{rel}: canonical {page.canon} vs {expected}"
         assert len(page.ids)==len(set(page.ids)), f"{rel}: duplicate IDs"
+        assert not page.errors, f"{rel}: {page.errors}"
+        if rel == R31_ROUTE+"/index.html":
+            assert len(page.source_commits)==1 and re.fullmatch(r"[0-9a-f]{40}", page.source_commits[0]), "R3.1 source commit marker missing or invalid"
         source=(OUT/rel).read_text(encoding="utf-8")
         for value in BUSINESS:
             assert value in source, f"{rel}: visible business details missing: {value[:3]}"
@@ -99,7 +115,7 @@ def run(context):
     assert "2026.05.11" in notes and "https://mashcore-market-notes.netlify.app/" in notes
     assert "Gate 0" in studio and "Mock" in studio and "미검증" in studio
     assert (OUT/"research/index.html").read_text(encoding="utf-8").count('id="research-public-paths"')==1
-    assert all("LEDGER" not in (OUT/x).read_text(encoding="utf-8").upper() for x in EXPECTED)
+    assert all("LEDGER" not in (OUT/x).read_text(encoding="utf-8").upper() for x in expected_pages)
     assert not any(x.name.startswith("hero-desktop") or x.name.startswith("hero-mobile") for x in OUT.rglob("*")),"Unapproved generated hero found"
     assert not (OUT/"preview").exists()
     for path in OUT.rglob("*"):
@@ -120,8 +136,10 @@ def run(context):
         assert not locs,"Draft sitemap must be empty"
         assert "Allow: /" in robots and "Disallow: /" not in robots
         assert "X-Robots-Tag: noindex" in (OUT/"_headers").read_text(encoding="utf-8"),"Draft header noindex missing"
-    print(json.dumps({"result":"PASS","context":context,"pages":len(EXPECTED),"checked_page_shells":checks,
-         "sitemap_urls":len(locs),"generated_media_excluded":True,"preview_routes_excluded":True},ensure_ascii=False))
+    print(json.dumps({"result":"PASS","context":context,"pages":len(expected_pages),"checked_page_shells":checks,
+         "sitemap_urls":len(locs),"r31_preview_included":preview_enabled,
+         "r31_allowlisted_files":len(R31_FILES) if preview_enabled else 0,
+         "legacy_preview_excluded":True},ensure_ascii=False))
 
 
 if __name__=="__main__":

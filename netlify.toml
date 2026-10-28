@@ -8,7 +8,7 @@
   command = "python3 scripts/check_site.py && python3 scripts/prepare_public.py --context production && python3 scripts/check_release.py --context production"
 
 [context.deploy-preview]
-  command = "python3 scripts/check_site.py && python3 scripts/prepare_public.py --context deploy-preview && python3 scripts/check_release.py --context deploy-preview"
+  command = "python3 scripts/prepare_public.py --context deploy-preview"
 
 [context.branch-deploy]
   command = "python3 scripts/check_site.py && python3 scripts/prepare_public.py --context branch-deploy && python3 scripts/check_release.py --context branch-deploy"

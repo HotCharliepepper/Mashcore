@@ -18,6 +18,7 @@ from review_details import render_services, render_about
 from review_r2 import hero as r2_hero, situations, judgment, outputs_process, home_faq
 from media_assets import verify_media
 from review_seo import apply_seo
+from review_integrated import render_review_pages, research_bridge, field_bridge
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://mashcore.co.kr'
@@ -69,11 +70,11 @@ def business_rows(b: dict) -> str:
 
 
 def header() -> str:
-    return '<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore</a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/services/">하는 일</a><a href="/#field">현장과 작업</a><a href="/research/">연구</a><a href="/about/">소개</a><a class="mobile-inquiry" href="/#invitation">내 상황 이야기하기 ↗</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'
+    return '<header class="site-header core-header"><div class="core-wrap header-inner"><a class="brand core-brand" href="/" aria-label="Mashcore 홈">Mashcore</a><nav id="main-nav" class="desktop-nav" aria-label="주요 메뉴"><a href="/services/">함께할 일</a><a href="/research/">연구·노트</a><a href="/work/weplace/">현장 협업</a><a href="/signal-studio/">Signal Studio</a><a href="/about/">소개</a><a class="mobile-inquiry" href="/#invitation">내 상황 이야기하기 ↗</a></nav><a class="header-cta" href="/#invitation">내 상황 이야기하기 <span aria-hidden="true">↗</span></a><button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="메뉴 열기">메뉴</button></div></header>'
 
 
 def footer(b: dict) -> str:
-    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/research/log/">연구 기록</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>전략·브랜드·디지털 설계</span><a href="#main">위로 ↑</a></div></div></footer>'''
+    return f'''<footer class="core-footer"><div class="core-wrap"><div class="core-footer-grid"><div><a class="core-footer-brand" href="/">Mashcore</a><p>함께 하여 강화한다.<br>서로의 강점을 모아 사업의 다음 선택을 설계합니다.</p></div><nav aria-label="하단 메뉴"><a href="/services/">서비스</a><a href="/research/">연구</a><a href="/research/notes/">노트</a><a href="/research/log/">연구 기록</a><a href="/signal-studio/">Signal Studio</a><a href="/explore/">생각 읽기</a><a href="/about/">소개</a><a href="/policies/refund/">취소·환불 정책</a></nav></div><section class="footer-legal" aria-labelledby="footer-business-title"><h2 id="footer-business-title">사업자 정보</h2>{business_rows(b)}</section><div class="core-footer-bottom"><span>© 2026 Mashcore</span><span>전략·브랜드·디지털 설계</span><a href="#main">위로 ↑</a></div></div></footer>'''
 
 
 def page(path: str, title: str, description: str, main: str, b: dict, *, home: bool = False, review: bool = True) -> str:
@@ -162,8 +163,8 @@ def build(root: Path, output: Path, context: str) -> dict:
     portfolio=review_field(s)
     invitation=review_invitation(EMAIL,s)
     origin='<section id="origin" aria-labelledby="opening-title" data-chapter="">'+r2_hero(s,media)+situations()+'</section>'
-    observed=observed.rsplit('</section>',1)[0]+judgment()+'</section>'
-    portfolio=portfolio.rsplit('</section>',1)[0]+outputs_process()+'</section>'
+    observed=observed.rsplit('</section>',1)[0]+judgment()+research_bridge()+'</section>'
+    portfolio=portfolio.rsplit('</section>',1)[0]+outputs_process()+field_bridge()+'</section>'
     invitation=invitation.replace('<div class="chapter-inner invitation-layout">',home_faq()+'<div class="chapter-inner invitation-layout">',1)
     main=origin+observed+portfolio+invitation
     home=page('/',s['title'],s['description'],main,b,home=True,review=context!='production')
@@ -172,6 +173,7 @@ def build(root: Path, output: Path, context: str) -> dict:
     mobile=home.replace('class="landing-page core-page"','class="landing-page core-page mobile-edition"',1).replace('<title>Mashcore —','<title>Mashcore 모바일 —',1)
     (output/'mobile/index.html').write_text(mobile,encoding='utf-8')
     render_new_pages(output,s,c,b,context)
+    render_review_pages(output,b,page,review=context!='production')
     count=0
     for path in sorted(output.rglob('*.html')):
         text=path.read_text(encoding='utf-8').replace('https://mashcore.netlify.app',BASE).replace('weplace25@gmail.com',EMAIL)
@@ -186,7 +188,7 @@ def build(root: Path, output: Path, context: str) -> dict:
         # If site.js fails, restore the readable navigation fallback.
         if path.relative_to(output).as_posix()!='preview/index.html':
             text=text.replace('<head>','<head><script>document.documentElement.classList.add("js");addEventListener("error",e=>{if((e.target?.src||e.filename||"").split("?")[0].endsWith("/site.js"))document.documentElement.classList.remove("js")},true)</script>',1)
-        text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"><link rel="stylesheet" href="/assets/css/experience-r2.css"></head>',1)
+        text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/fonts.css"><link rel="stylesheet" href="/assets/css/renewal.css"><link rel="stylesheet" href="/assets/css/experience-r2.css"><link rel="stylesheet" href="/assets/css/review-integrated.css"></head>',1)
         if path.relative_to(output).as_posix() in ('index.html', 'mobile/index.html'):
             text=text.replace('</head>','<link rel="stylesheet" href="/assets/css/hero-reverse.css"></head>',1)
             # Select the requested layout before first paint. With scripts
@@ -195,7 +197,7 @@ def build(root: Path, output: Path, context: str) -> dict:
             # The deployed review iframe exposed an unstyled first paint.
             # Inline the authored CSS in its existing order on these two entry
             # pages only. No second hand-maintained critical stylesheet.
-            for css_name in ('strategy.css','fonts.css','renewal.css','experience-r2.css','hero-reverse.css'):
+            for css_name in ('strategy.css','fonts.css','renewal.css','experience-r2.css','hero-reverse.css','review-integrated.css'):
                 css_path='/assets/css/'+css_name
                 link='<link rel="stylesheet" href="'+css_path+'">'
                 style='<style data-source="'+css_path+'">'+(root/css_path.lstrip('/')).read_text(encoding='utf-8')+'</style>'
@@ -207,8 +209,9 @@ def build(root: Path, output: Path, context: str) -> dict:
     sitemap=output/'sitemap.xml'
     if sitemap.exists():
         text=sitemap.read_text(encoding='utf-8').replace('https://mashcore.netlify.app',BASE)
-        if BASE+'/services/' not in text:
-            text=text.replace('</urlset>',f'<url><loc>{BASE}/services/</loc></url></urlset>')
+        for route in ('/services/','/research/lab/','/research/notes/','/signal-studio/'):
+            if BASE+route not in text:
+                text=text.replace('</urlset>',f'<url><loc>{BASE}{route}</loc></url></urlset>')
         sitemap.write_text(text,encoding='utf-8')
     if context!='production':
         (output/'robots.txt').write_text('User-agent: *\nDisallow: /\n',encoding='utf-8')

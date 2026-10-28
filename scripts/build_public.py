@@ -215,7 +215,10 @@ def build(root: Path, output: Path, context: str) -> dict:
                 text=text.replace('</urlset>',f'<url><loc>{BASE}{route}</loc></url></urlset>')
         sitemap.write_text(text,encoding='utf-8')
     if context!='production':
-        (output/'robots.txt').write_text('User-agent: *\nDisallow: /\n',encoding='utf-8')
+        # A crawler must be able to read the noindex HTTP/meta directive.
+        # Do not list unapproved Draft routes in any review sitemap.
+        (output/'robots.txt').write_text('User-agent: *\nAllow: /\n',encoding='utf-8')
+        (output/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n',encoding='utf-8')
         h=output/'_headers';existing=h.read_text(encoding='utf-8') if h.exists() else ''
         h.write_text(existing+'\n/*\n  X-Robots-Tag: noindex, nofollow\n',encoding='utf-8')
     verify_media(root,output)

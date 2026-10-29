@@ -22,6 +22,9 @@ PUBLIC_DIRS = (
 PUBLIC_FILES = ("index.html", "robots.txt", "sitemap.xml", "mashcore-profile.jpg")
 R31_SOURCE = "experiments/r31-origin-research"
 R31_ROUTE = "r31-review"
+R34_SOURCE = "experiments/r34-one-core-four-systems"
+R34_ROUTE = "r34-review"
+R34_FILES = ("index.html",)  # Single public-safe review page, Preview only
 # Deliberate file-by-file boundary: never copy the experiments tree, source ZIP,
 # master video, working notes, or new files merely because they share a folder.
 R31_FILES = (
@@ -31,6 +34,14 @@ R31_FILES = (
 # Approved for the public homepage by the user's 2026-10-28 deployment request.
 # The historical experiment remains independently isolated to Deploy Previews.
 R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
+R32_PUBLIC_FILES = ("styles.css", "word-motion.js", "SplitText.min.js", "ScrollTrigger.min.js")
+R32_REVIEW_TOOLS = '''<details class="r32-review" id="r32-review"><summary>R3.3 읽기·스크롤 비교</summary>
+<nav aria-label="R3.2 비교 선택"><a href="?layout=before" data-r32-motion-choice="before">R3.1 기준</a>
+<a href="?motion=calm" data-r32-motion-choice="calm">비교 · 1.85초 / 0.70초</a>
+<a href="?motion=slow" data-r32-motion-choice="slow">기본 · 2.2초 / 0.90초</a>
+<a href="?motion=still" data-r32-motion-choice="still">워드 정지</a>
+<a href="?scroll=free">자유 스크롤</a><a href="?scroll=proximity">선택적 스냅</a><button type="button" data-r33-skip>모션 건너뛰기</button><button type="button" data-r32-replay disabled>워드 다시 보기</button></nav>
+<p data-r32-motion-status role="status">기기의 모션 감소·데이터 절약 설정을 우선합니다.</p></details>'''
 FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 
 
@@ -47,6 +58,11 @@ def prepare(context: str) -> None:
         raise ValueError("Symlink in public R3.1 assets")
     if {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()} != set(R31_PUBLIC_FILES):
         raise ValueError("Public R3.1 assets must match the approved allowlist")
+    r32 = ROOT / "assets/r32"
+    if any(p.is_symlink() for p in (r32, *r32.parents, *r32.rglob("*"))):
+        raise ValueError("Symlink in R3.2 assets")
+    if {p.relative_to(r32).as_posix() for p in r32.rglob("*") if p.is_file()} != set(R32_PUBLIC_FILES):
+        raise ValueError("R3.2 assets must match the explicit allowlist")
     for name in PUBLIC_DIRS:
         src = ROOT / name
         if not src.is_dir():
@@ -71,6 +87,19 @@ def prepare(context: str) -> None:
             target = DEST / R31_ROUTE / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, target)
+    if context == "deploy-preview":
+        # Explicit preview-only R3.4 editorial/IA review, excluding private tools.
+        for name in R34_FILES:
+            src = ROOT / R34_SOURCE / name
+            if any(part.is_symlink() for part in (src, *src.parents)):
+                raise ValueError("Symlink in R3.4 source: " + name)
+            if not src.is_file():
+                raise ValueError("Missing R3.4 review source: " + name)
+            target = DEST / R34_ROUTE / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, target)
+            if "LEDGER" in target.read_text(encoding="utf-8").upper():
+                raise ValueError("Private product name exposed in R3.4 review")
     commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
@@ -78,6 +107,7 @@ def prepare(context: str) -> None:
     marked_pages = [DEST / "index.html", DEST / "mobile/index.html"]
     if context == "deploy-preview":
         marked_pages.append(DEST / R31_ROUTE / "index.html")
+        marked_pages.append(DEST / R34_ROUTE / "index.html")
     for page in marked_pages:
         html = page.read_text(encoding="utf-8")
         html = html.replace("</head>", f'<meta name="r31-commit" content="{commit}"></head>', 1)
@@ -102,6 +132,7 @@ def prepare(context: str) -> None:
         (DEST / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")
         for path in DEST.rglob("*.html"):
             text = path.read_text(encoding="utf-8")
+            text = text.replace("<!-- R32_REVIEW_TOOLS -->", R32_REVIEW_TOOLS)
             if '<meta name="robots"' not in text and '<meta content="noindex' not in text:
                 text = text.replace("</head>", '<meta name="robots" content="noindex,nofollow"></head>', 1)
             path.write_text(text, encoding="utf-8")

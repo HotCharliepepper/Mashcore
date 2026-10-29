@@ -1,0 +1,60 @@
+name: MASHCORE R3.4 IA Draft Review Gate
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'experiments/r34-one-core-four-systems/**'
+      - 'docs/R34_ONE_CORE_FOUR_SYSTEMS.md'
+      - 'scripts/prepare_public.py'
+      - 'scripts/check_release.py'
+      - 'qa/r34_preview.py'
+      - '.github/workflows/r34-ia-review.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r34-ia-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  review-only:
+    if: startsWith(github.head_ref, 'codex/r34-ia-review-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and validate preview allowlist
+        run: |
+          python scripts/check_site.py
+          python scripts/prepare_public.py --context deploy-preview
+          python scripts/check_release.py --context deploy-preview
+          test -f dist/r34-review/index.html
+          ! grep -qi LEDGER dist/r34-review/index.html
+          grep -q 'name="robots" content="noindex' dist/r34-review/index.html
+      - name: Install browser engines
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Actual browser interaction check
+        run: |
+          python -m http.server 8333 --directory dist &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          R34_URL=http://127.0.0.1:8333/r34-review/ python qa/r34_preview.py
+      - name: Production and branch output must exclude R3.4 review
+        run: |
+          python scripts/prepare_public.py --context production
+          python scripts/check_release.py --context production
+          test ! -e dist/r34-review
+          python scripts/prepare_public.py --context branch-deploy
+          python scripts/check_release.py --context branch-deploy
+          test ! -e dist/r34-review
+      - name: Upload review evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r34-ia-review-evidence
+          path: qa/r34-evidence/
+          retention-days: 30

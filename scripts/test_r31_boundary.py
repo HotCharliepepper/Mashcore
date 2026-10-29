@@ -82,6 +82,11 @@ class PreviewBoundary(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "approved allowlist"):
             pack.prepare("production")
 
+    def test_r32_unlisted_asset_is_rejected(self):
+        (self.root / "assets/r32/internal.json").write_text("not public")
+        with self.assertRaisesRegex(ValueError, "R3.2 assets"):
+            pack.prepare("deploy-preview")
+
     def test_public_master_rejected(self):
         self.checked_build("production")
         with (self.out / "assets/r31/origin.mp4").open("wb") as f:

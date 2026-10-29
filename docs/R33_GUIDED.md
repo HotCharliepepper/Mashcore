@@ -4,6 +4,10 @@ Base: R3.2 `3da474ecf7783464d9cc3d9c9ee9e0d2ba07365f`.
 Remote main checked immediately before work: `a8dae1c4b6e69cd02e24b5e28bc9600f5a756fcf`.
 PRs 14 and 15 remain open Draft; no existing R3.3 branch was found.
 Branch: `codex/r33-guided-experience-20261029`; separate worktree.
+Draft PR #16 initially targeted R3.2. That non-production base did not generate
+a Netlify Preview (404, no deploy status). PR base was changed to main solely
+for Preview eligibility; source parent remains R3.2. Review only R3.3 via
+`3da474e...HEAD`; this PR includes R3.2 and must not be merged independently.
 
 ## Behavior
 

@@ -30,7 +30,17 @@ with sync_playwright() as p:
             if engine=="chromium":
                 page.evaluate("document.documentElement.style.zoom='2'")
                 page.wait_for_timeout(150)
-                check(label+" CSS zoom 200 percent reflow",page.evaluate("document.documentElement.scrollWidth<=innerWidth+2"))
+                diag=page.evaluate("""() => ({
+                    width:innerWidth,
+                    scroll:document.documentElement.scrollWidth,
+                    overflow: [...document.querySelectorAll('*')]
+                      .map(el=>({el,box:el.getBoundingClientRect()}))
+                      .filter(o=>o.box.right > innerWidth+2 || o.box.left < -2)
+                      .slice(0,20)
+                      .map(o=>({tag:o.el.tagName,cls:typeof o.el.className==='string'?o.el.className:'',text:o.el.textContent?.trim().slice(0,65),right:Math.round(o.box.right),left:Math.round(o.box.left)}))
+                })""")
+                page.screenshot(path=str(OUT/(label+"-zoom.png")))
+                check(label+" CSS zoom 200 percent reflow",diag['scroll']<=diag['width']+2,diag)
                 page.evaluate("document.documentElement.style.zoom=''")
             page.screenshot(path=str(OUT/(label+"-main.png")))
             page.locator('button[data-review-go="lab"]').click()

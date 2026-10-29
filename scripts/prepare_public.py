@@ -22,6 +22,9 @@ PUBLIC_DIRS = (
 PUBLIC_FILES = ("index.html", "robots.txt", "sitemap.xml", "mashcore-profile.jpg")
 R31_SOURCE = "experiments/r31-origin-research"
 R31_ROUTE = "r31-review"
+R34_SOURCE = "experiments/r34-one-core-four-systems"
+R34_ROUTE = "r34-review"
+R34_FILES = ("index.html",)  # Single public-safe review page, Preview only
 # Deliberate file-by-file boundary: never copy the experiments tree, source ZIP,
 # master video, working notes, or new files merely because they share a folder.
 R31_FILES = (
@@ -84,6 +87,19 @@ def prepare(context: str) -> None:
             target = DEST / R31_ROUTE / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, target)
+    if context == "deploy-preview":
+        # Explicit preview-only R3.4 editorial/IA review, excluding private tools.
+        for name in R34_FILES:
+            src = ROOT / R34_SOURCE / name
+            if any(part.is_symlink() for part in (src, *src.parents)):
+                raise ValueError("Symlink in R3.4 source: " + name)
+            if not src.is_file():
+                raise ValueError("Missing R3.4 review source: " + name)
+            target = DEST / R34_ROUTE / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, target)
+            if "LEDGER" in target.read_text(encoding="utf-8").upper():
+                raise ValueError("Private product name exposed in R3.4 review")
     commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if not re.fullmatch(r"[0-9a-f]{40}", commit):
@@ -91,6 +107,7 @@ def prepare(context: str) -> None:
     marked_pages = [DEST / "index.html", DEST / "mobile/index.html"]
     if context == "deploy-preview":
         marked_pages.append(DEST / R31_ROUTE / "index.html")
+        marked_pages.append(DEST / R34_ROUTE / "index.html")
     for page in marked_pages:
         html = page.read_text(encoding="utf-8")
         html = html.replace("</head>", f'<meta name="r31-commit" content="{commit}"></head>', 1)

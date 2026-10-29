@@ -91,7 +91,7 @@ def run(context):
     pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in expected_pages}
     checks=0
     for rel,page in pages.items():
-        expected_h1 = 6 if rel == R34_ROUTE+"/index.html" else 1  # Six discrete review panels, only one visible at a time.
+        expected_h1 = 1  # Interactive review has one document H1; detail panels use H2.
         assert page.h1==expected_h1 and page.titles==1 and len(page.desc)==1 and page.desc[0], f"{rel}: title/H1/description"
         expected=CANON+("/" if rel in ("index.html","mobile/index.html",R31_ROUTE+"/index.html",R34_ROUTE+"/index.html") else "/"+rel.removesuffix("index.html"))
         assert page.canon==[expected], f"{rel}: canonical {page.canon} vs {expected}"

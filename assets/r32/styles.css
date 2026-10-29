@@ -60,3 +60,7 @@ html:has(.r31-page) #field, html:has(.r31-page) #invitation, html:has(.r31-page)
 html.r33-proximity #origin, html.r33-proximity #research { scroll-snap-align: start; scroll-snap-stop: normal; }
 .r33-media-note { color: #d0d5c7; font-size: 12px; line-height: 1.8; margin-block: 24px; }
 .r33-media-note summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+/* Allow intrinsic content to shrink when browser/CSS zoom narrows the layout. */
+html:not([data-r32-layout="before"]) .r31-actions .r31-primary { min-width: 0; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.r31-page .footer-grid > *, .r31-page .footer-reading { min-width: 0; }
+.r31-page .footer-wordmark { max-width: 100%; overflow-wrap: anywhere; }

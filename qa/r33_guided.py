@@ -38,10 +38,17 @@ with sync_playwright() as p:
         page.locator('[data-r33-skip]').click()
         check(engine+' skip restores original',page.locator('#opening-title .r32-word').count()==0)
         page.locator('[data-r32-replay]').click()
-        page.wait_for_function("document.querySelector('#opening-title').dataset.wordMotionState==='playing'")
+        # Pointer auto-scroll can already move the title out of view. In that
+        # case replay is immediately restored, which is the intended escape.
+        page.wait_for_function("['playing','complete'].includes(document.querySelector('#opening-title').dataset.wordMotionState)")
         page.evaluate('window.scrollTo(0,document.body.scrollHeight)')
         page.wait_for_function("document.querySelectorAll('#opening-title .r32-word').length===0",timeout=1500)
         check(engine+' scroll interrupts and escapes',page.locator('#opening-title .r32-word').count()==0 and page.evaluate('scrollY>600'))
+        page.goto(BASE)
+        page.wait_for_function("document.querySelector('#opening-title').dataset.wordMotionState==='playing'")
+        page.evaluate('window.scrollTo(0,document.body.scrollHeight)')
+        page.wait_for_function("document.querySelectorAll('#opening-title .r32-word').length===0",timeout=1500)
+        check(engine+' active visible motion scroll escape',page.evaluate('scrollY>600'))
         page.goto(BASE+'?motion=still')
         page.evaluate("document.documentElement.style.zoom='2'")
         page.wait_for_timeout(250)

@@ -53,5 +53,5 @@ for relative in ['index.html','mobile/index.html']:
 for directory in ['research','services','about','explore','policies','signal-studio','work']:
     for file in (ROOT/directory).rglob('*.html'):
         assert file.read_text(encoding='utf-8') == original(file.relative_to(ROOT).as_posix()), 'Unrelated page changed: '+str(file)
-assert '1.25' in (ROOT/'assets/r32/word-motion.js').read_text() and '1.4' in (ROOT/'assets/r32/word-motion.js').read_text()
+assert '1.85' in (ROOT/'assets/r32/word-motion.js').read_text() and '2.2' in (ROOT/'assets/r32/word-motion.js').read_text()
 print('PASS: R3.1 app/style/core, copy/CTA, all detail pages, SEO/schema/GEO, mobile sync and R3.2 source/dist hooks')

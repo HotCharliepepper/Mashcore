@@ -1,18 +1,18 @@
-/* R3.2, adapted from Draft #14: optional and independent of R3.1 app.js. */
+/* R3.3, adapted from Draft #14: optional and independent of R3.1 app.js. */
 (() => {
   'use strict';
   const VERSION = '3.15.0';
   const params = new URLSearchParams(location.search);
   const preset = params.get('motion') === 'calm' ? 'calm' : params.get('motion') === 'still' ? 'still' : 'slow';
   const before = document.documentElement.dataset.r32Layout === 'before';
-  const motion = Object.freeze({ duration: preset === 'calm' ? 1.25 : 1.4, stagger: .18, y: 8, ease: 'sine.out' });
+  const motion = Object.freeze({ duration: preset === 'calm' ? 1.85 : 2.2, stagger: preset === 'calm' ? .70 : .90, y: 14, ease: 'sine.out' });
   document.documentElement.dataset.wordMotionPreset = preset;
   document.documentElement.dataset.wordMotionDuration = String(motion.duration);
   document.querySelectorAll('[data-r32-motion-choice]').forEach(link => {
     if ((!before && link.dataset.r32MotionChoice === preset) || (before && link.dataset.r32MotionChoice === 'before')) link.setAttribute('aria-current', 'page');
   });
   const comparisonStatus = document.querySelector('[data-r32-motion-status]');
-  if (comparisonStatus) comparisonStatus.textContent = before ? 'R3.1 기준 화면 · 워드 모션 없음' : preset === 'still' ? '워드 모션 정지 · 원문은 그대로 읽을 수 있습니다.' : `단어 ${motion.duration}초 · 순차 간격 0.18초 · 기기의 모션 감소 설정을 우선합니다.`;
+  if (comparisonStatus) comparisonStatus.textContent = before ? 'R3.1 기준 화면 · 워드 모션 없음' : preset === 'still' ? '워드 모션 정지 · 원문은 그대로 읽을 수 있습니다.' : `의미 구절 ${motion.duration}초 · 시작 간격 ${motion.stagger}초 · 기기의 모션 감소 설정을 우선합니다.`;
   const origin = document.querySelector('[data-word-motion="origin"]');
   const research = document.querySelector('[data-word-motion="research"]');
   if (!origin && !research) return;
@@ -69,18 +69,27 @@
     try {
       // Split only at playback, not while Research is below the viewport.
       // Keep <em>, <br>, language, DOM order and the existing accessible name.
-      const split = window.SplitText.create(element, { type: 'words', wordsClass: 'r32-word', tag: 'span', aria: 'auto' });
+      // Delimiter retains the original <em>/<br> structure and spaces exactly.
+      const originalHTML = element.innerHTML;
+      const delimiter = '\uE000';
+      if (element === origin) element.innerHTML = originalHTML
+        .replace('그 사람은,', '그 사람은,' + delimiter)
+        .replace('멈췄을까요?', delimiter + '멈췄을까요?');
+      let split;
+      try {
+        split = window.SplitText.create(element, { type: 'words', wordsClass: 'r32-word', tag: 'span', aria: 'auto', ...(element === origin ? { wordDelimiter: delimiter } : {}) });
+      } catch (error) { element.innerHTML = originalHTML; throw error; }
+      const pluginRevert = split.revert.bind(split);
+      split.revert = () => { pluginRevert(); element.innerHTML = originalHTML; };
       record = { element, split, timeline: null };
       records.add(record);
       mark(element, 'playing');
       const timeline = window.gsap.timeline({ onComplete: () => revert(record) });
       record.timeline = timeline;
       const emphasis = getComputedStyle(element).getPropertyValue('--r31-word-emphasis').trim();
-      timeline.fromTo(split.words, { y: motion.y }, {
-        y: 0, duration: motion.duration, stagger: motion.stagger, ease: motion.ease,
-      }, 0);
       // No opacity-zero start or clipping: every word stays readable.
       split.words.forEach((word, index) => {
+        timeline.fromTo(word, { y: motion.y }, { y: 0, duration: motion.duration, ease: motion.ease }, index * motion.stagger);
         const color = getComputedStyle(word).color;
         timeline.to(word, { color: emphasis || color, duration: motion.duration / 2, ease: 'sine.inOut' }, index * motion.stagger)
           .to(word, { color, duration: motion.duration / 2, ease: 'sine.inOut' }, index * motion.stagger + motion.duration / 2);
@@ -121,7 +130,7 @@
       }
     } catch (_) { stop('plugin-unavailable'); }
   }
-  const preferenceChanged = () => { if (optedOut()) { stop('preference'); if (replayButton) replayButton.disabled = true; } };
+  const preferenceChanged = () => { if (optedOut()) stop('preference'); if (replayButton) replayButton.disabled = optedOut(); };
   reduced.addEventListener('change', preferenceChanged);
   connection?.addEventListener?.('change', preferenceChanged);
   // Never keep nowrap word wrappers through a viewport change or backgrounding.
@@ -135,6 +144,11 @@
   }, { passive: true });
   document.addEventListener('visibilitychange', () => { if (document.hidden) records.forEach(revert); });
   window.addEventListener('pagehide', () => stop('pagehide'));
+  window.addEventListener('pageshow', event => { if (event.persisted) { stopped = false; mark(origin, 'restored'); } });
+  document.querySelector('[data-r33-skip]')?.addEventListener('click', () => stop('skipped'));
+  if ('IntersectionObserver' in window && origin) new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) records.forEach(record => { if (record.element === origin) revert(record); });
+  }).observe(origin);
   document.querySelector('[data-r32-replay]')?.addEventListener('click', () => {
     if (optedOut()) return;
     records.forEach(revert);
@@ -144,4 +158,38 @@
     initialize();
   });
   initialize();
+})();
+
+/* Native proximity only: no wheel/touch interception, pin, or nested scroller.
+   Root participates only while the two fitting scenes are near the viewport. */
+(() => {
+  const root = document.documentElement;
+  const origin = document.getElementById('origin');
+  const research = document.getElementById('research');
+  if (!origin || !research) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const params = new URLSearchParams(location.search);
+  let frame;
+  function update() {
+    const header = document.querySelector('.site-header')?.getBoundingClientRect().height || 0;
+    const available = innerHeight - header;
+    const a = origin.getBoundingClientRect(), b = research.getBoundingClientRect();
+    const fits = a.height <= available + 2 && b.height <= available + 2;
+    const eligible = params.get('scroll') !== 'free' && !reduced.matches && !navigator.connection?.saveData
+      && !location.hash && fits && innerHeight > 600 && (visualViewport?.scale || 1) <= 1
+      && scrollY < research.offsetTop - header - 4;
+    root.classList.toggle('r33-proximity', eligible);
+    root.dataset.r33Scroll = eligible ? 'proximity' : 'free';
+    root.style.setProperty('--r33-header', header + 'px');
+  }
+  const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); };
+  ['scroll','resize','pageshow','hashchange'].forEach(name => addEventListener(name, schedule, {passive:true}));
+  reduced.addEventListener('change', schedule);
+  navigator.connection?.addEventListener?.('change', schedule);
+  visualViewport?.addEventListener('resize', schedule);
+  new ResizeObserver(schedule).observe(research);
+  new ResizeObserver(schedule).observe(origin);
+  document.addEventListener('focusin', () => root.classList.remove('r33-proximity'));
+  addEventListener('pagehide', () => root.classList.remove('r33-proximity'));
+  update();
 })();

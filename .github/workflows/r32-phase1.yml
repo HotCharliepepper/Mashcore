@@ -1,4 +1,4 @@
-name: R3.2 Phase 1 QA
+name: R3.3 Guided Experience QA
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   words-and-regressions:
-    if: startsWith(github.head_ref, 'codex/r32-phase1-')
+    if: startsWith(github.head_ref, 'codex/r33-guided-experience-')
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -51,12 +51,14 @@ jobs:
         env:
           PREVIEW_URL: https://deploy-preview-${{ github.event.pull_request.number }}--mashcore.netlify.app/
           QA_COMMIT: ${{ github.event.pull_request.head.sha }}
-        run: python qa/r32_phase1.py
+        run: |
+          python qa/r32_phase1.py
+          python qa/r33_guided.py
       - name: Keep screenshots and measured results outside the publish artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: r32-phase1-${{ github.event.pull_request.head.sha }}
-          path: qa/r32-evidence/
+          path: qa/r33-evidence/
           retention-days: 30
           if-no-files-found: warn

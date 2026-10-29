@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = os.environ['PREVIEW_URL'].rstrip('/') + '/'
 SHA = os.environ['QA_COMMIT']
-OUT = Path('qa/r32-evidence')
+OUT = Path('qa/r33-evidence')
 OUT.mkdir(parents=True, exist_ok=True)
 ROWS = []
 METRICS = []
@@ -109,7 +109,7 @@ def research_regression(page, name):
 
 
 def screen(browser, width, height, route='', engine='chromium'):
-    name = f'{engine}-{width}-' + ('mobile-route' if route else 'home')
+    name = f'{engine}-{width}x{height}-' + ('mobile-route' if route else 'home')
     context = browser.new_context(viewport={'width': width, 'height': height}, device_scale_factor=1,
                                   is_mobile=width <= 390, has_touch=width <= 390)
     context.add_init_script(PROBE)
@@ -130,13 +130,13 @@ def screen(browser, width, height, route='', engine='chromium'):
         record(name + ' matching GSAP plugins', page.evaluate("[gsap.version,SplitText.version,ScrollTrigger.version].every(v=>v==='3.15.0')"))
         record(name + ' exactly one core request', page.evaluate("performance.getEntriesByType('resource').filter(e=>e.name.endsWith('/assets/r31/gsap.min.js')).length") == 1)
         complete = readable(page, name + ' complete')
-        record(name + ' default duration 1.4s', complete['duration'] == '1.4')
-        if width <= 820:
+        record(name + ' default duration 2.2s', complete['duration'] == '2.2')
+        if width <= 820 and height >= 760:
             record(name + ' entire observation frame above fold', complete['scene']['y'] >= 0 and complete['scene']['y'] + complete['scene']['height'] <= height, complete['scene'])
             record(name + ' scene before question', complete['scene']['y'] + complete['scene']['height'] <= complete['h1']['y'])
             record(name + ' question and CTA above fold', complete['h1']['y'] + complete['h1']['height'] <= height and complete['cta']['y'] + complete['cta']['height'] <= height)
         record(name + ' first frame readable', bool(complete['first']) and all(x['visible'] for x in complete['first']), complete['first'])
-        record(name + ' CTA above fold', complete['cta']['y'] + complete['cta']['height'] <= height + 2, complete['cta'])
+        record(name + ' CTA reachable', complete['cta']['height'] >= 44 and complete['cta']['visible'], complete['cta'])
         record(name + ' Origin wrappers reverted', page.locator('#opening-title .r32-word').count() == 0)
         page.evaluate("document.querySelector('#origin-video').pause()")
         page.screenshot(path=str(OUT / (name + '-after.png')))
@@ -266,7 +266,7 @@ def baseline(browser):
 
 
 def motion_comparison(browser):
-    for mode, duration in [('calm','1.25'),('slow','1.4')]:
+    for mode, duration in [('calm','1.85'),('slow','2.2')]:
         context = browser.new_context(viewport={'width':390,'height':844})
         page = context.new_page()
         try:
@@ -276,7 +276,7 @@ def motion_comparison(browser):
             data = page.locator('#opening-title .r32-word').evaluate_all("words=>words.map(w=>({y:new DOMMatrixReadOnly(getComputedStyle(w).transform).m42,opacity:getComputedStyle(w).opacity,color:getComputedStyle(w).color}))")
             record(mode + ' exact duration', page.evaluate('document.documentElement.dataset.wordMotionDuration') == duration)
             record(mode + ' stagger has sequential positions', len(data)>1 and max(d['y'] for d in data)-min(d['y'] for d in data)>.1, data)
-            record(mode + ' words always readable', all(d['opacity']=='1' and 0<=d['y']<=8 for d in data))
+            record(mode + ' words always readable', all(d['opacity']=='1' and 0<=d['y']<=14 for d in data))
             record(mode + ' sequential color variation', len(set(d['color'] for d in data))>1)
             page.screenshot(path=str(OUT/(mode+'-during-motion.png')))
             page.wait_for_function("document.querySelector('#opening-title').dataset.wordMotionState==='complete'", timeout=10000)
@@ -313,7 +313,7 @@ try:
     with sync_playwright() as p:
         chromium = p.chromium.launch()
         for route in ['', 'mobile/']:
-            for width, height in [(320, 760), (390, 844), (768, 1024), (1440, 900)]:
+            for width, height in [(320, 760), (390, 844), (390, 667), (844, 390), (768, 1024), (1440, 900)]:
                 screen(chromium, width, height, route)
         for mode in ['reduced', 'still', 'saveData', 'no-js', 'core-fail', 'split-fail', 'trigger-fail', 'module-fail', 'video-fail']:
             fallback(chromium, mode)

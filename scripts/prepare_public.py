@@ -32,12 +32,12 @@ R31_FILES = (
 # The historical experiment remains independently isolated to Deploy Previews.
 R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
 R32_PUBLIC_FILES = ("styles.css", "word-motion.js", "SplitText.min.js", "ScrollTrigger.min.js")
-R32_REVIEW_TOOLS = '''<details class="r32-review" id="r32-review"><summary>R3.2 화면·워드 모션 비교</summary>
+R32_REVIEW_TOOLS = '''<details class="r32-review" id="r32-review"><summary>R3.3 읽기·스크롤 비교</summary>
 <nav aria-label="R3.2 비교 선택"><a href="?layout=before" data-r32-motion-choice="before">R3.1 기준</a>
-<a href="?motion=calm" data-r32-motion-choice="calm">일반 · 1.25초</a>
-<a href="?motion=slow" data-r32-motion-choice="slow">일반 · 1.4초</a>
+<a href="?motion=calm" data-r32-motion-choice="calm">비교 · 1.85초 / 0.70초</a>
+<a href="?motion=slow" data-r32-motion-choice="slow">기본 · 2.2초 / 0.90초</a>
 <a href="?motion=still" data-r32-motion-choice="still">워드 정지</a>
-<button type="button" data-r32-replay disabled>워드 다시 보기</button></nav>
+<a href="?scroll=free">자유 스크롤</a><a href="?scroll=proximity">선택적 스냅</a><button type="button" data-r33-skip>모션 건너뛰기</button><button type="button" data-r32-replay disabled>워드 다시 보기</button></nav>
 <p data-r32-motion-status role="status">기기의 모션 감소·데이터 절약 설정을 우선합니다.</p></details>'''
 FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
 

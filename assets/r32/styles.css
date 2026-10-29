@@ -10,6 +10,7 @@ html:not([data-r32-layout="before"]) .r31-page { --r31-word-emphasis: #e6cb99; }
 .r32-native-menu { display: none; }
 @media (min-width:821px) {
   .r32-review { position: relative; z-index: 4; }
+  .r31-origin:has(.r32-review) { z-index: 1; }
   html:not([data-r32-layout="before"]) .r31-origin { padding-bottom: 0; }
   .r31-origin > .r32-review { position: absolute; left: 0; right: 0; top: 100%; }
   html:has(.r32-review[open]) .r31-research { padding-top: 240px; }
@@ -52,3 +53,10 @@ html:not([data-r32-layout="before"]) .r31-page { --r31-word-emphasis: #e6cb99; }
   html:not([data-r32-layout="before"]) .r31-observation { font-size: 9px; }
 }
 @media (prefers-reduced-motion:reduce) { .r31-page .r32-word { transform: none !important; } }
+
+/* Two native targets only; all other sections remain free reading. */
+html.r33-proximity:has(.r31-page) { scroll-snap-type: y proximity; scroll-padding-top: var(--r33-header, 78px); }
+html:has(.r31-page) #field, html:has(.r31-page) #invitation, html:has(.r31-page) #chore-research { scroll-snap-align: none; }
+html.r33-proximity #origin, html.r33-proximity #research { scroll-snap-align: start; scroll-snap-stop: normal; }
+.r33-media-note { color: #d0d5c7; font-size: 12px; line-height: 1.8; margin-block: 24px; }
+.r33-media-note summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }

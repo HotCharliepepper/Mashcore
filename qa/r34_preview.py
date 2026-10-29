@@ -29,7 +29,7 @@ with sync_playwright() as p:
             check(label+" no private name","LEDGER" not in page.content())
             page.screenshot(path=str(OUT/(label+"-main.png")))
             page.locator('button[data-review-go="lab"]').click()
-            check(label+" lab",page.locator("#view-lab").is_visible() and page.locator("h1:visible").count()==1)
+            check(label+" lab",page.locator("#view-lab").is_visible() and page.locator("#view-lab .detail-title").is_visible())
             page.locator('button[data-review-go="notes"]').click()
             check(label+" notes",page.locator("#view-notes").is_visible())
             page.locator('button[data-review-go="studio"]').click()

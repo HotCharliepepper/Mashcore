@@ -27,6 +27,11 @@ with sync_playwright() as p:
             check(label+" image loaded",page.locator(".hero-photo img").first.evaluate("(el)=>el.naturalWidth>0"))
             check(label+" no runtime error",not errors,errors)
             check(label+" no private name","LEDGER" not in page.content())
+            if engine=="chromium":
+                page.evaluate("document.documentElement.style.zoom='2'")
+                page.wait_for_timeout(150)
+                check(label+" CSS zoom 200 percent reflow",page.evaluate("document.documentElement.scrollWidth<=innerWidth+2"))
+                page.evaluate("document.documentElement.style.zoom=''")
             page.screenshot(path=str(OUT/(label+"-main.png")))
             page.locator('button[data-review-go="lab"]').click()
             check(label+" lab",page.locator("#view-lab").is_visible() and page.locator("#view-lab .detail-title").is_visible())

@@ -71,6 +71,7 @@
       // Keep <em>, <br>, language, DOM order and the existing accessible name.
       // Delimiter retains the original <em>/<br> structure and spaces exactly.
       const originalHTML = element.innerHTML;
+      const accessibleName = element.getAttribute('aria-label') || element.innerText.replace(/\s+/g, ' ').trim();
       const delimiter = '\uE000';
       if (element === origin) element.innerHTML = originalHTML
         .replace('그 사람은,', '그 사람은,' + delimiter)
@@ -79,6 +80,8 @@
       try {
         split = window.SplitText.create(element, { type: 'words', wordsClass: 'r32-word', tag: 'span', aria: 'auto', ...(element === origin ? { wordDelimiter: delimiter } : {}) });
       } catch (error) { element.innerHTML = originalHTML; throw error; }
+      // SplitText reads the temporary delimiter too; expose only the original name.
+      element.setAttribute('aria-label', accessibleName);
       const pluginRevert = split.revert.bind(split);
       split.revert = () => { pluginRevert(); element.innerHTML = originalHTML; };
       record = { element, split, timeline: null };

@@ -22,6 +22,7 @@ with sync_playwright() as p:
                 return {words:words.map(w=>w.textContent),duration:timeline.duration(),tweens:timeline.getChildren().filter(t=>t.vars.y===0).map(t=>({start:t.startTime(),end:t.endTime(),duration:t.duration()}))};
             }""")
             check(engine+mode+' three meaning units', data['words']==['그 사람은,','왜 잠시','멈췄을까요?'],data)
+            check(engine+mode+' original accessible name', page.locator('#opening-title').get_attribute('aria-label')=='그 사람은, 왜 잠시 멈췄을까요?')
             check(engine+mode+' sequence duration',abs(data['duration']-(duration+2*gap))<.01,data)
             page.screenshot(path=str(OUT/(engine+mode+'-frame.png')))
             page.locator('.r31-primary').click()

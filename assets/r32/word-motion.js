@@ -152,6 +152,14 @@
   if ('IntersectionObserver' in window && origin) new IntersectionObserver(entries => {
     if (!entries[0].isIntersecting) records.forEach(record => { if (record.element === origin) revert(record); });
   }).observe(origin);
+  // Replay controls may already be below the title. An observer does not emit
+  // another exit when replay starts offscreen, so scroll also checks active work.
+  window.addEventListener('scroll', () => {
+    if (!origin || !records.size) return;
+    const rect = origin.getBoundingClientRect();
+    if (rect.bottom <= 0 || rect.top >= innerHeight)
+      records.forEach(record => { if (record.element === origin) revert(record); });
+  }, { passive: true });
   document.querySelector('[data-r32-replay]')?.addEventListener('click', () => {
     if (optedOut()) return;
     records.forEach(revert);

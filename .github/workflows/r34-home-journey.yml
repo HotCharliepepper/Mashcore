@@ -1,0 +1,67 @@
+name: MASHCORE R3.4 Real Homepage Journey QA
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'index.html'
+      - 'mobile/index.html'
+      - 'assets/css/r34-home.css'
+      - 'qa/r34_home_journey.py'
+      - 'scripts/**'
+      - '.github/workflows/r34-home-journey.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r34-home-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  homepage-journey:
+    if: startsWith(github.head_ref, 'codex/r34-home-journey-')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout exact Draft head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check sources and safe packaging
+        run: |
+          python scripts/check_site.py
+          python scripts/test_r31_boundary.py
+          python -m py_compile qa/r34_home_journey.py
+          for context in production branch-deploy deploy-preview; do
+            python scripts/prepare_public.py --context "$context"
+            python scripts/check_release.py --context "$context"
+            python scripts/check_r32.py
+            if test "$context" = deploy-preview; then
+              test -f dist/r34-review/index.html
+            else
+              test ! -e dist/r34-review
+            fi
+          done
+      - name: Existing navigation, inquiry and spatial regressions
+        run: |
+          npm install --prefix "$RUNNER_TEMP/r34-interactions" --no-audit --no-fund linkedom@0.18.12
+          NODE_PATH="$RUNNER_TEMP/r34-interactions/node_modules" node scripts/check_interactions.cjs
+          NODE_PATH="$RUNNER_TEMP/r34-interactions/node_modules" node scripts/check_spatial.cjs
+      - name: Install Chromium and WebKit
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium webkit
+      - name: Inspect the exact Netlify Draft Preview
+        env:
+          PREVIEW_URL: https://deploy-preview-${{ github.event.pull_request.number }}--mashcore.netlify.app/
+          QA_COMMIT: ${{ github.event.pull_request.head.sha }}
+        run: python qa/r34_home_journey.py
+      - name: Upload measured screenshot and JSON evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r34-home-journey-${{ github.event.pull_request.head.sha }}
+          path: qa/r34-home-evidence/
+          retention-days: 30
+          if-no-files-found: warn

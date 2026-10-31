@@ -8,7 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit, unquote
 import xml.etree.ElementTree as ET
-from prepare_public import R31_FILES, R31_ROUTE, R31_PUBLIC_FILES
+from prepare_public import R31_FILES, R31_ROUTE, R31_PUBLIC_FILES, R32_PUBLIC_FILES, R34_ROUTE, R34_FILES
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/"dist"
@@ -65,7 +65,7 @@ class Scan(HTMLParser):
 def run(context):
     assert context in ("production","deploy-preview","branch-deploy")
     preview_enabled = context == "deploy-preview"
-    expected_pages = EXPECTED | ({R31_ROUTE+"/index.html"} if preview_enabled else set())
+    expected_pages = EXPECTED | ({R31_ROUTE+"/index.html", R34_ROUTE+"/index.html"} if preview_enabled else set())
     actual={p.relative_to(OUT).as_posix() for p in OUT.rglob("*.html")}
     assert actual==expected_pages, f"Unexpected/missing route: extra={actual-expected_pages}, missing={expected_pages-actual}"
     preview_root = OUT / R31_ROUTE
@@ -75,21 +75,29 @@ def run(context):
         assert (preview_root/"assets/origin.mp4").stat().st_size < 3_000_000, "Web video budget exceeded; do not deploy master"
     else:
         assert not preview_root.exists(), "R3.1 is only allowed in deploy-preview"
+    r34_root = OUT / R34_ROUTE
+    if preview_enabled:
+        r34_files = {p.relative_to(r34_root).as_posix() for p in r34_root.rglob("*") if p.is_file()}
+        assert r34_files == set(R34_FILES), f"R3.4 preview allowlist mismatch: {r34_files}"
+    else:
+        assert not r34_root.exists(), "R3.4 review must never enter production output"
     public_media = OUT / "assets/r31"
     actual_media = {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()}
     assert actual_media == set(R31_PUBLIC_FILES), "Public R3.1 asset allowlist mismatch"
+    assert {p.relative_to(OUT/"assets/r32").as_posix() for p in (OUT/"assets/r32").rglob("*") if p.is_file()} == set(R32_PUBLIC_FILES), "R3.2 asset allowlist mismatch"
     assert (public_media / "origin.mp4").stat().st_size < 3_000_000, "Public video budget exceeded; do not deploy master"
     allowed_videos = {"assets/r31/origin.mp4"} | ({"r31-review/assets/origin.mp4"} if preview_enabled else set())
     assert {p.relative_to(OUT).as_posix() for p in OUT.rglob("*.mp4")} == allowed_videos, "Unapproved video in release"
     pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in expected_pages}
     checks=0
     for rel,page in pages.items():
-        assert page.h1==1 and page.titles==1 and len(page.desc)==1 and page.desc[0], f"{rel}: title/H1/description"
-        expected=CANON+("/" if rel in ("index.html","mobile/index.html",R31_ROUTE+"/index.html") else "/"+rel.removesuffix("index.html"))
+        expected_h1 = 1  # Interactive review has one document H1; detail panels use H2.
+        assert page.h1==expected_h1 and page.titles==1 and len(page.desc)==1 and page.desc[0], f"{rel}: title/H1/description"
+        expected=CANON+("/" if rel in ("index.html","mobile/index.html",R31_ROUTE+"/index.html",R34_ROUTE+"/index.html") else "/"+rel.removesuffix("index.html"))
         assert page.canon==[expected], f"{rel}: canonical {page.canon} vs {expected}"
         assert len(page.ids)==len(set(page.ids)), f"{rel}: duplicate IDs"
         assert not page.errors, f"{rel}: {page.errors}"
-        if rel in ("index.html", "mobile/index.html", R31_ROUTE+"/index.html"):
+        if rel in ("index.html", "mobile/index.html", R31_ROUTE+"/index.html", R34_ROUTE+"/index.html"):
             assert len(page.source_commits)==1 and re.fullmatch(r"[0-9a-f]{40}", page.source_commits[0]), "R3.1 source commit marker missing or invalid"
         source=(OUT/rel).read_text(encoding="utf-8")
         for value in BUSINESS:

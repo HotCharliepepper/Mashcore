@@ -77,7 +77,7 @@ with sync_playwright() as p:
         browser.close()
     # No-JavaScript fallback: native details, radio and links still work.
     browser=p.chromium.launch()
-    context=browser.new_context(viewport={"width":390,"height":844},javascript_enabled=False)
+    context=browser.new_context(viewport={"width":390,"height":844},java_script_enabled=False)
     page=context.new_page()
     page.goto(BASE,wait_until="domcontentloaded",timeout=25000)
     check("no-js source links",page.locator("a.r34-door").count()==3)

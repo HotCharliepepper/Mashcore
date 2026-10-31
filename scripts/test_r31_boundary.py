@@ -32,6 +32,8 @@ class PreviewBoundary(unittest.TestCase):
         for name in pack.PUBLIC_FILES:
             shutil.copy2(SOURCE / name, self.root / name)
         shutil.copytree(SOURCE / pack.R31_SOURCE, self.root / pack.R31_SOURCE)
+        # R3.4 preview-only IA review is part of the same isolated packaging contract.
+        shutil.copytree(SOURCE / pack.R34_SOURCE, self.root / pack.R34_SOURCE)
         self.out = self.root / "dist"
         for module, key, value in ((pack, "ROOT", self.root), (pack, "DEST", self.out),
                                     (release, "ROOT", self.root), (release, "OUT", self.out)):
@@ -54,8 +56,9 @@ class PreviewBoundary(unittest.TestCase):
                 self.checked_build(context)
                 review = self.out / "r31-review"
                 self.assertEqual(review.exists(), context == "deploy-preview")
+                self.assertEqual((self.out / pack.R34_ROUTE).exists(), context == "deploy-preview")
                 self.assertEqual(len(list(self.out.rglob("*.html"))),
-                                 15 if context == "deploy-preview" else 14)
+                                 16 if context == "deploy-preview" else 14)
                 if context == "deploy-preview":
                     self.assertEqual({p.relative_to(review).as_posix()
                                       for p in review.rglob("*") if p.is_file()}, REVIEW_FILES)

@@ -1,0 +1,20 @@
+import { readFile, writeFile } from 'node:fs/promises';
+const root = new URL('../../experiments/sense-r35/', import.meta.url);
+const html = await readFile(new URL('index.html',root),'utf8');
+const letters = [...new Set(html.replace(/<[^>]*>/g,'').replace(/\s+/g,' ') + 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789→↗↶·.,?!')].sort().join('');
+const url = 'https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap&text=' + encodeURIComponent(letters);
+const cssResponse = await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'}});
+if (!cssResponse.ok) throw Error('Font stylesheet: '+cssResponse.status);
+const css = await cssResponse.text();
+const fontURL = css.match(/url\((https[^)]+)\)/)?.[1];
+if (!fontURL) throw Error('Font URL missing');
+const response = await fetch(fontURL);
+if (!response.ok) throw Error('Font download failed');
+const buffer = Buffer.from(await response.arrayBuffer());
+if (buffer.subarray(0,4).toString() !== 'wOF2') throw Error('Expected WOFF2');
+await writeFile(new URL('fonts/gowun-batang.woff2',root),buffer);
+const license = await fetch('https://raw.githubusercontent.com/google/fonts/main/ofl/gowunbatang/OFL.txt');
+if (!license.ok) throw Error('Font license download failed');
+await writeFile(new URL('fonts/OFL.txt',root),await license.text());
+console.log(JSON.stringify({font:'Gowun Batang',bytes:buffer.length,uniqueCharacters:letters.length,source:fontURL}));
+

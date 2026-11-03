@@ -50,6 +50,16 @@
 
 소유자: 구현 에이전트. 날짜: 2026-11-03. 실제 사용자 이해/현장 반례/효과의 다음 검토는 사용자 연구가 필요하며 이번 코드 QA로 대신하지 않는다.
 
+## 고정된 실험의 디자인 계약
+
+- **THESIS:** 멈춤은 관찰이고, 설명은 수정할 수 있는 가설이다.
+- **OWN WORLD:** R3.1의 forest/paper/고운바탕과 문 앞 Runway 장면을 계승한다. 별도의 브랜드 세계를 만들지 않는다.
+- **STORY:** Origin의 서비스 이해 → 세 설명과 반례 → S31 04/25/26 조작 → LAB·서비스로 이어진다.
+- **FIRST VIEWPORT:** 읽을 수 있는 질문, 서비스 의미와 CTA를 기존 포스터와 함께 PC·모바일에 배치한다.
+- **FORM:** 정적 시맨틱 HTML/CSS, native control, 로컬 subset, 명시적 영상 재생과 요청한 설명용 GSAP만. 자동 진입 모션 없음.
+
+Impeccable new-work의 precisely specified narrow request 예외를 적용했다. 새 컨셉 승인, seed, QUALITY BAR card, comp를 생성했다고 주장하지 않는다.
+
 ## 디자인 도구 검수 해석
 
 Taste, Impeccable, Emil 철학 기반 animate가 설치되어 있음을 먼저 확인했다. Taste draw/lint/inspect와 Impeccable context/detect를 실행했다. 기존 브랜드와 명시된 세 장면이 결정된 좁은 실험이므로 별도 컨셉 승인 라운드를 만들지 않았다.
@@ -81,9 +91,33 @@ Taste lint: 0 FAIL / 2 WARN (forced-colors 경계). 최종 inspect: 기록된 `s
 - `experiments/sense-r35/README.md`, `PRODUCT.md` — 실행·제품 범위.
 - `scripts/prepare_r35_preview.py` — Preview 전용 5파일 allowlist와 링크 검사.
 - `netlify.toml` — deploy-preview 명령에 전용 패키저만 추가.
-- `qa/r35/browser.mjs`, `media.mjs`, `references.mjs`, `serve.mjs`, `fetch-font.mjs`, `package.json`, `package-lock.json` — 재현 가능한 QA·캡처·서버·폰트 생성.
+- `qa/r35/browser.mjs`, `media.mjs`, `references.mjs`, `capture-zoom.mjs`, `serve.mjs`, `fetch-font.mjs`, `package.json`, `package-lock.json` — 재현 가능한 QA·캡처·서버·폰트 생성.
 - `.github/workflows/r35-sense-experience.yml` — 정확한 PR HEAD에서 패키징·Chromium/WebKit·artifact.
 - `.gitignore` — QA dependencies, generated evidence, skill working files 제외.
 - `docs/R35_SENSE_EXPERIENCE.md` — 비교·Decision Log·QA·파일 목록.
 
 운영 원본 및 PR #18의 변경 파일 수는 0. 루트 DESIGN.md도 변경하지 않는다.
+
+## 인계와 독립 검토
+
+- [Draft PR #19](https://github.com/HotCharliepepper/Mashcore/pull/19) — `codex/r35-sense-experience-20261103`, main 기반 독립 브랜치. 병합하지 않는다.
+- [Netlify Deploy Preview](https://deploy-preview-19--mashcore.netlify.app/sense-r35/) — HTTP 200, noindex 헤더와 세 장면, `r35-commit` 메타를 직접 확인했다. 최종 HEAD와 CI 링크는 PR 본문에 기록한다.
+- Chromium 112 / WebKit 390px 37 항목으로 구성된 CI가 실제 dist 출력에서 실행된다. 최초 실행 [#41621534954](https://github.com/HotCharliepepper/Mashcore/actions/runs/41621534954)은 총 149 PASS / 0 FAIL. 아이콘·캡처 보완 후 최종 HEAD 재실행 결과는 PR에 갱신한다.
+- Impeccable 독립 전체 검토에서 나온 문자 아이콘 지적 1건을 공통 SVG stroke 아이콘으로 수정했다. 최종 verdict pass는 그 1건을 **resolved / ship**으로 판단했다. 다른 범위의 추가 인증을 주장하지 않는다.
+- 확대 full-page PNG의 브라우저 타일 중복은 11개의 390×2000 연속 viewport 캡처로 교체했다. 최종 타일에 전체 푸터가 존재하며 독립 검토에서 모두 유효함을 확인했다. CI에는 확대 첫 viewport 캡처를 남긴다.
+- 로컬 캡처: `evidence/r35/fold-1440.png`, `fold-390.png`, `desktop-1440.png`, `desktop-390.png`, `before-main-r31-{1440,390}.png`, `before-pr18-r34-{1440,390}.png` 및 네 폭의 선택/확장·JS-off 화면. 비교 화면은 고정 SHA의 별도 사본에서 촬영했다.
+- 운영 Netlify 배포는 시작/재확인 모두 `6ae1f7c19ddb6a779b397b20`. main 및 PR #18 SHA도 최종 인계 전에 다시 확인한다.
+
+## Design-system verification
+
+구현 후 documenter 검수는 새 시각 체계 확정이 아니라 기존 MASHCORE 안의 세 장면 확장 여부를 확인했다. 기준은 현재 `index.html`, `assets/r31/styles.css`와 실험의 `index.html`, `styles.css`, `app.js`이며, 제품 범위는 실험 폴더의 `PRODUCT.md`를 따른다.
+
+- **계승한 색·장면:** forest/ink `#18241c`, paper `#f4efe6`, 고운바탕 400, MASHCORE 워드마크와 문 앞의 동일한 WebP/MP4 장면을 이어 쓴다. 종이색·숲색 면의 교대와 같은 장면을 다시 보는 구성은 기존 코드에서 확인된다.
+- **실험 안의 색·문자:** accent `#70552d`는 보조 링크·라벨·포커스, wash `#e7e4d9`는 조작 예시 배경, soft `#c5cbbd`는 어두운 면의 보조 문장에 사용한다. 본문은 OS 한국어 sans `16px/1.8`, 보조 문자는 주로 `13px`; 고운바탕 제목은 데스크톱 H1 `clamp(52px,5.8vw,86px)/1.28`, H2 `clamp(34px,4.3vw,62px)/1.4`이다. 모바일 H1은 최종 덮어쓰기인 `clamp(24px,14cqi,65px)/1.3`을 따른다. 로컬 폰트 subset과 이 크기 체계는 실험의 구현 선택이다.
+- **배치·형태:** 최대 폭 `1600px`, 좌우 여백 `clamp(20px,5vw,80px)`와 비대칭 열을 사용한다. `1050px`에서 열 비율을 조정하고 `700px` 이하에서 세로로 쌓으며 여백은 `24px`, `360px` 이하에서는 `20px`이다. 면은 그림자 없이 색 대비로 구분하고 버튼·예시 판은 직각이다. 읽기 순서 숫자의 원형은 해당 예시에만 쓰인다.
+- **실제 구성요소:** 숲색/종이색 반전 CTA, 밑줄 텍스트 링크, 직접 재생 버튼, 세 가설 native radio, 배치·길이 radio, native details, reset이 존재한다. CTA의 기본 최소 높이는 `54px`; 링크·보조 버튼의 주요 조작 영역은 `44px`이다. 포커스는 `3px` outline과 `5px` offset, 밝은 면에서는 accent, 어두운 면에서는 paper를 사용한다. 최종 방향·펼침·되돌림 아이콘은 동일한 authored SVG stroke 세트(`18px`, `1.5`, round cap/join)이며 이 실험의 통일 규칙이다.
+- **동작 범위:** 자동 진입 연출은 없고 영상은 직접 요청한다. 읽기 순서 예시만 포인터 요청 시 GSAP opacity를 사용하며 키보드·동작 줄이기에서는 정적 번호를 보여 준다. 이 세 장면의 동작 선택을 전사 모션 규칙으로 확장하지 않는다.
+
+화면 근거는 `evidence/r35/fold-{320,390,768,1440}.png`와 `desktop-{320,390,768,1440}.png`이다. 이번 문서 검수에서는 320/1440 첫 화면을 직접 대조했고, 네 폭의 동작·접근성 검수 범위와 한계는 위 QA 결과를 참조한다. 확인 결과 기존 색·서체·장면의 연속성을 유지하는 독립 실험이며 새 브랜드 세계나 전사 디자인 시스템 교체로 기록하지 않는다.
+
+기존 루트 `DESIGN.md`의 이전 색 토큰·영상 설명·연락처와 현재 코드 사이의 드리프트는 이번 범위에서 수정하거나 새 규칙으로 정당화하지 않았다. 루트 `DESIGN.md`를 그대로 보존하고 `.impeccable/design.json`도 생성·갱신하지 않았다. 실험 전용 배치·크기·아이콘 선택과 미사용 CSS 변수는 전사 토큰으로 승격하지 않는다.

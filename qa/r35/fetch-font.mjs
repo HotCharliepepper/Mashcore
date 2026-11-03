@@ -17,4 +17,3 @@ const license = await fetch('https://raw.githubusercontent.com/google/fonts/main
 if (!license.ok) throw Error('Font license download failed');
 await writeFile(new URL('fonts/OFL.txt',root),await license.text());
 console.log(JSON.stringify({font:'Gowun Batang',bytes:buffer.length,uniqueCharacters:letters.length,source:fontURL}));
-

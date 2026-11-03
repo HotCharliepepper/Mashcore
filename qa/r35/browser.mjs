@@ -132,10 +132,8 @@ await page.screenshot({path:`${output}/${prefix}keyboard-focus.png`});
 await page.emulateMedia({reducedMotion:'reduce'});
 await page.evaluate(()=>{document.documentElement.style.zoom='2';scrollTo(0,0);});
 check(`${prefix}200% CSS zoom: no horizontal overflow`,await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-// Chromium fullPage tiling can duplicate content when CSS zoom is active.
-// A single tall viewport paints the enlarged document once, without stitching.
-const zoomHeight=Math.ceil(await page.evaluate(()=>document.body.getBoundingClientRect().height));
-await page.setViewportSize({width:390,height:zoomHeight});
+// Keep zoom captures within an ordinary viewport: >16k-tall Chromium captures
+// can repeat tiles. The local capture-zoom helper records consecutive views.
 await page.screenshot({path:`${output}/${prefix}zoom-200.png`,fullPage:false});
 await context.close();
 

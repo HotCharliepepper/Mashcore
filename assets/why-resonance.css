@@ -1,0 +1,18 @@
+/* Only the actual closing signature receives the supplied resonance study. */
+#core-reveal > .closing[data-why-resonance] > .mashcore-why-resonance {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  max-width: 100%;
+  pointer-events: none;
+  user-select: none;
+  opacity: .92;
+}
+
+#core-reveal > .closing[data-why-resonance] > :is(.final-brand, .afterword, .meaning) {
+  z-index: 2;
+}
+
+#core-reveal > .closing[data-why-resonance] > .signature {
+  z-index: 4;
+}

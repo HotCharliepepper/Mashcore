@@ -1,0 +1,65 @@
+/* The red-brown punctuation belongs to the HERO Dot family. The invitation
+   occupies the existing film padding, above the frame's classification label. */
+#break-frame.r092-egg .refine-egg-cue {
+  --egg-cue-copper: #986a58;
+  position: absolute;
+  inset-inline: 18px;
+  bottom: 43px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  min-height: 20px;
+  color: #e3cbb8;
+  font: 400 12px/20px var(--font-sans);
+  letter-spacing: .005em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+#break-frame.r092-egg .refine-egg-cue[hidden],
+#break-frame.r092-egg .r092-egg-button:disabled .refine-egg-cue,
+#break-frame.r092-egg .r092-egg-button[aria-pressed="true"] .refine-egg-cue {
+  display: none;
+}
+#break-frame.r092-egg .refine-egg-cue-dot {
+  display: block;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--egg-cue-copper);
+  opacity: .88;
+  transition: opacity 160ms cubic-bezier(.22,.61,.36,1), transform 160ms cubic-bezier(.22,.61,.36,1);
+}
+#break-frame.r092-egg .r092-egg-button:focus-visible .refine-egg-cue {
+  color: #f2e3d7;
+}
+#break-frame.r092-egg .r092-egg-button:focus-visible .refine-egg-cue-dot {
+  opacity: 1;
+}
+@media (hover: hover) and (pointer: fine) {
+  #break-frame.r092-egg .r092-egg-button:not(:disabled):hover .refine-egg-cue {
+    color: #f2e3d7;
+  }
+  #break-frame.r092-egg .r092-egg-button:not(:disabled):hover .refine-egg-cue-dot {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+@media (max-width: 650px) {
+  #break-frame.r092-egg .refine-egg-cue {
+    bottom: 39px;
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #break-frame.r092-egg .refine-egg-cue-dot {
+    transition: none;
+    transform: none !important;
+  }
+}
+#break-frame.r092-egg[data-egg-motion="reduced"] .refine-egg-cue-dot {
+  transition: none;
+  transform: none !important;
+}

@@ -1,0 +1,28 @@
+/* H: a single invitation headline. Body, services, CTA and footer keep their type. */
+#invitation .r092-invitation-intro .r092-invitation-copy h2:not([data-invitation-type="baseline"]){
+ font-family:var(--font-sans);
+ font-weight:500;
+ font-size:clamp(30px,3.4vw,48px);
+ line-height:1.38;
+ letter-spacing:-.025em;
+ color:#f5f0e4;
+ text-shadow:none;
+ filter:none;
+ text-wrap:balance;
+ font-synthesis:none;
+}
+#invitation .r092-invitation-intro .r092-invitation-copy h2[data-invitation-type="serif"]{
+ font-family:var(--font-heading);
+ font-weight:400;
+ line-height:1.5;
+ letter-spacing:-.015em;
+}
+#invitation .r092-invitation-copy h2 .invitation-type-phrase{display:block;text-wrap:balance}
+#invitation .r092-invitation-copy h2[data-invitation-phrases="true"]>br{display:none}
+@media(max-width:650px){
+ #invitation .r092-invitation-intro .r092-invitation-copy h2:not([data-invitation-type="baseline"]){font-size:31px;line-height:1.42}
+ #invitation .r092-invitation-intro .r092-invitation-copy h2[data-invitation-type="serif"]{line-height:1.5}
+}
+@media(max-width:350px){
+ #invitation .r092-invitation-intro .r092-invitation-copy h2:not([data-invitation-type="baseline"]){font-size:28px}
+}

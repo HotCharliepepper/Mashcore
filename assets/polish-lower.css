@@ -1,0 +1,25 @@
+/* F: concise service scope, native disclosures, and a slightly longer fade. */
+.r092-sense #invitation .polish-services{max-width:1160px;margin:52px auto 0}
+.r092-sense #invitation .polish-services h3{margin:0 0 18px;font:400 25px/1.5 var(--font-heading);color:#f1ebdd;letter-spacing:-.02em}
+.r092-sense #invitation .polish-services-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(30px,5vw,72px);align-items:start}
+.r092-sense #invitation .polish-services details{min-width:0;border-top:1px solid #78866f}
+.r092-sense #invitation .polish-services summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:70px;padding:16px 0;list-style:none;cursor:pointer;font:450 19px/1.6 var(--font-sans);letter-spacing:-.025em;color:#f1ebdd;word-break:keep-all;overflow-wrap:anywhere}
+.r092-sense #invitation .polish-services summary::-webkit-details-marker{display:none}
+.r092-sense #invitation .polish-services summary span{flex:none;width:20px;text-align:center;font-weight:350;font-size:23px;line-height:1;transition:transform 160ms ease-out}
+.r092-sense #invitation .polish-services details[open] summary span{transform:rotate(45deg)}
+.r092-sense #invitation .polish-services details p{max-width:48ch;margin:0;padding:0 30px 22px 0;color:#dbe3d2;font:400 15px/1.8 var(--font-sans);letter-spacing:-.012em;word-break:keep-all;overflow-wrap:anywhere}
+.r092-sense #invitation .polish-services summary:focus-visible{outline:2px solid #e0c88e;outline-offset:5px}
+.r092-sense #invitation .polish-services+.r092-invitation-actions{margin-top:28px}
+.r092-sense #invitation .r092-invitation-intro::after{height:clamp(252px,26vw,392px)}
+@media(max-width:760px){
+ .r092-sense #invitation .polish-services{margin-top:36px}
+ .r092-sense #invitation .polish-services h3{font-size:23px;margin-bottom:14px}
+ .r092-sense #invitation .polish-services-list{grid-template-columns:1fr}
+ .r092-sense #invitation .polish-services summary{font-size:17px;min-height:60px;padding:14px 0;gap:12px}
+ .r092-sense #invitation .polish-services details p{font-size:14px;padding-right:16px}
+}
+@media(max-width:650px){
+ .r092-sense #invitation .d2-final-signature{padding-bottom:60px}
+ .r092-sense #invitation .r092-invitation-intro::after{height:188px}
+}
+@media(prefers-reduced-motion:reduce){.r092-sense #invitation .polish-services summary span{transition:none}}

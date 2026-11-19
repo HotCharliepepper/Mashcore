@@ -1,0 +1,46 @@
+/* MICRO: a single quiet bridge within the existing title. The measured tool
+   speed is the shared px/s token for both opposing rows, not another multiplier. */
+#field .r06-tool-wall{--fm-speed:65.8944;--fm-bridge-angle:3deg}
+#field .r06-tool-wall .fm-heading>div:first-child{flex:1;min-width:0}
+#field .r06-tool-wall .fm-introduction{width:100%;min-width:0}
+#field .r06-tool-wall .refine-think-heading{
+ display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;
+ align-items:center;gap:clamp(9px,2.2vw,28px);width:100%;min-width:0;
+ margin:0;text-transform:none;
+}
+#field .r06-tool-wall .refine-think-bridge{display:block;width:100%;height:.75px;background:var(--ink);opacity:.38;transform:rotate(var(--fm-bridge-angle));transform-origin:center;pointer-events:none}
+#field .r06-tool-wall .refine-think-title{
+ display:block;font:400 clamp(54px,5.3vw,76px)/1.02 var(--font-editorial);
+ letter-spacing:-.025em;
+ font-synthesis:none;
+}
+#field .r06-tool-wall .refine-think-subtitle{
+ display:block;justify-self:end;transform:translateY(10px);text-align:right;font:400 20px/1.35 var(--font-sans);letter-spacing:-.01em;
+}
+@media(max-width:650px),(pointer:coarse){#field .r06-tool-wall{--fm-speed:50.18112}}
+@media(max-width:650px){
+ #field .r06-tool-wall{--fm-bridge-angle:3deg}
+ #field .r06-tool-wall .refine-think-heading{gap:9px}
+ #field .r06-tool-wall .refine-think-subtitle{transform:translateY(6px)}
+}
+@media(prefers-reduced-motion:no-preference){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{
+  gap:58px;padding-inline:29px;
+ }
+}
+/* The two half-gaps also meet at the original/clone seam. The mobile change
+   is limited to the moving row, leaving keyboard and reduced-motion grids. */
+@media(prefers-reduced-motion:no-preference) and (max-width:650px),
+       (prefers-reduced-motion:no-preference) and (pointer:coarse){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{
+  gap:46px;padding-inline:23px;
+ }
+}
+@media(max-width:900px){
+ #field .r06-tool-wall .refine-think-title{font-size:54px}
+ #field .r06-tool-wall .refine-think-subtitle{font-size:18px}
+}
+
+/* The supplied EB Garamond face is 400 only: a subpixel ink layer gives
+   T → comma a subtle taper without synthesizing unsupported font weights. */
+#field .r06-tool-wall .refine-think-title>span{-webkit-text-stroke:var(--think-stroke) currentColor}

@@ -1,0 +1,21 @@
+/* 2026-11-18: bounded mobile / project / LINEN review delta. */
+/* At 320px, reuse one inner inset across the title, cards and work-path heading.
+   The lettering keeps its size; only the bridge and surrounding space shrink. */
+@media(max-width:360px){
+ #field .r06-tool-wall{--fm-compact-inset:6px}
+ #field .r06-tool-wall :is(.fm-heading,.field-projects,.fm-row-contexts .fm-row-heading){padding-inline:var(--fm-compact-inset)}
+}
+#field .field-project-card{height:100%;box-sizing:border-box}
+#field .field-project-logo{flex:0 0 auto;width:88px;height:88px;max-width:100%;justify-content:center}
+#field .field-project-logo img{width:100%;height:100%;max-height:none;object-fit:contain;filter:none}
+#field .field-project-logo[data-project-logo="compass"]{background:#142c25;padding:9px;box-sizing:border-box}
+#field .field-project-copy p{max-width:34em;word-break:keep-all;overflow-wrap:anywhere}
+/* The outer LINEN still isolates the scene. Let only its existing z=3 control
+   clear the z=2 edge fade; the isolated film surface stays below that fade. */
+.r092-sense #linen #film{isolation:auto}
+.r092-sense #linen .r092-linen-control{width:44px;height:44px;min-height:44px;opacity:0;pointer-events:none;transition:opacity 180ms ease;background:rgba(241,235,221,.82)}
+.r092-sense #linen:hover .r092-linen-control,
+.r092-sense #linen:focus-within .r092-linen-control,
+.r092-sense #linen #film[data-film-state="error"] .r092-linen-control{opacity:1;pointer-events:auto}
+@media(hover:none),(pointer:coarse){.r092-sense #linen .r092-linen-control{opacity:.82;pointer-events:auto}}
+@media(prefers-reduced-motion:reduce){.r092-sense #linen .r092-linen-control{transition:none;opacity:1;pointer-events:auto}}

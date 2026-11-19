@@ -1,0 +1,3 @@
+/* Narrow contrast corrections to the retained official detail pages. */
+#room-person>span:first-child,#room-brand>span:first-child,#room-space>span:first-child,#room-relation>span:first-child,#room-tech>span:first-child{color:#655947}
+.commerce-end>div>.commerce-overline{color:#62594d}

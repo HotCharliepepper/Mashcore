@@ -1,0 +1,14 @@
+/* Project and collaboration names remain separate from tools and owned paths. */
+#field .r06-tool-wall .fm-projects{display:flex;align-items:baseline;gap:32px;padding:12px 36px 28px;color:#172d26}
+#field .r06-tool-wall .fm-projects h4{flex:none;margin:0;font:500 14px/1.6 var(--font-sans);letter-spacing:-.01em}
+#field .r06-tool-wall .fm-projects ul{display:flex;flex-wrap:wrap;gap:12px 30px;margin:0;padding:0;list-style:none}
+#field .r06-tool-wall .fm-projects li{margin:0;font:400 17px/1.6 var(--font-sans);letter-spacing:-.01em;word-break:keep-all}
+#field .r06-tool-wall .fm-projects a{display:inline;padding:0;margin:0;min-height:0;font:inherit;letter-spacing:inherit;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+#field .r06-tool-wall .fm-projects a:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+@media(max-width:900px){#field .r06-tool-wall .fm-projects{padding-inline:24px;gap:24px}}
+@media(max-width:650px){
+ #field .r06-tool-wall .fm-projects{display:block;padding:4px 18px 24px}
+ #field .r06-tool-wall .fm-projects h4{margin-bottom:12px;font-size:13px}
+ #field .r06-tool-wall .fm-projects ul{gap:10px 24px}
+ #field .r06-tool-wall .fm-projects li{font-size:16px}
+}

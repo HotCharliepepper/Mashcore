@@ -1,0 +1,19 @@
+/* Statutory business details for detail pages that use the A20 detail footer.
+   Mirrors the homepage r05 business footer so every public route shows the same legal block. */
+.detail-footer{flex-wrap:wrap}
+.detail-footer .r05-business-footer{flex-basis:100%;width:100%;margin-top:8px;padding-top:24px;border-top:1px solid var(--service-rule,#c9bfaf);color:#504c40}
+.detail-footer .r05-business-groups{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:24px 40px;margin:0;font:400 13px/1.7 var(--font-sans,system-ui,sans-serif)}
+.detail-footer .r05-business-groups dl{margin:0}
+.detail-footer .r05-business-groups dt{color:#625e50;font-weight:400}
+.detail-footer .r05-business-groups dd{margin:2px 0 0;word-break:keep-all;overflow-wrap:anywhere}
+.detail-footer .r05-business-identity>div{display:flex;gap:12px;align-items:baseline}
+.detail-footer .r05-business-identity dt{flex:none}
+.detail-footer .r05-business-identity dd{margin:0}
+.detail-footer .r05-business-contact dd{margin:0}
+.detail-footer .r05-business-contact a{display:inline-flex;align-items:center;min-height:44px;color:#404c3e;font-size:13px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.detail-footer .r05-business-contact a:focus-visible{outline:3px solid #805c27;outline-offset:4px}
+@media (max-width:760px){
+  .detail-footer .r05-business-groups{grid-template-columns:1fr;gap:20px}
+  .detail-footer .r05-business-address br{display:none}
+  .detail-footer .r05-business-address dd{max-width:32ch}
+}

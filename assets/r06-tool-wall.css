@@ -1,0 +1,32 @@
+/* PASS B only: original gradient, controller and two-row timing stay intact.
+   Official SVG bytes, colors, aspect ratios and internal clear space are retained. */
+#field .r06-tool-wall .fm-row-tools .fm-original{grid-template-columns:repeat(2,minmax(0,1fr))}
+#field .r06-tool-wall .fm-tool>summary{position:relative;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;min-height:112px}
+#field .r06-tool-wall .fm-row-tools .fm-clone-link{position:relative;gap:0;min-height:112px;justify-content:center}
+#field .r06-tool-wall .fm-identity[data-fm-brand="runway"] .fm-logo{height:32px;width:auto;max-width:none;filter:none;transform:none}
+#field .r06-tool-wall .fm-identity[data-fm-brand="netlify"] .fm-logo{height:72px;width:auto;max-width:none;filter:none;transform:none}
+#field .r06-tool-wall .r06-hover-context,#field .r06-tool-wall .fm-row-contexts .fm-detail{opacity:0;transition:opacity 120ms var(--ease-out);color:#344c41;font:400 12px/1.65 var(--font-sans)}
+#field .r06-tool-wall .r06-hover-context{display:block;white-space:nowrap}
+#field .r06-tool-wall .fm-tool>summary:focus-visible .r06-hover-context,#field .r06-tool-wall .fm-tool[open] .r06-hover-context,#field .r06-tool-wall .fm-row-contexts a:focus-visible .fm-detail{opacity:1}
+#field .r06-tool-wall .fm-tool-info a+a{margin-left:18px}
+#field .r06-tool-wall .r06-material-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 40px;margin:24px 0;max-width:72ch}
+#field .r06-tool-wall .r06-material-list>div{min-width:0}
+#field .r06-tool-wall .r06-material-list dt{margin:0 0 5px;font:500 14px/1.6 var(--font-sans);color:#172d26}
+#field .r06-tool-wall .r06-material-list dd{margin:0;font:400 13px/1.8 var(--font-sans);color:#344c41;word-break:keep-all}
+#field .r06-tool-wall .fm-source-info a{display:inline-block;padding-block:6px;min-height:32px}
+@media(hover:hover) and (pointer:fine){
+ #field .r06-tool-wall .fm-tool>summary:hover .r06-hover-context,#field .r06-tool-wall .fm-row-contexts a:hover .fm-detail{opacity:1}
+ #field .r06-tool-wall [data-marquee-viewport]:hover .fm-clone-link .r06-hover-context,#field .r06-tool-wall [data-marquee-viewport]:hover .fm-clone-link .fm-detail{opacity:1}
+}
+@media(prefers-reduced-motion:no-preference){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{justify-content:space-around;gap:88px;min-width:var(--fm-row-width,1000px)}
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group li{width:244px;flex:none}
+ #field .r06-tool-wall[data-reading="true"] .fm-row-tools .fm-original{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ #field .r06-tool-wall .fm-row-tools .fm-original,#field .r06-tool-wall[data-reading="true"] .fm-row-tools .fm-original{grid-template-columns:1fr}
+ #field .r06-tool-wall .r06-material-list{grid-template-columns:1fr;gap:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ #field .r06-tool-wall .r06-hover-context,#field .r06-tool-wall .fm-row-contexts .fm-detail{transition:none}
+}

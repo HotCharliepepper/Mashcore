@@ -1,0 +1,60 @@
+/* EXPERIENCE & TRUST: explicit destinations within the existing frame. */
+#invitation .mini-funnel-result-actions a[data-mini-contact] {
+ display:inline-flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+ min-height:48px;
+ padding:8px 0;
+ border-bottom:1px solid rgba(241,235,221,.64);
+ color:#f1ebdd;
+ font-family:var(--font-body);
+ font-size:15px;
+ font-weight:550;
+ line-height:1.6;
+ letter-spacing:-.015em;
+ text-decoration:none;
+}
+#invitation [data-mini-contact] svg,
+#field .trust-project-action svg {
+ flex:0 0 auto;
+ width:19px;
+ height:19px;
+ fill:none;
+ stroke:currentColor;
+ stroke-width:1.4;
+}
+#invitation [data-mini-contact]:focus-visible {
+ outline:2px solid #f1ebdd;
+ outline-offset:5px;
+}
+#field .field-project-card .trust-project-action {
+ display:inline-flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:20px;
+ align-self:flex-start;
+ margin-top:auto;
+ min-height:44px;
+ border-bottom:1px solid currentColor;
+ color:#344c41;
+ font-family:var(--font-body);
+ font-size:14px;
+ font-weight:500;
+ line-height:1.5;
+ text-decoration:none;
+}
+#field .field-project-card a.trust-project-action:focus-visible {
+ outline:2px solid #344c41;
+ outline-offset:5px;
+}
+[data-inquiry-form]#inquiry {scroll-margin-top:110px;}
+[data-inquiry-form] [data-inquiry-context-note] {
+ margin:0 0 24px;
+ color:inherit;
+ font-size:15px;
+ line-height:1.65;
+}
+@media(max-width:390px) {
+ #invitation .mini-funnel-result-actions a[data-mini-contact] {width:100%;gap:12px;font-size:14px;}
+}

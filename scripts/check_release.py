@@ -1,162 +1,124 @@
 #!/usr/bin/env python3
-"""Production/Preview release boundary and generated static-link validation."""
-from __future__ import annotations
-import argparse
-import json
-import re
+"""Strict A20 release check: business info, search, file case, public boundary."""
+from pathlib import Path,PurePosixPath
 from html.parser import HTMLParser
-from pathlib import Path
-from urllib.parse import urlsplit, unquote
-import xml.etree.ElementTree as ET
-from prepare_public import R31_FILES, R31_ROUTE, R31_PUBLIC_FILES
+import argparse,json,re,sys,xml.etree.ElementTree as ET
+from urllib.parse import urlsplit,unquote
+from prepare_public import ROOT, OUT, manifest, DENIED_EXTS, DENIED_ROOTS, ALLOWED_CONTEXTS
 
-ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/"dist"
-EXPECTED={
- "index.html","mobile/index.html","services/index.html","about/index.html",
- "explore/index.html","research/index.html","research/lab/index.html",
- "research/notes/index.html","research/log/index.html",
- "research/chore-to-play/index.html","research/market-interpretation/index.html",
- "work/weplace/index.html","signal-studio/index.html","policies/refund/index.html"
-}
-CANON="https://mashcore.co.kr"
-BUSINESS=("247-02-04104","최규현","weplacehyun@naver.com")
-FORBIDDEN={"docs","content","scripts","qa",".git",".github","source-media","project_sources","upload","experiments"}
-VOID={"br","img","input","link","meta","source","track","hr","wbr","area"}
+BUSINESS=['247-02-04104','최규현','weplacehyun@naver.com']
+SEARCH_TAGS=['naver-site-verification','msvalidate.01']
+CANON='https://mashcore.co.kr/'
+META_NOINDEX_ROUTES={'mobile/index.html','research/method/index.html'}
+ASSET_RE=re.compile(r'(?<![\w/])/?assets/[\w./%-]+(?:\.(?:js|css|svg|png|jpeg|jpg|webp|mp4|woff2|woff|ttf|map|txt))?',re.I)
+CSS_RE=re.compile(r'url\(\s*["\']?([^"\')]+)',re.I)
 
-
-class Scan(HTMLParser):
-    def __init__(self, data):
+class Inspect(HTMLParser):
+    def __init__(self,source):
         super().__init__(convert_charrefs=True)
-        self.links=[]
-        self.ids=[]
-        self.h1=0
-        self.titles=0
-        self.desc=[]
-        self.canon=[]
-        self.robots=[]
-        self.source_commits=[]
-        self.chapters=[]
-        self.nav=[]
-        self.errors=[]
-        self._in_head=False
-        self.feed(data)
-    def handle_starttag(self,tag,attrs):
-        a=dict(attrs)
-        if tag=='head':self._in_head=True
-        if "id" in a:self.ids.append(a["id"])
-        if tag=="section" and "data-chapter" in a:self.chapters.append(a.get("id"))
-        if tag=="h1":self.h1+=1
-        if tag=="title" and self._in_head:self.titles+=1
-        if tag=="meta" and a.get("name")=="description":self.desc.append(a.get("content",""))
-        if tag=="meta" and a.get("name")=="robots":self.robots.append(a.get("content",""))
-        if tag=="meta" and a.get("name")=="r31-commit":self.source_commits.append(a.get("content",""))
-        if tag=="link" and a.get("rel")=="canonical":self.canon.append(a.get("href",""))
-        if tag=="img" and "alt" not in a:self.errors.append("Missing img alt")
-        for k in ("href","src","poster","data-src"):
-            if a.get(k):self.links.append(a[k])
-        if tag=="a" and a.get("href") in ("/services/","/research/","/work/weplace/","/signal-studio/","/about/"):
-            self.nav.append(a["href"])
+        self.tags=[];self.refs=[];self.ids=[];self.h1=0;self.titles=0;self.description=[];self.canonical=[];self.robots=[]
+        self.feed(source)
+    def handle_starttag(self,t,attrs):
+        d=dict(attrs);self.tags.append((t,d))
+        if 'id' in d:self.ids.append(d['id'])
+        if t=='h1':self.h1+=1
+        if t=='title':self.titles+=1
+        if t=='meta' and d.get('name')=='description':self.description.append(d.get('content',''))
+        if t=='meta' and d.get('name')=='robots':self.robots.append(d.get('content',''))
+        if t=='link' and d.get('rel')=='canonical':self.canonical.append(d.get('href',''))
+        if t=='img' and 'alt' not in d:raise AssertionError('Image missing alt')
+        for attr in ('href','src','poster','data-src'):
+            if d.get(attr):self.refs.append(d[attr])
+        if d.get('srcset'):
+            for item in d['srcset'].split(','):
+                if item.strip():self.refs.append(item.strip().split()[0])
 
-    def handle_endtag(self,tag):
-        if tag=='head':self._in_head=False
-
-
-def run(context):
-    assert context in ("production","deploy-preview","branch-deploy")
-    preview_enabled = context == "deploy-preview"
-    expected_pages = EXPECTED | ({R31_ROUTE+"/index.html"} if preview_enabled else set())
-    actual={p.relative_to(OUT).as_posix() for p in OUT.rglob("*.html")}
-    assert actual==expected_pages, f"Unexpected/missing route: extra={actual-expected_pages}, missing={expected_pages-actual}"
-    preview_root = OUT / R31_ROUTE
-    if preview_enabled:
-        actual_preview = {p.relative_to(preview_root).as_posix() for p in preview_root.rglob("*") if p.is_file()}
-        assert actual_preview == set(R31_FILES), f"R3.1 file allowlist mismatch: {actual_preview ^ set(R31_FILES)}"
-        assert (preview_root/"assets/origin.mp4").stat().st_size < 3_000_000, "Web video budget exceeded; do not deploy master"
+def assert_link(ref,source,paths):
+    if not ref or ref.startswith(('mailto:','tel:','data:','blob:','javascript:','#','//')):return
+    url=urlsplit(ref)
+    if url.scheme or url.netloc:return
+    raw=unquote(url.path)
+    if not raw:return
+    if raw.startswith('/'):
+        target=raw.lstrip('/')
     else:
-        assert not preview_root.exists(), "R3.1 is only allowed in deploy-preview"
-    public_media = OUT / "assets/r31"
-    actual_media = {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()}
-    assert actual_media == set(R31_PUBLIC_FILES), "Public R3.1 asset allowlist mismatch"
-    assert (public_media / "origin.mp4").stat().st_size < 3_000_000, "Public video budget exceeded; do not deploy master"
-    allowed_videos = {"assets/r31/origin.mp4"} | ({"r31-review/assets/origin.mp4"} if preview_enabled else set())
-    assert {p.relative_to(OUT).as_posix() for p in OUT.rglob("*.mp4")} == allowed_videos, "Unapproved video in release"
-    pages={rel:Scan((OUT/rel).read_text(encoding="utf-8")) for rel in expected_pages}
-    checks=0
-    for rel,page in pages.items():
-        assert page.h1==1 and page.titles==1 and len(page.desc)==1 and page.desc[0], f"{rel}: title/H1/description"
-        expected=CANON+("/" if rel in ("index.html","mobile/index.html",R31_ROUTE+"/index.html") else "/"+rel.removesuffix("index.html"))
-        assert page.canon==[expected], f"{rel}: canonical {page.canon} vs {expected}"
-        assert len(page.ids)==len(set(page.ids)), f"{rel}: duplicate IDs"
-        assert not page.errors, f"{rel}: {page.errors}"
-        if rel in ("index.html", "mobile/index.html", R31_ROUTE+"/index.html"):
-            assert len(page.source_commits)==1 and re.fullmatch(r"[0-9a-f]{40}", page.source_commits[0]), "R3.1 source commit marker missing or invalid"
-        source=(OUT/rel).read_text(encoding="utf-8")
-        for value in BUSINESS:
-            assert value in source, f"{rel}: visible business details missing: {value[:3]}"
-        assert "footer-legal" in source and "business-info" in source, f"{rel}: legal footer not visible"
-        assert "href=\"/preview/\"" not in source, f"{rel}: internal preview link leaked"
-        assert set(("/services/","/research/","/work/weplace/","/signal-studio/","/about/")).issubset(set(page.nav)), f"{rel}: common nav missing"
-        if context=="production":
-            assert not page.robots or not any("noindex" in x.lower() for x in page.robots), f"{rel}: unintended production noindex"
-        else:
-            assert len(page.robots)==1 and "noindex" in page.robots[0], f"{rel}: review noindex missing"
-        for ref in page.links:
-            url=urlsplit(ref)
-            if url.scheme or url.netloc or ref.startswith("//"):continue
-            target=OUT/unquote(url.path).lstrip("/") if url.path.startswith("/") else (OUT/rel).parent/unquote(url.path)
-            if not url.path:target=OUT/rel
-            target=target.resolve()
-            assert target.is_relative_to(OUT.resolve()), f"{rel}: link leaves public root: {ref}"
-            if target.is_dir():target=target/"index.html"
-            assert target.is_file(), f"{rel}: broken local path {ref}"
-            if url.fragment and target.suffix==".html":
-                dest=target.relative_to(OUT.resolve()).as_posix()
-                assert dest in pages and unquote(url.fragment) in pages[dest].ids, f"{rel}: broken fragment {ref}"
-        checks+=1
-    home=(OUT/"index.html").read_text(encoding="utf-8")
-    assert pages["index.html"].chapters==["origin","research","field","invitation"],"Four scene IDs"
-    assert 'id="opening-title"' in home and "왜 잠시 멈췄을까요?" in " ".join(re.sub(r"<[^>]+>", " ", home).split()) and 'href="/services/"' in home
-    for rel in ("index.html", "mobile/index.html"):
-        source=(OUT/rel).read_text(encoding="utf-8")
-        assert "DESIGN PREVIEW" not in source and "검토본</title>" not in source, "Review label in public homepage"
-        assert '/assets/r31/origin.mp4' in source and '/assets/r31/origin.webp' in source
-        assert 'id="origin-video"' in source and 'data-research-step="next"' in source
-    notes=(OUT/"research/notes/index.html").read_text(encoding="utf-8")
-    studio=(OUT/"signal-studio/index.html").read_text(encoding="utf-8")
-    assert "2026.05.11" in notes and "https://mashcore-market-notes.netlify.app/" in notes
-    assert "Gate 0" in studio and "Mock" in studio and "미검증" in studio
-    assert (OUT/"research/index.html").read_text(encoding="utf-8").count('id="research-public-paths"')==1
-    assert all("LEDGER" not in (OUT/x).read_text(encoding="utf-8").upper() for x in expected_pages)
-    assert not any(x.name.startswith("hero-desktop") or x.name.startswith("hero-mobile") for x in OUT.rglob("*")),"Unapproved generated hero found"
-    assert not (OUT/"preview").exists()
-    for path in OUT.rglob("*"):
-        rel=path.relative_to(OUT)
-        assert not FORBIDDEN.intersection(rel.parts), f"Private/source directory published: {rel}"
-        assert not path.name.startswith("."), f"Dotfile published: {rel}"
-        if path.is_file(): assert path.suffix not in (".py",".md",".env",".zip",".map",".pem",".key"), f"Source artifact published: {rel}"
-    xml=ET.parse(OUT/"sitemap.xml")
-    locs=[e.text for e in xml.iter() if e.tag.endswith("loc")]
-    robots=(OUT/"robots.txt").read_text(encoding="utf-8")
-    if context=="production":
-        assert len(locs)==13 and all(str(v).startswith(CANON+"/") for v in locs),"Production sitemap URLs"
-        assert all((OUT/(v.removeprefix(CANON).lstrip("/") or "index.html")).is_file() or
-                   (OUT/(v.removeprefix(CANON).lstrip("/"))/"index.html").is_file() for v in locs),"Production sitemap missing pages"
-        assert "Allow: /" in robots and "Disallow: /" not in robots
-        assert not (OUT/"_headers").exists(),"Review noindex headers leaked into production"
+        target=str((PurePosixPath(source).parent/PurePosixPath(raw)))
+    # URL directory paths resolve to index.html.
+    if not target or target.endswith('/'):
+        target=target+'index.html'
+    if target not in paths and target+'/index.html' in paths:target=target+'/index.html'
+    if target not in paths:
+        raise AssertionError(f'Missing/case-mismatch local link in {source}: {ref} -> {target}')
+
+def check(context):
+    if context not in ALLOWED_CONTEXTS:raise ValueError('Unknown context')
+    source_manifest=set(manifest())
+    out={x.relative_to(OUT).as_posix() for x in OUT.rglob('*') if x.is_file()}
+    if out!=source_manifest|{'_headers'}:raise AssertionError(f'Public allowlist differs: extra={out-source_manifest}, missing={source_manifest-out}')
+    pages=sorted(p for p in source_manifest if p.endswith('.html'))
+    assert len(pages)==19,(len(pages),'Expected 19 HTML pages')
+    for path in pages:
+        s=(OUT/path).read_text(encoding='utf8');p=Inspect(s)
+        assert p.h1==1,(path,p.h1,'Expected one H1')
+        assert p.titles==1 and len(p.description)==1 and p.description[0],(path,'title/description')
+        assert len(p.ids)==len(set(p.ids)),(path,'duplicate IDs')
+        expected=(CANON if path=='mobile/index.html' else CANON+'research/' if path=='research/method/index.html' else CANON+(path[:-10] if path!='index.html' else ''))
+        assert p.canonical==[expected],(path,'canonical',p.canonical,expected)
+        for field in BUSINESS:assert field in s,(path,'missing business detail',field)
+        assert 'footer-legal' in s and 'business-info' in s,(path,'legal footer tokens missing')
+        if context=='production':
+            if path in META_NOINDEX_ROUTES:
+                assert len(p.robots)==1 and 'noindex' in p.robots[0].lower(),(path,'dedicated noindex missing')
+            else:assert not any('noindex' in v.lower() for v in p.robots),(path,'Unexpected production noindex')
+        else:assert len(p.robots)==1 and 'noindex' in p.robots[0].lower(),(path,'Preview noindex missing')
+        if path=='index.html':
+            for name in SEARCH_TAGS:assert s.count('name="'+name+'"')==1,('ownership tag',name)
+        for ref in p.refs:
+            assert_link(ref,path,source_manifest)
+    # Preserve CSS/JS references as case-sensitive paths.
+    checked_refs=0
+    for path in source_manifest:
+        if not path.endswith(('.css','.js','.html')):continue
+        data=(OUT/path).read_text(encoding='utf8',errors='replace')
+        for ref in ASSET_RE.findall(data):
+            item=ref.lstrip('/').split('?')[0]
+            # Only a literal recognized file path, not a partial JS template string.
+            if item.lower() in {x.lower() for x in source_manifest if x.startswith('assets/')}:
+                assert item in source_manifest,(path,'asset case mismatch',item)
+                checked_refs+=1
+        if path.endswith('.css'):
+            for ref in CSS_RE.findall(data):
+                ref=ref.strip();url=urlsplit(ref)
+                if ref.startswith(('data:','//','#')) or url.scheme or url.netloc:continue
+                # Relative CSS url() assets are only checked when the named extension is present.
+                item=ref.split('#')[0].split('?')[0]
+                if not item:continue
+                from posixpath import normpath,dirname,join
+                loc=normpath(join(dirname(path),item.lstrip('/'))) if not item.startswith('/') else item.lstrip('/')
+                assert loc in source_manifest,(path,'missing CSS url()',ref,loc)
+    allowed_videos={'assets/columbus-b9bvurhk.mp4','assets/scene02-thread-desktop-bpvij5sp.mp4'}
+    video_set={x.lower() for x in source_manifest if x.lower().endswith('.mp4')}
+    assert video_set==allowed_videos,('Video allowlist mismatch',video_set)
+    assert all((OUT/x).stat().st_size < 5_000_000 for x in source_manifest if x.lower().endswith('.mp4'))
+    for p in out:
+        part=PurePosixPath(p)
+        assert not any(seg in DENIED_ROOTS or seg.startswith('.') for seg in part.parts)
+        assert part.suffix not in DENIED_EXTS
+    sitemap=ET.parse(OUT/'sitemap.xml');urls=[x.text for x in sitemap.iter() if x.tag.endswith('loc')]
+    headers=(OUT/'_headers').read_text(encoding='utf8')
+    if context=='production':
+        assert len(urls)==17,('Expected 17 indexed sitemap URLs',len(urls))
+        assert all(u.startswith(CANON) for u in urls)
+        assert all('Sitemap: '+CANON+'sitemap.xml' in (OUT/'robots.txt').read_text(encoding='utf8') for _ in [0])
+        assert 'X-Robots-Tag: noindex, nofollow' not in headers
+        assert '/mobile/*' in headers and '/research/method/*' in headers
     else:
-        assert not locs,"Draft sitemap must be empty"
-        assert "Allow: /" in robots and "Disallow: /" not in robots
-        assert "X-Robots-Tag: noindex" in (OUT/"_headers").read_text(encoding="utf-8"),"Draft header noindex missing"
-    print(json.dumps({"result":"PASS","context":context,"pages":len(expected_pages),"checked_page_shells":checks,
-         "sitemap_urls":len(locs),"r31_preview_included":preview_enabled,
-         "r31_allowlisted_files":len(R31_FILES) if preview_enabled else 0,
-         "approved_public_r31_assets":len(R31_PUBLIC_FILES),
-         "legacy_preview_excluded":True},ensure_ascii=False))
+        assert not urls,('Preview sitemap must be empty',urls)
+        assert 'X-Robots-Tag: noindex, nofollow' in headers
+    result={'result':'PASS','context':context,'public_files':len(source_manifest),'pages':len(pages),'asset_references_checked':checked_refs,'sitemap_urls':len(urls)}
+    print(json.dumps(result,ensure_ascii=False))
 
-
-if __name__=="__main__":
-    parser=argparse.ArgumentParser()
-    parser.add_argument("--context",required=True,choices=("production","deploy-preview","branch-deploy"))
-    args=parser.parse_args()
-    run(args.context)
+if __name__=='__main__':
+    pa=argparse.ArgumentParser();pa.add_argument('--context',required=True,choices=sorted(ALLOWED_CONTEXTS));a=pa.parse_args()
+    try:check(a.context)
+    except Exception as ex:print('RELEASE CHECK FAILED:',repr(ex),file=sys.stderr);sys.exit(1)

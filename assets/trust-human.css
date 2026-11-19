@@ -1,0 +1,61 @@
+/* Preserve the native three-stage reading path and keep its controls reachable. */
+#ai-dialogue .r092-dialogue-choices {
+  position: sticky;
+  top: 24px;
+  z-index: 3;
+  min-height: 64px;
+  height: auto;
+  background: #182d27;
+}
+
+#ai-dialogue .r092-dialogue-choices button {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 2px;
+  min-height: 64px;
+  height: auto;
+  padding: 8px 4px;
+}
+
+#ai-dialogue .trust-human-step {
+  color: #bdcdbc;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: .02em;
+  font-variant-numeric: tabular-nums;
+}
+
+#ai-dialogue [aria-pressed="true"] .trust-human-step {
+  color: #ddc58f;
+}
+
+#ai-dialogue .r092-dialogue-choices button:focus-visible {
+  outline: 2px solid #ddc58f;
+  outline-offset: -5px;
+}
+
+#ai-dialogue .trust-human-example {
+  max-width: 42ch;
+  margin: 12px 0 0;
+  color: #cedbc9;
+  font: 400 15px/1.65 var(--font-sans);
+  letter-spacing: -.012em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  #ai-dialogue .r092-dialogue-choices { top: 12px; }
+}
+
+@media (max-width: 650px) {
+  #ai-dialogue .r092-dialogue-choices button {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  #ai-dialogue .r092-dialogue-answer { padding-block: 32px; }
+  #ai-dialogue .r093-dialogue-role { margin-top: 16px; }
+  #ai-dialogue .trust-human-example { margin-top: 8px; }
+}

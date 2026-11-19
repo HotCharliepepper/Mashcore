@@ -1,0 +1,14 @@
+/* Scoped to the isolated HERO. Navigation remains above every light surface. */
+#origin .hero-discovery-surface{position:absolute;inset:0;z-index:3;pointer-events:none;contain:paint;background:#07111d}
+#origin .hero-discovery-surface[hidden]{display:none}
+#origin[data-discovery-phase]:not([data-discovery-phase="idle"]) :is(.journey-nav,.transport,.r09-small-brand){z-index:7}
+.r092-sense #origin[data-discovery-phase]:not([data-discovery-phase="idle"]) [data-light-tone="night"]{color:#eee7d8;background:transparent;text-shadow:none}
+.r092-sense #origin[data-discovery-phase]:not([data-discovery-phase="idle"]) .r09-small-brand[data-light-tone="night"] img{filter:brightness(0) invert(1)}
+.r092-sense #origin[data-discovery-phase]:not([data-discovery-phase="idle"]) [data-light-tone="paper"]{color:#25372d;background:transparent;text-shadow:none}
+/* Blend each transparent navigation group against the actual spatial surface.
+   A circle may cut through one glyph: a single sampled ink cannot cover that.
+   White source ink yields dark-on-paper and light-on-night per pixel, no plate. */
+#origin[data-discovery-phase]:not([data-discovery-phase="idle"]) :is(.journey-nav,.transport,.r09-small-brand){mix-blend-mode:difference;isolation:auto}
+#origin[data-discovery-phase]:not([data-discovery-phase="idle"]) :is(.journey-nav,.transport,.r09-small-brand),#origin[data-discovery-phase]:not([data-discovery-phase="idle"]) :is(.journey-nav,.transport) :is(a,button){color:#fff!important;background:transparent!important;text-shadow:none!important}
+#origin[data-discovery-phase]:not([data-discovery-phase="idle"]) .r09-small-brand img{filter:brightness(0) invert(1)!important}
+@media(prefers-reduced-motion:reduce){#origin .hero-discovery-surface{display:none!important}#origin [data-meaning-word]{filter:none!important}}

@@ -1,0 +1,6 @@
+#origin .hero-discovery-lens{position:absolute;z-index:7;border-radius:50%;overflow:hidden;isolation:isolate;transform:translate(-50%,-50%);pointer-events:none;contain:layout paint;outline:1px solid rgb(102 88 67 / .24);box-shadow:0 3px 20px rgb(30 42 33 / .10),inset 0 0 0 1px rgb(255 253 244 / .28)}
+#origin .hero-discovery-lens[hidden]{display:none}
+#origin .hero-discovery-lens-bg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#origin .hero-discovery-lens .hero-discovery-lens-mark{position:absolute;max-width:none;pointer-events:none}
+#origin .hero-discovery-lens[data-near-dot="true"]{outline-color:rgb(152 106 88 / .42)}
+@media(hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#origin .hero-discovery-lens{display:none!important}}

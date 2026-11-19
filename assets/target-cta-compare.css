@@ -1,0 +1,28 @@
+/* Local comparison route only. Keep the established invitation surface. */
+.r092-sense #invitation .target-cta-compare{max-width:1160px;margin:48px auto 64px;padding-block:32px 40px;border-top:1px solid #78866f;border-bottom:1px solid #78866f;color:#f1ebdd}
+.r092-sense #invitation .target-cta-compare h3{margin:0;font:400 clamp(28px,2.6vw,36px)/1.5 var(--font-heading);letter-spacing:-.025em;word-break:keep-all}
+.r092-sense #invitation .target-cta-note{margin:10px 0 26px;font:400 13px/1.65 var(--font-sans);color:#d4ddc9}
+.r092-sense #invitation .target-audiences{display:flex;flex-wrap:wrap;gap:8px 28px;border-bottom:1px solid #78866f;margin-bottom:32px}
+.r092-sense #invitation .target-audiences button{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;color:#d4ddc9;font:450 15px/1.6 var(--font-sans);letter-spacing:-.015em;min-height:48px;padding:10px 0;cursor:pointer}
+.r092-sense #invitation .target-audiences button[aria-pressed=true]{color:#fff4dc;border-bottom-color:#d3bd7c}
+.r092-sense #invitation .target-cta-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,72px)}
+.r092-sense #invitation .target-problems{min-width:0;margin:0;padding:0;border:0}
+.r092-sense #invitation .target-problems legend{margin:0 0 22px;padding:0;font:400 23px/1.6 var(--font-heading);word-break:keep-all}
+.r092-sense #invitation .target-problems label{display:flex;align-items:flex-start;gap:12px;min-height:58px;padding:15px 0;border-bottom:1px solid #64745d;cursor:pointer;font:400 15px/1.7 var(--font-sans);word-break:keep-all;overflow-wrap:anywhere}
+.r092-sense #invitation .target-problems input{flex:none;width:18px;height:18px;margin:4px 0 0;accent-color:#d3bd7c}
+.r092-sense #invitation .target-problems input:checked+span{text-decoration:underline;text-underline-offset:5px;color:#fff4dc}
+.r092-sense #invitation .target-service h4{margin:0 0 16px;color:#fff4dc;font:400 25px/1.5 var(--font-heading);word-break:keep-all}
+.r092-sense #invitation .target-service [data-target-description]{margin:0;color:#e1e7d9;font:400 15px/1.8 var(--font-sans);word-break:keep-all;overflow-wrap:anywhere;max-width:48ch}
+.r092-sense #invitation .target-inquiry{margin:24px 0 0;padding-top:18px;border-top:1px solid #64745d;color:#f1ebdd;font:400 17px/1.8 var(--font-heading);word-break:keep-all;overflow-wrap:anywhere}
+.r092-sense #invitation .target-cta-links{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:22px}
+.r092-sense #invitation .target-cta-links a{display:inline-flex;align-items:center;min-height:48px;padding:10px 0;border-bottom:1px solid #c7d1bc;color:#fff4dc;text-decoration:none;font:500 14px/1.7 var(--font-sans);word-break:keep-all}
+.r092-sense #invitation .target-cta-compare :is(button,input,a):focus-visible{outline:2px solid #e0c88e;outline-offset:5px}
+@media(max-width:760px){
+ .r092-sense #invitation .target-cta-compare{margin-block:36px 48px;padding-block:24px 32px}
+ .r092-sense #invitation .target-cta-layout{grid-template-columns:1fr;gap:28px}
+ .r092-sense #invitation .target-audiences{gap:4px 22px;margin-bottom:24px}
+ .r092-sense #invitation .target-audiences button{font-size:14px}
+ .r092-sense #invitation .target-problems legend{font-size:22px;margin-bottom:12px}
+ .r092-sense #invitation .target-service{padding-top:24px;border-top:1px solid #78866f}
+ .r092-sense #invitation .target-service h4{font-size:24px}
+}

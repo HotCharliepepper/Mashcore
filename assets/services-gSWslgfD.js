@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-P2Xu9kJm.js";import"./pointer-d6MfV9ri.js";/* empty css                     */var e=new AbortController;function t(){let e;try{e=decodeURIComponent(location.hash.slice(1))}catch{return}let t=document.getElementById(e);t?.matches(`.detail-disclosures details`)&&(t.open=!0)}t(),window.addEventListener(`hashchange`,t,{signal:e.signal});

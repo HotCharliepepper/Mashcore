@@ -1,0 +1,10 @@
+/* Keep products legible under their one supplier, without implying a partnership. */
+#field .r06-tool-wall .refine-openai-identity{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:72px}
+#field .r06-tool-wall .refine-openai-identity .refine-tool-name{min-height:0}
+#field .r06-tool-wall .refine-openai-products{display:block;margin-top:5px;color:#344c41;font:400 13px/1.5 var(--font-sans);letter-spacing:0}
+#field .r06-tool-wall .fm-tool-info p+p{margin-top:12px}
+/* The mobile signature keeps a green-to-paper breath without a long empty tail. */
+@media(max-width:650px){
+ .r092-sense #invitation .d2-final-signature{padding-bottom:56px}
+ .r092-sense #invitation .r092-invitation-intro::after{height:160px}
+}

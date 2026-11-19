@@ -1,0 +1,16 @@
+/* The same four-step case, with the sentence typography used elsewhere. */
+#field .field-decision-text {
+  font-family: var(--font-sans);
+  font-weight: 550;
+  font-size: clamp(22px, 2.1vw, 30px);
+  line-height: 1.6;
+  letter-spacing: -.025em;
+}
+#field .field-observation-text {
+  font-size: clamp(17px, 1.25vw, 18px);
+  line-height: 1.7;
+}
+#field .field-case-footer > p { max-width: 44ch; }
+#field .field-case-footer > p > span { display: inline-block; margin-top: 8px; }
+#field .field-inspect[open] .trust-inspect-open { display: none; }
+#field .field-inspect:not([open]) .trust-inspect-close { display: none; }

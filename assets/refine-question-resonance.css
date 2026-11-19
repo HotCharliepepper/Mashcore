@@ -1,0 +1,18 @@
+/* Punctuation stays legible; just one hairline wave leaves its center once. */
+#question .question-resonance-anchor{position:relative;display:inline-block;isolation:isolate}
+#question .question-resonance-wave{position:absolute;left:50%;top:53%;width:1.12em;height:1.12em;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.72);pointer-events:none;z-index:-1}
+#question .question-resonance-hidden-y{position:absolute;left:14%;top:105%;font:italic .58em/1 var(--font-heading);letter-spacing:0;color:currentColor;opacity:0;transform:translate(-50%,-50%) translateY(3px);pointer-events:none;z-index:-1;user-select:none}
+@media(max-width:650px){#question .question-resonance-wave{width:.92em;height:.92em}}
+/* Landings stay in the empty wall below the question, away from the person. */
+#question .question-dropfield{position:absolute;left:50%;top:100%;width:200px;transform:translateX(-50%);pointer-events:none;color:#dedbc8;user-select:none}
+#question .question-drop-landing{position:absolute;left:10%;top:80px}
+#question .question-drop-landing[data-drop="2"]{left:80%;top:122px}
+#question .question-droplet{position:absolute;left:0;top:0;width:2px;height:5px;border-radius:50%;background:currentColor;opacity:0;transform:translate(-50%,-36px)}
+#question .question-drop-ripple{position:absolute;left:0;top:0;width:28px;height:10px;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+@media(max-width:650px){
+ #question .question-dropfield{width:140px}
+ #question .question-drop-landing{left:0}
+ #question .question-drop-landing[data-drop="2"]{left:57%}
+ #question .question-drop-ripple{width:20px;height:7px}
+}
+@media(prefers-reduced-motion:reduce){#question :is(.question-resonance-wave,.question-resonance-hidden-y,.question-dropfield){display:none}}

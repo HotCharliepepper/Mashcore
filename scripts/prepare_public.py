@@ -1,115 +1,62 @@
 #!/usr/bin/env python3
-"""Copy the confirmed public static site into a deploy-only allowlist.
+"""Reproducible, allowlisted A20 static release. No app secrets, server or API."""
+from pathlib import Path,PurePosixPath
+import argparse, shutil, sys
 
-The production main remains a static HTML/CSS/JS source. This reproducible
-packaging step prevents docs, staging drafts, PR9 generated concept media and
-internal assets from being uploaded as public web files.
-"""
-from __future__ import annotations
-import argparse
-import os
-from pathlib import Path
-import re
-import shutil
-import subprocess
-
-ROOT = Path(__file__).resolve().parents[1]
-DEST = ROOT / "dist"
-PUBLIC_DIRS = (
-    "assets", "about", "explore", "mobile", "policies",
-    "research", "services", "signal-studio", "work",
-)
-PUBLIC_FILES = ("index.html", "robots.txt", "sitemap.xml", "mashcore-profile.jpg")
-R31_SOURCE = "experiments/r31-origin-research"
-R31_ROUTE = "r31-review"
-# Deliberate file-by-file boundary: never copy the experiments tree, source ZIP,
-# master video, working notes, or new files merely because they share a folder.
-R31_FILES = (
-    "index.html", "styles.css", "app.js", "assets/origin.mp4",
-    "assets/origin.webp", "assets/gsap.min.js",
-)
-# Approved for the public homepage by the user's 2026-10-28 deployment request.
-# The historical experiment remains independently isolated to Deploy Previews.
-R31_PUBLIC_FILES = ("styles.css", "app.js", "origin.mp4", "origin.webp", "gsap.min.js")
-FORBIDDEN_ROOTS = {"docs", "content", "scripts", "qa", ".git", ".github", "source-media", "project_sources", "experiments"}
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'dist'
+ALLOWED_CONTEXTS={'production','deploy-preview','branch-deploy'}
+DENIED_ROOTS={'.git','.github','docs','scripts','qa','experiments','preview','content','upload','node_modules','project_sources'}
+DENIED_EXTS={'.py','.md','.zip','.env','.map','.pem','.key'}
 
 
-def prepare(context: str) -> None:
-    if context not in ("production", "deploy-preview", "branch-deploy"):
-        raise ValueError("Unsupported public packaging context")
-    if DEST.resolve() != ROOT.resolve() / "dist" or DEST.is_symlink():
-        raise ValueError("Only the dedicated dist directory may be regenerated")
-    if DEST.exists():
-        shutil.rmtree(DEST)
-    DEST.mkdir()
-    public_media = ROOT / "assets/r31"
-    if any(p.is_symlink() for p in (public_media, *public_media.parents, *public_media.rglob("*"))):
-        raise ValueError("Symlink in public R3.1 assets")
-    if {p.relative_to(public_media).as_posix() for p in public_media.rglob("*") if p.is_file()} != set(R31_PUBLIC_FILES):
-        raise ValueError("Public R3.1 assets must match the approved allowlist")
-    for name in PUBLIC_DIRS:
-        src = ROOT / name
-        if not src.is_dir():
-            raise ValueError("Expected public source directory: " + name)
-        shutil.copytree(src, DEST / name,
-                        ignore=shutil.ignore_patterns("*.map", "*.md", ".DS_Store", "__pycache__", "node_modules"))
-    for name in PUBLIC_FILES:
-        src = ROOT / name
-        if not src.is_file():
-            raise ValueError("Expected public source file: " + name)
-        shutil.copy2(src, DEST / name)
-
-    if context == "deploy-preview":
-        preview_source = ROOT / R31_SOURCE
-        for name in R31_FILES:
-            src = preview_source / name
-            # Reject symlinks in every path component, including the source root.
-            if any(part.is_symlink() for part in (src, *src.parents)):
-                raise ValueError("Symlink in R3.1 source: " + name)
-            if not src.is_file():
-                raise ValueError("Missing allowlisted R3.1 source: " + name)
-            target = DEST / R31_ROUTE / name
-            target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, target)
-    commit = os.environ.get("COMMIT_REF") or subprocess.check_output(
-        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    if not re.fullmatch(r"[0-9a-f]{40}", commit):
-        raise ValueError("R3.1 requires a full source commit SHA")
-    marked_pages = [DEST / "index.html", DEST / "mobile/index.html"]
-    if context == "deploy-preview":
-        marked_pages.append(DEST / R31_ROUTE / "index.html")
-    for page in marked_pages:
-        html = page.read_text(encoding="utf-8")
-        html = html.replace("</head>", f'<meta name="r31-commit" content="{commit}"></head>', 1)
-        page.write_text(html, encoding="utf-8")
-
-    # /preview/ is an internal review tool, not a public destination.
-    assert not (DEST / "preview").exists()
-    for path in DEST.rglob("*"):
-        rel = path.relative_to(DEST)
-        if FORBIDDEN_ROOTS.intersection(rel.parts) or path.name.startswith("."):
-            raise ValueError("Source/private data in release: " + str(rel))
-        if path.is_file() and path.suffix in (".md", ".py", ".zip", ".env", ".map", ".key", ".pem"):
-            raise ValueError("Non-public source file: " + str(rel))
-
-    if context != "production":
-        # noindex must remain readable, not blocked by robots.txt.
-        (DEST / "robots.txt").write_text("User-agent: *\nAllow: /\n", encoding="utf-8")
-        (DEST / "sitemap.xml").write_text(
-            '<?xml version="1.0" encoding="UTF-8"?>\n'
-            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n',
-            encoding="utf-8")
-        (DEST / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")
-        for path in DEST.rglob("*.html"):
-            text = path.read_text(encoding="utf-8")
-            if '<meta name="robots"' not in text and '<meta content="noindex' not in text:
-                text = text.replace("</head>", '<meta name="robots" content="noindex,nofollow"></head>', 1)
-            path.write_text(text, encoding="utf-8")
+def manifest():
+    m=ROOT/'scripts/public_manifest.txt'
+    paths=[line.strip() for line in m.read_text(encoding='utf8').splitlines() if line.strip()]
+    if not paths or len(set(paths))!=len(paths):raise ValueError('Empty or duplicate public manifest')
+    for path in paths:
+        p=PurePosixPath(path)
+        if p.is_absolute() or '..' in p.parts or p.parts[0] in DENIED_ROOTS or p.suffix in DENIED_EXTS or any(x.startswith('.') for x in p.parts):
+            raise ValueError(f'Private/unsafe file in public manifest: {path}')
+        src=ROOT.joinpath(*p.parts)
+        if not src.is_file():raise ValueError(f'Public file missing: {path}')
+        if src.is_symlink() or any(x.is_symlink() for x in src.parents if x!=ROOT.parent):
+            raise ValueError(f'Symlink in public file: {path}')
+    return paths
 
 
-if __name__ == "__main__":
-    cli = argparse.ArgumentParser()
-    cli.add_argument("--context", required=True, choices=("production", "deploy-preview", "branch-deploy"))
-    args = cli.parse_args()
-    prepare(args.context)
-    print("Public site packaged; context="+args.context)
+def prepare(context):
+    if context not in ALLOWED_CONTEXTS:raise ValueError('Invalid deploy context')
+    if OUT.is_symlink():raise ValueError('dist may not be symlink')
+    paths=manifest()
+    if OUT.exists():shutil.rmtree(OUT)
+    OUT.mkdir()
+    for path in paths:
+        src=ROOT/path; dst=OUT/path
+        dst.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copyfile(src,dst)
+    # Netlify's deploy-preview output must be excluded from search indexing.
+    # The production source is already indexable except /mobile and /research/method.
+    if context=='production':
+        header=(
+            '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n'
+            '/mobile/*\n  X-Robots-Tag: noindex, follow\n'
+            '/research/method/*\n  X-Robots-Tag: noindex, follow\n')
+    else:
+        (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n',encoding='utf8')
+        (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\n',encoding='utf8')
+        header='/*\n  X-Robots-Tag: noindex, nofollow\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n'
+        for p in OUT.rglob('*.html'):
+            s=p.read_text(encoding='utf8')
+            import re
+            s=re.sub(r'<meta\b[^>]*\bname\s*=\s*["\']robots["\'][^>]*>','',s,flags=re.I)
+            s=s.replace('</head>','<meta name="robots" content="noindex,nofollow"></head>',1)
+            p.write_text(s,encoding='utf8')
+    (OUT/'_headers').write_text(header,encoding='utf8')
+    print(f'Prepared A20 public release: context={context}, files={len(paths)}, HTML={sum(x.endswith(".html") for x in paths)}')
+
+if __name__=='__main__':
+    pa=argparse.ArgumentParser();pa.add_argument('--context',required=True,choices=sorted(ALLOWED_CONTEXTS));args=pa.parse_args()
+    try:prepare(args.context)
+    except Exception as ex:print('ERROR:',ex,file=sys.stderr);sys.exit(1)

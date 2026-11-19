@@ -1,0 +1,4 @@
+/* Both phrases share one quiet pool of light; the approved logo is untouched. */
+#origin .hero-narrative-spotlight{position:absolute;inset:12% 8% 22%;pointer-events:none;z-index:-1;background:radial-gradient(ellipse 38% 32% at 50% 50%,rgb(255 251 232 / .25),rgb(255 250 226 / .08) 55%,transparent 100%);opacity:0}
+#origin[data-meaning-mode="animated"] [data-meaning-word]{transform-origin:50% 50%;text-shadow:var(--word-highlight-x,0px) -.55px .25px rgb(255 253 240 / .65),var(--word-shadow-x,0px) 1.1px .8px rgb(8 29 20 / .16),1.5px 3px 9px rgb(10 29 19 / .07)}
+@media(prefers-reduced-motion:reduce){#origin .hero-narrative-spotlight{display:none}#origin [data-meaning-word]{text-shadow:none;filter:none!important}}

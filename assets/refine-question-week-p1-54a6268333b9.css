@@ -1,0 +1,41 @@
+/* The verified concept image becomes a wider stage; no replacement asset. */
+.r092-sense #question .r092-question-intro{position:relative;width:min(1280px,calc(100% - 7.2vw));max-width:1280px;grid-template-columns:minmax(0,1fr);gap:0}
+.r092-sense #question .d2-question-figure{grid-area:1/1/3/2;display:grid;grid-template-rows:subgrid;gap:0}
+/* Let the existing photograph reach the viewport edges, while the title and
+   reading column keep their established grid. Only the empty upper photo edge
+   carries the HERO's light; the person, question and threshold stay opaque. */
+.r092-sense #question .d2-question-photo{grid-row:1;width:100vw;margin-inline:calc(50% - 50vw);aspect-ratio:16/9;--question-light-depth:clamp(92px,9vw,130px);mask-image:linear-gradient(180deg,transparent 0%,#0003 calc(var(--question-light-depth)*.16),#000b calc(var(--question-light-depth)*.48),#000e calc(var(--question-light-depth)*.76),#000 var(--question-light-depth),#000 calc(100% - 4px),#000e 100%);mask-repeat:no-repeat}
+.r092-sense #question .d2-question-figure figcaption{grid-row:2}
+.r092-sense #question .d2-question-photo :is(img,.question-living-canvas){transform:scale(1.035);transform-origin:76% 27%}
+.r092-sense #question .r092-question-title{grid-area:1/1;position:relative;align-self:start;justify-self:start;top:38%;left:0;transform:translateY(-50%);width:60%;max-width:none;margin:0;color:#f2ecdf;font-size:clamp(34px,3.8vw,56px);line-height:1.42;text-align:center;text-shadow:0 1px 12px rgb(4 17 12 / .22);pointer-events:none;z-index:2}
+/* 33% × 1.15 ≈ 38%: lower the block without changing its centered alignment. */
+.r092-sense #question[data-question-variant="baseline"] .r092-question-title{top:33%}
+#question .question-refine-phrase{display:inline-block;white-space:nowrap}
+#question[data-refine-reveal="waiting"] .question-refine-phrase{opacity:.82}
+.r092-sense #question .r092-question-copy{grid-area:3/1;margin-top:36px}
+/* Failed media never competes with the title for its reserved image area. */
+.r092-sense #question .r092-question-intro:has([data-image-state="failed"]) .r092-question-title{grid-area:1/1;top:auto;left:auto;transform:none;width:100%;text-align:left;color:var(--ink);margin:0 0 28px;text-shadow:none}
+.r092-sense #question .r092-question-intro:has([data-image-state="failed"]) .d2-question-figure{grid-area:2/1;display:block}
+.r092-sense #question .r092-question-intro:has([data-image-state="failed"]) .d2-question-photo{width:100%;margin-inline:0;mask-image:none}
+@media(max-width:900px){
+ .r092-sense #question .r092-question-intro{width:calc(100% - 36px)}
+ .r092-sense #question .d2-question-photo{aspect-ratio:4/3;--question-light-depth:88px}
+ .r092-sense #question .r092-question-title{width:57%;font-size:clamp(30px,4.3vw,40px)}
+}
+@media(max-width:650px){
+ .r092-sense #question .r092-question-intro{width:calc(100% - 24px)}
+ .r092-sense #question .d2-question-photo{aspect-ratio:4/5;--question-light-depth:64px}
+ .r092-sense #question .d2-question-photo img{object-position:71.5% center}
+ .r092-sense #question .r092-question-title{width:38%;left:0;top:38%;font-size:clamp(22px,6.65vw,28px);line-height:1.4;letter-spacing:-.04em;margin:0}
+ /* A small optical offset clears the wall plaque without cropping the coat. */
+ #question .question-refine-phrase:first-child{position:relative;left:-6px}
+ .r092-sense #question .r092-question-copy{margin:28px 12px 0}
+ .r092-sense #question .d2-question-figure figcaption{padding-inline:12px}
+}
+@media(prefers-reduced-motion:reduce){#question .question-refine-phrase{opacity:1!important;transform:none!important;filter:none!important}#question .question-stop{opacity:1!important}}
+
+/* A small signal beneath the unchanged question block, on the empty wall. */
+#question .question-stop{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);font:600 12px/1.3 var(--font-sans);letter-spacing:.12em;color:#dda58f;text-shadow:0 1px 3px #18352a,0 0 7px rgb(221 165 143 / .16);white-space:nowrap}
+#question[data-refine-reveal="waiting"] .question-stop{opacity:.7}
+.r092-sense #question .r092-question-intro:has([data-image-state="failed"]) .question-stop{position:static;display:block;transform:none;margin-top:12px;color:#8d4838;text-shadow:none}
+@media(max-width:650px){#question .question-stop{top:calc(100% + 12px);font-size:10px;letter-spacing:.1em}}

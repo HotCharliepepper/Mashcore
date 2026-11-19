@@ -1,0 +1,51 @@
+name: MASHCORE A20 Release QA
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'assets/**'
+      - 'index.html'
+      - 'mobile/**'
+      - 'about/**'
+      - 'contact/**'
+      - 'market-notes/**'
+      - 'research/**'
+      - 'services/**'
+      - 'work/**'
+      - 'signal-studio/**'
+      - 'policies/**'
+      - 'scripts/**'
+      - 'qa/a20_browser_qa.py'
+      - 'netlify.toml'
+      - '.github/workflows/a20-release.yml'
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: mashcore-a20-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate-public-release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Source checks and reproducible static release
+        run: |
+          python3 scripts/prepare_public.py --context production
+          python3 scripts/check_release.py --context production
+          python3 scripts/prepare_public.py --context deploy-preview
+          python3 scripts/check_release.py --context deploy-preview
+          python3 scripts/prepare_public.py --context branch-deploy
+          python3 scripts/check_release.py --context branch-deploy
+          python3 scripts/prepare_public.py --context production
+      - name: Browser test dependencies
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Check all 19 routes on desktop and mobile (local build)
+        run: python3 qa/a20_browser_qa.py

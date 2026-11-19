@@ -1,0 +1,105 @@
+/* PASS02.1: clarify the existing dialogue sequence and own-production record.
+   No scene layout, media, scroll, animation or interaction ownership changes. */
+#ai-dialogue .pass021-dialogue-example {
+  max-width: 43ch;
+  margin: 0 0 24px;
+  color: #d5dfcf;
+  font: 400 16px/1.7 var(--font-sans);
+  letter-spacing: -.012em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+#ai-dialogue .r092-dialogue-choices button {
+  padding-inline: 6px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+#ai-dialogue .r092-dialogue-answer h3 {
+  font-weight: 580;
+  line-height: 1.5;
+  letter-spacing: -.025em;
+}
+
+#ai-dialogue .r093-dialogue-role {
+  font-size: 15px;
+  font-weight: 500;
+  color: #cedbc9;
+}
+
+#ai-dialogue .r092-dialogue-answer[data-current="true"] .r093-dialogue-role {
+  color: #ddc58f;
+}
+
+#field .field-case .field-step-label {
+  color: #3b4c41;
+  font-weight: 550;
+}
+
+#field .pass021-field-confirmation {
+  display: grid;
+  grid-template-columns: .8fr 1.45fr;
+  align-items: start;
+  gap: clamp(32px, 6vw, 80px);
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid #b4bcaf;
+}
+
+#field .pass021-field-confirmation > h3 {
+  margin: 5px 0 0;
+}
+
+#field .pass021-field-confirmation > div {
+  min-width: 0;
+}
+
+#field .pass021-field-finding {
+  max-width: 44ch;
+  margin: 0;
+  font: 450 clamp(17px, 1.45vw, 19px)/1.7 var(--font-sans);
+  letter-spacing: -.015em;
+  color: #263d37;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+#field .pass021-field-limit {
+  max-width: 54ch;
+  margin: 16px 0 0;
+  font: 400 14px/1.75 var(--font-sans);
+  color: #4f584b;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  #field .pass021-field-confirmation {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+
+  #field .pass021-field-confirmation > h3 {
+    margin: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  #ai-dialogue .r092-dialogue-choices,
+  #ai-dialogue .r092-dialogue-choices button {
+    min-height: 64px;
+    height: auto;
+  }
+
+  #ai-dialogue .r092-dialogue-choices button {
+    font-size: 13px;
+    padding-inline: 4px;
+  }
+
+  #ai-dialogue .r093-dialogue-role {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,29 @@
+/* Official source files retain their color, aspect ratio and internal clear space. */
+#field .r06-tool-wall .fm-tool>summary,#field .r06-tool-wall .fm-row-tools .fm-clone-link{min-height:134px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand]{gap:12px;min-height:96px;align-items:center}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand] .fm-logo-slot{width:auto;min-height:96px;justify-content:flex-start}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand] .fm-logo{display:block;width:160px;height:auto;max-width:none;filter:none;transform:none;opacity:1}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="chatgpt"] .fm-logo{width:188px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="codex"] .fm-logo{width:48px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="netlify"] .fm-logo{width:156px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="gsap"] .fm-logo{width:132px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="github"] .fm-logo{width:172px}
+#field .r06-tool-wall .fm-row-tools .fm-identity[data-fm-brand="playwright"] .fm-logo{width:48px}
+#field .r06-tool-wall .fm-brand-name{display:block;flex:none;font:500 26px/1.25 var(--font-sans);letter-spacing:-.025em;white-space:nowrap}
+#field .r06-tool-wall [data-fm-brand]:not([data-logo-ready="true"]) .fm-brand-name{display:none}
+@media(prefers-reduced-motion:no-preference){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{gap:42px;padding-inline:21px}
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group>li{width:var(--fm-item-width,184px)}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="chatgpt"]{--fm-item-width:200px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="codex"]{--fm-item-width:156px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="runway"],#field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="netlify"]{--fm-item-width:176px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="gsap"]{--fm-item-width:148px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="github"]{--fm-item-width:188px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="playwright"]{--fm-item-width:204px}
+ #field .r06-tool-wall .fm-row-tools .fm-group>[data-fm-slot="figma"]{--fm-item-width:192px}
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group>[data-fm-slot="chatgpt"]{margin-inline-end:24px}
+}
+@media(prefers-reduced-motion:no-preference) and (max-width:650px),(prefers-reduced-motion:no-preference) and (pointer:coarse){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{gap:34px;padding-inline:17px}
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group>[data-fm-slot="chatgpt"]{margin-inline-end:18px}
+}

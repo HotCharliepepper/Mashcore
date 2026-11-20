@@ -1,0 +1,68 @@
+name: R3.5 Sense Experience QA
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'experiments/sense-r35/**'
+      - 'qa/r35/**'
+      - 'scripts/prepare_r35_preview.py'
+      - 'netlify.toml'
+      - '.github/workflows/r35-sense-experience.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r35-sense-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  independent-experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Protect original source and packaging contexts
+        run: |
+          git diff --exit-code a8dae1c4b6e69cd02e24b5e28bc9600f5a756fcf -- index.html mobile assets about explore policies research services signal-studio work scripts/prepare_public.py scripts/check_release.py
+          python3 scripts/prepare_public.py --context production
+          python3 scripts/check_release.py --context production
+          test ! -e dist/sense-r35
+          python3 scripts/prepare_public.py --context branch-deploy
+          python3 scripts/check_release.py --context branch-deploy
+          test ! -e dist/sense-r35
+          python3 scripts/prepare_public.py --context deploy-preview
+          python3 scripts/check_release.py --context deploy-preview
+          python3 scripts/prepare_r35_preview.py --context deploy-preview
+          node --check experiments/sense-r35/app.js
+      - name: Install browser QA dependencies
+        run: |
+          npm ci --prefix qa/r35 --ignore-scripts
+          cd qa/r35
+          npx playwright install --with-deps chromium webkit
+      - name: Verify packaged prototype
+        env:
+          R35_ROOT: ${{ github.workspace }}/dist
+          R35_URL: http://127.0.0.1:8350/sense-r35/
+        run: |
+          node qa/r35/serve.mjs > /tmp/r35-server.log 2>&1 &
+          for i in $(seq 1 20); do curl -fsS "$R35_URL" > /dev/null && break || sleep 1; done
+          node qa/r35/browser.mjs
+          R35_BROWSER=webkit node qa/r35/browser.mjs
+      - name: Record exact tested commit
+        if: always()
+        run: |
+          mkdir -p evidence/r35
+          git rev-parse HEAD > evidence/r35/tested_git_sha.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r35-sense-evidence-${{ github.event.pull_request.head.sha }}
+          path: evidence/r35/
+          retention-days: 30

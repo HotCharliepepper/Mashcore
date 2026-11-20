@@ -1,0 +1,58 @@
+/* Pass C: grow the original film and its overlays as one surface. The media
+   box keeps its intrinsic ratio/layout space throughout. No scroll correction. */
+#break-frame.r092-egg[data-egg-refined="true"] .e1-egg-media{transform:scale(var(--egg-frame-scale,.94));transform-origin:50% 52%;transition:transform 520ms cubic-bezier(.22,.61,.36,1)}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="0"]{--egg-frame-scale:.94}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="1"]{--egg-frame-scale:.955}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="2"]{--egg-frame-scale:.97}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="3"]{--egg-frame-scale:.985}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="4"]{--egg-frame-scale:1}
+#break-frame.r092-egg[data-egg-refined="true"] .egg-beat-label[data-visible="false"]{opacity:0}
+#break-frame.r092-egg[data-egg-refined="true"] .egg-beat-label[data-visible="true"]{opacity:1;transition:opacity 90ms linear}
+@media(max-width:650px){
+ #break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="0"]{--egg-frame-scale:.88}
+ #break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="1"]{--egg-frame-scale:.90}
+ #break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="2"]{--egg-frame-scale:.94}
+ #break-frame.r092-egg[data-egg-refined="true"][data-egg-frame-step="3"]{--egg-frame-scale:.97}
+}
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-beats-static="true"] .e1-egg-media,
+#break-frame.r092-egg[data-egg-refined="true"][data-egg-motion="reduced"] .e1-egg-media{transform:none;transition:none}
+@media(prefers-reduced-motion:reduce){
+ #break-frame.r092-egg[data-egg-refined="true"] .e1-egg-media{transform:none;transition:none}
+ #break-frame.r092-egg[data-egg-refined="true"] .egg-beat-label{transition:none!important}
+}
+/* Pass F: give the revealed signature a deliberate bottom breath. Replace the
+   reveal's spare minimum height plus seam margin with one responsive space.
+   Apply only after reveal (or without enhancement), leaving the closed cue intact. */
+#break-frame.r092-egg:is([data-egg-view="open"],:not([data-egg-enhanced="true"])) .r092-label-reveal{
+ min-height:0;padding-bottom:clamp(88px,7.5vw,112px)
+}
+.r092-sense #break-frame.r092-egg:is([data-egg-view="open"],:not([data-egg-enhanced="true"]))::after{margin-top:0}
+@media(max-width:650px){
+ #break-frame.r092-egg:is([data-egg-view="open"],:not([data-egg-enhanced="true"])) .r092-label-reveal{padding-bottom:56px}
+}
+
+/* A22: the existing small conclusion remains static, including before play.
+   Decoration is optional and never controls the wordmark's visibility or size. */
+.r092-sense #break-frame.r092-egg[data-egg-enhanced][data-egg-view] .r092-label-reveal{
+ position:relative;block-size:auto;min-height:0;padding-top:54px;
+ padding-bottom:clamp(88px,7.5vw,112px);overflow:visible
+}
+.r092-sense #break-frame.r092-egg[data-egg-enhanced] .r092-label-wordmark{
+ position:relative;z-index:1;opacity:1;transform:none;transition:none
+}
+#break-frame.r092-egg .egg-completion-flow{
+ position:absolute;left:0;display:block;width:100%;max-width:none;overflow:hidden;
+ pointer-events:none;user-select:none;z-index:0;contain:layout paint
+}
+#break-frame.r092-egg .egg-completion-flow path{
+ fill:none;stroke:#d6b68e;stroke-linecap:round;opacity:0;pointer-events:none
+}
+#break-frame.r092-egg .egg-completion-curve{stroke-width:1px;stroke-dasharray:18 100}
+#break-frame.r092-egg .egg-completion-mote{stroke-width:2.2px;stroke-dasharray:.9 100}
+@media(max-width:650px){
+ .r092-sense #break-frame.r092-egg[data-egg-enhanced][data-egg-view] .r092-label-reveal{padding-top:40px;padding-bottom:56px}
+ #break-frame.r092-egg .egg-completion-curve{stroke-width:.85px}
+ #break-frame.r092-egg .egg-completion-mote{stroke-width:1.8px}
+}
+@media(prefers-reduced-motion:reduce),(prefers-reduced-data:reduce){#break-frame.r092-egg .egg-completion-flow{display:none!important}}
+#break-frame.r092-egg[data-egg-motion="reduced"] .egg-completion-flow{display:none!important}

@@ -1,0 +1,51 @@
+/* A23 PASS2: preserve the four actual records and their single selection owner.
+   The last verification edge becomes the existing film's thread/light surface. */
+.r092-sense #field #field-working-tools[data-a23-process]{padding-bottom:0}
+#field #field-working-tools[data-a23-process] .fwt-selectors{grid-template-columns:1fr 1.3fr 1fr;gap:32px}
+#field #field-working-tools[data-a23-process] .fwt-stage-name>span:first-child{font-size:28px;color:#172d26}
+#field #field-working-tools[data-a23-process] .fwt-stage[data-current="true"] .fwt-stage-name>span:first-child{text-decoration:underline;text-decoration-thickness:.7px;text-underline-offset:9px}
+#field #field-working-tools[data-a23-process] .fwt-result{grid-template-columns:minmax(0,2.35fr) minmax(220px,.9fr);column-gap:32px}
+#field #field-working-tools[data-a23-process] .fwt-result figure{align-self:start}
+#field #field-working-tools[data-a23-process] .fwt-result-tool{font-size:12px;margin-top:12px}
+#field #field-working-tools[data-a23-process] .fwt-portrait{max-width:320px}
+#field #field-working-tools[data-a23-process] .fwt-proof-link{font-size:13px}
+#field #field-working-tools .a23-collaboration-details{margin:32px 0 0;border-top:1px solid #b5bbab;border-bottom:1px solid #b5bbab}
+#field #field-working-tools[data-a23-process] .fwt-selectors{margin-top:28px}
+#field #field-working-tools .a23-collaboration-details>summary{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;padding:14px 0;color:#344c41;font:450 16px/1.6 var(--font-sans);cursor:pointer;list-style:none}
+#field #field-working-tools .a23-collaboration-details>summary::-webkit-details-marker{display:none}
+#field #field-working-tools .a23-collaboration-details>summary>span{font:450 11px/1.5 var(--font-sans);letter-spacing:.025em}
+#field #field-working-tools .a23-collaboration-details>summary::after{content:"";flex:none;width:7px;height:7px;margin-inline:4px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:rotate(45deg)}
+#field #field-working-tools .a23-collaboration-details[open]>summary::after{transform:rotate(225deg)}
+#field #field-working-tools .a23-collaboration-details>summary:focus-visible{outline:2px solid #805c27;outline-offset:4px}
+#field #field-working-tools .a23-collaboration-details .fwt-collaboration{margin:0 calc(-1 * clamp(24px,4vw,56px));padding-block:32px 40px}
+#field #field-working-tools .a23-verification-thread{position:relative;width:100vw;height:clamp(156px,16vw,220px);margin:36px calc(50% - 50vw) 0;background:linear-gradient(180deg,var(--paper,#eee7d8) 0%,#e7dcc5 100%);pointer-events:none;overflow:hidden}
+#field #field-working-tools .a23-verification-thread svg{display:block;width:100%;height:100%;overflow:visible;stroke:#61745f;stroke-width:.8;vector-effect:non-scaling-stroke}
+#field #field-working-tools .a23-thread-main{opacity:.36;transition:opacity 200ms var(--ease-out)}
+#field #field-working-tools .a23-thread-echo{opacity:.15}
+#field #field-working-tools[data-selected-stage="verify"] .a23-thread-main{opacity:.65}
+/* Reuse the existing FIELD and LINEN seam instead of stacking another veil. */
+.r092-sense #field:has(#field-working-tools[data-a23-process])::after{content:none}
+.r092-sense #linen::before{background:linear-gradient(180deg,#e7dcc5 0%,rgba(231,220,197,.48) 48%,transparent 100%)}
+.r092-sense #linen .a23-linen-threads{position:absolute;inset:0 0 auto;width:100%;height:clamp(200px,28vw,340px);z-index:2;stroke:#61745f;stroke-width:.8;opacity:.29;pointer-events:none;transition:opacity 600ms var(--ease-out),transform 600ms var(--ease-out)}
+.r092-sense #linen .a23-linen-threads path{vector-effect:non-scaling-stroke}
+.r092-sense #linen:has(#film[data-film-presented="true"]) .a23-linen-threads{opacity:.08;transform:translateY(12px)}
+@media(max-width:900px){
+ #field #field-working-tools[data-a23-process] .fwt-selectors{gap:20px}
+ #field #field-working-tools[data-a23-process] .fwt-result{grid-template-columns:minmax(0,1.8fr) minmax(200px,1fr);column-gap:24px}
+}
+@media(max-width:650px){
+ #field #field-working-tools[data-a23-process] .fwt-selectors{grid-template-columns:1fr 1.3fr 1fr;gap:12px}
+ #field #field-working-tools[data-a23-process] .fwt-stage-name>span:first-child{font-size:21px}
+ #field #field-working-tools[data-a23-process] .fwt-stage-buttons{flex-direction:column;gap:4px}
+ #field #field-working-tools[data-a23-process] .fwt-selectors button{min-height:56px;padding:8px 0}
+ #field #field-working-tools[data-a23-process] .fwt-result{grid-template-columns:minmax(0,1fr);column-gap:0}
+ #field #field-working-tools[data-a23-process] .fwt-portrait{max-width:280px}
+ #field #field-working-tools .a23-collaboration-details{margin-top:24px;margin-bottom:0}
+ #field #field-working-tools .a23-collaboration-details>summary{gap:12px;font-size:14px;flex-wrap:wrap}
+ #field #field-working-tools .a23-collaboration-details>summary>span{font-size:10px}
+ #field #field-working-tools .a23-collaboration-details .fwt-collaboration{padding-block:28px 36px}
+ #field #field-working-tools .a23-verification-thread{margin-top:24px}
+}
+@media(max-width:350px){#field #field-working-tools[data-a23-process] .fwt-selectors{gap:8px}#field #field-working-tools[data-a23-process] .fwt-stage-name>span:first-child{font-size:18px}#field #field-working-tools .a23-collaboration-details>summary>span{display:none}}
+@media(prefers-reduced-motion:reduce){#field #field-working-tools .a23-thread-main,.r092-sense #linen .a23-linen-threads{transition:none}.r092-sense #linen:has(#film[data-film-presented="true"]) .a23-linen-threads{transform:none}}
+@media(forced-colors:active){#field #field-working-tools .a23-verification-thread,.r092-sense #linen .a23-linen-threads{display:none}}

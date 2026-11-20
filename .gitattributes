@@ -1,0 +1,16 @@
+# Keep the reviewed public payload byte-identical on Windows and Linux builders.
+/assets/** -text
+/index.html -text
+/mobile/** -text
+/about/** -text
+/contact/** -text
+/explore/** -text
+/market-notes/** -text
+/research/** -text
+/services/** -text
+/signal-studio/** -text
+/work/** -text
+/policies/** -text
+/robots.txt -text
+/sitemap.xml -text
+/mashcore-profile.jpg -text

@@ -1,27 +1,27 @@
-/* MICRO: a single quiet bridge within the existing title. The measured tool
-   speed is the shared px/s token for both opposing rows, not another multiplier. */
-#field .r06-tool-wall{--fm-speed:65.8944;--fm-bridge-angle:3deg}
+/* A21: a short rising bridge and lit, tapering ink in the existing title.
+   The shared marquee speed and its focus/reading ownership stay unchanged. */
+#field .r06-tool-wall{--fm-speed:65.8944;--fm-bridge-angle:-24deg;--fm-bridge-length:64px}
 #field .r06-tool-wall .fm-heading>div:first-child{flex:1;min-width:0}
 #field .r06-tool-wall .fm-introduction{width:100%;min-width:0}
 #field .r06-tool-wall .refine-think-heading{
- display:grid;grid-template-columns:max-content minmax(0,1fr) max-content;
- align-items:center;gap:clamp(9px,2.2vw,28px);width:100%;min-width:0;
+ display:grid;grid-template-columns:max-content var(--fm-bridge-length) max-content;
+ align-items:center;justify-content:start;gap:24px;width:100%;min-width:0;
  margin:0;text-transform:none;
 }
-#field .r06-tool-wall .refine-think-bridge{display:block;width:100%;height:.75px;background:var(--ink);opacity:.38;transform:rotate(var(--fm-bridge-angle));transform-origin:center;pointer-events:none}
+#field .r06-tool-wall .refine-think-bridge{display:block;width:var(--fm-bridge-length);height:.7px;background:var(--ink);opacity:.5;transform:rotate(var(--fm-bridge-angle));transform-origin:center;pointer-events:none}
 #field .r06-tool-wall .refine-think-title{
  display:block;font:400 clamp(54px,5.3vw,76px)/1.02 var(--font-editorial);
- letter-spacing:-.025em;
+ letter-spacing:-.02em;
  font-synthesis:none;
 }
 #field .r06-tool-wall .refine-think-subtitle{
- display:block;justify-self:end;transform:translateY(10px);text-align:right;font:400 20px/1.35 var(--font-sans);letter-spacing:-.01em;
+ display:block;justify-self:start;transform:translateY(-13px);text-align:left;font:400 20px/1.35 var(--font-sans);letter-spacing:-.01em;
 }
 @media(max-width:650px),(pointer:coarse){#field .r06-tool-wall{--fm-speed:50.18112}}
 @media(max-width:650px){
- #field .r06-tool-wall{--fm-bridge-angle:3deg}
- #field .r06-tool-wall .refine-think-heading{gap:9px}
- #field .r06-tool-wall .refine-think-subtitle{transform:translateY(6px)}
+ #field .r06-tool-wall{--fm-bridge-length:44px}
+ #field .r06-tool-wall .refine-think-heading{gap:10px}
+ #field .r06-tool-wall .refine-think-subtitle{transform:translateY(-9px)}
 }
 @media(prefers-reduced-motion:no-preference){
  #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{
@@ -41,6 +41,25 @@
  #field .r06-tool-wall .refine-think-subtitle{font-size:18px}
 }
 
-/* The supplied EB Garamond face is 400 only: a subpixel ink layer gives
-   T → comma a subtle taper without synthesizing unsupported font weights. */
-#field .r06-tool-wall .refine-think-title>span{-webkit-text-stroke:var(--think-stroke) currentColor}
+/* Keep the six original --think-stroke values and the real 400 font face.
+   A clearer ink layer tapers T → comma; light comes from the upper left.
+   The small offset shadows are static, never an extra animation loop. */
+#field .r06-tool-wall .refine-think-title>span{
+ -webkit-text-stroke:calc(var(--think-stroke)*2.5) currentColor;
+ paint-order:stroke fill;
+ text-shadow:-.35px -.5px .55px rgba(246,245,228,.62),
+              .65px .9px .8px rgba(10,30,22,.26),
+              1.2px 1.8px 2.3px rgba(10,30,22,.08);
+}
+/* The compact inset changes at 360px in mobile-r1.css. Start this fit rule
+   earlier so 361–374px does not squeeze tools beyond the heading. */
+@media(max-width:380px){
+ #field .r06-tool-wall{--fm-bridge-length:36px}
+ #field .r06-tool-wall .refine-think-heading{gap:8px}
+ #field .r06-tool-wall .refine-think-title{font-size:48px}
+ #field .r06-tool-wall .refine-think-subtitle{font-size:16px;transform:translateY(-7.3px)}
+}
+@media(forced-colors:active){
+ #field .r06-tool-wall .refine-think-title>span{text-shadow:none}
+ #field .r06-tool-wall .refine-think-bridge{background:CanvasText;opacity:1}
+}

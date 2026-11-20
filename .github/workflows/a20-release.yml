@@ -1,4 +1,4 @@
-name: MASHCORE A20 Release QA
+name: MASHCORE Current Release Gate
 on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -8,6 +8,7 @@ on:
       - 'mobile/**'
       - 'about/**'
       - 'contact/**'
+      - 'explore/**'
       - 'market-notes/**'
       - 'research/**'
       - 'services/**'
@@ -16,6 +17,11 @@ on:
       - 'policies/**'
       - 'scripts/**'
       - 'qa/a20_browser_qa.py'
+      - 'qa/current_release_browser.py'
+      - 'docs/release-provenance.md'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - '.gitattributes'
       - 'netlify.toml'
       - '.github/workflows/a20-release.yml'
   push:
@@ -23,7 +29,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: mashcore-a20-${{ github.event.pull_request.number || github.ref }}
+  group: mashcore-current-release-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   validate-public-release:
@@ -36,6 +42,7 @@ jobs:
           python-version: '3.11'
       - name: Source checks and reproducible static release
         run: |
+          python3 scripts/release_lock.py --check
           python3 scripts/prepare_public.py --context production
           python3 scripts/check_release.py --context production
           python3 scripts/prepare_public.py --context deploy-preview
@@ -43,9 +50,13 @@ jobs:
           python3 scripts/prepare_public.py --context branch-deploy
           python3 scripts/check_release.py --context branch-deploy
           python3 scripts/prepare_public.py --context production
+          python3 scripts/check_release.py --context production
+          python3 scripts/release_lock.py --check --context production
       - name: Browser test dependencies
         run: |
           python3 -m pip install playwright==1.57.0
           python3 -m playwright install --with-deps chromium
       - name: Check all 19 routes on desktop and mobile (local build)
         run: python3 qa/a20_browser_qa.py
+      - name: Check current Interlude, VALUE FLOW, HUMAN, FIELD and inquiry interactions
+        run: python3 qa/current_release_browser.py

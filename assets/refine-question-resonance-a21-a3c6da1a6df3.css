@@ -1,0 +1,39 @@
+/* Punctuation stays legible; just one hairline wave leaves its center once. */
+#question .question-resonance-anchor{position:relative;display:inline-block;isolation:isolate}
+#question .question-resonance-wave{position:absolute;left:50%;top:53%;width:1.12em;height:1.12em;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.72);pointer-events:none;z-index:-1}
+#question .question-resonance-hidden-y{position:absolute;left:14%;top:105%;font:italic .58em/1 var(--font-heading);letter-spacing:0;color:currentColor;opacity:0;transform:translate(-50%,-50%) translateY(3px);pointer-events:none;z-index:-1;user-select:none}
+@media(max-width:650px){#question .question-resonance-wave{width:.92em;height:.92em}}
+/* Landings stay in the empty wall below the question, away from the person. */
+#question .question-dropfield{position:absolute;left:50%;top:100%;width:200px;transform:translateX(-50%);pointer-events:none;color:#dedbc8;user-select:none}
+#question .question-drop-landing{position:absolute;left:10%;top:80px}
+#question .question-drop-landing[data-drop="2"]{left:80%;top:122px}
+#question .question-droplet{position:absolute;left:0;top:0;width:2px;height:5px;border-radius:50%;background:currentColor;opacity:0;transform:translate(-50%,-36px)}
+#question .question-drop-ripple{position:absolute;left:0;top:0;width:28px;height:10px;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+@media(max-width:650px){
+ #question .question-dropfield{width:140px}
+ #question .question-drop-landing{left:0}
+ #question .question-drop-landing[data-drop="2"]{left:57%}
+ #question .question-drop-ripple{width:20px;height:7px}
+}
+@media(prefers-reduced-motion:reduce){#question :is(.question-resonance-wave,.question-resonance-hidden-y,.question-dropfield){display:none}}
+
+/* STOPPED is a quiet comparison; the image and the single living renderer stay. */
+#question[data-question-variant="stopped"] .stopped-word{position:relative;display:inline-flex;align-items:baseline;white-space:nowrap;font:600 clamp(36px,4.2vw,60px)/1.1 var(--font-sans);letter-spacing:-.025em}
+#question .stopped-stop{color:#dda58f}
+#question .stopped-ped,#question .stopped-comma{color:#b0c1a2;text-shadow:.5px 1px 1px #243d2f}
+#question .stopped-comma{display:inline-block;transform-origin:50% 75%}
+#question .stopped-ripple{position:absolute;right:-20px;top:calc(100% + 38px);width:54px;height:12px;border:1px solid #b0c1a2;border-radius:50%;opacity:0;pointer-events:none;transform:translateX(-50%)}
+#question .stopped-why{display:block;margin-top:86px;font:italic 400 clamp(26px,2.8vw,38px)/1.25 var(--font-heading);letter-spacing:.08em;color:#e5ddbe}
+#question[data-stopped-phase="settled"] .stopped-comma{opacity:.35}
+.r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:53%;top:40%;line-height:1.2}
+#question .r092-question-intro:has([data-image-state="failed"]) .stopped-stop{color:#8d4838}
+#question .r092-question-intro:has([data-image-state="failed"]) :is(.stopped-ped,.stopped-comma,.stopped-why){color:#28483b;text-shadow:none}
+@media(max-width:900px){.r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:52%}}
+@media(max-width:650px){
+ .r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:38%;left:0;top:39%;text-align:left;padding-left:10px}
+ #question[data-question-variant="stopped"] .stopped-word{display:inline-block;font-size:clamp(29px,8.4vw,34px);line-height:1.04}
+ #question .stopped-stop{display:block}
+ #question .stopped-why{margin-top:68px;font-size:24px}
+ #question .stopped-ripple{width:36px;height:9px;right:-14px}
+}
+@media(prefers-reduced-motion:reduce){#question .stopped-ripple{display:none}#question :is(.stopped-stop,.stopped-ped,.stopped-comma,.stopped-why){opacity:1!important;transform:none!important}}

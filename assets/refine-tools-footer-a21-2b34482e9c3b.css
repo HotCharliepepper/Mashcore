@@ -1,0 +1,42 @@
+/* Local refinement C: verified names, owned pathways and a quiet signature.
+   Existing marquee controller and approved letter outlines remain unchanged. */
+#field .r06-tool-wall .fm-row-tools .fm-group{grid-template-columns:repeat(3,minmax(0,1fr))}
+#field .r06-tool-wall .refine-tool-name{display:flex;align-items:center;min-height:72px;font:500 32px/1.2 var(--font-sans);letter-spacing:-.025em}
+#field .r06-tool-wall .refine-owned-heading{display:flex;align-items:center;min-width:0}
+#field .r06-tool-wall .refine-owned-heading img{display:block;width:224px;max-width:100%;height:auto}
+#field .r06-tool-wall .fm-row-contexts .fm-row-heading{padding-top:34px}
+#field .r06-tool-wall .fm-row-contexts .fm-name{font-weight:500}
+.r092-sense #invitation .r092-invitation-intro{--refine-intro-pad:max(5.4vw,24px);padding-bottom:0}
+.r092-sense #invitation .d2-final-signature{position:relative;margin-top:clamp(96px,10vw,152px);padding-bottom:clamp(70px,8vw,116px);isolation:isolate}
+.r092-sense #invitation .r092-invitation-intro::after{content:"";display:block;height:clamp(220px,24vw,360px);margin-inline:calc(-1 * var(--refine-intro-pad));background:linear-gradient(180deg,transparent 0%,#58644f 38%,#a7b09a 72%,var(--paper,#eee7d8) 100%);pointer-events:none}
+.r092-sense #invitation .refine-signature-lens{position:absolute;left:0;top:0;width:140px;height:140px;border-radius:50%;overflow:hidden;pointer-events:none;z-index:1;opacity:0;contain:paint;transition:opacity 160ms ease-out;mask-image:radial-gradient(circle closest-side,#000 84%,transparent 100%)}
+.r092-sense #invitation .refine-signature-lens[data-visible="true"]{opacity:1}
+.r092-sense #invitation .refine-signature-lens svg{position:absolute;max-width:none;overflow:visible;pointer-events:none;color:var(--paper,#eee7d8)}
+.r092-sense #invitation .refine-signature-lens svg :is(path,circle){fill:currentColor}
+.r092-sense #invitation .refine-signature-lens svg [fill="#B59A71"]{display:none}
+@media(prefers-reduced-motion:no-preference){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{gap:82px;justify-content:flex-start}
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group li{width:204px}
+ #field .r06-tool-wall[data-enhanced="true"] .refine-tool-name{font-size:32px}
+ #field .r06-tool-wall[data-reading="true"] .fm-row-tools .fm-original{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:800px){
+ #field .r06-tool-wall .fm-row-tools .fm-group{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #field .r06-tool-wall .refine-owned-heading img{width:204px}
+ #field .r06-tool-wall .refine-tool-name{font-size:28px}
+}
+@media(max-width:650px){.r092-sense #invitation .r092-invitation-intro{--refine-intro-pad:24px}}
+@media(max-width:500px){
+ #field .r06-tool-wall .fm-row-tools .fm-group,#field .r06-tool-wall[data-reading="true"] .fm-row-tools .fm-original{grid-template-columns:1fr}
+ #field .r06-tool-wall .fm-row-contexts .fm-row-heading{padding-top:28px}
+ #field .r06-tool-wall .refine-owned-heading img{width:192px}
+ .r092-sense #invitation .d2-final-signature{margin-top:104px;padding-bottom:94px}
+ .r092-sense #invitation .r092-invitation-intro::after{height:260px}
+}
+@media(max-width:350px){.r092-sense #invitation .r092-invitation-intro{--refine-intro-pad:18px}}
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse){.r092-sense #invitation .refine-signature-lens{display:none!important;transition:none}}
+/* END: a finite inward gathering beneath the approved mark. No scene/CTA overlay. */
+.r092-sense #invitation .refine-end-convergence{position:absolute;z-index:-1;overflow:hidden;overflow:clip;contain:strict;pointer-events:none;user-select:none}
+.r092-sense #invitation .refine-end-signal{position:absolute;display:block;width:2px;height:2px;margin:-1px 0 0 -1px;border-radius:50%;background:#c7d4ba;opacity:0;pointer-events:none}
+@media(max-width:650px){.r092-sense #invitation .refine-end-signal{width:1.8px;height:1.8px;margin:-.9px 0 0 -.9px}}
+@media(prefers-reduced-motion:reduce){.r092-sense #invitation .refine-end-convergence{display:none!important}}

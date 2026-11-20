@@ -1,0 +1,32 @@
+/* Isolated experiment: original particle, light and brand styles are untouched. */
+#origin[data-becomes-study] [data-meaning-word],#origin[data-becomes-study]>.question{display:none!important}
+#origin[data-becomes-study] .becomes-story{position:relative;width:100%;margin:0;color:#eee7d8;pointer-events:none}
+#origin[data-becomes-study] .becomes-sentence{display:flex;align-items:baseline;justify-content:center;gap:clamp(18px,2vw,30px);width:max-content;max-width:90%;margin:auto;font:400 clamp(44px,5.65vw,82px)/1.15 var(--font-editorial);letter-spacing:-.025em;transform-origin:50% 50%;text-shadow:0 2px 14px rgb(3 10 8 / .45)}
+#origin[data-becomes-study] .becomes-sentence>span{display:block;flex:none;white-space:nowrap}
+#origin[data-becomes-study] [data-becomes-bridge]{font-size:.46em;font-style:italic;font-weight:400;letter-spacing:.005em;font-synthesis:none}
+#origin[data-becomes-study] [data-becomes-comma]{display:inline-block;width:0;overflow:visible}
+#origin[data-becomes-study][data-becomes-mode="animated"] .becomes-story{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:8vh}
+#origin[data-becomes-study][data-becomes-mode="animated"] .becomes-sentence{max-width:88%;margin:0}
+#origin[data-becomes-study][data-becomes-mode="animated"] [data-r093-final]{pointer-events:none}
+#origin[data-becomes-study][data-becomes-mode="static"] .becomes-story{margin-bottom:clamp(30px,6vh,64px)}
+#origin[data-becomes-study][data-becomes-mode="static"] .becomes-sentence{font-size:clamp(30px,4.8vw,66px);text-shadow:none}
+#origin[data-becomes-study][data-becomes-mode="static"] .becomes-story [data-becomes-comma]{display:none}
+/* No speculative first-frame sentence: only Ash is shown while the module loads. */
+html[data-becomes-boot="pending"] #origin[data-becomes-study] #hero-meaning{visibility:visible;display:block}
+html[data-becomes-boot="pending"] #origin[data-becomes-study] .becomes-story{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding-bottom:8vh}
+html[data-becomes-boot="pending"] #origin[data-becomes-study] :is([data-becomes-bridge],[data-becomes-core],[data-r093-final]){opacity:0!important}
+html[data-becomes-boot="pending"] #origin[data-becomes-study]>.gate{visibility:hidden!important;opacity:0!important}
+/* A blocked module or no JavaScript displays the complete sentence and brand. */
+html:not([data-becomes-boot]) #origin[data-becomes-study] #hero-meaning,html[data-becomes-boot="fallback"] #origin[data-becomes-study] #hero-meaning{visibility:visible;display:flex}
+html:not([data-becomes-boot]) #origin[data-becomes-study]>.gate,html[data-becomes-boot="fallback"] #origin[data-becomes-study]>.gate{visibility:hidden!important;opacity:0!important}
+html:not([data-becomes-boot]) #origin[data-becomes-study] .becomes-story,html[data-becomes-boot="fallback"] #origin[data-becomes-study] .becomes-story{margin-bottom:clamp(30px,6vh,64px)}
+html:not([data-becomes-boot]) #origin[data-becomes-study] [data-becomes-comma],html[data-becomes-boot="fallback"] #origin[data-becomes-study] [data-becomes-comma]{display:none}
+@media(max-width:700px){
+ #origin[data-becomes-study] .becomes-sentence{flex-direction:column;align-items:center;gap:14px;font-size:clamp(44px,13.5vw,62px);line-height:1.1;max-width:88%}
+ #origin[data-becomes-study] [data-becomes-bridge]{font-size:.54em;line-height:1.25}
+ #origin[data-becomes-study][data-becomes-mode="static"] .becomes-sentence{font-size:clamp(38px,11vw,48px)}
+ #origin[data-becomes-study][data-becomes-mode="static"] .becomes-story{margin-bottom:30px}
+}
+@media(prefers-reduced-motion:reduce){
+ #origin[data-becomes-study] .becomes-story *{animation:none!important;transition:none!important;filter:none!important}
+}

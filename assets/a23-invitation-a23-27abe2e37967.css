@@ -1,0 +1,47 @@
+/* A23 PASS3: the existing woven footage opens onto a light reading surface.
+   Preserve the single-choice owner, final SVG geometry and bounded END motion. */
+.r092-sense #linen::after{
+ background:linear-gradient(180deg,transparent 0%,rgba(231,220,197,.66) 62%,#e7dcc5 100%);
+}
+.r092-sense #invitation{border-top:0}
+.r092-sense #invitation .r092-invitation-intro{padding-top:0}
+.r092-sense #invitation .a23-invitation-opening{
+ --a23-invitation-seam:clamp(64px,8vw,112px);
+ margin-inline:calc(-1 * var(--refine-intro-pad));
+ padding:clamp(64px,6vw,96px) var(--refine-intro-pad) 0;
+ background:linear-gradient(180deg,#e7dcc5 0%,#e7dcc5 calc(100% - var(--a23-invitation-seam)),transparent 100%);color:#25372d;
+}
+.r092-sense #invitation .a23-invitation-opening::after{
+ content:"";display:block;height:var(--a23-invitation-seam);
+ margin:32px calc(-1 * var(--refine-intro-pad)) 0;
+ pointer-events:none;
+}
+.r092-sense #invitation .a23-invitation-opening .r092-invitation-copy h2:not([data-invitation-type="baseline"]),
+.r092-sense #invitation .a23-invitation-opening .r092-invitation-copy>p{color:#25372d}
+.r092-sense #invitation .mini-funnel{margin-top:0;padding-top:32px;border-top:0}
+.r092-sense #invitation .mini-funnel-result{border-top-color:#87927b}
+.r092-sense #invitation .mini-funnel-result-actions{align-items:center}
+.r092-sense #invitation .mini-funnel-result-actions a[data-mini-contact]{
+ display:inline-flex;align-items:center;gap:20px;min-height:48px;
+ margin:0;padding:8px 0;border-bottom:1px solid #f1ebdd;
+ color:#fff3d9;text-decoration:none;font:550 17px/1.65 var(--font-sans);
+}
+.r092-sense #invitation .a23-invitation-direct{max-width:1160px;margin:28px auto 0;padding-top:20px;border-top:1px solid #6f806b}
+.r092-sense #invitation .a23-invitation-direct>p{margin:0;color:#c8d5bf;font:400 14px/1.7 var(--font-sans);word-break:keep-all}
+.r092-sense #invitation .a23-invitation-direct .r092-invitation-actions{margin-top:8px}
+@media(max-width:650px){
+ .r092-sense #invitation .a23-invitation-opening{--a23-invitation-seam:72px;padding-top:44px}
+ .r092-sense #invitation .a23-invitation-opening::after{margin-top:28px}
+ .r092-sense #invitation .mini-funnel{padding-top:28px}
+ .r092-sense #invitation .mini-funnel-result-actions{flex-direction:column;align-items:flex-start;gap:8px}
+ .r092-sense #invitation .mini-funnel-result-actions a[data-mini-contact]{font-size:16px;gap:14px}
+}
+@media(hover:hover) and (pointer:fine){
+ .r092-sense #invitation .mini-funnel-result-actions a:hover{text-decoration:underline;text-underline-offset:5px}
+}
+@media(forced-colors:active){
+ .r092-sense #invitation .a23-invitation-opening{background:Canvas;color:CanvasText}
+ .r092-sense #invitation .a23-invitation-opening .r092-invitation-copy h2:not([data-invitation-type="baseline"]),
+ .r092-sense #invitation .a23-invitation-opening .r092-invitation-copy>p{color:CanvasText}
+ .r092-sense #invitation .a23-invitation-opening::after{background:none}
+}

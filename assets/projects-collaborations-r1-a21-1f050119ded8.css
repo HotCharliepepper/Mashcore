@@ -1,0 +1,52 @@
+/* Supplied logos and Korean names stay intact. Quiet geometry describes each
+   relationship without duplicating the logo or creating another motion loop. */
+#field .field-projects{display:block;margin:0;padding:20px 36px 40px;color:#172d26}
+#field .field-projects>h4{margin:0 0 22px;font:500 14px/1.45 var(--font-sans);letter-spacing:.025em}
+#field .field-projects-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:0;padding:0;list-style:none}
+#field .field-projects-list>li{min-width:0;margin:0;padding:0}
+/* A21: keep both card boxes equal. The second item's static offset is
+   separate from the link's existing 2px hover/focus transform. */
+@media(min-width:651px){
+ #field .field-projects-list>li:nth-child(2){position:relative;top:20px}
+}
+#field .field-project-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:24px;min-height:128px;margin:0;padding:24px;border:1px solid #a8b4aa;border-radius:0;background:transparent;color:inherit;text-decoration:none;box-shadow:none;transition:transform 160ms var(--ease-out),border-color 160ms var(--ease-out)}
+#field .field-project-card h5{margin:0;font:500 20px/1.5 var(--font-sans);letter-spacing:-.02em;word-break:keep-all;overflow-wrap:anywhere}
+#field .field-project-card{position:relative;isolation:isolate}
+#field .field-project-card::before{content:"";position:absolute;right:24px;top:26px;width:112px;height:84px;background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.27;pointer-events:none;transition:opacity 160ms var(--ease-out)}
+#field .field-projects-list>li:first-child .field-project-card::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 84' fill='none' stroke='%23758b7b' stroke-width='.8'%3E%3Ccircle cx='70' cy='42' r='31'/%3E%3Ccircle cx='70' cy='42' r='19'/%3E%3Cpath d='M70 3v78M31 42h79M43 15l54 54M43 69l54-54'/%3E%3C/svg%3E")}
+#field .field-projects-list>li:nth-child(2) .field-project-card::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 84' fill='none' stroke='%23758b7b' stroke-width='.8'%3E%3Cpath d='M7 20h28v22h32v22h37M98 59l6 5-6 5'/%3E%3Ccircle cx='7' cy='20' r='2'/%3E%3Ccircle cx='67' cy='42' r='2'/%3E%3C/svg%3E")}
+#field .field-project-card:focus-within::before{opacity:.46}
+#field div.field-project-card:focus-within{border-color:#344c41;transform:translateY(-2px)}
+#field .field-project-copy{min-width:0}
+#field .field-project-copy p{margin:5px 0 0;color:#344c41;font:400 13px/1.5 var(--font-sans);letter-spacing:-.01em}
+#field .field-project-logo{display:flex;flex:0 1 152px;align-items:center;justify-content:flex-start;min-width:0;height:64px}
+#field .field-project-logo[hidden]{display:none!important}
+#field .field-project-logo img{display:block;width:auto;height:auto;max-width:100%;max-height:64px;object-fit:contain;filter:none;transform:none;opacity:1}
+#field a.field-project-card:focus-visible{outline:2px solid #344c41;outline-offset:5px;border-color:#344c41;transform:translateY(-2px)}
+@media(hover:hover) and (pointer:fine){
+ #field a.field-project-card:hover{border-color:#344c41;transform:translateY(-2px)}
+ #field .field-project-card:hover::before{opacity:.46}
+ #field div.field-project-card:has(a:hover){border-color:#344c41;transform:translateY(-2px)}
+}
+@media(max-width:900px){
+ #field .field-projects{padding-inline:24px}
+ #field .field-projects-list{gap:16px}
+ #field .field-project-card{gap:18px;padding:20px}
+ #field .field-project-card h5{font-size:18px}
+ #field .field-project-card::before{right:18px;top:24px;width:92px;height:76px}
+}
+@media(max-width:650px){
+ #field .field-projects{padding:16px 18px 32px}
+ #field .field-projects>h4{margin-bottom:18px;font-size:13px}
+ #field .field-projects-list{grid-template-columns:1fr;gap:14px}
+ #field .field-projects-list>li:nth-child(2){top:0}
+ #field .field-project-card{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:16px;min-height:128px;padding:20px}
+ #field .field-project-card h5{font-size:18px}
+ #field .field-project-logo{flex:0 0 auto;width:152px;height:52px;max-width:100%}
+ #field .field-project-logo img{max-height:52px}
+}
+@media(prefers-reduced-motion:reduce){
+ #field .field-project-card,#field .field-project-card::before{transition:none}
+ #field a.field-project-card:is(:hover,:focus-visible){transform:none}
+ #field div.field-project-card:focus-within,#field div.field-project-card:has(a:hover){transform:none}
+}

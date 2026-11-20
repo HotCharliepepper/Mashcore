@@ -1,0 +1,74 @@
+/* Scoped real variable face: shared EB Garamond and every other wordmark stay unchanged. */
+@font-face{
+ font-family:"Mashcore Think";font-style:normal;font-weight:400 800;font-display:swap;
+ src:url("/assets/eb-garamond-think-88603384163d.woff2") format("woff2");
+}
+/* A21: a short rising bridge and lit, tapering ink in the existing title.
+   The shared marquee speed and its focus/reading ownership stay unchanged. */
+#field .r06-tool-wall{--fm-speed:65.8944;--fm-bridge-angle:-7deg;--fm-bridge-length:64px}
+#field .r06-tool-wall .fm-heading>div:first-child{flex:1;min-width:0}
+#field .r06-tool-wall .fm-introduction{width:100%;min-width:0}
+#field .r06-tool-wall .refine-think-heading{
+ display:grid;grid-template-columns:max-content var(--fm-bridge-length) max-content;
+ align-items:center;justify-content:start;gap:24px;width:100%;min-width:0;
+ margin:0;text-transform:none;
+}
+#field .r06-tool-wall .refine-think-bridge{display:block;width:var(--fm-bridge-length);height:.7px;background:var(--ink);opacity:.5;transform:rotate(var(--fm-bridge-angle));transform-origin:center;pointer-events:none}
+#field .r06-tool-wall .refine-think-title{
+ display:block;font:400 clamp(54px,5.3vw,76px)/1.02 "Mashcore Think",var(--font-editorial);
+ letter-spacing:-.02em;
+ font-synthesis:none;
+}
+#field .r06-tool-wall .refine-think-subtitle{
+ display:block;justify-self:start;transform:translateY(-4.5px);text-align:left;font:400 20px/1.35 var(--font-sans);letter-spacing:-.01em;
+}
+@media(max-width:650px),(pointer:coarse){#field .r06-tool-wall{--fm-speed:50.18112}}
+@media(max-width:650px){
+ #field .r06-tool-wall{--fm-bridge-length:44px}
+ #field .r06-tool-wall .refine-think-heading{gap:10px}
+ #field .r06-tool-wall .refine-think-subtitle{transform:translateY(-3px)}
+}
+@media(prefers-reduced-motion:no-preference){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{
+  gap:58px;padding-inline:29px;
+ }
+}
+/* The two half-gaps also meet at the original/clone seam. The mobile change
+   is limited to the moving row, leaving keyboard and reduced-motion grids. */
+@media(prefers-reduced-motion:no-preference) and (max-width:650px),
+       (prefers-reduced-motion:no-preference) and (pointer:coarse){
+ #field .r06-tool-wall[data-enhanced="true"]:not([data-reading="true"]) .fm-row-tools .fm-group{
+  gap:46px;padding-inline:23px;
+ }
+}
+@media(max-width:900px){
+ #field .r06-tool-wall .refine-think-title{font-size:54px}
+ #field .r06-tool-wall .refine-think-subtitle{font-size:18px}
+}
+
+/* Real wght outlines taper toward the comma. No synthesized ink/stroke. */
+#field .r06-tool-wall .refine-think-title>span{
+ -webkit-text-stroke:0;
+ font-weight:var(--think-weight);
+ font-variation-settings:"wght" var(--think-weight);
+ text-shadow:-.3px -.4px .6px rgba(246,245,228,.52),
+              .65px .9px 1px rgba(10,30,22,.20);
+}
+#field .r06-tool-wall .refine-think-title>span:nth-child(1){--think-weight:600}
+#field .r06-tool-wall .refine-think-title>span:nth-child(2){--think-weight:560}
+#field .r06-tool-wall .refine-think-title>span:nth-child(3){--think-weight:520}
+#field .r06-tool-wall .refine-think-title>span:nth-child(4){--think-weight:480}
+#field .r06-tool-wall .refine-think-title>span:nth-child(5){--think-weight:430}
+#field .r06-tool-wall .refine-think-title>span:nth-child(6){--think-weight:400}
+/* The compact inset changes at 360px in mobile-r1.css. Start this fit rule
+   earlier so 361–374px does not squeeze tools beyond the heading. */
+@media(max-width:380px){
+ #field .r06-tool-wall{--fm-bridge-length:36px}
+ #field .r06-tool-wall .refine-think-heading{gap:8px}
+ #field .r06-tool-wall .refine-think-title{font-size:48px}
+ #field .r06-tool-wall .refine-think-subtitle{font-size:16px;transform:translateY(-2.5px)}
+}
+@media(forced-colors:active){
+ #field .r06-tool-wall .refine-think-title>span{text-shadow:none}
+ #field .r06-tool-wall .refine-think-bridge{background:CanvasText;opacity:1}
+}

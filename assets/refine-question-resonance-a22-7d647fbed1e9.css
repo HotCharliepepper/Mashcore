@@ -1,0 +1,46 @@
+/* Punctuation stays legible; just one hairline wave leaves its center once. */
+#question .question-resonance-anchor{position:relative;display:inline-block;isolation:isolate}
+#question .question-resonance-wave{position:absolute;left:50%;top:53%;width:1.12em;height:1.12em;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.72);pointer-events:none;z-index:-1}
+#question .question-resonance-hidden-y{position:absolute;left:14%;top:105%;font:italic .58em/1 var(--font-heading);letter-spacing:0;color:currentColor;opacity:0;transform:translate(-50%,-50%) translateY(3px);pointer-events:none;z-index:-1;user-select:none}
+@media(max-width:650px){#question .question-resonance-wave{width:.92em;height:.92em}}
+/* Landings stay in the empty wall below the question, away from the person. */
+#question .question-dropfield{position:absolute;left:50%;top:100%;width:200px;transform:translateX(-50%);pointer-events:none;color:#dedbc8;user-select:none}
+#question .question-drop-landing{position:absolute;left:10%;top:80px}
+#question .question-drop-landing[data-drop="2"]{left:80%;top:122px}
+#question .question-droplet{position:absolute;left:0;top:0;width:2px;height:5px;border-radius:50%;background:currentColor;opacity:0;transform:translate(-50%,-36px)}
+#question .question-drop-ripple{position:absolute;left:0;top:0;width:28px;height:10px;border:1px solid currentColor;border-radius:50%;opacity:0;transform:translate(-50%,-50%) scale(.2)}
+@media(max-width:650px){
+ #question .question-dropfield{width:140px}
+ #question .question-drop-landing{left:0}
+ #question .question-drop-landing[data-drop="2"]{left:57%}
+ #question .question-drop-ripple{width:20px;height:7px}
+}
+@media(prefers-reduced-motion:reduce){#question :is(.question-resonance-wave,.question-resonance-hidden-y,.question-dropfield){display:none}}
+
+/* A22: one atomic word; both colours share the same quiet wall material. */
+.r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:53%;top:40%;line-height:1.2;container-type:inline-size}
+#question[data-question-variant="stopped"] .stopped-word{position:relative;display:inline-flex;flex-flow:row nowrap;align-items:baseline;width:max-content;max-width:100%;white-space:nowrap;word-break:normal;overflow-wrap:normal;font:600 clamp(36px,4.2vw,60px)/1.08 var(--font-sans);font-synthesis:none;letter-spacing:-.025em}
+#question :is(.stopped-stop,.stopped-ped,.stopped-comma){display:inline-block;flex:none;white-space:nowrap;word-break:normal;overflow-wrap:normal;text-shadow:-.4px -.65px .5px var(--stopped-reflection),.4px 1px .65px rgb(20 33 25 / .6),1px 1.8px 2.6px rgb(9 28 18 / .2)}
+#question .stopped-stop{--stopped-reflection:rgb(255 226 202 / .28);color:#dda58f}
+#question .stopped-ped,#question .stopped-comma{--stopped-reflection:rgb(235 242 218 / .2);color:#b0c1a2}
+#question .stopped-comma{transform-origin:50% 75%}
+/* One drop and the existing ellipse share a measured landing point. */
+#question .stopped-drop{position:absolute;left:var(--stopped-impact-x,100%);top:var(--stopped-drop-y,100%);width:2.6px;height:4px;border-radius:55% 55% 62% 62%;background:#d8c8a6;opacity:0;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 2px rgb(236 224 192 / .14)}
+#question .stopped-ripple{position:absolute;left:var(--stopped-impact-x,100%);top:var(--stopped-impact-y,calc(100% + 36px));width:52px;height:11px;border:1px solid rgb(176 193 162 / .8);border-radius:50%;opacity:0;pointer-events:none;transform:translate(-50%,-50%)}
+#question .stopped-why{display:block;margin-top:80px;font:italic 400 clamp(28px,3vw,40px)/1.15 'EB Garamond',Georgia,serif;font-synthesis:none;font-kerning:normal;letter-spacing:.045em;color:#e5ddbe;text-shadow:-.3px -.5px .5px rgb(255 244 218 / .12),.4px 1px 1.5px rgb(15 33 23 / .3)}
+#question[data-stopped-phase="settled"] .stopped-comma{opacity:.55}
+/* Information stays readable even when a quick scroll never starts the sequence. */
+#question[data-stopped-phase="waiting"] :is(.stopped-ped,.stopped-comma){opacity:.64}
+#question[data-stopped-phase="waiting"] .stopped-why{opacity:.7}
+#question .r092-question-intro:has([data-image-state="failed"]) .stopped-stop{color:#8d4838}
+#question .r092-question-intro:has([data-image-state="failed"]) :is(.stopped-ped,.stopped-comma,.stopped-why){color:#28483b;text-shadow:none}
+@media(max-width:900px){.r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:52%}}
+@media(max-width:650px){
+ .r092-sense #question[data-question-variant="stopped"] .r092-question-title{width:44%;left:0;top:50%;text-align:left;padding-left:10px}
+ #question[data-question-variant="stopped"] .stopped-word{font-size:clamp(20px,7.75vw,34px)}
+ @supports(font-size:1cqi){#question[data-question-variant="stopped"] .stopped-word{font-size:clamp(20px,20cqi,34px)}}
+ #question .stopped-why{margin-top:62px;font-size:clamp(25px,7vw,29px);letter-spacing:.035em}
+ #question .stopped-ripple{width:36px;height:8px}
+ #question .stopped-drop{width:2.3px;height:3.6px}
+}
+@media(prefers-reduced-motion:reduce){#question :is(.stopped-ripple,.stopped-drop){display:none}#question :is(.stopped-stop,.stopped-ped,.stopped-comma,.stopped-why){opacity:1!important;transform:none!important}}

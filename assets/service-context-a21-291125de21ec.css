@@ -1,0 +1,11 @@
+/* One selected context, in the existing service page's paper/ink language. */
+.service-page .service-context[hidden]{display:none!important}
+.service-page .service-context{margin:0 0 64px;padding:28px 0;border-block:1px solid #9ca18d;scroll-margin-top:32px}
+.service-page .service-context h2{margin:0 0 18px;font:550 clamp(24px,3vw,36px)/1.4 var(--font-sans);letter-spacing:-.025em;color:#263629}
+.service-page .service-context dl{display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin:0}
+.service-page .service-context dt{font:500 14px/1.6 var(--font-sans);margin-bottom:8px;color:#46503d}
+.service-page .service-context dd{margin:0;max-width:55ch;font:400 17px/1.7 var(--font-sans);color:#263629;word-break:keep-all;overflow-wrap:anywhere}
+.service-page .service-context .detail-actions{margin-top:24px;gap:12px 32px}
+.service-page .service-context .detail-note{margin-bottom:0}
+.service-page .service-context a:focus-visible{outline:3px solid #6a5124;outline-offset:5px}
+@media(max-width:650px){.service-page .service-context{margin-bottom:44px;padding:24px 0}.service-page .service-context dl{grid-template-columns:1fr;gap:22px}.service-page .service-context .detail-actions{align-items:flex-start;flex-direction:column}.service-page .service-context .journey-link{min-height:48px}}

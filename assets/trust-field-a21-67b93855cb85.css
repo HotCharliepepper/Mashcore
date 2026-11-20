@@ -1,0 +1,96 @@
+/* The same four-step case, with the sentence typography used elsewhere. */
+#field .field-decision-text {
+  font-family: var(--font-sans);
+  font-weight: 550;
+  font-size: clamp(22px, 2.1vw, 30px);
+  line-height: 1.6;
+  letter-spacing: -.025em;
+}
+#field .field-observation-text {
+  font-size: clamp(17px, 1.25vw, 18px);
+  line-height: 1.7;
+}
+#field .field-case-footer > p { max-width: 44ch; }
+#field .field-case-footer > p > span { display: inline-block; margin-top: 8px; }
+#field .field-inspect[open] .trust-inspect-open { display: none; }
+#field .field-inspect:not([open]) .trust-inspect-close { display: none; }
+
+/* A21: retain the original images and their proportions in a native comparison. */
+#field .a21-field-case .depth-bridge { margin-bottom: 36px; }
+#field .a21-field-compare-heading h3 {
+  margin: 0;
+  font: 550 clamp(21px,2vw,26px)/1.5 var(--font-sans);
+  letter-spacing: -.02em;
+}
+#field .a21-field-compare-heading > p {
+  max-width: 66ch;
+  margin: 12px 0 24px;
+  color: #435449;
+  font: 400 14px/1.7 var(--font-sans);
+  word-break: keep-all;
+}
+#field .a21-field-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #9eaa9c;
+}
+#field .a21-field-controls[hidden],
+#field .a21-field-screen[hidden] { display: none !important; }
+#field .a21-field-controls button {
+  min-height: 48px;
+  min-width: 96px;
+  margin: 0;
+  padding: 12px 20px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #435449;
+  font: 500 15px/1.5 var(--font-sans);
+  cursor: pointer;
+}
+#field .a21-field-controls [aria-pressed="true"] {
+  border-bottom-color: #263d37;
+  color: #1d342d;
+}
+#field .a21-field-controls button:focus-visible,
+#field .a21-field-original:focus-visible { outline: 2px solid #755321; outline-offset: 4px; }
+#field .a21-field-viewer { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; align-items: start; }
+#field .a21-field-screen { min-width: 0; width: 100%; margin: 0; }
+#field .a21-field-comparison:not([data-field-view="both"]) .a21-field-viewer { grid-template-columns: minmax(0,840px); justify-content: center; }
+#field .a21-field-screen .field-photo-frame { aspect-ratio: 3 / 2; }
+#field .a21-field-screen .field-photo-frame img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform: none !important;
+}
+#field .a21-field-screen .field-image-fallback { justify-content: center; }
+#field .a21-field-original { display: inline-flex; align-items: center; min-height: 44px; margin-top: 2px; color: #263d37; font: 500 13px/1.65 var(--font-sans); text-underline-offset: 5px; }
+#field .a21-field-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; list-style: none; margin: 48px 0 0; padding: 28px 0 0; border-top: 1px solid #b4bcaf; }
+#field .a21-field-steps h3 { margin: 0 0 12px; color: #435449; font: 550 15px/1.5 var(--font-sans); }
+#field .a21-field-steps p { margin: 0; color: #263d37; font: 400 17px/1.7 var(--font-sans); letter-spacing: -.012em; word-break: keep-all; overflow-wrap: anywhere; }
+#field .a21-field-detail { margin-top: 36px; border-block: 1px solid #b4bcaf; }
+#field .a21-field-detail > summary { display: list-item; list-style: disclosure-closed; min-height: 54px; padding: 16px 0; font: 500 15px/1.6 var(--font-sans); }
+#field .a21-field-detail[open] > summary { list-style: disclosure-open; }
+#field .a21-field-detail > summary::-webkit-details-marker { display: inline; }
+#field .a21-field-detail > div { padding-bottom: 24px; max-width: 70ch; }
+#field .a21-field-detail .field-observation-text { margin: 0; padding: 0; border: 0; font-size: 16px; line-height: 1.7; }
+#field .a21-field-detail .pass021-field-limit { margin: 16px 0 0; color: #435449; font: 400 14px/1.7 var(--font-sans); word-break: keep-all; }
+@media(hover:hover) and (pointer:fine) { #field .a21-field-controls button:hover, #field .a21-field-original:hover { color: #755321; } }
+@media(max-width:900px) { #field .a21-field-steps { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px 32px; } }
+@media(max-width:650px) {
+  #field .a21-field-viewer { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  #field .a21-field-controls button { flex: 1; min-width: 0; padding-inline: 10px; font-size: 14px; }
+  #field .a21-field-steps { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+  #field .a21-field-steps li { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 16px; }
+  #field .a21-field-steps h3 { margin: 3px 0 0; font-size: 14px; }
+  #field .a21-field-steps p { font-size: 16px; }
+  #field .a21-field-detail { margin-top: 28px; }
+}

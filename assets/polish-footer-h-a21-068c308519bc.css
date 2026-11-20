@@ -1,0 +1,20 @@
+/* Legal sign-off follows the preserved business information. */
+.journey-footer .polish-copyright{flex-basis:100%;width:100%;margin:0;color:#625e50;font:500 12px/1.7 var(--font-sans);letter-spacing:.025em;word-break:normal;overflow-wrap:normal}
+@media(max-width:350px){.journey-footer .polish-copyright{font-size:11px;letter-spacing:.025em}}
+
+/* A21.1: preserve the archived form and legal content, remove competing boxes. */
+.r092-sense #invitation .r092-consult-archive{padding:16px max(5.4vw,24px) 20px;background:var(--living-ground,var(--paper));border-top:0}
+.r092-sense #invitation .r092-consult-archive>summary{min-height:48px;padding:12px 0;border-top:0;font-size:14px;line-height:1.6}
+.r092-sense #invitation .r092-consult-archive[open]>.r092-consult-content{padding-top:24px}
+.r092-sense #invitation .r092-consult-archive .invitation-choices{gap:12px 36px;margin-bottom:24px}
+.r092-sense #invitation .r092-consult-archive .invitation-choices a{min-height:96px;padding:16px 32px 16px 0;background:transparent;color:var(--ink);border-bottom:1px solid #aab5a4}
+.r092-sense #invitation .r092-consult-archive .invitation-choices a>span:first-child{font:500 18px/1.5 var(--font-sans);letter-spacing:-.015em}
+.r092-sense #invitation .r092-consult-archive .invitation-choices p{margin-top:8px;font-size:14px}
+.r092-sense #invitation .r092-consult-archive .invitation-choices .choice-arrow{right:0;top:18px;font-size:20px}
+.r092-sense #invitation .r092-consult-archive .invitation-starts{margin-bottom:40px}
+.r092-sense .journey-footer{border-top:0;padding-block:20px 36px;gap:20px 32px}
+.r092-sense .journey-footer nav{gap:6px 24px}
+.r092-sense .journey-footer .r05-business-footer{margin-top:0;padding-top:20px}
+.r092-sense .journey-footer .r05-business-groups{gap:20px 32px}
+@media(max-width:650px){.r092-sense #invitation .r092-consult-archive{padding:12px 24px 16px}.r092-sense #invitation .r092-consult-archive .invitation-choices{grid-template-columns:1fr;gap:0}.r092-sense .journey-footer{padding-block:16px 32px;gap:16px}.r092-sense .journey-footer nav{gap:6px 20px}}
+@media(max-width:350px){.r092-sense #invitation .r092-consult-archive{padding-inline:18px}}
